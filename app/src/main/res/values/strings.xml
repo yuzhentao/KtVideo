@@ -1,3 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
     <string name="app_name">KtVideo</string>
+
+    <string name="home_bottom_1">Home</string>
+    <string name="home_bottom_2">Find</string>
+    <string name="home_bottom_3">Hot</string>
+    <string name="home_bottom_4">Mine</string>
+
 </resources>

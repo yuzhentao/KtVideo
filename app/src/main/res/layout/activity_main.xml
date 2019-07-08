@@ -3,16 +3,140 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/layout_top"
+        layout="@layout/layout_top" />
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/v_bottom"
+        app:layout_constraintTop_toBottomOf="@id/layout_top"
+        tools:background="@color/black" />
+
+    <View
+        android:id="@+id/v_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_line"
+        app:layout_constraintBottom_toTopOf="@id/v_bottom" />
+
+    <View
+        android:id="@+id/v_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_home"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x40"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/v_bottom"
+        app:layout_constraintEnd_toStartOf="@id/ll_find"
+        app:layout_constraintStart_toStartOf="@id/v_bottom"
+        app:layout_constraintTop_toTopOf="@id/v_bottom">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:scaleType="centerInside"
+            android:src="@drawable/home_bg_selected" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x20"
+            android:maxWidth="@dimen/x80"
+            android:text="@string/home_bottom_1"
+            android:textColor="@color/color_gray_black"
+            android:textSize="@dimen/x10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_find"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x40"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/v_bottom"
+        app:layout_constraintEnd_toStartOf="@id/ll_hot"
+        app:layout_constraintStart_toEndOf="@id/ll_home"
+        app:layout_constraintTop_toTopOf="@id/v_bottom">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:scaleType="centerInside"
+            android:src="@drawable/find_bg_selected" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x20"
+            android:maxWidth="@dimen/x80"
+            android:text="@string/home_bottom_2"
+            android:textColor="@color/color_gray_black"
+            android:textSize="@dimen/x10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_hot"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x40"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/v_bottom"
+        app:layout_constraintEnd_toStartOf="@id/ll_mine"
+        app:layout_constraintStart_toEndOf="@id/ll_find"
+        app:layout_constraintTop_toTopOf="@id/v_bottom">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:scaleType="centerInside"
+            android:src="@drawable/hot_bg_selected" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x20"
+            android:maxWidth="@dimen/x80"
+            android:text="@string/home_bottom_3"
+            android:textColor="@color/color_gray_black"
+            android:textSize="@dimen/x10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mine"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x40"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/v_bottom"
+        app:layout_constraintEnd_toEndOf="@id/v_bottom"
+        app:layout_constraintStart_toEndOf="@id/ll_hot"
+        app:layout_constraintTop_toTopOf="@id/v_bottom">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:scaleType="centerInside"
+            android:src="@drawable/mine_bg_selected" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x20"
+            android:maxWidth="@dimen/x80"
+            android:text="@string/home_bottom_4"
+            android:textColor="@color/color_gray_black"
+            android:textSize="@dimen/x10" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

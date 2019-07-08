@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
@@ -42,6 +42,14 @@
     <style name="DialogEmptyAnimation" parent="android:Animation">
         <item name="android:windowEnterAnimation">@null</item>
         <item name="android:windowExitAnimation">@null</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textDirection" tools:targetApi="jelly_bean_mr1">locale</item>
     </style>
 
 </resources>
