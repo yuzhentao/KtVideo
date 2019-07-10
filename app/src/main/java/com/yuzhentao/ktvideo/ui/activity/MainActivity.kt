@@ -7,6 +7,8 @@ import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.view.View
 import android.widget.RadioButton
+import android.widget.Toast
+import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
 import java.util.*
 
@@ -19,14 +21,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var rbRanking: RadioButton? = null
     private var rbMine: RadioButton? = null
 
+    private var toast: Toast? = null
+    private var exitTime: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
     }
 
+    override fun onBackPressed() {
+        if (System.currentTimeMillis().minus(exitTime) <= 3000) {
+            finish()
+
+        }
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.iv_right_top -> {
+
+            }
             R.id.rb_home -> {
                 tvTitle?.text = getToday()
                 tvTitle?.visibility = View.VISIBLE
@@ -66,6 +81,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
+        //沉浸式状态栏
+        ImmersionBar.with(this).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init();
+        //隐藏导航栏
+        val window = window
+        val params = window.attributes
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        window.attributes = params
         tvTitle = findViewById(R.id.tv_center_top)
         ivSearch = findViewById(R.id.iv_right_top)
         rbHome = findViewById(R.id.rb_home)
@@ -76,6 +98,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         tvTitle?.typeface = Typeface.createFromAsset(this.assets, "fonts/Lobster-1.4.otf")
         tvTitle?.visibility = View.VISIBLE
         ivSearch?.setImageResource(R.drawable.icon_search)
+        ivSearch?.setOnClickListener(this)
         rbHome?.isSelected = true
         rbHome?.setOnClickListener(this)
         rbDiscover?.setOnClickListener(this)
