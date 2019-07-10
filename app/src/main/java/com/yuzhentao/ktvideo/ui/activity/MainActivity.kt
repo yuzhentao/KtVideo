@@ -10,6 +10,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.util.showToast
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -30,10 +31,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         initView()
     }
 
+    override fun onPause() {
+        super.onPause()
+        toast?.let { toast!!.cancel() }
+    }
+
     override fun onBackPressed() {
         if (System.currentTimeMillis().minus(exitTime) <= 3000) {
             finish()
-
+            toast!!.cancel()
+        } else {
+            exitTime = System.currentTimeMillis()
+            toast = showToast("再按一次退出程序")
         }
     }
 
