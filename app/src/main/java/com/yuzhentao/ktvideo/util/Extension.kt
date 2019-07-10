@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-inline fun <reified T : Activity> Activity.newIntent() {
+inline fun <reified T : Activity> Activity.startActivity() {
     val intent = Intent(this, T::class.java)
     startActivity(intent)
 }

@@ -2,6 +2,7 @@ package com.yuzhentao.ktvideo.ui.activity
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -10,7 +11,9 @@ import android.widget.RadioButton
 import android.widget.Toast
 import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.ui.fragment.*
 import com.yuzhentao.ktvideo.util.showToast
+import com.yuzhentao.ktvideo.util.startActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -22,6 +25,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var rbRanking: RadioButton? = null
     private var rbMine: RadioButton? = null
 
+    private var homeFragment: HomeFragment? = null
+    private var discoverFragment: DiscoverFragment? = null
+    private var hotFragment: HotFragment? = null
+    private var mineFragment: MineFragment? = null
+    private lateinit var searchFragment: SearchFragment
+
     private var toast: Toast? = null
     private var exitTime: Long = 0
 
@@ -29,6 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
+        initFragment(savedInstanceState)
     }
 
     override fun onPause() {
@@ -49,7 +59,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_right_top -> {
-
+                if (rbMine?.isChecked!!) {//设置
+                    startActivity<SettingActivity>()
+                } else {//搜索
+                    searchFragment = SearchFragment()
+                    searchFragment.show(supportFragmentManager, SEARCH_TAG)
+                }
             }
             R.id.rb_home -> {
                 tvTitle?.text = getToday()
@@ -59,6 +74,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbDiscover?.isSelected = false
                 rbRanking?.isSelected = false
                 rbMine?.isSelected = false
+                supportFragmentManager
+                        .beginTransaction()
+                        .show(homeFragment!!)
+                        .hide(discoverFragment!!)
+                        .hide(hotFragment!!)
+                        .hide(mineFragment!!)
+                        .commit()
             }
             R.id.rb_discover -> {
                 tvTitle?.setText(R.string.discover)
@@ -68,6 +90,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbDiscover?.isSelected = true
                 rbRanking?.isSelected = false
                 rbMine?.isSelected = false
+                supportFragmentManager
+                        .beginTransaction()
+                        .hide(homeFragment!!)
+                        .show(discoverFragment!!)
+                        .hide(hotFragment!!)
+                        .hide(mineFragment!!)
+                        .commit()
             }
             R.id.rb_ranking -> {
                 tvTitle?.setText(R.string.ranking)
@@ -77,6 +106,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbDiscover?.isSelected = false
                 rbRanking?.isSelected = true
                 rbMine?.isSelected = false
+                supportFragmentManager
+                        .beginTransaction()
+                        .hide(homeFragment!!)
+                        .hide(discoverFragment!!)
+                        .show(hotFragment!!)
+                        .hide(mineFragment!!)
+                        .commit()
             }
             R.id.rb_mine -> {
                 tvTitle?.visibility = View.GONE
@@ -85,6 +121,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbDiscover?.isSelected = false
                 rbRanking?.isSelected = false
                 rbMine?.isSelected = true
+                supportFragmentManager
+                        .beginTransaction()
+                        .hide(homeFragment!!)
+                        .hide(discoverFragment!!)
+                        .hide(hotFragment!!)
+                        .show(mineFragment!!)
+                        .commit()
             }
         }
     }
@@ -113,6 +156,44 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         rbDiscover?.setOnClickListener(this)
         rbRanking?.setOnClickListener(this)
         rbMine?.setOnClickListener(this)
+    }
+
+    private fun initFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            val fragments: List<Fragment> = supportFragmentManager.fragments
+            for (fragment in fragments) {
+                if (fragment is HomeFragment) {
+                    homeFragment = fragment
+                }
+                if (fragment is DiscoverFragment) {
+                    discoverFragment = fragment
+                }
+                if (fragment is HotFragment) {
+                    hotFragment = fragment
+                }
+                if (fragment is MineFragment) {
+                    mineFragment = fragment
+                }
+            }
+        } else {
+            homeFragment = HomeFragment()
+            discoverFragment = DiscoverFragment()
+            hotFragment = HotFragment()
+            mineFragment = MineFragment()
+            val ft = supportFragmentManager.beginTransaction()
+            ft.add(R.id.content, homeFragment!!)
+                    .add(R.id.content, discoverFragment!!)
+                    .add(R.id.content, hotFragment!!)
+                    .add(R.id.content, mineFragment!!)
+                    .commit()
+        }
+        supportFragmentManager
+                .beginTransaction()
+                .show(homeFragment!!)
+                .hide(discoverFragment!!)
+                .hide(hotFragment!!)
+                .hide(mineFragment!!)
+                .commit()
     }
 
     private fun getToday(): String {
