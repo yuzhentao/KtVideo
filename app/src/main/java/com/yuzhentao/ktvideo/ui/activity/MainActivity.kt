@@ -12,8 +12,8 @@ import android.widget.Toast
 import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.fragment.*
+import com.yuzhentao.ktvideo.util.newIntent
 import com.yuzhentao.ktvideo.util.showToast
-import com.yuzhentao.ktvideo.util.startActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_right_top -> {
                 if (rbMine?.isChecked!!) {//设置
-                    startActivity<SettingActivity>()
+                    newIntent<SettingActivity>(false)
                 } else {//搜索
                     searchFragment = SearchFragment()
                     searchFragment.show(supportFragmentManager, SEARCH_TAG)

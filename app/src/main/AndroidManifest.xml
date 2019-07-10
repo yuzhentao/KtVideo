@@ -21,16 +21,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".ui.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.SplashActivity"
-            android:theme="@style/Splash" />
+        <activity android:name=".ui.activity.MainActivity" />
         <activity
             android:name=".ui.activity.VideoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

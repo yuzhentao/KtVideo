@@ -9,9 +9,12 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-inline fun <reified T : Activity> Activity.startActivity() {
+inline fun <reified T : Activity> Activity.newIntent(isFinish: Boolean) {
     val intent = Intent(this, T::class.java)
     startActivity(intent)
+    if (isFinish) {
+        finish()
+    }
 }
 
 fun Context.showToast(message: String): Toast {
