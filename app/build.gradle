@@ -20,8 +20,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 }
 
@@ -46,6 +46,7 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:9.0.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     implementation 'com.shuyu:GSYVideoPlayer:1.6.8'
     implementation 'zlc.season:rxdownload2:2.0.4'
