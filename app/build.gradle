@@ -12,6 +12,7 @@ android {
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -45,7 +46,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:9.0.0'
     kapt 'com.jakewharton:butterknife-compiler:9.0.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     implementation 'com.shuyu:GSYVideoPlayer:1.6.8'
