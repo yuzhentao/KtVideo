@@ -14,9 +14,9 @@ interface HomeContract {
 
     interface Presenter : BasePresenter {
 
-        fun requestData()
+        fun load()
 
-        fun requestMoreData(data: String?)
+        fun loadMore(date: String?)
 
     }
 

@@ -2,6 +2,7 @@ package com.yuzhentao.ktvideo.ui.activity
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
@@ -41,9 +42,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         initFragment(savedInstanceState)
     }
 
+    /**
+     * let扩展函数的实际上是一个作用域函数，当你需要去定义一个变量在一个特定的作用域范围内，let函数的是一个不错的选择；let函数另一个作用就是可以避免写一些判断null的操作
+     * object.let{
+     *  it.XXX//在函数体内使用it替代object对象去访问其公有的属性和方法
+     * }
+     * object?.let{//表示object不为null的条件下，才会去执行let函数体
+     *  it.XXX
+     * }
+     */
     override fun onPause() {
         super.onPause()
-        toast?.let { toast!!.cancel() }
+        toast?.let {//这里表示toast不为null时才会去执行函数体
+            toast!!.cancel()
+        }
     }
 
     override fun onBackPressed() {
@@ -58,6 +70,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.layout_top -> {
+                homeFragment?.scrollToTop()
+            }
             R.id.iv_right_top -> {
                 if (rbMine?.isChecked!!) {//设置
                     newIntent<SettingActivity>(false)
@@ -140,6 +155,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val params = window.attributes
         params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         window.attributes = params
+        (findViewById<ConstraintLayout>(R.id.layout_top)).setOnClickListener(this)
         tvTitle = findViewById(R.id.tv_center_top)
         ivSearch = findViewById(R.id.iv_right_top)
         rbHome = findViewById(R.id.rb_home)

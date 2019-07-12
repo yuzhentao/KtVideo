@@ -12,7 +12,7 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
 
     var context: Context? = null
     var view: HomeContract.View? = null
-    private val mModel: HomeModel by lazy {
+    private val model: HomeModel by lazy {
         HomeModel()
     }
 
@@ -26,9 +26,9 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
     }
 
     @SuppressLint("CheckResult")
-    override fun requestData() {
+    override fun load() {
         val observable: Observable<HomeBean>? = context?.let {
-            mModel.loadData(it, true, "0")
+            model.loadData(it, true, "")
         }
         observable?.normalSchedulers()?.subscribe { homeBean: HomeBean ->
             view?.setData(homeBean)
@@ -36,8 +36,10 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
     }
 
     @SuppressLint("CheckResult")
-    override fun requestMoreData(data: String?) {
-        val observable: Observable<HomeBean>? = context?.let { mModel.loadData(it, false, data) }
+    override fun loadMore(date: String?) {
+        val observable: Observable<HomeBean>? = context?.let {
+            model.loadData(it, false, date)
+        }
         observable?.normalSchedulers()?.subscribe { homeBean: HomeBean ->
             view?.setData(homeBean)
         }

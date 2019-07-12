@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.Item
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
-import com.yuzhentao.ktvideo.util.ImageLoadUtils
+import com.yuzhentao.ktvideo.util.ImageUtil
 
 class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -39,11 +39,11 @@ class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.A
 
         val photo = bean?.data?.cover?.feed
         val icon = bean?.data?.author?.icon
-        ImageLoadUtils.display(context!!, holder.ivPhoto, photo as String)
+        ImageUtil.display(context!!, holder.ivPhoto, photo as String)
         if (icon == null) {
             holder.ivUser?.visibility = View.GONE
         } else {
-            ImageLoadUtils.display(context!!, holder.ivUser, icon)
+            ImageUtil.display(context!!, holder.ivUser, icon)
         }
 
         val title = bean.data.title

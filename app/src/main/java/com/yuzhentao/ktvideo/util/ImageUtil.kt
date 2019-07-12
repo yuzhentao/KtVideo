@@ -6,7 +6,7 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.yuzhentao.ktvideo.R
 
-class ImageLoadUtils {
+class ImageUtil {
 
     companion object {
         fun display(context: Context, imageView: ImageView?, url: String) {
