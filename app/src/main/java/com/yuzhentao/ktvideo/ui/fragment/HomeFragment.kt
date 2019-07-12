@@ -5,7 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HomeAdapter
-import com.yuzhentao.ktvideo.bean.HomeBean
+import com.yuzhentao.ktvideo.bean.Item
+import com.yuzhentao.ktvideo.bean.NewHomeBean
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.presenter.HomePresenter
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -13,10 +14,10 @@ import java.util.regex.Pattern
 
 class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    var isRefresh: Boolean = false
+    private var isRefresh: Boolean = false
     var presenter: HomePresenter? = null
-    var beans = ArrayList<HomeBean.IssueListBean.ItemListBean>()
-    var adapter: HomeAdapter? = null
+    var beans = ArrayList<Item>()
+    private var adapter: HomeAdapter? = null
     var data: String? = null
 
     override fun getLayoutResources(): Int {
@@ -27,7 +28,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         srl.setOnRefreshListener(this)
         srl.setColorSchemeResources(R.color.orange)
         presenter = HomePresenter(context, this)
-        presenter?.start()
+        presenter?.requestData()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = HomeAdapter(context, beans)
         rv.adapter = adapter
@@ -49,10 +50,10 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
 
     }
 
-    override fun setData(bean: HomeBean) {
+    override fun setData(bean: NewHomeBean) {
         val regEx = "[^0-9]"
         val p = Pattern.compile(regEx)
-        val m = p.matcher(bean.nextPageUrl.toString())
+        val m = p.matcher(bean.nextPageUrl)
         data = m.replaceAll("").subSequence(1, m.replaceAll("").length - 1).toString()
         if (isRefresh) {
             isRefresh = false
@@ -61,9 +62,9 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                 beans.clear()
             }
         }
-        bean.issueList!!
-                .flatMap { it.itemList!! }
-                .filter { it.type.equals("video") }
+        bean.issueList
+                .flatMap { it.itemList }
+                .filter { it.type == "video" }
                 .forEach { beans.add(it) }
         adapter?.notifyDataSetChanged()
     }
@@ -71,7 +72,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     override fun onRefresh() {
         if (!isRefresh) {
             isRefresh = true
-            presenter?.start()
+            presenter?.requestData()
         }
     }
 

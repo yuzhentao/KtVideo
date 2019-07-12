@@ -10,15 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yuzhentao.ktvideo.R
-import com.yuzhentao.ktvideo.bean.HomeBean
+import com.yuzhentao.ktvideo.bean.Item
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.ImageLoadUtils
 
-class HomeAdapter(context: Context?, beans: MutableList<HomeBean.IssueListBean.ItemListBean>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var context: Context? = null
-    var beans: MutableList<HomeBean.IssueListBean.ItemListBean>? = null
-    var inflater: LayoutInflater? = null
+    private var beans: MutableList<Item>? = null
+    private var inflater: LayoutInflater? = null
 
     init {
         this.context = context
@@ -46,18 +46,18 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.IssueListBean.I
             ImageLoadUtils.display(context!!, holder.ivUser, icon)
         }
 
-        val title = bean.data?.title
-        val category = bean.data?.category
-        val minute = bean.data?.duration?.div(60)
-        val second = bean.data?.duration?.minus((minute?.times(60)) as Long)
+        val title = bean.data.title
+        val category = bean.data.category
+        val minute = bean.data.duration.div(60)
+        val second = bean.data.duration.minus((minute.times(60)))
         val realMinute: String
         val realSecond: String
-        realMinute = if (minute!! < 10) {
+        realMinute = if (minute < 10) {
             "0$minute"
         } else {
             minute.toString()
         }
-        realSecond = if (second!! < 10) {
+        realSecond = if (second < 10) {
             "0$second"
         } else {
             second.toString()
@@ -68,13 +68,13 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.IssueListBean.I
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, VideoDetailActivity::class.java)
-            val desc = bean.data?.description
-            val duration = bean.data?.duration
-            val playUrl = bean.data?.playUrl
-            val blurred = bean.data?.cover?.blurred
-            val collect = bean.data?.consumption?.collectionCount
-            val share = bean.data?.consumption?.shareCount
-            val reply = bean.data?.consumption?.replyCount
+            val desc = bean.data.description
+            val duration = bean.data.duration
+            val playUrl = bean.data.playUrl
+            val blurred = bean.data.cover.blurred
+            val collect = bean.data.consumption.collectionCount
+            val share = bean.data.consumption.shareCount
+            val reply = bean.data.consumption.replyCount
             val time = System.currentTimeMillis()
             //todo
         }
