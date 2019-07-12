@@ -2,13 +2,13 @@ package com.yuzhentao.ktvideo.mvp.contract
 
 import com.yuzhentao.ktvideo.base.BasePresenter
 import com.yuzhentao.ktvideo.base.BaseView
-import com.yuzhentao.ktvideo.bean.NewHomeBean
+import com.yuzhentao.ktvideo.bean.HomeBean
 
 interface HomeContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setData(bean: NewHomeBean)
+        fun setData(bean: HomeBean)
 
     }
 

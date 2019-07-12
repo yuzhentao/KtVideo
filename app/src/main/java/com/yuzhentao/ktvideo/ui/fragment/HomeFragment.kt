@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HomeAdapter
 import com.yuzhentao.ktvideo.bean.Item
-import com.yuzhentao.ktvideo.bean.NewHomeBean
+import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.presenter.HomePresenter
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
 
     }
 
-    override fun setData(bean: NewHomeBean) {
+    override fun setData(bean: HomeBean) {
         val regEx = "[^0-9]"
         val p = Pattern.compile(regEx)
         val m = p.matcher(bean.nextPageUrl)

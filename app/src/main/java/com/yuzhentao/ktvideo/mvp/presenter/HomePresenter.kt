@@ -2,7 +2,7 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.yuzhentao.ktvideo.bean.NewHomeBean
+import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.model.HomeModel
 import com.yuzhentao.ktvideo.util.normalSchedulers
@@ -27,18 +27,18 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
 
     @SuppressLint("CheckResult")
     override fun requestData() {
-        val observable: Observable<NewHomeBean>? = context?.let {
+        val observable: Observable<HomeBean>? = context?.let {
             mModel.loadData(it, true, "0")
         }
-        observable?.normalSchedulers()?.subscribe { homeBean: NewHomeBean ->
+        observable?.normalSchedulers()?.subscribe { homeBean: HomeBean ->
             view?.setData(homeBean)
         }
     }
 
     @SuppressLint("CheckResult")
     override fun requestMoreData(data: String?) {
-        val observable: Observable<NewHomeBean>? = context?.let { mModel.loadData(it, false, data) }
-        observable?.normalSchedulers()?.subscribe { homeBean: NewHomeBean ->
+        val observable: Observable<HomeBean>? = context?.let { mModel.loadData(it, false, data) }
+        observable?.normalSchedulers()?.subscribe { homeBean: HomeBean ->
             view?.setData(homeBean)
         }
     }
