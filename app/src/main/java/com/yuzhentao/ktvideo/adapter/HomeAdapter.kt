@@ -3,6 +3,7 @@ package com.yuzhentao.ktvideo.adapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Parcelable
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -11,8 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.Item
+import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.ImageUtil
+import com.yuzhentao.ktvideo.util.ObjectSaveUtils
+import com.yuzhentao.ktvideo.util.SPUtils
 
 class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -76,7 +80,21 @@ class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.A
             val share = bean.data.consumption.shareCount
             val reply = bean.data.consumption.replyCount
             val time = System.currentTimeMillis()
-            //todo
+            val videoBean = VideoBean(photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+            val url = SPUtils.getInstance(context!!, "beans").getString(playUrl)
+            if (url == "") {
+                var count = SPUtils.getInstance(context!!, "beans").getInt("count")
+                count = if (count != -1) {
+                    count.inc()
+                } else {
+                    1
+                }
+                SPUtils.getInstance(context!!, "beans").put(playUrl, playUrl)
+                SPUtils.getInstance(context!!, "beans").put("count", count)
+                ObjectSaveUtils.saveObject(context!!, "bean$count", videoBean)
+            }
+            intent.putExtra("data", videoBean as Parcelable)
+            context?.startActivity(intent)
         }
     }
 
