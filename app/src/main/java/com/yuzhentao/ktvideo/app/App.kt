@@ -7,8 +7,13 @@ import timber.log.Timber
 
 class App : MultiDexApplication() {
 
+    companion object {
+        var app: App? = null
+    }
+
     override fun onCreate() {
         super.onCreate()
+        app = this
         initTimber()
     }
 
