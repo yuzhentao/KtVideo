@@ -59,7 +59,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/x5"
         android:gravity="start"
-        android:maxLines="10"
+        android:maxLines="8"
         android:paddingStart="@dimen/x10"
         android:paddingEnd="@dimen/x10"
         android:textColor="@color/white"
@@ -185,6 +185,5 @@
             android:textSize="@dimen/x12"
             tools:text="测试" />
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>
