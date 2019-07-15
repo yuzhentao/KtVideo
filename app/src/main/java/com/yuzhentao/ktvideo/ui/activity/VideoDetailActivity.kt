@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import android.widget.ImageView
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.yuzhentao.ktvideo.R
@@ -55,9 +56,10 @@ class VideoDetailActivity : AppCompatActivity() {
             ImageUtil.displayHigh(context, iv_bg, bgUrl)
         }
         tv_title.text = bean.title
-        tv_title.typeface = Typeface.createFromAsset(this.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
+        tv_title.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
         tv_desc.text = bean.description
         tv_desc.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_desc.movementMethod = ScrollingMovementMethod.getInstance()
         val category = bean.category
         val duration = bean.duration
         val minute = duration?.div(60)
@@ -78,6 +80,9 @@ class VideoDetailActivity : AppCompatActivity() {
         }
         val time = "发布于 $category / $realMinute:$realSecond"
         tv_time.text = time
+        tv_favorite.text = bean.collect.toString()
+        tv_share.text = bean.share.toString()
+        tv_reply.text = bean.reply.toString()
     }
 
     private fun prepareVideo() {

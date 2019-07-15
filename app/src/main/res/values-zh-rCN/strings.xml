@@ -7,4 +7,6 @@
     <string name="home_bottom_3">热门</string>
     <string name="home_bottom_4">我的</string>
 
+    <string name="video_cache">缓存</string>
+
 </resources>
