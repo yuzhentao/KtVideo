@@ -8,12 +8,17 @@ import android.os.Handler
 import android.os.Message
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
+import android.view.View
 import android.widget.ImageView
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.util.ImageUtil
+import com.yuzhentao.ktvideo.util.ObjectSaveUtils
+import com.yuzhentao.ktvideo.util.SPUtils
+import com.yuzhentao.ktvideo.util.showToast
 import kotlinx.android.synthetic.main.activity_video_detail.*
+import zlc.season.rxdownload2.RxDownload
 
 class VideoDetailActivity : AppCompatActivity() {
 
@@ -83,10 +88,64 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_favorite.text = bean.collect.toString()
         tv_share.text = bean.share.toString()
         tv_reply.text = bean.reply.toString()
+        tv_download.setOnClickListener {
+            val url = bean.playUrl?.let {
+                SPUtils.getInstance(context, "downloads").getString(it)
+            }
+            if (url == "") {
+                var count = SPUtils.getInstance(context, "downloads").getInt("count")
+                count = if (count != -1) {
+                    count.inc()
+                } else {
+                    1
+                }
+                SPUtils.getInstance(context, "downloads").put("count", count)
+                ObjectSaveUtils.saveObject(context, "download$count", bean)
+                addMission(bean.playUrl, count)
+            } else {
+                showToast("该视频已经缓存过了")
+            }
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun addMission(playUrl: String?, count: Int) {
+        RxDownload
+                .getInstance(context)
+                .serviceDownload(playUrl, "download$count")
+                .subscribe({
+                    showToast("开始下载")
+                    SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
+                    SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
+                }, {
+                    showToast("添加任务失败")
+                })
     }
 
     private fun prepareVideo() {
-
+        val uri = intent.getStringExtra("loaclFile")
+        if (uri != null) {
+            vp.setUp(uri, false, null, null)
+        } else {
+            vp.setUp(bean.playUrl, false, null, null)
+        }
+        //封面
+        iv = ImageView(context)
+        iv.scaleType = ImageView.ScaleType.CENTER_CROP
+        //todo
+        vp.titleTextView.visibility = View.GONE
+        vp.backButton.visibility = View.VISIBLE
+        orientationUtils = OrientationUtils(this, vp)
+        vp.setIsTouchWiget(true)
+        vp.isRotateViewAuto = false
+        vp.isLockLand = false
+        vp.isShowFullAnimation = false
+        vp.isNeedLockFull = true
+        vp.fullscreenButton.setOnClickListener {
+            orientationUtils.resolveByClick()//直接横屏
+            vp.startWindowFullscreen(context, true, true)//第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
+        }
+        vp.setStandardVideoAllCallBack(object )
     }
 
 }
