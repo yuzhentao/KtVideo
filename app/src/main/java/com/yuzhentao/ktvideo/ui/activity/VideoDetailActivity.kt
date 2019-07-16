@@ -28,16 +28,19 @@ class VideoDetailActivity : AppCompatActivity() {
 
     companion object {
 
-        var MSG_IMAGE_LOADED = 101
+        var MSG_IMAGE_LOADED = 1000
 
     }
 
     var context: Context = this
-    lateinit var iv: ImageView
-    lateinit var bean: VideoBean
+    var activity: VideoDetailActivity = this
+
+    private lateinit var bean: VideoBean
+
+    lateinit var ivCover: ImageView//封面
     var isPlay: Boolean = false
     var isPause: Boolean = false
-    lateinit var orientationUtils: OrientationUtils
+    lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
     var handler: Handler =
             @SuppressLint("HandlerLeak")
             object : Handler() {
@@ -45,7 +48,7 @@ class VideoDetailActivity : AppCompatActivity() {
                     super.handleMessage(msg)
                     when (msg?.what) {
                         MSG_IMAGE_LOADED -> {
-                            vp.setThumbImageView(iv)
+                            vp.setThumbImageView(ivCover)
                         }
                     }
                 }
@@ -87,7 +90,7 @@ class VideoDetailActivity : AppCompatActivity() {
             } else {
                 //新版本isIfCurrentIsFullscreen的标志位内部提前设置了，所以不会和手动点击冲突
                 if (vp.isIfCurrentIsFullscreen) {
-                    StandardGSYVideoPlayer.backFromWindowFull(this);
+                    StandardGSYVideoPlayer.backFromWindowFull(context)
                 }
                 orientationUtils.let {
                     orientationUtils.isEnable = true
@@ -100,16 +103,16 @@ class VideoDetailActivity : AppCompatActivity() {
         orientationUtils.let {
             orientationUtils.backToProtVideo()
         }
-        if (StandardGSYVideoPlayer.backFromWindowFull(this)) {
+        if (StandardGSYVideoPlayer.backFromWindowFull(context)) {
             return
         }
         super.onBackPressed()
     }
 
     private fun initView() {
-        val bgUrl = bean.blurred
-        bgUrl?.let {
-            ImageUtil.displayHigh(context, iv_bg, bgUrl)
+        val blurred = bean.blurred//接口提供的虚化图
+        blurred?.let {
+            ImageUtil.displayHigh(context, iv_bg, blurred)
         }
         tv_title.text = bean.title
         tv_title.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
@@ -180,13 +183,12 @@ class VideoDetailActivity : AppCompatActivity() {
         } else {
             vp.setUp(bean.playUrl, false, null, null)
         }
-        //封面
-        iv = ImageView(context)
-        iv.scaleType = ImageView.ScaleType.CENTER_CROP
-        ImageViewAsyncTask(handler, this, iv).execute(bean.feed)
+        ivCover = ImageView(context)
+        ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
+        ImageViewAsyncTask(handler, activity, ivCover).execute(bean.feed)
         vp.titleTextView.visibility = View.GONE
         vp.backButton.visibility = View.VISIBLE
-        orientationUtils = OrientationUtils(this, vp)
+        orientationUtils = OrientationUtils(activity, vp)
         vp.setIsTouchWiget(true)
         vp.isRotateViewAuto = false
         vp.isLockLand = false
