@@ -3,10 +3,8 @@ package com.yuzhentao.ktvideo.util
 import android.content.Context
 import java.io.*
 
-/**
- * Created by lvruheng on 2017/7/11.
- */
 object ObjectSaveUtils{
+
     fun saveObject(context: Context, name: String, value: Any) {
         var fos: FileOutputStream? = null
         var oos: ObjectOutputStream? = null
@@ -17,14 +15,11 @@ object ObjectSaveUtils{
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
-            if (fos != null) {
-                fos.close()
-            }
-            if (oos != null) {
-                oos.close()
-            }
+            fos?.close()
+            oos?.close()
         }
     }
+
     fun getValue(context: Context, name: String): Any? {
         var fis: FileInputStream? = null
         var ois: ObjectInputStream? = null
@@ -57,7 +52,9 @@ object ObjectSaveUtils{
         }
         return null
     }
+
     fun deleteFile(name: String,context: Context){
         context.deleteFile(name)
     }
+
 }

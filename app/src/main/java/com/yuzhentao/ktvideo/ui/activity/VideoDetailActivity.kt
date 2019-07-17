@@ -144,7 +144,7 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_reply.text = bean.reply.toString()
         tv_download.setOnClickListener {
             val url = bean.playUrl?.let {
-                SPUtils.getInstance(context, "downloads").getString(it)
+                SPUtils.getInstance(context, "downloads").getString(it)//是否缓存当前视频
             }
             if (url == "") {
                 var count = SPUtils.getInstance(context, "downloads").getInt("count")
@@ -153,17 +153,20 @@ class VideoDetailActivity : AppCompatActivity() {
                 } else {
                     1
                 }
-                SPUtils.getInstance(context, "downloads").put("count", count)
-                ObjectSaveUtils.saveObject(context, "download$count", bean)
-                addMission(bean.playUrl, count)
+                SPUtils.getInstance(context, "downloads").put("count", count)//缓存的视频对象数量
+                ObjectSaveUtils.saveObject(context, "download$count", bean)//保存视频对象，缓存中会使用到
+                cache(bean.playUrl, count)
             } else {
                 showToast("该视频已经缓存过了")
             }
         }
     }
 
+    /**
+     * 缓存
+     */
     @SuppressLint("CheckResult")
-    private fun addMission(playUrl: String?, count: Int) {
+    private fun cache(playUrl: String?, count: Int) {
         RxDownload
                 .getInstance(context)
                 .serviceDownload(playUrl, "download$count")
@@ -177,7 +180,7 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private fun prepareVideo() {
-        val uri = intent.getStringExtra("loaclFile")
+        val uri = intent.getStringExtra("loac©lFile")
         if (uri != null) {
             vp.setUp(uri, false, null, null)
         } else {

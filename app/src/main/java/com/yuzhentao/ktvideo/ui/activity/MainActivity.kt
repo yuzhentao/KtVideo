@@ -1,5 +1,6 @@
 package com.yuzhentao.ktvideo.ui.activity
 
+import android.Manifest
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
@@ -11,11 +12,14 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import com.gyf.barlibrary.ImmersionBar
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.fragment.*
 import com.yuzhentao.ktvideo.util.newIntent
 import com.yuzhentao.ktvideo.util.showToast
+import io.reactivex.disposables.Disposable
 import java.util.*
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -35,9 +39,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var toast: Toast? = null
     private var exitTime: Long = 0
 
+    private var permissionsDisposable: Disposable? = null
+    private var rxPermissions: RxPermissions? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        requestPermissions()
         initView()
         initFragment(savedInstanceState)
     }
@@ -53,9 +61,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     override fun onPause() {
         super.onPause()
-        toast?.let {//这里表示toast不为null时才会去执行函数体
+        toast?.let {
+            //这里表示toast不为null时才会去执行函数体
             toast!!.cancel()
         }
+    }
+
+    override fun onDestroy() {
+        if (permissionsDisposable != null && !permissionsDisposable!!.isDisposed) {
+            permissionsDisposable!!.dispose()
+        }
+        super.onDestroy()
     }
 
     override fun onBackPressed() {
@@ -145,6 +161,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
         }
+    }
+
+    private fun requestPermissions() {
+        rxPermissions = RxPermissions(this)
+        permissionsDisposable = rxPermissions!!
+                .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe { permission ->
+                    when {
+                        permission.granted -> {
+
+                        }
+                        permission.shouldShowRequestPermissionRationale -> {
+
+                        }
+                        else -> {
+
+                        }
+                    }
+                }
     }
 
     private fun initView() {

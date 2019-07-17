@@ -81,17 +81,17 @@ class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.A
             val reply = bean.data.consumption.replyCount
             val time = System.currentTimeMillis()
             val videoBean = VideoBean(photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
-            val url = SPUtils.getInstance(context!!, "beans").getString(playUrl)
+            val url = SPUtils.getInstance(context!!, "beans").getString(playUrl)//是否保存视频地址
             if (url == "") {
                 var count = SPUtils.getInstance(context!!, "beans").getInt("count")
                 count = if (count != -1) {
-                    count.inc()
+                    count.inc()//i++
                 } else {
                     1
                 }
-                SPUtils.getInstance(context!!, "beans").put(playUrl, playUrl)
-                SPUtils.getInstance(context!!, "beans").put("count", count)
-                ObjectSaveUtils.saveObject(context!!, "bean$count", videoBean)
+                SPUtils.getInstance(context!!, "beans").put(playUrl, playUrl)//视频地址
+                SPUtils.getInstance(context!!, "beans").put("count", count)//保存的视频对象数量
+                ObjectSaveUtils.saveObject(context!!, "bean$count", videoBean)//保存视频对象，观看记录中会使用到
             }
             intent.putExtra("data", videoBean as Parcelable)
             context?.startActivity(intent)
