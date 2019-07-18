@@ -6,10 +6,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
-import android.os.AsyncTask
-import android.os.Bundle
-import android.os.Handler
-import android.os.Message
+import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.view.View
@@ -21,7 +18,8 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.util.*
 import kotlinx.android.synthetic.main.activity_video_detail.*
-import zlc.season.rxdownload2.RxDownload
+import timber.log.Timber
+import zlc.season.rxdownload3.core.Mission
 import java.io.FileInputStream
 
 class VideoDetailActivity : AppCompatActivity() {
@@ -167,7 +165,9 @@ class VideoDetailActivity : AppCompatActivity() {
      */
     @SuppressLint("CheckResult")
     private fun cache(playUrl: String?, count: Int) {
-        RxDownload
+        val mission = Mission(playUrl!!, "video", "${Environment.getExternalStorageDirectory()}" + "/KtVideo" + "/Video")
+        Timber.e("")
+/*        RxDownload
                 .getInstance(context)
                 .serviceDownload(playUrl, "download$count")
                 .subscribe({
@@ -176,7 +176,7 @@ class VideoDetailActivity : AppCompatActivity() {
                     SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
                 }, {
                     showToast("添加任务失败")
-                })
+                })*/
     }
 
     private fun prepareVideo() {
