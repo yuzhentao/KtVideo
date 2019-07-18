@@ -6,7 +6,10 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
-import android.os.*
+import android.os.AsyncTask
+import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.view.View
@@ -17,9 +20,14 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.util.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_video_detail.*
 import timber.log.Timber
+import zlc.season.rxdownload3.RxDownload
 import zlc.season.rxdownload3.core.Mission
+import zlc.season.rxdownload3.helper.dispose
 import java.io.FileInputStream
 
 class VideoDetailActivity : AppCompatActivity() {
@@ -52,6 +60,8 @@ class VideoDetailActivity : AppCompatActivity() {
                 }
             }
 
+    private var disposable: Disposable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_detail)
@@ -76,6 +86,7 @@ class VideoDetailActivity : AppCompatActivity() {
         orientationUtils.let {
             orientationUtils.releaseListener()
         }
+        dispose(disposable)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
@@ -164,9 +175,16 @@ class VideoDetailActivity : AppCompatActivity() {
      * 缓存
      */
     @SuppressLint("CheckResult")
+
     private fun cache(playUrl: String?, count: Int) {
-        val mission = Mission(playUrl!!, "video", "${Environment.getExternalStorageDirectory()}" + "/KtVideo" + "/Video")
-        Timber.e("")
+        val mission = Mission("http://pic37.nipic.com/20140113/8800276_184927469000_2.png", "video.png", "/sdcard" + "/KtVideo" + "/Video")
+        disposable = RxDownload.create(mission, autoStart = false)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { status ->
+                    Timber.e("%s>>>", status.toString())
+                }
+        RxDownload.start(mission).subscribe()
 /*        RxDownload
                 .getInstance(context)
                 .serviceDownload(playUrl, "download$count")
