@@ -15,6 +15,7 @@ class App : MultiDexApplication() {
         super.onCreate()
         app = this
         initTimber()
+        initRxEasyHttp()
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -24,6 +25,10 @@ class App : MultiDexApplication() {
 
     private fun initTimber() {
         Timber.plant(Timber.DebugTree())
+    }
+
+    private fun initRxEasyHttp() {
+        EasyHttp.init(this)
     }
 
 }
