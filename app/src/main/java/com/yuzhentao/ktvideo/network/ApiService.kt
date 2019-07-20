@@ -1,5 +1,6 @@
 package com.yuzhentao.ktvideo.network
 
+import com.yuzhentao.ktvideo.bean.DiscoverBean
 import com.yuzhentao.ktvideo.bean.HomeBean
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -20,5 +21,9 @@ interface ApiService {
     //获取首页第一页之后的数据
     @GET("v2/feed")
     fun getHomeMoreData(@Query("date") date: String, @Query("num") num: String): Observable<HomeBean>
+
+    //获取发现的数据
+    @GET("v2/categories?udid=26868b32e808498db32fd51fb422d00175e179df&vc=83")
+    fun getDiscoverData(): Observable<MutableList<DiscoverBean>>
 
 }
