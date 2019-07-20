@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
-import android.os.*
+import android.os.Bundle
+import android.os.Environment
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.view.View
@@ -20,6 +22,8 @@ import com.yuzhentao.ktvideo.util.*
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.callback.DownloadProgressCallBack
 import com.zhouyou.http.exception.ApiException
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_video_detail.*
 import timber.log.Timber
 import java.io.File
@@ -27,33 +31,17 @@ import java.io.FileInputStream
 
 class VideoDetailActivity : AppCompatActivity() {
 
-    companion object {
-
-        var MSG_IMAGE_LOADED = 1000
-
-    }
-
     var context: Context = this
     var activity: VideoDetailActivity = this
 
     private lateinit var bean: VideoBean
 
     lateinit var ivCover: ImageView//封面
+    private var coverDisposable: Disposable? = null
+
     var isPlay: Boolean = false
     var isPause: Boolean = false
     lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
-    var handler: Handler =
-            @SuppressLint("HandlerLeak")
-            object : Handler() {
-                override fun handleMessage(msg: Message?) {
-                    super.handleMessage(msg)
-                    when (msg?.what) {
-                        MSG_IMAGE_LOADED -> {
-                            vp.setThumbImageView(ivCover)
-                        }
-                    }
-                }
-            }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +62,11 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        coverDisposable.let {
+            if (!coverDisposable!!.isDisposed) {
+                coverDisposable!!.dispose()
+            }
+        }
         super.onDestroy()
         GSYVideoPlayer.releaseAllVideos()
         orientationUtils.let {
@@ -165,7 +158,6 @@ class VideoDetailActivity : AppCompatActivity() {
 
     /**
      * 缓存
-     * http://pic39.nipic.com/20140320/12795880_110914420143_2.jpg
      */
     @SuppressLint("CheckResult")
     private fun cache(playUrl: String?, count: Int) {
@@ -204,7 +196,7 @@ class VideoDetailActivity : AppCompatActivity() {
         }
         ivCover = ImageView(context)
         ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
-        ImageViewAsyncTask(handler, activity, ivCover).execute(bean.feed)
+        setCover()
         vp.titleTextView.visibility = View.GONE
         vp.backButton.visibility = View.VISIBLE
         orientationUtils = OrientationUtils(activity, vp)
@@ -239,30 +231,22 @@ class VideoDetailActivity : AppCompatActivity() {
         }
     }
 
-    private class ImageViewAsyncTask(handler: Handler, activity: VideoDetailActivity, private val iv: ImageView) : AsyncTask<String, Void, String>() {
-
-        private var handler = handler
-        private var path: String? = null
-        private var inputStream: FileInputStream? = null
-        private var activity = activity
-
-        override fun doInBackground(vararg params: String?): String {
-            val future = GlideApp.with(activity)
-                    .load(params[0])
-                    .downloadOnly(100, 100)
-            val cacheFile = future.get()
-            path = cacheFile.absolutePath
-            return path!!
-        }
-
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-            inputStream = FileInputStream(result)
+    private fun setCover() {
+        val observable: Observable<Bitmap> = Observable.create { emitter ->
+            val cacheFile = GlideApp
+                    .with(context)
+                    .downloadOnly()
+                    .load(bean.feed)
+                    .submit()
+                    .get()
+            val path: String? = cacheFile.absolutePath
+            val inputStream: FileInputStream? = FileInputStream(path)
             val bitmap = BitmapFactory.decodeStream(inputStream)
-            iv.setImageBitmap(bitmap)
-            val message = handler.obtainMessage()
-            message.what = MSG_IMAGE_LOADED
-            handler.sendMessage(message)
+            emitter.onNext(bitmap)
+        }
+        coverDisposable = observable.normalSchedulers().subscribe { bitmap: Bitmap? ->
+            ivCover.setImageBitmap(bitmap)
+            vp.setThumbImageView(ivCover)
         }
     }
 
