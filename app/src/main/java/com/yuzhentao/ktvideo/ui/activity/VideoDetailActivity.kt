@@ -6,10 +6,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
-import android.os.AsyncTask
-import android.os.Bundle
-import android.os.Handler
-import android.os.Message
+import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.view.View
@@ -20,7 +17,12 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.util.*
+import com.zhouyou.http.EasyHttp
+import com.zhouyou.http.callback.DownloadProgressCallBack
+import com.zhouyou.http.exception.ApiException
 import kotlinx.android.synthetic.main.activity_video_detail.*
+import timber.log.Timber
+import java.io.File
 import java.io.FileInputStream
 
 class VideoDetailActivity : AppCompatActivity() {
@@ -163,11 +165,34 @@ class VideoDetailActivity : AppCompatActivity() {
 
     /**
      * 缓存
-     * http://cdn.sinaweibo.com.cn//uploadFiles/uploadFile/2019010803200685761.webp
+     * http://pic39.nipic.com/20140320/12795880_110914420143_2.jpg
      */
     @SuppressLint("CheckResult")
     private fun cache(playUrl: String?, count: Int) {
+        EasyHttp.downLoad(playUrl)
+                .savePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo")
+                .saveName("download$count.mp4")
+                .execute(object : DownloadProgressCallBack<String>() {
+                    override fun update(bytesRead: Long, contentLength: Long, done: Boolean) {
+                        val progress: Int = ((bytesRead * 100 / contentLength).toInt())
+                        Timber.e("Cache-update>>>$progress")
+                    }
 
+                    override fun onComplete(path: String?) {
+                        Timber.e("Cache-onComplete>>>")
+                    }
+
+                    override fun onError(e: ApiException?) {
+                        Timber.e("Cache-onError>>>${e.toString()}")
+                    }
+
+                    override fun onStart() {
+                        Timber.e("Cache-onStart>>>")
+                        showToast("开始下载")
+                        SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
+                        SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
+                    }
+                })
     }
 
     private fun prepareVideo() {
