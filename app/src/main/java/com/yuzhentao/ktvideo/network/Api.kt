@@ -12,5 +12,8 @@ const val HOT_STRATEGY = "http://baobab.wandoujia.com/api/v3/ranklist?num=10&str
 //发现更多详情接口
 const val FIND_DETAIL = "http://baobab.wandoujia.com/api/v3/videos?categoryName=%s&strategy=%s&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83";
 
+//发现更多详情接口
+const val DISCOVER_DETAIL = "http://baobab.kaiyanapp.com/api/v4/categories/detail/tab?id=%s"
+
 //搜索关键字
 const val SEARCH_RELATED = "http://baobab.kaiyanapp.com/api/v1/search?num=10&query=%E4%BD%A0&start=10"

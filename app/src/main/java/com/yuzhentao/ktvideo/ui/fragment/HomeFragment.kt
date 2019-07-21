@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HomeAdapter
 import com.yuzhentao.ktvideo.bean.HomeBean
-import com.yuzhentao.ktvideo.bean.Item
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.presenter.HomePresenter
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -16,7 +15,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
 
     private var isRefresh: Boolean = false
     private var adapter: HomeAdapter? = null
-    var beans = ArrayList<Item>()
+    var beans = ArrayList<HomeBean.Issue.Item>()
     var presenter: HomePresenter? = null
     var date: String? = null
 

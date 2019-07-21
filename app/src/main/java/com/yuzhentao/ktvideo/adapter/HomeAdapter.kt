@@ -11,17 +11,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yuzhentao.ktvideo.R
-import com.yuzhentao.ktvideo.bean.Item
+import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ObjectSaveUtils
 import com.yuzhentao.ktvideo.util.SPUtils
 
-class HomeAdapter(context: Context?, beans: MutableList<Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var context: Context? = null
-    private var beans: MutableList<Item>? = null
+    private var beans: MutableList<HomeBean.Issue.Item>? = null
     private var inflater: LayoutInflater? = null
 
     init {
