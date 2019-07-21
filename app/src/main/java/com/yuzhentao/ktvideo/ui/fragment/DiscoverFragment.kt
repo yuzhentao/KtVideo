@@ -8,6 +8,9 @@ import com.yuzhentao.ktvideo.mvp.contract.DiscoverContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverPresenter
 import kotlinx.android.synthetic.main.fragment_home.*
 
+/**
+ * 发现
+ */
 class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     var presenter: DiscoverPresenter? = null

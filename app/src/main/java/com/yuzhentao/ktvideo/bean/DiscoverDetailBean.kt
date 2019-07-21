@@ -1,5 +1,8 @@
 package com.yuzhentao.ktvideo.bean
 
+/**
+ * http://baobab.kaiyanapp.com/api/v4/categories/detail/tab?id=%s
+ */
 data class DiscoverDetailBean(
         val categoryInfo: CategoryInfo,
         val tabInfo: TabInfo,

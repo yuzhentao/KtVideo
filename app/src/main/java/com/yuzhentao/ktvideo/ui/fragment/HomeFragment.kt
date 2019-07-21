@@ -11,6 +11,9 @@ import com.yuzhentao.ktvideo.mvp.presenter.HomePresenter
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.regex.Pattern
 
+/**
+ * 首页
+ */
 class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private var isRefresh: Boolean = false

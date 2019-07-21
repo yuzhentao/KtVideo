@@ -29,6 +29,9 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
 
+/**
+ * 视频详情
+ */
 class VideoDetailActivity : AppCompatActivity() {
 
     var context: Context = this
