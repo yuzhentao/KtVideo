@@ -52,8 +52,9 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) :
 
         val title = bean.data.title
         val category = bean.data.category
-        val minute = bean.data.duration.div(60)
-        val second = bean.data.duration.minus((minute.times(60)))
+        val duration = bean.data.duration
+        val minute = duration.div(60)
+        val second = duration.minus((minute.times(60)))
         val realMinute: String
         val realSecond: String
         realMinute = if (minute < 10) {
@@ -73,7 +74,6 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) :
         holder.itemView.setOnClickListener {
             val intent = Intent(context, VideoDetailActivity::class.java)
             val desc = bean.data.description
-            val duration = bean.data.duration
             val playUrl = bean.data.playUrl
             val blurred = bean.data.cover.blurred
             val collect = bean.data.consumption.collectionCount
