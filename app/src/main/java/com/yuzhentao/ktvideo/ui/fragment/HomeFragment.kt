@@ -27,10 +27,10 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     }
 
     override fun initView() {
-        srl.setOnRefreshListener(this)
-        srl.setColorSchemeResources(R.color.orange)
         presenter = HomePresenter(context, this)
         presenter?.load()
+        srl.setOnRefreshListener(this)
+        srl.setColorSchemeResources(R.color.orange)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = HomeAdapter(context, beans)
         rv.adapter = adapter

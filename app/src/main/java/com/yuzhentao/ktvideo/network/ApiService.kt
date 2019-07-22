@@ -1,6 +1,7 @@
 package com.yuzhentao.ktvideo.network
 
 import com.yuzhentao.ktvideo.bean.DiscoverBean
+import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
 import com.yuzhentao.ktvideo.bean.HomeBean
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -25,5 +26,8 @@ interface ApiService {
     //获取发现的数据
     @GET("v2/categories?udid=26868b32e808498db32fd51fb422d00175e179df&vc=83")
     fun getDiscoverData(): Observable<MutableList<DiscoverBean>>
+
+    @GET("v4/categories/detail/tab")
+    fun getDiscoverDetailData(@Query("id") id: String): Observable<DiscoverDetailBean>
 
 }
