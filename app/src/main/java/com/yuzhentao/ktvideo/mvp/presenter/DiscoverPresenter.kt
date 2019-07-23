@@ -17,8 +17,8 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) : Discov
     }
 
     init {
-        this.view = view
         this.context = context
+        this.view = view
     }
 
     override fun start() {

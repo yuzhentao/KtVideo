@@ -17,8 +17,8 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
     }
 
     init {
-        this.view = view
         this.context = context
+        this.view = view
     }
 
     override fun start() {

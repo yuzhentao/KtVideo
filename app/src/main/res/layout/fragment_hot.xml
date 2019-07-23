@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,9 +9,14 @@
         android:id="@+id/tl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x40"
+        android:elevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/vp"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/black" />
+        app:tabIndicatorColor="@color/black"
+        app:tabMode="fixed"
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="0dp"
+        tools:ignore="UnusedAttribute" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"

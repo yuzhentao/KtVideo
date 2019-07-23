@@ -1,13 +1,16 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.adapter.HotAdapter
+import kotlinx.android.synthetic.main.fragment_hot.*
 
 class HotFragment : BaseFragment() {
 
-    private var tabs = mutableListOf("周排行", "月排行", "总排行")
     lateinit var fragments: ArrayList<Fragment>
+    private var titles = mutableListOf("周排行", "月排行", "总排行")
     var strategy = arrayOf("weekly", "monthly", "historical")
 
     override fun getLayoutResources(): Int {
@@ -34,6 +37,22 @@ class HotFragment : BaseFragment() {
         fragments.add(weekFragment)
         fragments.add(monthFragment)
         fragments.add(allFragment)
+
+        vp.adapter = HotAdapter(fragmentManager, fragments, titles)
+        tl.setupWithViewPager(vp)
+        tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+        })
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
