@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/x200">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x200"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/img_test_1" />
 
     <View
         android:id="@+id/v_mask"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x200"
-        android:background="@drawable/boman_selector"
-        app:layout_constraintTop_toTopOf="@id/iv" />
+        android:layout_height="match_parent"
+        android:background="@drawable/boman_selector" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_title"

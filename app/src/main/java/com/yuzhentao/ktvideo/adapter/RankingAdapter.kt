@@ -18,7 +18,7 @@ import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ObjectSaveUtils
 import com.yuzhentao.ktvideo.util.SPUtils
 
-class RankAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : RecyclerView.Adapter<RankAdapter.ViewHolder>() {
+class RankingAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : RecyclerView.Adapter<RankingAdapter.ViewHolder>() {
 
     var context: Context? = null
     var beans: ArrayList<HotBean.Item.Data>? = null
@@ -35,7 +35,7 @@ class RankAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : Recy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater!!.inflate(R.layout.item_rank, parent, false), context!!)
+        return ViewHolder(inflater!!.inflate(R.layout.item_ranking, parent, false), context!!)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

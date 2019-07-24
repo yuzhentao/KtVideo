@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
-import com.yuzhentao.ktvideo.adapter.RankAdapter
+import com.yuzhentao.ktvideo.adapter.RankingAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
@@ -22,7 +22,7 @@ class DiscoverDetailActivity : AppCompatActivity(), DiscoverDetailContract.View,
     private var context: Context = this
     private var activity: DiscoverDetailActivity = this
 
-    private var adapter: RankAdapter? = null
+    private var adapter: RankingAdapter? = null
 
     private var presenter: DiscoverDetailPresenter? = null
 
@@ -39,7 +39,7 @@ class DiscoverDetailActivity : AppCompatActivity(), DiscoverDetailContract.View,
         srl.setOnRefreshListener(this)
         srl.setColorSchemeResources(R.color.orange)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        adapter = RankAdapter()
+//        adapter = RankingAdapter()
 //        rv.adapter = adapter
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

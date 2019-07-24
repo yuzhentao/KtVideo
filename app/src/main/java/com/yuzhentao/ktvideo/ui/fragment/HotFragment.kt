@@ -3,10 +3,12 @@ package com.yuzhentao.ktvideo.ui.fragment
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HotAdapter
 import kotlinx.android.synthetic.main.fragment_hot.*
 
+/**
+ * 热门
+ */
 class HotFragment : BaseFragment() {
 
     lateinit var fragments: ArrayList<Fragment>
@@ -14,7 +16,7 @@ class HotFragment : BaseFragment() {
     var strategy = arrayOf("weekly", "monthly", "historical")
 
     override fun getLayoutResources(): Int {
-        return R.layout.fragment_hot
+        return com.yuzhentao.ktvideo.R.layout.fragment_hot
     }
 
     override fun initView() {
@@ -25,12 +27,12 @@ class HotFragment : BaseFragment() {
 
         val monthFragment = RankingFragment()
         val monthBundle = Bundle()
-        monthBundle.putString("strategy", strategy[0])
+        monthBundle.putString("strategy", strategy[1])
         monthFragment.arguments = monthBundle
 
         val allFragment = RankingFragment()
         val allBundle = Bundle()
-        allBundle.putString("strategy", strategy[0])
+        allBundle.putString("strategy", strategy[2])
         allFragment.arguments = allBundle
 
         fragments = ArrayList()
@@ -42,7 +44,11 @@ class HotFragment : BaseFragment() {
         tl.setupWithViewPager(vp)
         tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
+                tab?.let {
+                    if (tab.position < fragments.size) {
+                        (fragments[tab.position] as RankingFragment).scrollToTop()
+                    }
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
