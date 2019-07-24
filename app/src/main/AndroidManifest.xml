@@ -43,6 +43,12 @@
             android:theme="@style/Video" />
         <activity android:name=".ui.activity.DiscoverDetailActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.AvatarActivity" />
+        <activity android:name=".ui.activity.FavoriteActivity" />
+        <activity android:name=".ui.activity.CommentActivity" />
+        <activity android:name=".ui.activity.CacheActivity" />
+        <activity android:name=".ui.activity.WatchActivity" />
+        <activity android:name=".ui.activity.FeedbackActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

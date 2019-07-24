@@ -1,0 +1,17 @@
+package com.yuzhentao.ktvideo.ui.activity
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.yuzhentao.ktvideo.R
+
+/**
+ * 我的缓存
+ */
+class CacheActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_cache)
+    }
+
+}
