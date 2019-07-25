@@ -1,7 +1,9 @@
 package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -9,6 +11,7 @@ import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.ObjectSaveUtils
 import com.yuzhentao.ktvideo.util.SPUtils
 import com.yuzhentao.ktvideo.util.normalSchedulers
@@ -64,6 +67,20 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = CacheAdapter(context, beans)
         rv.adapter = adapter
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                val bean: VideoBean? = beans[position]
+                bean?.let {
+                    val intent = Intent(context, VideoDetailActivity::class.java)
+                    intent.putExtra("data", bean as Parcelable)
+                    context.startActivity(intent)
+                }
+            }
+
+            override fun onItemLongClick(view: View, position: Int): Boolean {
+                return false
+            }
+        })
     }
 
     private fun initData() {
