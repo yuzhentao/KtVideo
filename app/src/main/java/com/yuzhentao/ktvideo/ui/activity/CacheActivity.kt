@@ -33,7 +33,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cache)
-        ImmersionBar.with(this).transparentBar().barAlpha(0.3f).fitsSystemWindows(true).init()
+        ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init()
         initView()
         initData()
     }
@@ -85,6 +85,13 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         }
         disposable = observable.normalSchedulers().subscribe { tempBeans: ArrayList<VideoBean>? ->
             tempBeans?.let {
+                if (tempBeans.size > 0) {
+                    rv.visibility = View.VISIBLE
+                    tv_hint.visibility = View.GONE
+                } else {
+                    rv.visibility = View.GONE
+                    tv_hint.visibility = View.VISIBLE
+                }
                 if (beans.size > 0) {
                     beans.clear()
                 }

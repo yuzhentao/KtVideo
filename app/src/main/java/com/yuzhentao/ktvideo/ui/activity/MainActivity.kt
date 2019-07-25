@@ -1,6 +1,7 @@
 package com.yuzhentao.ktvideo.ui.activity
 
 import android.Manifest
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
@@ -20,8 +21,13 @@ import com.yuzhentao.ktvideo.util.showToast
 import io.reactivex.disposables.Disposable
 import java.util.*
 
-
+/**
+ * 主类
+ */
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    var context: Context = this
+    var activity: MainActivity = this
 
     private var tvTitle: AppCompatTextView? = null
     private var ivSearch: AppCompatImageView? = null
@@ -184,7 +190,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initView() {
         //沉浸式状态栏
-        ImmersionBar.with(this).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init();
+        ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init();
         //隐藏导航栏
         val window = window
         val params = window.attributes
