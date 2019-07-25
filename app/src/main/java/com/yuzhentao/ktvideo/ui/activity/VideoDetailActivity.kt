@@ -160,6 +160,16 @@ class VideoDetailActivity : AppCompatActivity() {
                 showToast("该视频已经缓存过了")
             }
         }
+        btn_pause.setOnClickListener {
+            Timber.e("暂停下载>>>")
+            showToast("暂停下载")
+            Aria.download(this).stopAllTask()
+        }
+        btn_resume.setOnClickListener {
+            Timber.e("继续下载>>>")
+            showToast("继续下载")
+            Aria.download(this).resumeAllTask()
+        }
     }
 
     /**

@@ -14,12 +14,14 @@
     <string name="splash_intro_en">Daily Video Promotion, Make Your Eye Open.</string>
     <string name="splash_intro_cn">每日精选视频推介，让你大开眼界。</string>
     <string name="video_cache">Download</string>
-    <string name="mine_login">点击登录即可发表评论</string>
+    <string name="mine_login">Click on login to comment</string>
     <string name="mine_favorite">Favorite</string>
     <string name="mine_comment">Comment</string>
     <string name="mine_cache">My Cache</string>
     <string name="mine_watch">Watch History</string>
     <string name="mine_feedback">Feedback</string>
-    <string name="cache_no">暂无内容</string>
+    <string name="cache_no">No Cache</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Continue</string>
 
 </resources>
