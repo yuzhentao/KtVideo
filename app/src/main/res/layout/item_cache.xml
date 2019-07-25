@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x80">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv"
+        android:layout_width="@dimen/x140"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_test_1" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_top"
+        style="@style/TextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x10"
+        android:layout_marginEnd="@dimen/x5"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        android:textSize="@dimen/x14"
+        app:layout_constraintBottom_toTopOf="@id/tv_bottom"
+        app:layout_constraintEnd_toStartOf="@id/iv_download"
+        app:layout_constraintStart_toEndOf="@id/iv"
+        app:layout_constraintTop_toTopOf="@id/iv"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="测试测试测试" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_bottom"
+        style="@style/TextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x5"
+        android:gravity="center_vertical"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/x10"
+        app:layout_constraintBottom_toBottomOf="@id/iv"
+        app:layout_constraintEnd_toEndOf="@id/tv_top"
+        app:layout_constraintStart_toStartOf="@id/tv_top"
+        app:layout_constraintTop_toBottomOf="@id/tv_top"
+        tools:text="测试测试测试" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_download"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
+        android:layout_marginEnd="@dimen/x5"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_play_normal" />
+
+</android.support.constraint.ConstraintLayout>
