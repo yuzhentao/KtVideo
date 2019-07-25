@@ -13,15 +13,15 @@ import android.support.v7.app.AppCompatActivity
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageView
+import com.arialyy.annotations.Download
+import com.arialyy.aria.core.Aria
+import com.arialyy.aria.core.download.DownloadTask
 import com.shuyu.gsyvideoplayer.GSYVideoPlayer
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.util.*
-import com.zhouyou.http.EasyHttp
-import com.zhouyou.http.callback.DownloadProgressCallBack
-import com.zhouyou.http.exception.ApiException
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_video_detail.*
@@ -34,21 +34,23 @@ import java.io.FileInputStream
  */
 class VideoDetailActivity : AppCompatActivity() {
 
-    var context: Context = this
-    var activity: VideoDetailActivity = this
+    private var context: Context = this
+    private var activity: VideoDetailActivity = this
 
     private lateinit var bean: VideoBean
 
     private lateinit var ivCover: ImageView//封面
     private var coverDisposable: Disposable? = null
 
-    var isPlay: Boolean = false
-    var isPause: Boolean = false
-    lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
+    private var playUrl: String? = null
+    private var isPlay: Boolean = false
+    private var isPause: Boolean = false
+    private lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_detail)
+        Aria.download(this).register()
         bean = intent.getParcelableExtra("data")
         initView()
         prepareVideo()
@@ -140,7 +142,8 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_share.text = bean.share.toString()
         tv_reply.text = bean.reply.toString()
         tv_download.setOnClickListener {
-            val url = bean.playUrl?.let {
+            playUrl = bean.playUrl
+            val url = playUrl?.let {
                 SPUtils.getInstance(context, "downloads").getString(it)//是否缓存当前视频
             }
             if (url == "") {
@@ -152,7 +155,7 @@ class VideoDetailActivity : AppCompatActivity() {
                 }
                 SPUtils.getInstance(context, "downloads").put("count", count)//缓存的视频对象数量
                 ObjectSaveUtils.saveObject(context, "download$count", bean)//保存视频对象，缓存中会使用到
-                cache(bean.playUrl, count)
+                cache(count)
             } else {
                 showToast("该视频已经缓存过了")
             }
@@ -163,31 +166,38 @@ class VideoDetailActivity : AppCompatActivity() {
      * 缓存
      */
     @SuppressLint("CheckResult")
-    private fun cache(playUrl: String?, count: Int) {
-        EasyHttp.downLoad(playUrl)
-                .savePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo")
-                .saveName("download$count.mp4")
-                .execute(object : DownloadProgressCallBack<String>() {
-                    override fun update(bytesRead: Long, contentLength: Long, done: Boolean) {
-                        val progress: Int = ((bytesRead * 100 / contentLength).toInt())
-                        Timber.e("Cache-update>>>$progress")
-                    }
+    private fun cache(count: Int) {
+//        EasyHttp.downLoad(playUrl)
+//                .savePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo")
+//                .saveName("download$count.mp4")
+//                .execute(object : DownloadProgressCallBack<String>() {
+//                    override fun update(bytesRead: Long, contentLength: Long, done: Boolean) {
+//                        val progress: Int = ((bytesRead * 100 / contentLength).toInt())
+//                        Timber.e("Cache-update>>>$progress")
+//                    }
+//
+//                    override fun onComplete(path: String?) {
+//                        Timber.e("Cache-onComplete>>>")
+//                    }
+//
+//                    override fun onError(e: ApiException?) {
+//                        Timber.e("Cache-onError>>>${e.toString()}")
+//                    }
+//
+//                    override fun onStart() {
+//                        Timber.e("Cache-onStart>>>")
+//                        showToast("开始下载")
+//                        SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
+//                        SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
+//                    }
+//                })
 
-                    override fun onComplete(path: String?) {
-                        Timber.e("Cache-onComplete>>>")
-                    }
-
-                    override fun onError(e: ApiException?) {
-                        Timber.e("Cache-onError>>>${e.toString()}")
-                    }
-
-                    override fun onStart() {
-                        Timber.e("Cache-onStart>>>")
-                        showToast("开始下载")
-                        SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
-                        SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
-                    }
-                })
+        playUrl?.let {
+            Aria.download(this)
+                    .load(playUrl!!)
+                    .setFilePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo" + File.separator + "download$count.mp4")
+                    .start()
+        }
     }
 
     private fun prepareVideo() {
@@ -250,6 +260,31 @@ class VideoDetailActivity : AppCompatActivity() {
         coverDisposable = observable.normalSchedulers().subscribe { bitmap: Bitmap? ->
             ivCover.setImageBitmap(bitmap)
             vp.setThumbImageView(ivCover)
+        }
+    }
+
+    @Download.onTaskStart
+    fun onDownloadStart(task: DownloadTask) {
+        if (task.key == playUrl) {
+            Timber.e("开始下载>>>")
+            showToast("开始下载")
+            SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
+            SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
+        }
+    }
+
+    @Download.onTaskRunning
+    fun onDownloadProgress(task: DownloadTask) {
+        if (task.key == playUrl) {
+            Timber.e("下载进度>>>${task.percent}")
+        }
+    }
+
+    @Download.onTaskComplete
+    fun onDownloadComplete(task: DownloadTask) {
+        if (task.key == playUrl) {
+            Timber.e("下载完成>>>")
+            showToast("下载完成")
         }
     }
 
