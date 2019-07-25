@@ -39,7 +39,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private lateinit var bean: VideoBean
 
-    lateinit var ivCover: ImageView//封面
+    private lateinit var ivCover: ImageView//封面
     private var coverDisposable: Disposable? = null
 
     var isPlay: Boolean = false
