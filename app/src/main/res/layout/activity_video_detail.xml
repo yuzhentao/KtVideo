@@ -194,20 +194,4 @@
             android:textSize="@dimen/x12" />
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_pause"
-        android:layout_width="@dimen/x80"
-        android:layout_height="@dimen/x40"
-        android:text="@string/pause"
-        app:layout_constraintEnd_toEndOf="@id/iv_bg"
-        app:layout_constraintTop_toTopOf="@id/iv_bg" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_resume"
-        android:layout_width="@dimen/x80"
-        android:layout_height="@dimen/x40"
-        android:text="@string/resume"
-        app:layout_constraintEnd_toEndOf="@id/iv_bg"
-        app:layout_constraintTop_toBottomOf="@id/btn_pause" />
-
 </android.support.constraint.ConstraintLayout>
