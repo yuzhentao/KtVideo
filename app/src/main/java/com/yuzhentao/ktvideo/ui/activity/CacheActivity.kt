@@ -65,7 +65,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = CacheAdapter(context, beans)
+        adapter = CacheAdapter(context, beans, dbManager)
         rv.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {

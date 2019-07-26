@@ -8,20 +8,23 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.arialyy.aria.core.Aria
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
+import com.yuzhentao.ktvideo.util.DownloadState
 import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ResourcesUtil
-import com.yuzhentao.ktvideo.util.SPUtils
 import com.yuzhentao.ktvideo.util.ViewUtil
 import io.reactivex.disposables.Disposable
 
-class CacheAdapter(context: Context, beans: ArrayList<VideoBean>) : RecyclerView.Adapter<CacheAdapter.ViewHolder>() {
+class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: VideoDbManager) : RecyclerView.Adapter<CacheAdapter.ViewHolder>() {
 
     var context: Context? = null
     var beans: ArrayList<VideoBean>? = null
-    var inflater: LayoutInflater? = null
-    var isDownload = false
+    var dbManager: VideoDbManager
+    private var inflater: LayoutInflater? = null
+    private var dbBean: VideoBean? = null
     var hasLoaded = false
     lateinit var disposable: Disposable
 
@@ -30,6 +33,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>) : RecyclerView
     init {
         this.context = context
         this.beans = beans
+        this.dbManager = dbManager
         this.inflater = LayoutInflater.from(context)
     }
 
@@ -52,23 +56,44 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>) : RecyclerView
             val ivDownload = holder.ivDownload
             val photoUrl: String? = bean.feed
             photoUrl?.let {
+                dbBean = dbManager.find(bean.playUrl!!)
                 ImageUtil.display(context!!, holder.iv, photoUrl)
             }
             val title: String? = bean.title
             holder.tvTop!!.text = title
-            isDownload = SPUtils.getInstance(context!!, "download_state").getBoolean(bean.playUrl!!)
-            if (isDownload) {
-                SPUtils.getInstance(context!!, "download_state").put(bean.playUrl!!, false)
-                ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_pause)
+            if (bean.playUrl != null) {
+                dbBean?.let {
+                    if (dbBean!!.downloadState == DownloadState.DOWNLOADING.name) {
+                        ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_pause)
+                    } else if (dbBean!!.downloadState == DownloadState.COMPLETE.name) {
+                        ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_play)
+                    } else {
+                        ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_error)
+                    }
+                }
             } else {
-                SPUtils.getInstance(context!!, "download_state").put(bean.playUrl!!, true)
-                ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_play)
+                ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_error)
             }
-            ivDownload.setOnClickListener {
-                if (isDownload) {
-
-                } else {
-
+            ivDownload!!.setOnClickListener {
+                dbBean?.let {
+                    when (dbBean!!.downloadState) {
+                        DownloadState.DOWNLOADING.name -> {
+                            Aria.download(this).stopAllTask()
+                            bean.downloadState = DownloadState.PAUSE.name
+                            dbManager.update(bean)
+                        }
+                        DownloadState.PAUSE.name -> {
+                            Aria.download(this).resumeAllTask()
+                            bean.downloadState = DownloadState.DOWNLOADING.name
+                            dbManager.update(bean)
+                        }
+                        DownloadState.COMPLETE.name -> {
+                            listener!!.onItemClick(holder.itemView, holder.layoutPosition)
+                        }
+                        DownloadState.ERROR.name -> {
+                            listener!!.onItemClick(holder.itemView, holder.layoutPosition)
+                        }
+                    }
                 }
             }
             listener?.let {
