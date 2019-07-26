@@ -3,7 +3,7 @@ package com.yuzhentao.ktvideo.adapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
-import android.os.Parcelable
+import android.os.Bundle
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -86,7 +86,9 @@ class RankingAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : R
                     SPUtils.getInstance(context!!, "beans").put("count", count)//保存的视频对象数量
                     ObjectSaveUtils.saveObject(context!!, "bean$count", videoBean)//保存视频对象，观看记录中会使用到
                 }
-                intent.putExtra("data", videoBean as Parcelable)
+                val bundle = Bundle()
+                bundle.putParcelable("data", videoBean)
+                intent.putExtra("bundle", bundle)
                 context?.startActivity(intent)
             }
         }

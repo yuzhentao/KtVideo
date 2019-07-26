@@ -21,6 +21,7 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.util.*
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -42,16 +43,21 @@ class VideoDetailActivity : AppCompatActivity() {
     private lateinit var ivCover: ImageView//封面
     private var coverDisposable: Disposable? = null
 
+    private lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
+
+    private lateinit var dbManager: VideoDbManager
+
     private var playUrl: String? = null
     private var isPlay: Boolean = false
     private var isPause: Boolean = false
-    private lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_detail)
+        dbManager = VideoDbManager()
         Aria.download(this).register()
-        bean = intent.getParcelableExtra("data")
+        val bundle = intent.getBundleExtra("bundle")
+        bean = bundle.getParcelable("data")
         initView()
         prepareVideo()
     }
@@ -67,6 +73,7 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        dbManager.close()
         coverDisposable.let {
             if (!coverDisposable!!.isDisposed) {
                 coverDisposable!!.dispose()
@@ -280,6 +287,8 @@ class VideoDetailActivity : AppCompatActivity() {
             showToast("开始下载")
             SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
             SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
+            bean.downloadState = DownloadState.DOWNLOADING.name
+            dbManager.insert(bean)
         }
     }
 
@@ -287,6 +296,9 @@ class VideoDetailActivity : AppCompatActivity() {
     fun onDownloadProgress(task: DownloadTask) {
         if (task.key == playUrl) {
             Timber.e("下载进度>>>${task.percent}")
+            bean.downloadState = DownloadState.DOWNLOADING.name
+            bean.downloadProgress = task.percent
+            dbManager.update(bean)
         }
     }
 
@@ -295,6 +307,9 @@ class VideoDetailActivity : AppCompatActivity() {
         if (task.key == playUrl) {
             Timber.e("下载完成>>>")
             showToast("下载完成")
+            bean.downloadState = DownloadState.COMPLETE.name
+            bean.downloadProgress = 100
+            dbManager.update(bean)
         }
     }
 

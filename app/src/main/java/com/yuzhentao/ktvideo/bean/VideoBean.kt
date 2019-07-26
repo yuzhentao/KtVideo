@@ -2,47 +2,76 @@ package com.yuzhentao.ktvideo.bean
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
+import com.yuzhentao.ktvideo.util.DownloadState
+import io.realm.RealmModel
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
+import java.util.*
 
-class VideoBean(var feed: String?, var title: String?, var description: String?,
-                var duration: Int?, var playUrl: String?, var category: String?,
-                var blurred: String?, var collect: Int?, var share: Int?, var reply: Int?, var time: Long) : Parcelable, Serializable {
+@RealmClass
+open class VideoBean(
+        var feed: String? = "",
+        var title: String? = "",
+        var description: String? = "",
+        var duration: Int? = 0,
+        var playUrl: String? = "",
+        var category: String? = "",
+        var blurred: String? = "",
+        var collect: Int? = 0,
+        var share: Int? = 0,
+        var reply: Int? = 0,
+        var time: Long = 0L) : Parcelable, RealmModel {
 
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readValue(Int::class.java.classLoader) as Int?,
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readValue(Int::class.java.classLoader) as Int?,
-            source.readValue(Int::class.java.classLoader) as Int?,
-            source.readValue(Int::class.java.classLoader) as Int?,
-            source.readLong()
-    )
+    @PrimaryKey
+    var id: String? = UUID.randomUUID().toString()
+    var downloadState: String? = DownloadState.NORMAL.name
+    var downloadProgress: Int? = 0
 
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(feed)
-        writeString(title)
-        writeString(description)
-        writeValue(duration)
-        writeString(playUrl)
-        writeString(category)
-        writeString(blurred)
-        writeValue(collect)
-        writeValue(share)
-        writeValue(reply)
-        writeLong(time)
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readLong()) {
+        id = parcel.readString()
+        downloadState = parcel.readString()
+        downloadProgress = parcel.readValue(Int::class.java.classLoader) as? Int
     }
 
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<VideoBean> = object : Parcelable.Creator<VideoBean> {
-            override fun createFromParcel(source: Parcel): VideoBean = VideoBean(source)
-            override fun newArray(size: Int): Array<VideoBean?> = arrayOfNulls(size)
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(feed)
+        parcel.writeString(title)
+        parcel.writeString(description)
+        parcel.writeValue(duration)
+        parcel.writeString(playUrl)
+        parcel.writeString(category)
+        parcel.writeString(blurred)
+        parcel.writeValue(collect)
+        parcel.writeValue(share)
+        parcel.writeValue(reply)
+        parcel.writeLong(time)
+        parcel.writeString(id)
+        parcel.writeString(downloadState)
+        parcel.writeValue(downloadProgress)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<VideoBean> {
+        override fun createFromParcel(parcel: Parcel): VideoBean {
+            return VideoBean(parcel)
+        }
+
+        override fun newArray(size: Int): Array<VideoBean?> {
+            return arrayOfNulls(size)
         }
     }
 

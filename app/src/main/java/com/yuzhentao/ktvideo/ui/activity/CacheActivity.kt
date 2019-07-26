@@ -72,7 +72,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 val bean: VideoBean? = beans[position]
                 bean?.let {
                     val intent = Intent(context, VideoDetailActivity::class.java)
-                    intent.putExtra("data", bean as Parcelable)
+                    val bundle = Bundle()
+                    bundle.putParcelable("data", bean)
+                    intent.putExtra("bundle", bundle)
                     context.startActivity(intent)
                 }
             }

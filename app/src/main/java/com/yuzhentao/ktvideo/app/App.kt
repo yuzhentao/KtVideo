@@ -4,6 +4,8 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import android.support.multidex.MultiDexApplication
 import com.zhouyou.http.EasyHttp
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import timber.log.Timber
 
 class App : MultiDexApplication() {
@@ -16,6 +18,7 @@ class App : MultiDexApplication() {
         super.onCreate()
         app = this
         initTimber()
+        initRealm()
         initRxEasyHttp()
     }
 
@@ -26,6 +29,17 @@ class App : MultiDexApplication() {
 
     private fun initTimber() {
         Timber.plant(Timber.DebugTree())
+    }
+
+    private fun initRealm() {
+        Realm.init(this)
+        val config: RealmConfiguration? = RealmConfiguration.Builder()
+                .name("ktvideo.realm")//文件名
+                .schemaVersion(0)//版本号
+                .build()
+        config?.let {
+            Realm.setDefaultConfiguration(config)
+        }
     }
 
     private fun initRxEasyHttp() {
