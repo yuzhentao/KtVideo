@@ -3,7 +3,6 @@ package com.yuzhentao.ktvideo.app
 import android.content.Context
 import android.support.multidex.MultiDex
 import android.support.multidex.MultiDexApplication
-import com.zhouyou.http.EasyHttp
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import timber.log.Timber
@@ -19,7 +18,6 @@ class App : MultiDexApplication() {
         app = this
         initTimber()
         initRealm()
-        initRxEasyHttp()
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -40,10 +38,6 @@ class App : MultiDexApplication() {
         config?.let {
             Realm.setDefaultConfiguration(config)
         }
-    }
-
-    private fun initRxEasyHttp() {
-        EasyHttp.init(app)
     }
 
 }

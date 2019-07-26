@@ -184,31 +184,6 @@ class VideoDetailActivity : AppCompatActivity() {
      */
     @SuppressLint("CheckResult")
     private fun cache(count: Int) {
-//        EasyHttp.downLoad(playUrl)
-//                .savePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo")
-//                .saveName("download$count.mp4")
-//                .execute(object : DownloadProgressCallBack<String>() {
-//                    override fun update(bytesRead: Long, contentLength: Long, done: Boolean) {
-//                        val progress: Int = ((bytesRead * 100 / contentLength).toInt())
-//                        Timber.e("Cache-update>>>$progress")
-//                    }
-//
-//                    override fun onComplete(path: String?) {
-//                        Timber.e("Cache-onComplete>>>")
-//                    }
-//
-//                    override fun onError(e: ApiException?) {
-//                        Timber.e("Cache-onError>>>${e.toString()}")
-//                    }
-//
-//                    override fun onStart() {
-//                        Timber.e("Cache-onStart>>>")
-//                        showToast("开始下载")
-//                        SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
-//                        SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
-//                    }
-//                })
-
         playUrl?.let {
             Aria.download(this)
                     .load(playUrl!!)
