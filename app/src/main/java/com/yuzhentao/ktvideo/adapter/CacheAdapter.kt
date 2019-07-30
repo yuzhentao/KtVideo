@@ -92,13 +92,9 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
                             Aria.download(this).load(bean.playUrl!!).stop()
-                            bean.downloadState = DownloadState.PAUSE.name
-                            dbManager.update(bean)
                         }
                         DownloadState.PAUSE.name -> {
                             Aria.download(this).load(bean.playUrl!!).start()
-                            bean.downloadState = DownloadState.DOWNLOADING.name
-                            dbManager.update(bean)
                         }
                         DownloadState.COMPLETE.name -> {
                             listener!!.onItemClick(holder.itemView, holder.layoutPosition)

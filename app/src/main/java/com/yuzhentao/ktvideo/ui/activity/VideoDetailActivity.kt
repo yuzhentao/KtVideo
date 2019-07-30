@@ -248,7 +248,7 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskStart
     fun onDownloadStart(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.e("开始下载>>>")
+            Timber.tag("下载").e("开始>>>")
             showToast("开始下载")
             SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
             SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
@@ -260,8 +260,19 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskRunning
     fun onDownloadProgress(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.e("下载进度>>>${task.percent}")
+            Timber.tag("下载").e("进度>>>${task.percent}")
             bean.downloadProgress = task.percent
+            dbManager.update(bean)
+        }
+    }
+
+    @Download.onTaskFail
+    fun onDownloadFail(task: DownloadTask) {
+        if (task.key == playUrl) {
+            Timber.tag("下载").e("失败>>>")
+            showToast("下载失败")
+            bean.downloadState = DownloadState.ERROR.name
+            bean.downloadProgress = 0
             dbManager.update(bean)
         }
     }
@@ -269,7 +280,7 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskComplete
     fun onDownloadComplete(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.e("下载完成>>>")
+            Timber.tag("下载").e("完成>>>")
             showToast("下载完成")
             bean.downloadState = DownloadState.COMPLETE.name
             bean.downloadProgress = 100

@@ -15,6 +15,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.DownloadState
+import com.yuzhentao.ktvideo.util.showToast
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
@@ -114,8 +115,58 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             for (index in adapter.beans!!.indices) {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
-                    Timber.e("下载进度>>>${task.percent}")
+                    Timber.tag("下载").e("进度>>>${task.percent}")
                     bean.downloadProgress = task.percent
+                    dbManager.update(bean)
+                    adapter.notifyItemChanged(index, 1)
+                }
+            }
+        }
+    }
+
+    @Download.onTaskStop
+    fun onDownloadStop(task: DownloadTask) {
+        if (adapter.beans != null && adapter.beans!!.size > 0) {
+            for (index in adapter.beans!!.indices) {
+                val bean = adapter.beans!![index]
+                if (task.key == bean.playUrl) {
+                    Timber.tag("下载").e("暂停>>>")
+                    showToast("暂停下载")
+                    bean.downloadState = DownloadState.PAUSE.name
+                    dbManager.update(bean)
+                    adapter.notifyItemChanged(index, 1)
+                }
+            }
+        }
+    }
+
+    @Download.onTaskResume
+    fun onDownloadResume(task: DownloadTask) {
+        if (adapter.beans != null && adapter.beans!!.size > 0) {
+            for (index in adapter.beans!!.indices) {
+                val bean = adapter.beans!![index]
+                if (task.key == bean.playUrl) {
+                    Timber.tag("下载").e("恢复>>>")
+                    showToast("恢复下载")
+                    bean.downloadState = DownloadState.DOWNLOADING.name
+                    dbManager.update(bean)
+                    adapter.notifyItemChanged(index, 1)
+                }
+            }
+        }
+    }
+
+    @Download.onTaskFail
+    fun onDownloadFail(task: DownloadTask) {
+        if (adapter.beans != null && adapter.beans!!.size > 0) {
+            for (index in adapter.beans!!.indices) {
+                val bean = adapter.beans!![index]
+                if (task.key == bean.playUrl) {
+                    Timber.tag("下载").e("失败>>>")
+                    showToast("下载失败")
+                    bean.downloadState = DownloadState.ERROR.name
+                    bean.downloadProgress = 0
+                    dbManager.update(bean)
                     adapter.notifyItemChanged(index, 1)
                 }
             }
@@ -128,8 +179,11 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             for (index in adapter.beans!!.indices) {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
+                    Timber.tag("下载").e("完成>>>")
+                    showToast("下载完成")
                     bean.downloadState = DownloadState.COMPLETE.name
                     bean.downloadProgress = 100
+                    dbManager.update(bean)
                     adapter.notifyItemChanged(index, 1)
                 }
             }
