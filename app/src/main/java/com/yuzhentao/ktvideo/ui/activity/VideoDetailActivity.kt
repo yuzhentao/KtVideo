@@ -149,6 +149,7 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_favorite.text = bean.collect.toString()
         tv_share.text = bean.share.toString()
         tv_reply.text = bean.reply.toString()
+        ll_download.visibility = if (intent.getBooleanExtra("showCache", true)) View.VISIBLE else View.GONE
         tv_download.setOnClickListener {
             playUrl?.let {
                 if (dbManager.find(playUrl!!) == null) {

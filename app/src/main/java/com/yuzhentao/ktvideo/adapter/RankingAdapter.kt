@@ -76,6 +76,7 @@ class RankingAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : R
                 val bundle = Bundle()
                 bundle.putParcelable("data", videoBean)
                 intent.putExtra("bundle", bundle)
+                intent.putExtra("showCache", true)
                 context?.startActivity(intent)
             }
         }

@@ -82,6 +82,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                     val bundle = Bundle()
                     bundle.putParcelable("data", bean)
                     intent.putExtra("bundle", bundle)
+                    intent.putExtra("showCache", false)
                     context.startActivity(intent)
                 }
             }
