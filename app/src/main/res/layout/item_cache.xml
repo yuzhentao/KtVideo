@@ -28,7 +28,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/x14"
         app:layout_constraintBottom_toTopOf="@id/tv_bottom"
-        app:layout_constraintEnd_toStartOf="@id/iv_download"
+        app:layout_constraintEnd_toStartOf="@id/btn_progress"
         app:layout_constraintStart_toEndOf="@id/iv"
         app:layout_constraintTop_toTopOf="@id/iv"
         app:layout_constraintVertical_chainStyle="packed"
@@ -49,25 +49,21 @@
         app:layout_constraintTop_toBottomOf="@id/tv_top"
         tools:text="测试测试测试" />
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_download"
+    <com.yuzhentao.ktvideo.view.progressbutton.ProgressFloatingActionButton
+        android:id="@+id/btn_progress"
         android:layout_width="@dimen/x30"
         android:layout_height="@dimen/x30"
         android:layout_marginEnd="@dimen/x5"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/selector_play" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_progress"
-        android:layout_width="@dimen/x30"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/x5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_download" />
+        app:pFabCircleColor="@color/orange"
+        app:pFabColor="@color/white"
+        app:pFabFinalIcon="@drawable/selector_play"
+        app:pFabProgressIcon="@drawable/selector_pause"
+        app:pFabStartingProgress="0"
+        app:pFabStepSize="1"
+        app:pFabTotalProgress="100" />
 
     <View
         android:layout_width="0dp"

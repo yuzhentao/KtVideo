@@ -124,38 +124,6 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    @Download.onTaskStop
-    fun onDownloadStop(task: DownloadTask) {
-        if (adapter.beans != null && adapter.beans!!.size > 0) {
-            for (index in adapter.beans!!.indices) {
-                val bean = adapter.beans!![index]
-                if (task.key == bean.playUrl) {
-                    Timber.tag("下载").e("暂停>>>")
-                    showToast("暂停下载")
-                    bean.downloadState = DownloadState.PAUSE.name
-                    dbManager.update(bean)
-                    adapter.notifyItemChanged(index, 1)
-                }
-            }
-        }
-    }
-
-    @Download.onTaskResume
-    fun onDownloadResume(task: DownloadTask) {
-        if (adapter.beans != null && adapter.beans!!.size > 0) {
-            for (index in adapter.beans!!.indices) {
-                val bean = adapter.beans!![index]
-                if (task.key == bean.playUrl) {
-                    Timber.tag("下载").e("恢复>>>")
-                    showToast("恢复下载")
-                    bean.downloadState = DownloadState.DOWNLOADING.name
-                    dbManager.update(bean)
-                    adapter.notifyItemChanged(index, 1)
-                }
-            }
-        }
-    }
-
     @Download.onTaskFail
     fun onDownloadFail(task: DownloadTask) {
         if (adapter.beans != null && adapter.beans!!.size > 0) {
