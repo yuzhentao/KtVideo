@@ -6,14 +6,19 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.arialyy.annotations.Download
+import com.arialyy.aria.core.Aria
+import com.arialyy.aria.core.download.DownloadTask
 import com.gyf.barlibrary.ImmersionBar
-import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
+import com.yuzhentao.ktvideo.util.DownloadState
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_cache.*
+import timber.log.Timber
+
 
 /**
  * 我的缓存
@@ -33,8 +38,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cache)
+        setContentView(com.yuzhentao.ktvideo.R.layout.activity_cache)
         dbManager = VideoDbManager()
+        Aria.download(this).register()
         ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init()
         initView()
         initData()
@@ -58,7 +64,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(tb)
         val bar = supportActionBar
         bar?.let {
-            bar.title = getString(R.string.mine_cache)
+            bar.title = getString(com.yuzhentao.ktvideo.R.string.mine_cache)
             bar.setDisplayHomeAsUpEnabled(true)
             tb.setNavigationOnClickListener {
                 onBackPressed()
@@ -99,6 +105,34 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 tv_hint.visibility = View.VISIBLE
             }
             adapter.notifyDataSetChanged()
+        }
+    }
+
+    @Download.onTaskRunning
+    fun onDownloadProgress(task: DownloadTask) {
+        if (adapter.beans != null && adapter.beans!!.size > 0) {
+            for (index in adapter.beans!!.indices) {
+                val bean = adapter.beans!![index]
+                if (task.key == bean.playUrl) {
+                    Timber.e("下载进度>>>${task.percent}")
+                    bean.downloadProgress = task.percent
+                    adapter.notifyItemChanged(index, 1)
+                }
+            }
+        }
+    }
+
+    @Download.onTaskComplete
+    fun onDownloadComplete(task: DownloadTask) {
+        if (adapter.beans != null && adapter.beans!!.size > 0) {
+            for (index in adapter.beans!!.indices) {
+                val bean = adapter.beans!![index]
+                if (task.key == bean.playUrl) {
+                    bean.downloadState = DownloadState.COMPLETE.name
+                    bean.downloadProgress = 100
+                    adapter.notifyItemChanged(index, 1)
+                }
+            }
         }
     }
 

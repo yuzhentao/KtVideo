@@ -261,7 +261,6 @@ class VideoDetailActivity : AppCompatActivity() {
     fun onDownloadProgress(task: DownloadTask) {
         if (task.key == playUrl) {
             Timber.e("下载进度>>>${task.percent}")
-            bean.downloadState = DownloadState.DOWNLOADING.name
             bean.downloadProgress = task.percent
             dbManager.update(bean)
         }

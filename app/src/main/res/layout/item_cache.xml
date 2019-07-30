@@ -60,6 +60,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/selector_play" />
 
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_progress"
+        android:layout_width="@dimen/x30"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_download" />
+
     <View
         android:layout_width="0dp"
         android:layout_height="1px"

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arialyy.aria.core.Aria
+import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
@@ -42,14 +43,26 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater!!.inflate(com.yuzhentao.ktvideo.R.layout.item_cache, parent, false), context!!)
+        return ViewHolder(inflater!!.inflate(R.layout.item_cache, parent, false), context!!)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+        } else {
+            val bean = beans?.get(position)
+            bean?.let {
+                holder.tvProgress!!.text = bean.downloadProgress.toString()
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = beans?.get(position)
         bean?.let {
             if (position != itemCount - 1) {
-                ViewUtil.setMargins(holder.itemView, 0, 0, 0, ResourcesUtil.getDimensionPixelOffset(context!!, com.yuzhentao.ktvideo.R.dimen.x2))
+                ViewUtil.setMargins(holder.itemView, 0, 0, 0, ResourcesUtil.getDimensionPixelOffset(context!!, R.dimen.x2))
             } else {
                 ViewUtil.setMargins(holder.itemView, 0, 0, 0, 0)
             }
@@ -64,26 +77,26 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
             if (bean.playUrl != null) {
                 dbBean?.let {
                     if (dbBean!!.downloadState == DownloadState.DOWNLOADING.name) {
-                        ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_pause)
+                        ivDownload!!.setImageResource(R.drawable.selector_pause)
                     } else if (dbBean!!.downloadState == DownloadState.COMPLETE.name) {
-                        ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_play)
+                        ivDownload!!.setImageResource(R.drawable.selector_play)
                     } else {
-                        ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_error)
+                        ivDownload!!.setImageResource(R.drawable.selector_error)
                     }
                 }
             } else {
-                ivDownload!!.setImageResource(com.yuzhentao.ktvideo.R.drawable.selector_error)
+                ivDownload!!.setImageResource(R.drawable.selector_error)
             }
             ivDownload!!.setOnClickListener {
                 dbBean?.let {
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
-                            Aria.download(this).stopAllTask()
+                            Aria.download(this).load(bean.playUrl!!).stop()
                             bean.downloadState = DownloadState.PAUSE.name
                             dbManager.update(bean)
                         }
                         DownloadState.PAUSE.name -> {
-                            Aria.download(this).resumeAllTask()
+                            Aria.download(this).load(bean.playUrl!!).start()
                             bean.downloadState = DownloadState.DOWNLOADING.name
                             dbManager.update(bean)
                         }
@@ -96,6 +109,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                     }
                 }
             }
+            holder.tvProgress!!.text = bean.downloadProgress.toString()
             listener?.let {
                 holder.itemView.setOnClickListener {
                     listener!!.onItemClick(holder.itemView, holder.layoutPosition)
@@ -114,12 +128,14 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
         var tvTop: AppCompatTextView? = null
         var tvBottom: AppCompatTextView? = null
         var ivDownload: AppCompatImageView? = null
+        var tvProgress: AppCompatTextView? = null
 
         init {
-            iv = itemView.findViewById(com.yuzhentao.ktvideo.R.id.iv) as AppCompatImageView
-            tvTop = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_top) as AppCompatTextView
-            tvBottom = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_bottom) as AppCompatTextView
-            ivDownload = itemView.findViewById(com.yuzhentao.ktvideo.R.id.iv_download) as AppCompatImageView
+            iv = itemView.findViewById(R.id.iv) as AppCompatImageView
+            tvTop = itemView.findViewById(R.id.tv_top) as AppCompatTextView
+            tvBottom = itemView.findViewById(R.id.tv_bottom) as AppCompatTextView
+            ivDownload = itemView.findViewById(R.id.iv_download) as AppCompatImageView
+            tvProgress = itemView.findViewById(R.id.tv_progress) as AppCompatTextView
             tvTop!!.typeface = Typeface.createFromAsset(context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
         }
 
