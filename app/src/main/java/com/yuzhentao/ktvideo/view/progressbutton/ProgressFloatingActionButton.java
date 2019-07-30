@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yuzhentao.ktvideo.R;
-
-import static com.yuzhentao.ktvideo.view.progressbutton.ThemeUtils.getThemeAccentColor;
-import static com.yuzhentao.ktvideo.view.progressbutton.ThemeUtils.getThemePrimaryColor;
+import com.yuzhentao.ktvideo.util.ColorUtils;
+import com.yuzhentao.ktvideo.util.ThemeUtils;
 
 public class ProgressFloatingActionButton extends FrameLayout /*implements ProgressView.OnCompletedListener*/ {
 
@@ -43,9 +42,9 @@ public class ProgressFloatingActionButton extends FrameLayout /*implements Progr
         iv = view.findViewById(R.id.iv);
         progressView = view.findViewById(R.id.pfProgress);
 
-        mPrimaryColor = getThemePrimaryColor(context);
-        mAccentColor = getThemeAccentColor(context);
-        mAccentColorLight = ColorUtils.lighten(mAccentColor, 0.5f);
+        mPrimaryColor = ThemeUtils.INSTANCE.getThemePrimaryColor(context);
+        mAccentColor = ThemeUtils.INSTANCE.getThemeAccentColor(context);
+        mAccentColorLight = ColorUtils.INSTANCE.lighten(mAccentColor, 0.5f);
 
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ProgressFloatingActionButton, defStyleAttr, 0);

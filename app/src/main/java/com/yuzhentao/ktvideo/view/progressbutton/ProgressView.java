@@ -28,7 +28,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-import static com.yuzhentao.ktvideo.view.progressbutton.ThemeUtils.getThemePrimaryColor;
+import com.yuzhentao.ktvideo.util.ThemeUtils;
 
 /**
  * Progress indicator behind the Floating Action Button.
@@ -54,7 +54,7 @@ public class ProgressView extends View {
         super(context, attrs);
 
         // Every attribute is initialized with a default value
-        mColor = getThemePrimaryColor(context);
+        mColor = ThemeUtils.INSTANCE.getThemePrimaryColor(context);
 
         mStartingProgress = 0;
         mCurrentProgress = 0;

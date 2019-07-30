@@ -46,6 +46,7 @@ class VideoDetailActivity : AppCompatActivity() {
     private lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
 
     private lateinit var dbManager: VideoDbManager
+    private var dbBean: VideoBean? = null
 
     private var playUrl: String? = null
     private var isPlay: Boolean = false
@@ -116,6 +117,15 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        playUrl = bean.playUrl
+        playUrl?.let {
+            dbManager.find(playUrl!!)?.let {
+                dbBean = dbManager.find(playUrl!!)
+                if (dbBean!!.downloadState == DownloadState.COMPLETE.name) {
+                    ll_download.visibility = View.GONE
+                }
+            }
+        }
         val blurred = bean.blurred//接口提供的虚化图
         blurred?.let {
             ImageUtil.displayHigh(context, iv_bg, blurred)
@@ -149,22 +159,21 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_share.text = bean.share.toString()
         tv_reply.text = bean.reply.toString()
         tv_download.setOnClickListener {
-            playUrl = bean.playUrl
-            val url = playUrl?.let {
+            playUrl?.let {
                 SPUtils.getInstance(context, "downloads").getString(it)//是否缓存当前视频
-            }
-            if (url == "") {
-                var count = SPUtils.getInstance(context, "downloads").getInt("count")
-                count = if (count != -1) {
-                    count.inc()
+                if (playUrl == "") {
+                    var count = SPUtils.getInstance(context, "downloads").getInt("count")
+                    count = if (count != -1) {
+                        count.inc()
+                    } else {
+                        1
+                    }
+                    SPUtils.getInstance(context, "downloads").put("count", count)//缓存的视频对象数量
+                    ObjectSaveUtils.saveObject(context, "download$count", bean)//保存视频对象，缓存中会使用到
+                    cache(count)
                 } else {
-                    1
+                    showToast("该视频已经缓存过了")
                 }
-                SPUtils.getInstance(context, "downloads").put("count", count)//缓存的视频对象数量
-                ObjectSaveUtils.saveObject(context, "download$count", bean)//保存视频对象，缓存中会使用到
-                cache(count)
-            } else {
-                showToast("该视频已经缓存过了")
             }
         }
     }
