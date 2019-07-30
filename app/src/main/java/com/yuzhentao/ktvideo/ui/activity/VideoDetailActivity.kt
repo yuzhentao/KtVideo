@@ -1,6 +1,5 @@
 package com.yuzhentao.ktvideo.ui.activity
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -118,14 +117,6 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private fun initView() {
         playUrl = bean.playUrl
-        playUrl?.let {
-            dbManager.find(playUrl!!)?.let {
-                dbBean = dbManager.find(playUrl!!)
-                if (dbBean!!.downloadState == DownloadState.COMPLETE.name) {
-                    ll_download.visibility = View.GONE
-                }
-            }
-        }
         val blurred = bean.blurred//接口提供的虚化图
         blurred?.let {
             ImageUtil.displayHigh(context, iv_bg, blurred)
@@ -160,19 +151,23 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_reply.text = bean.reply.toString()
         tv_download.setOnClickListener {
             playUrl?.let {
-                SPUtils.getInstance(context, "downloads").getString(it)//是否缓存当前视频
-                if (playUrl == "") {
-                    var count = SPUtils.getInstance(context, "downloads").getInt("count")
-                    count = if (count != -1) {
-                        count.inc()
-                    } else {
-                        1
+                if (dbManager.find(playUrl!!) == null) {
+                    bean.id?.let {
+                        cache(bean.id!!)
                     }
-                    SPUtils.getInstance(context, "downloads").put("count", count)//缓存的视频对象数量
-                    ObjectSaveUtils.saveObject(context, "download$count", bean)//保存视频对象，缓存中会使用到
-                    cache(count)
                 } else {
-                    showToast("该视频已经缓存过了")
+                    dbBean = dbManager.find(playUrl!!)
+                    when (dbBean!!.downloadState) {
+                        DownloadState.NORMAL.name -> {
+                            bean.id?.let {
+                                cache(bean.id!!)
+                            }
+                        }
+                        DownloadState.DOWNLOADING.name -> showToast("视频缓存中")
+                        DownloadState.PAUSE.name -> showToast("视频缓存中")
+                        DownloadState.COMPLETE.name -> showToast("视频缓存完成")
+                        else -> showToast("视频地址异常")
+                    }
                 }
             }
         }
@@ -181,14 +176,11 @@ class VideoDetailActivity : AppCompatActivity() {
     /**
      * 缓存
      */
-    @SuppressLint("CheckResult")
-    private fun cache(count: Int) {
-        playUrl?.let {
-            Aria.download(this)
-                    .load(playUrl!!)
-                    .setFilePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo" + File.separator + "download$count.mp4")
-                    .start()
-        }
+    private fun cache(name: Int) {
+        Aria.download(this)
+                .load(playUrl!!)
+                .setFilePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo" + File.separator + "download_$name.mp4")
+                .start()
     }
 
     private fun prepareVideo() {
@@ -259,8 +251,6 @@ class VideoDetailActivity : AppCompatActivity() {
         if (task.key == playUrl) {
             Timber.tag("下载").e("开始>>>")
             showToast("开始下载")
-            SPUtils.getInstance(context, "downloads").put(bean.playUrl.toString(), bean.playUrl.toString())
-            SPUtils.getInstance(context, "download_state").put(playUrl.toString(), true)
             bean.downloadState = DownloadState.DOWNLOADING.name
             dbManager.insert(bean)
         }

@@ -6,10 +6,11 @@ import com.yuzhentao.ktvideo.util.DownloadState
 import io.realm.RealmModel
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
-import java.util.*
 
 @RealmClass
 open class VideoBean(
+        @PrimaryKey
+        var id: Int? = 0,
         var feed: String? = "",
         var title: String? = "",
         var description: String? = "",
@@ -22,12 +23,11 @@ open class VideoBean(
         var reply: Int? = 0,
         var time: Long = 0L) : Parcelable, RealmModel {
 
-    @PrimaryKey
-    var id: String? = UUID.randomUUID().toString()
     var downloadState: String? = DownloadState.NORMAL.name
     var downloadProgress: Int? = 0
 
     constructor(parcel: Parcel) : this(
+            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -39,12 +39,12 @@ open class VideoBean(
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readLong()) {
-        id = parcel.readString()
         downloadState = parcel.readString()
         downloadProgress = parcel.readValue(Int::class.java.classLoader) as? Int
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
         parcel.writeString(feed)
         parcel.writeString(title)
         parcel.writeString(description)
@@ -56,7 +56,6 @@ open class VideoBean(
         parcel.writeValue(share)
         parcel.writeValue(reply)
         parcel.writeLong(time)
-        parcel.writeString(id)
         parcel.writeString(downloadState)
         parcel.writeValue(downloadProgress)
     }

@@ -15,8 +15,6 @@ import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.ImageUtil
-import com.yuzhentao.ktvideo.util.ObjectSaveUtils
-import com.yuzhentao.ktvideo.util.SPUtils
 
 class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -73,6 +71,7 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) :
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, VideoDetailActivity::class.java)
+            val id = bean.data.id
             val desc = bean.data.description
             val playUrl = bean.data.playUrl
             val blurred = bean.data.cover.blurred
@@ -80,19 +79,7 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) :
             val share = bean.data.consumption.shareCount
             val reply = bean.data.consumption.replyCount
             val time = System.currentTimeMillis()
-            val videoBean = VideoBean(photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
-            val url = SPUtils.getInstance(context!!, "beans").getString(playUrl)//是否保存视频地址
-            if (url == "") {
-                var count = SPUtils.getInstance(context!!, "beans").getInt("count")
-                count = if (count != -1) {
-                    count.inc()//i++
-                } else {
-                    1
-                }
-                SPUtils.getInstance(context!!, "beans").put(playUrl, playUrl)//视频地址
-                SPUtils.getInstance(context!!, "beans").put("count", count)//保存的视频对象数量
-                ObjectSaveUtils.saveObject(context!!, "bean$count", videoBean)//保存视频对象，观看记录中会使用到
-            }
+            val videoBean = VideoBean(id, photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
             val bundle = Bundle()
             bundle.putParcelable("data", videoBean)
             intent.putExtra("bundle", bundle)

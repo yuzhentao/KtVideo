@@ -46,7 +46,7 @@ class VideoDbManager : DbManager<VideoBean> {
 
     override fun find(value: String): VideoBean? {
         return if (realm != null) {
-            realm!!.where(VideoBean::class.java).equalTo("playUrl", value).findFirst()!!
+            realm!!.where(VideoBean::class.java).equalTo("playUrl", value).findFirst()
         } else {
             null
         }
