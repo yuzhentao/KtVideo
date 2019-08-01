@@ -16,15 +16,13 @@ import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.DownloadState
 import com.yuzhentao.ktvideo.util.showToast
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
-
 
 /**
  * 我的缓存
  */
-class CacheActivity : AppCompatActivity(), View.OnClickListener {
+class CacheActivity : AppCompatActivity() {
 
     var context: Context = this
     var activity: CacheActivity = this
@@ -32,8 +30,6 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     var beans = ArrayList<VideoBean>()
 
     lateinit var adapter: CacheAdapter
-
-    private var disposable: Disposable? = null
 
     private lateinit var dbManager: VideoDbManager
 
@@ -49,16 +45,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         dbManager.close()
-        disposable?.let {
-            if (!disposable!!.isDisposed) {
-                disposable!!.dispose()
-            }
-        }
         super.onDestroy()
-    }
-
-    override fun onClick(v: View?) {
-
     }
 
     private fun initView() {

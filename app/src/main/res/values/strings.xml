@@ -14,6 +14,7 @@
     <string name="splash_intro_en">Daily Video Promotion, Make Your Eye Open.</string>
     <string name="splash_intro_cn">每日精选视频推介，让你大开眼界。</string>
     <string name="video_cache">Download</string>
+    <string name="mine_setting">Setting</string>
     <string name="mine_login">Click on login to comment</string>
     <string name="mine_favorite">Favorite</string>
     <string name="mine_comment">Comment</string>

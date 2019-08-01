@@ -8,6 +8,7 @@
     <string name="home_bottom_4">我的</string>
 
     <string name="video_cache">缓存</string>
+    <string name="mine_setting">设置</string>
     <string name="mine_login">点击登录即可发表评论</string>
     <string name="mine_favorite">收藏</string>
     <string name="mine_comment">评论</string>

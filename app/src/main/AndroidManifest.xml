@@ -43,6 +43,7 @@
             android:theme="@style/Video" />
         <activity android:name=".ui.activity.DiscoverDetailActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.AvatarActivity" />
         <activity android:name=".ui.activity.FavoriteActivity" />
         <activity android:name=".ui.activity.CommentActivity" />
