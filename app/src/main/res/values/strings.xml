@@ -21,7 +21,6 @@
     <string name="mine_watch">Watch History</string>
     <string name="mine_feedback">Feedback</string>
     <string name="cache_no">No Cache</string>
-    <string name="pause">Pause</string>
-    <string name="resume">Continue</string>
+    <string name="cache_fail">Cache Exception</string>
 
 </resources>

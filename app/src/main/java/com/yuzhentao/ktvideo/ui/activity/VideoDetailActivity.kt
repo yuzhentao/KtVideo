@@ -226,6 +226,9 @@ class VideoDetailActivity : AppCompatActivity() {
         vp.backButton.setOnClickListener {
             onBackPressed()
         }
+        if (intent.getBooleanExtra("autoPlay", false)) {
+            vp.startPlayLogic()
+        }
     }
 
     private fun setCover() {

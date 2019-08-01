@@ -15,7 +15,6 @@
     <string name="mine_watch">观看记录</string>
     <string name="mine_feedback">意见反馈</string>
     <string name="cache_no">暂无内容</string>
-    <string name="pause">暂停</string>
-    <string name="resume">继续</string>
+    <string name="cache_fail">缓存异常</string>
 
 </resources>

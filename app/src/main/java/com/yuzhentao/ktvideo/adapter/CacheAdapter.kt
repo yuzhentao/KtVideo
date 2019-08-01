@@ -1,7 +1,9 @@
 package com.yuzhentao.ktvideo.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
+import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -14,6 +16,7 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
+import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.*
 import com.yuzhentao.ktvideo.view.progressbutton.ProgressFloatingActionButton
 import timber.log.Timber
@@ -123,10 +126,19 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                             notifyItemChanged(position, 1)
                         }
                         DownloadState.COMPLETE.name -> {
-                            listener!!.onItemClick(holder.itemView, holder.layoutPosition)
+                            val intent = Intent(context, VideoDetailActivity::class.java)
+                            val bundle = Bundle()
+                            bundle.putParcelable("data", bean)
+                            intent.putExtra("bundle", bundle)
+                            intent.putExtra("showCache", false)
+                            intent.putExtra("autoPlay", true)
+                            context!!.startActivity(intent)
                         }
                         DownloadState.ERROR.name -> {
-                            listener!!.onItemClick(holder.itemView, holder.layoutPosition)
+                            context!!.showToast(context!!.getString(R.string.cache_fail))
+                        }
+                        else -> {
+                            context!!.showToast(context!!.getString(R.string.cache_fail))
                         }
                     }
                 }
