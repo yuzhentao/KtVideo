@@ -15,7 +15,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.DownloadState
-import com.yuzhentao.ktvideo.util.showToast
+import com.yuzhentao.ktvideo.util.shortToast
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
 
@@ -119,7 +119,7 @@ class CacheActivity : AppCompatActivity() {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("下载").e("失败>>>")
-                    showToast("下载失败")
+                    shortToast("下载失败")
                     bean.downloadState = DownloadState.ERROR.name
                     bean.downloadProgress = 0
                     dbManager.update(bean)
@@ -136,7 +136,7 @@ class CacheActivity : AppCompatActivity() {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("下载").e("完成>>>")
-                    showToast("下载完成")
+                    shortToast("下载完成")
                     bean.downloadState = DownloadState.COMPLETE.name
                     bean.downloadProgress = 100
                     dbManager.update(bean)

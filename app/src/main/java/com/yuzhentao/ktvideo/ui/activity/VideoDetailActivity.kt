@@ -164,10 +164,10 @@ class VideoDetailActivity : AppCompatActivity() {
                                 cache(bean.id!!)
                             }
                         }
-                        DownloadState.DOWNLOADING.name -> showToast("视频缓存中")
-                        DownloadState.PAUSE.name -> showToast("视频缓存中")
-                        DownloadState.COMPLETE.name -> showToast("视频缓存完成")
-                        else -> showToast("视频地址异常")
+                        DownloadState.DOWNLOADING.name -> shortToast("视频缓存中")
+                        DownloadState.PAUSE.name -> shortToast("视频缓存中")
+                        DownloadState.COMPLETE.name -> shortToast("视频缓存完成")
+                        else -> shortToast("视频地址异常")
                     }
                 }
             }
@@ -254,7 +254,7 @@ class VideoDetailActivity : AppCompatActivity() {
     fun onDownloadStart(task: DownloadTask) {
         if (task.key == playUrl) {
             Timber.tag("下载").e("开始>>>")
-            showToast("开始下载")
+            shortToast("开始下载")
             bean.downloadState = DownloadState.DOWNLOADING.name
             dbManager.insert(bean)
         }
@@ -273,7 +273,7 @@ class VideoDetailActivity : AppCompatActivity() {
     fun onDownloadFail(task: DownloadTask) {
         if (task.key == playUrl) {
             Timber.tag("下载").e("失败>>>")
-            showToast("下载失败")
+            shortToast("下载失败")
             bean.downloadState = DownloadState.ERROR.name
             bean.downloadProgress = 0
             dbManager.update(bean)
@@ -284,7 +284,7 @@ class VideoDetailActivity : AppCompatActivity() {
     fun onDownloadComplete(task: DownloadTask) {
         if (task.key == playUrl) {
             Timber.tag("下载").e("完成>>>")
-            showToast("下载完成")
+            shortToast("下载完成")
             bean.downloadState = DownloadState.COMPLETE.name
             bean.downloadProgress = 100
             dbManager.update(bean)

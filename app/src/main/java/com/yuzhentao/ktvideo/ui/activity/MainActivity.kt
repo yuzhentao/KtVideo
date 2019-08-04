@@ -17,7 +17,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.fragment.*
 import com.yuzhentao.ktvideo.util.newIntent
-import com.yuzhentao.ktvideo.util.showToast
+import com.yuzhentao.ktvideo.util.shortToast
 import io.reactivex.disposables.Disposable
 import java.util.*
 
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             toast!!.cancel()
         } else {
             exitTime = System.currentTimeMillis()
-            toast = showToast("再按一次退出程序")
+            toast = shortToast("再按一次退出程序")
         }
     }
 

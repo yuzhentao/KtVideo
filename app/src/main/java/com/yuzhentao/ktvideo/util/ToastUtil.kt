@@ -1,6 +1,5 @@
 package com.yuzhentao.ktvideo.util
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Handler
 import android.os.Message
@@ -12,7 +11,6 @@ import android.widget.Toast
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.app.App
 import java.lang.reflect.Field
-
 
 object ToastUtil {
 
@@ -62,7 +60,6 @@ object ToastUtil {
 
     }
 
-    @SuppressLint("ShowToast")
     fun shortTop(text: String) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -80,7 +77,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun shortTop(@StringRes resId: Int) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -98,7 +94,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun shortCenter(text: String) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -116,7 +111,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun shortCenter(@StringRes resId: Int) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -134,7 +128,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun shortBottom(text: String) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -152,7 +145,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun shortBottom(@StringRes resId: Int) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -170,7 +162,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun longTop(text: String) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -187,7 +178,6 @@ object ToastUtil {
         hook(toast)
     }
 
-    @SuppressLint("ShowToast")
     fun longTop(@StringRes resId: Int) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -204,7 +194,6 @@ object ToastUtil {
         hook(toast)
     }
 
-    @SuppressLint("ShowToast")
     fun longCenter(text: String) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -222,7 +211,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun longCenter(@StringRes resId: Int) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -240,7 +228,6 @@ object ToastUtil {
         toast!!.show()
     }
 
-    @SuppressLint("ShowToast")
     fun longBottom(text: String) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
@@ -257,7 +244,6 @@ object ToastUtil {
         hook(toast)
     }
 
-    @SuppressLint("ShowToast")
     fun longBottom(@StringRes resId: Int) {
         if (toast != null) {
             val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
