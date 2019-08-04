@@ -24,9 +24,9 @@ object ToastUtil {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {//7.0或7.1
             try {
                 sField_TN = Toast::class.java.getDeclaredField("mTN")
-                sField_TN!!.setAccessible(true)
+                sField_TN!!.isAccessible = true
                 sField_TN_Handler = sField_TN!!.getType().getDeclaredField("mHandler")
-                sField_TN_Handler!!.setAccessible(true)
+                sField_TN_Handler!!.isAccessible = true
             } catch (ignored: Exception) {
 
             }
@@ -42,7 +42,6 @@ object ToastUtil {
             } catch (ignored: Exception) {
 
             }
-
         }
     }
 
@@ -66,12 +65,17 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun shortTop(text: String) {
         if (toast != null) {
-            toast!!.setText(text)
-            toast!!.duration = Toast.LENGTH_SHORT
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
         } else {
-            toast = Toast.makeText(App.app, text, Toast.LENGTH_SHORT)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
+            toast!!.view = view
         }
-        toast!!.setGravity(Gravity.TOP, 0, 0)
+        toast!!.duration = Toast.LENGTH_SHORT
+        toast!!.setGravity(Gravity.TOP, 0, 0)//最高在状态栏之下
         hook(toast)
         toast!!.show()
     }
@@ -79,11 +83,16 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun shortTop(@StringRes resId: Int) {
         if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_SHORT
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
         } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_SHORT)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
+            toast!!.view = view
         }
+        toast!!.duration = Toast.LENGTH_SHORT
         toast!!.setGravity(Gravity.TOP, 0, 0)
         hook(toast)
         toast!!.show()
@@ -92,11 +101,16 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun shortCenter(text: String) {
         if (toast != null) {
-            toast!!.setText(text)
-            toast!!.duration = Toast.LENGTH_SHORT
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
         } else {
-            toast = Toast.makeText(App.app, text, Toast.LENGTH_SHORT)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
+            toast!!.view = view
         }
+        toast!!.duration = Toast.LENGTH_SHORT
         toast!!.setGravity(Gravity.CENTER, 0, 0)
         hook(toast)
         toast!!.show()
@@ -105,11 +119,16 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun shortCenter(@StringRes resId: Int) {
         if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_SHORT
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
         } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_SHORT)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
+            toast!!.view = view
         }
+        toast!!.duration = Toast.LENGTH_SHORT
         toast!!.setGravity(Gravity.CENTER, 0, 0)
         hook(toast)
         toast!!.show()
@@ -118,12 +137,17 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun shortBottom(text: String) {
         if (toast != null) {
-            toast!!.setText(text)
-            toast!!.duration = Toast.LENGTH_SHORT
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
         } else {
-            toast = Toast.makeText(App.app, text, Toast.LENGTH_SHORT)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
+            toast!!.view = view
         }
-        //        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast!!.duration = Toast.LENGTH_SHORT
+        toast!!.setGravity(Gravity.BOTTOM, 0, 0)//最低在导航栏之上
         hook(toast)
         toast!!.show()
     }
@@ -131,12 +155,17 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun shortBottom(@StringRes resId: Int) {
         if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_SHORT
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
         } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_SHORT)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
+            toast!!.view = view
         }
-        //        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast!!.duration = Toast.LENGTH_SHORT
+        toast!!.setGravity(Gravity.BOTTOM, 0, 0)
         hook(toast)
         toast!!.show()
     }
@@ -144,33 +173,42 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun longTop(text: String) {
         if (toast != null) {
-            toast!!.setText(text)
-            toast!!.duration = Toast.LENGTH_LONG
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
         } else {
-            toast = Toast.makeText(App.app, text, Toast.LENGTH_LONG)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
+            toast!!.view = view
         }
+        toast!!.duration = Toast.LENGTH_LONG
         toast!!.setGravity(Gravity.TOP, 0, 0)
         hook(toast)
-        toast!!.show()
     }
 
     @SuppressLint("ShowToast")
     fun longTop(@StringRes resId: Int) {
         if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_LONG
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
         } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_LONG)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
+            toast!!.view = view
         }
+        toast!!.duration = Toast.LENGTH_LONG
         toast!!.setGravity(Gravity.TOP, 0, 0)
         hook(toast)
-        toast!!.show()
     }
 
     @SuppressLint("ShowToast")
     fun longCenter(text: String) {
-         if (toast != null) {
-
+        if (toast != null) {
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
         } else {
             toast = Toast(App.app)
             val view = View.inflate(App.app, R.layout.layout_toast, null)
@@ -187,11 +225,16 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun longCenter(@StringRes resId: Int) {
         if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_LONG
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
         } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_LONG)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
+            toast!!.view = view
         }
+        toast!!.duration = Toast.LENGTH_LONG
         toast!!.setGravity(Gravity.CENTER, 0, 0)
         hook(toast)
         toast!!.show()
@@ -200,40 +243,35 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     fun longBottom(text: String) {
         if (toast != null) {
-            toast!!.setText(text)
-            toast!!.duration = Toast.LENGTH_LONG
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
         } else {
-            toast = Toast.makeText(App.app, text, Toast.LENGTH_LONG)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = text
+            toast!!.view = view
         }
-        //        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast!!.duration = Toast.LENGTH_LONG
+        toast!!.setGravity(Gravity.BOTTOM, 0, 0)
         hook(toast)
-        toast!!.show()
     }
 
     @SuppressLint("ShowToast")
     fun longBottom(@StringRes resId: Int) {
         if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_LONG
+            val tv = toast!!.view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
         } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_LONG)
+            toast = Toast(App.app)
+            val view = View.inflate(App.app, R.layout.layout_toast, null)
+            val tv = view!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.setText(resId)
+            toast!!.view = view
         }
-        //        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast!!.duration = Toast.LENGTH_LONG
+        toast!!.setGravity(Gravity.BOTTOM, 0, 0)
         hook(toast)
-        toast!!.show()
-    }
-
-    @SuppressLint("ShowToast")
-    fun shortBottomOffset(@StringRes resId: Int, xOffset: Int, yOffset: Int) {
-        if (toast != null) {
-            toast!!.setText(resId)
-            toast!!.duration = Toast.LENGTH_SHORT
-        } else {
-            toast = Toast.makeText(App.app, resId, Toast.LENGTH_SHORT)
-        }
-        toast!!.setGravity(Gravity.BOTTOM, xOffset, yOffset)
-        hook(toast)
-        toast!!.show()
     }
 
 }

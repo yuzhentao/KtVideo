@@ -16,7 +16,7 @@ import com.gyf.barlibrary.ImmersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.fragment.*
-import com.yuzhentao.ktvideo.util.ToastUtil
+import com.yuzhentao.ktvideo.util.newIntent
 import com.yuzhentao.ktvideo.util.showToast
 import io.reactivex.disposables.Disposable
 import java.util.*
@@ -97,8 +97,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.iv_right_top -> {
                 if (rbMine?.isChecked!!) {//设置
-//                    newIntent<SettingActivity>(false)
-                    ToastUtil.longCenter(">>>>>>>>>>>>>>>>>>>>>>>>>")
+                    newIntent<SettingActivity>(false)
                 } else {//搜索
                     searchFragment = SearchFragment()
                     searchFragment.show(supportFragmentManager, SEARCH_TAG)

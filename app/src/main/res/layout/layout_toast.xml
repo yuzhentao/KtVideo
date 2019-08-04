@@ -12,4 +12,5 @@
     android:paddingBottom="@dimen/x5"
     android:textColor="@color/white"
     android:textSize="@dimen/x12"
+    tools:layout_gravity="center"
     tools:text="测试测试测试" />
