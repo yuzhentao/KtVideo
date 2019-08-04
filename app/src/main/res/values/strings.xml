@@ -22,6 +22,9 @@
     <string name="mine_watch">Watch History</string>
     <string name="mine_feedback">Feedback</string>
     <string name="cache_no">No Cache</string>
-    <string name="cache_fail">Cache Exception</string>
+    <string name="cache_start">Downloading</string>
+    <string name="cache_fail">Download failed</string>
+    <string name="cache_complete">Download completed</string>
+    <string name="cache_error">Cache Exception</string>
 
 </resources>

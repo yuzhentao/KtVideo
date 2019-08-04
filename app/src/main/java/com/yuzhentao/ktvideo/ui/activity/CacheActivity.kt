@@ -103,7 +103,7 @@ class CacheActivity : AppCompatActivity() {
             for (index in adapter.beans!!.indices) {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
-                    Timber.tag("下载").e("进度>>>${task.percent}")
+                    Timber.tag("缓存").e("进度>>>${task.percent}")
                     bean.downloadProgress = task.percent
                     dbManager.update(bean)
                     adapter.notifyItemChanged(index, 1)
@@ -118,7 +118,7 @@ class CacheActivity : AppCompatActivity() {
             for (index in adapter.beans!!.indices) {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
-                    Timber.tag("下载").e("失败>>>")
+                    Timber.tag("缓存").e("失败>>>")
                     shortToast("下载失败")
                     bean.downloadState = DownloadState.ERROR.name
                     bean.downloadProgress = 0
@@ -135,7 +135,7 @@ class CacheActivity : AppCompatActivity() {
             for (index in adapter.beans!!.indices) {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
-                    Timber.tag("下载").e("完成>>>")
+                    Timber.tag("缓存").e("完成>>>")
                     shortToast("下载完成")
                     bean.downloadState = DownloadState.COMPLETE.name
                     bean.downloadProgress = 100

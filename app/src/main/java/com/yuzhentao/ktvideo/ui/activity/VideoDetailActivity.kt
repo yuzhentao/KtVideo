@@ -253,8 +253,8 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskStart
     fun onDownloadStart(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.tag("下载").e("开始>>>")
-            shortToast("开始下载")
+            Timber.tag("缓存").e("开始>>>")
+            shortToast(getString(R.string.cache_start))
             bean.downloadState = DownloadState.DOWNLOADING.name
             dbManager.insert(bean)
         }
@@ -263,7 +263,7 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskRunning
     fun onDownloadProgress(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.tag("下载").e("进度>>>${task.percent}")
+            Timber.tag("缓存").e("进度>>>${task.percent}")
             bean.downloadProgress = task.percent
             dbManager.update(bean)
         }
@@ -272,8 +272,8 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskFail
     fun onDownloadFail(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.tag("下载").e("失败>>>")
-            shortToast("下载失败")
+            Timber.tag("缓存").e("失败>>>")
+            shortToast(getString(R.string.cache_fail))
             bean.downloadState = DownloadState.ERROR.name
             bean.downloadProgress = 0
             dbManager.update(bean)
@@ -283,8 +283,8 @@ class VideoDetailActivity : AppCompatActivity() {
     @Download.onTaskComplete
     fun onDownloadComplete(task: DownloadTask) {
         if (task.key == playUrl) {
-            Timber.tag("下载").e("完成>>>")
-            shortToast("下载完成")
+            Timber.tag("缓存").e("完成>>>")
+            shortToast(getString(R.string.cache_complete))
             bean.downloadState = DownloadState.COMPLETE.name
             bean.downloadProgress = 100
             dbManager.update(bean)

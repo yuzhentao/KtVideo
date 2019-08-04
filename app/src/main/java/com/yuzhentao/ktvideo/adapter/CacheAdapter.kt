@@ -82,6 +82,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
             } else {
                 ViewUtil.setMargins(holder.itemView, 0, 0, 0, 0)
             }
+            val tvBottom = holder.tvBottom
             val btnProgress = holder.btnProgress
             val photoUrl: String? = bean.feed
             photoUrl?.let {
@@ -92,14 +93,23 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
             holder.tvTop!!.text = title
             if (bean.playUrl != null) {
                 dbBean?.let {
-                    when {
-                        dbBean!!.downloadState == DownloadState.DOWNLOADING.name -> btnProgress!!.setImageRes(R.drawable.selector_pause)
-                        dbBean!!.downloadState == DownloadState.PAUSE.name -> btnProgress!!.setImageRes(R.drawable.selector_play)
-                        dbBean!!.downloadState == DownloadState.COMPLETE.name -> btnProgress!!.setImageRes(R.drawable.selector_play)
-                        else -> btnProgress!!.setImageRes(R.drawable.selector_error)
+                    when (dbBean!!.downloadState) {
+                        DownloadState.DOWNLOADING.name -> {
+                            btnProgress!!.setImageRes(R.drawable.selector_pause)
+                        }
+                        DownloadState.PAUSE.name -> {
+                            btnProgress!!.setImageRes(R.drawable.selector_play)
+                        }
+                        DownloadState.COMPLETE.name -> {
+                            btnProgress!!.setImageRes(R.drawable.selector_play)
+                        }
+                        else -> {
+                            btnProgress!!.setImageRes(R.drawable.selector_error)
+                        }
                     }
                 }
             } else {
+//                tvBottom.text =
                 btnProgress!!.setImageRes(R.drawable.selector_error)
             }
             if (bean.downloadProgress!! == 100) {
@@ -110,7 +120,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                 dbBean?.let {
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
-                            Timber.tag("下载").e("暂停>>>")
+                            Timber.tag("缓存").e("暂停>>>")
                             context!!.shortToast("暂停下载")
                             Aria.download(this).load(bean.playUrl!!).stop()
                             bean.downloadState = DownloadState.PAUSE.name
@@ -118,7 +128,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                             notifyItemChanged(position, 1)
                         }
                         DownloadState.PAUSE.name -> {
-                            Timber.tag("下载").e("恢复>>>")
+                            Timber.tag("缓存").e("恢复>>>")
                             context!!.shortToast("恢复下载")
                             Aria.download(this).load(bean.playUrl!!).resume()
                             bean.downloadState = DownloadState.DOWNLOADING.name
@@ -134,11 +144,8 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                             intent.putExtra("autoPlay", true)
                             context!!.startActivity(intent)
                         }
-                        DownloadState.ERROR.name -> {
-                            context!!.shortToast(context!!.getString(R.string.cache_fail))
-                        }
                         else -> {
-                            context!!.shortToast(context!!.getString(R.string.cache_fail))
+                            context!!.shortToast(context!!.getString(R.string.cache_error))
                         }
                     }
                 }
