@@ -23,6 +23,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.util.*
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_video_detail.*
 import timber.log.Timber
@@ -249,10 +250,24 @@ class VideoDetailActivity : AppCompatActivity() {
             val bitmap = BitmapFactory.decodeStream(inputStream)
             emitter.onNext(bitmap)
         }
-        coverDisposable = observable.normalSchedulers().subscribe { bitmap: Bitmap? ->
-            ivCover.setImageBitmap(bitmap)
-            vp.setThumbImageView(ivCover)
-        }
+        observable.normalSchedulers().subscribe(object : Observer<Bitmap> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                coverDisposable = d
+            }
+
+            override fun onNext(bitmap: Bitmap) {
+                ivCover.setImageBitmap(bitmap)
+                vp.setThumbImageView(ivCover)
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+        })
     }
 
     @Download.onTaskStart

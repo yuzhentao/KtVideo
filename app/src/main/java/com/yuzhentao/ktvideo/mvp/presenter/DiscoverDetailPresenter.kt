@@ -7,6 +7,8 @@ import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.model.DiscoverDetailModel
 import com.yuzhentao.ktvideo.util.normalSchedulers
 import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 
 class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) : DiscoverDetailContract.Presenter {
 
@@ -30,9 +32,23 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
         val observable: Observable<DiscoverDetailBean>? = context?.let {
             model.loadData(context!!, id)
         }
-        observable?.normalSchedulers()?.subscribe { bean: DiscoverDetailBean ->
-            view?.setData(bean)
-        }
+        observable?.normalSchedulers()?.subscribe(object : Observer<DiscoverDetailBean> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+
+            }
+
+            override fun onNext(t: DiscoverDetailBean) {
+                view?.setData(t)
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+        })
     }
 
 }

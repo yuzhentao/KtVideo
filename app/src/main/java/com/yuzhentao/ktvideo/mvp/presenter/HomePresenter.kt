@@ -7,6 +7,8 @@ import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.model.HomeModel
 import com.yuzhentao.ktvideo.util.normalSchedulers
 import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 
 class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.Presenter {
 
@@ -30,9 +32,23 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
         val observable: Observable<HomeBean>? = context?.let {
             model.loadData(it, true, "")
         }
-        observable?.normalSchedulers()?.subscribe { homeBean: HomeBean ->
-            view?.setData(homeBean)
-        }
+        observable?.normalSchedulers()?.subscribe(object : Observer<HomeBean> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+
+            }
+
+            override fun onNext(t: HomeBean) {
+                view?.setData(t)
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+        })
     }
 
     @SuppressLint("CheckResult")
@@ -40,9 +56,23 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
         val observable: Observable<HomeBean>? = context?.let {
             model.loadData(it, false, date)
         }
-        observable?.normalSchedulers()?.subscribe { homeBean: HomeBean ->
-            view?.setData(homeBean)
-        }
+        observable?.normalSchedulers()?.subscribe(object : Observer<HomeBean> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+
+            }
+
+            override fun onNext(t: HomeBean) {
+                view?.setData(t)
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+        })
     }
 
 }

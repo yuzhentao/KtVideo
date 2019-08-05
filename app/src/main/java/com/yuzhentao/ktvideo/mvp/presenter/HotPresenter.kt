@@ -7,6 +7,8 @@ import com.yuzhentao.ktvideo.mvp.contract.HotContract
 import com.yuzhentao.ktvideo.mvp.model.HotModel
 import com.yuzhentao.ktvideo.util.normalSchedulers
 import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 
 class HotPresenter(context: Context?, view: HotContract.View) : HotContract.Presenter {
 
@@ -30,9 +32,23 @@ class HotPresenter(context: Context?, view: HotContract.View) : HotContract.Pres
         val observable: Observable<HotBean>? = context?.let {
             model.loadData(context!!, strategy)
         }
-        observable?.normalSchedulers()?.subscribe { bean: HotBean ->
-            view?.setData(bean)
-        }
+        observable?.normalSchedulers()?.subscribe(object : Observer<HotBean> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+
+            }
+
+            override fun onNext(t: HotBean) {
+                view?.setData(t)
+            }
+
+            override fun onError(e: Throwable) {
+
+            }
+        })
     }
 
 }
