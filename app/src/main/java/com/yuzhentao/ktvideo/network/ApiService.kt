@@ -10,6 +10,8 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    //udid=49f77cac078741309bee11c5376c233224d8f2d3
+
     companion object {
         //伴生对象
         val BASE_URL: String
