@@ -120,14 +120,14 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                 dbBean?.let {
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
-                            Timber.tag("缓存").e("暂停>>>")
+                            Timber.tag("缓存").e("暂停>>>${bean.title}")
                             Aria.download(this).load(bean.playUrl!!).stop()
                             bean.downloadState = DownloadState.PAUSE.name
                             dbManager.update(bean)
                             notifyItemChanged(position, 1)
                         }
                         DownloadState.PAUSE.name -> {
-                            Timber.tag("缓存").e("恢复>>>")
+                            Timber.tag("缓存").e("恢复>>>${bean.title}")
                             Aria.download(this).load(bean.playUrl!!).resume()
                             bean.downloadState = DownloadState.DOWNLOADING.name
                             dbManager.update(bean)
