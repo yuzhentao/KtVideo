@@ -14,7 +14,7 @@ import com.yuzhentao.ktvideo.R;
 import com.yuzhentao.ktvideo.util.ColorUtils;
 import com.yuzhentao.ktvideo.util.ThemeUtils;
 
-public class ProgressFloatingActionButton extends FrameLayout /*implements ProgressView.OnCompletedListener*/ {
+public class ProgressButton extends FrameLayout /*implements ProgressView.OnCompletedListener*/ {
 
     private FloatingActionButton fab;
     private AppCompatImageView iv;
@@ -27,15 +27,15 @@ public class ProgressFloatingActionButton extends FrameLayout /*implements Progr
     private int mAccentColor;
     private int mAccentColorLight;
 
-    public ProgressFloatingActionButton(Context context) {
+    public ProgressButton(Context context) {
         this(context, null, 0);
     }
 
-    public ProgressFloatingActionButton(Context context, AttributeSet attrs) {
+    public ProgressButton(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ProgressFloatingActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ProgressButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View view = inflate(getContext(), R.layout.view_progress_button, this);
         fab = view.findViewById(R.id.pfFab);
@@ -47,48 +47,48 @@ public class ProgressFloatingActionButton extends FrameLayout /*implements Progr
         mAccentColorLight = ColorUtils.INSTANCE.lighten(mAccentColor, 0.5f);
 
         final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.ProgressFloatingActionButton, defStyleAttr, 0);
+                attrs, R.styleable.ProgressButton, defStyleAttr, 0);
 
-        if (a.hasValue(R.styleable.ProgressFloatingActionButton_pFabProgressIcon))
-            setIcon(a.getDrawable(R.styleable.ProgressFloatingActionButton_pFabProgressIcon));
+        if (a.hasValue(R.styleable.ProgressButton_pb_fab_progress_icon))
+            setIcon(a.getDrawable(R.styleable.ProgressButton_pb_fab_progress_icon));
 
-        if (a.hasValue(R.styleable.ProgressFloatingActionButton_pFabFinalIcon))
-            setFinalIcon(a.getDrawable(R.styleable.ProgressFloatingActionButton_pFabFinalIcon));
+        if (a.hasValue(R.styleable.ProgressButton_pb_fab_final_icon))
+            setFinalIcon(a.getDrawable(R.styleable.ProgressButton_pb_fab_final_icon));
 
         setStartingProgress(
-                a.getInt(R.styleable.ProgressFloatingActionButton_pFabStartingProgress, 0)
+                a.getInt(R.styleable.ProgressButton_pb_fab_starting_progress, 0)
         );
 
         setCurrentProgress(
-                a.getInt(R.styleable.ProgressFloatingActionButton_pFabCurrentProgress,
+                a.getInt(R.styleable.ProgressButton_pb_fab_current_progress,
                         progressView.mStartingProgress),
                 false
         );
 
         setTotalProgress(
-                a.getInt(R.styleable.ProgressFloatingActionButton_pFabTotalProgress, 100)
+                a.getInt(R.styleable.ProgressButton_pb_fab_total_progress, 100)
         );
 
         setStepSize(
-                a.getInt(R.styleable.ProgressFloatingActionButton_pFabStepSize, 10)
+                a.getInt(R.styleable.ProgressButton_pb_fab_step_size, 10)
         );
 
         setProgressColor(
-                a.getColor(R.styleable.ProgressFloatingActionButton_pFabCircleColor,
+                a.getColor(R.styleable.ProgressButton_pb_fab_circle_color,
                         mPrimaryColor
                 )
         );
 
         setFabColor(
                 a.getColor(
-                        R.styleable.ProgressFloatingActionButton_pFabColor,
+                        R.styleable.ProgressButton_pb_fab_color,
                         mAccentColor
                 )
         );
 
         setRippleColor(
                 a.getColor(
-                        R.styleable.ProgressFloatingActionButton_pFabRippleColor,
+                        R.styleable.ProgressButton_pb_fab_ripple_color,
                         mAccentColorLight
                 )
         );

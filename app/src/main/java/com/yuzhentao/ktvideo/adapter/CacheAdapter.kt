@@ -18,7 +18,7 @@ import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.*
-import com.yuzhentao.ktvideo.view.progressbutton.ProgressFloatingActionButton
+import com.yuzhentao.ktvideo.view.progressbutton.ProgressButton
 import timber.log.Timber
 
 class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: VideoDbManager) : RecyclerView.Adapter<CacheAdapter.ViewHolder>() {
@@ -172,12 +172,12 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
 
         var iv: AppCompatImageView? = null
         var tvTop: AppCompatTextView? = null
-        var btnProgress: ProgressFloatingActionButton? = null
+        var btnProgress: ProgressButton? = null
 
         init {
             iv = itemView.findViewById(R.id.iv) as AppCompatImageView
             tvTop = itemView.findViewById(R.id.tv_top) as AppCompatTextView
-            btnProgress = itemView.findViewById(R.id.btn_progress) as ProgressFloatingActionButton
+            btnProgress = itemView.findViewById(R.id.btn_progress) as ProgressButton
             tvTop!!.typeface = Typeface.createFromAsset(context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
         }
 

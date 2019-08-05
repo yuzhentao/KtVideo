@@ -9,6 +9,7 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
+import com.arialyy.aria.core.Aria
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.util.newIntent
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -26,6 +27,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         initView()
         anim()
+        Aria.get(this).downloadConfig.threadNum = 5
+        Aria.get(this).downloadConfig.maxTaskNum = 5
     }
 
     private fun initView() {
