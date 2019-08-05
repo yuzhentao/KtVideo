@@ -19,6 +19,6 @@
     <string name="cache_start">缓存开始</string>
     <string name="cache_fail">缓存失败</string>
     <string name="cache_complete">缓存完成</string>
-    <string name="cache_error">缓存异常</string>
+    <string name="cache_ing">正在缓存中&#8230;</string>
 
 </resources>

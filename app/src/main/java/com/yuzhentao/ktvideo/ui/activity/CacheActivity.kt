@@ -10,6 +10,7 @@ import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadTask
 import com.gyf.barlibrary.ImmersionBar
+import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
@@ -119,7 +120,7 @@ class CacheActivity : AppCompatActivity() {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("缓存").e("失败>>>")
-                    shortToast("下载失败")
+                    shortToast(getString(R.string.cache_fail))
                     bean.downloadState = DownloadState.ERROR.name
                     bean.downloadProgress = 0
                     dbManager.update(bean)
@@ -136,7 +137,7 @@ class CacheActivity : AppCompatActivity() {
                 val bean = adapter.beans!![index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("缓存").e("完成>>>")
-                    shortToast("下载完成")
+                    shortToast(getString(R.string.cache_complete))
                     bean.downloadState = DownloadState.COMPLETE.name
                     bean.downloadProgress = 100
                     dbManager.update(bean)

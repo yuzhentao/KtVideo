@@ -164,10 +164,10 @@ class VideoDetailActivity : AppCompatActivity() {
                                 cache(bean.id!!)
                             }
                         }
-                        DownloadState.DOWNLOADING.name -> shortToast("视频缓存中")
-                        DownloadState.PAUSE.name -> shortToast("视频缓存中")
-                        DownloadState.COMPLETE.name -> shortToast("视频缓存完成")
-                        else -> shortToast("视频地址异常")
+                        DownloadState.DOWNLOADING.name -> shortToast(getString(R.string.cache_ing))
+                        DownloadState.PAUSE.name -> shortToast(getString(R.string.cache_ing))
+                        DownloadState.COMPLETE.name -> shortToast(getString(R.string.cache_complete))
+                        else -> shortToast(getString(R.string.cache_fail))
                     }
                 }
             }

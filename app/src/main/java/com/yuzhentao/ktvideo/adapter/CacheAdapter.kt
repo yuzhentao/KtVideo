@@ -121,7 +121,6 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
                             Timber.tag("缓存").e("暂停>>>")
-                            context!!.shortToast("暂停下载")
                             Aria.download(this).load(bean.playUrl!!).stop()
                             bean.downloadState = DownloadState.PAUSE.name
                             dbManager.update(bean)
@@ -129,7 +128,6 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                         }
                         DownloadState.PAUSE.name -> {
                             Timber.tag("缓存").e("恢复>>>")
-                            context!!.shortToast("恢复下载")
                             Aria.download(this).load(bean.playUrl!!).resume()
                             bean.downloadState = DownloadState.DOWNLOADING.name
                             dbManager.update(bean)
@@ -145,7 +143,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                             context!!.startActivity(intent)
                         }
                         else -> {
-                            context!!.shortToast(context!!.getString(R.string.cache_error))
+                            context!!.shortToast(context!!.getString(R.string.cache_fail))
                         }
                     }
                 }
