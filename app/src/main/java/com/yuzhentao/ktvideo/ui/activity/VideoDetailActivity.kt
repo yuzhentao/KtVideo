@@ -172,6 +172,11 @@ class VideoDetailActivity : AppCompatActivity() {
                 }
             }
         }
+        playUrl?.let {
+            if (dbManager.find(playUrl!!) == null) {
+                dbManager.insert(bean)
+            }
+        }
     }
 
     /**
@@ -256,7 +261,7 @@ class VideoDetailActivity : AppCompatActivity() {
             Timber.tag("缓存").e("开始>>>${bean.title}")
             shortToast(getString(R.string.cache_start))
             bean.downloadState = DownloadState.DOWNLOADING.name
-            dbManager.insert(bean)
+            dbManager.update(bean)
         }
     }
 

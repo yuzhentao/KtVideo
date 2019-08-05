@@ -1,12 +1,17 @@
 package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.adapter.WatchAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
@@ -18,6 +23,8 @@ class WatchActivity : AppCompatActivity() {
     var activity: WatchActivity = this
 
     var beans = ArrayList<VideoBean>()
+
+    lateinit var adapter: WatchAdapter
 
     private lateinit var dbManager: VideoDbManager
 
@@ -45,10 +52,43 @@ class WatchActivity : AppCompatActivity() {
                 onBackPressed()
             }
         }
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        adapter = WatchAdapter(context, beans)
+        rv.adapter = adapter
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                val bean: VideoBean? = beans[position]
+                bean?.let {
+                    val intent = Intent(context, VideoDetailActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putParcelable("data", bean)
+                    intent.putExtra("bundle", bundle)
+                    intent.putExtra("showCache", false)
+                    context.startActivity(intent)
+                }
+            }
+
+            override fun onItemLongClick(view: View, position: Int): Boolean {
+                return false
+            }
+        })
     }
 
     private fun initData() {
-
+        dbManager.findAll()?.let {
+            if (beans.size > 0) {
+                beans.clear()
+            }
+            beans.addAll(it)
+            if (beans.size > 0) {
+                rv.visibility = View.VISIBLE
+                tv_hint.visibility = View.GONE
+            } else {
+                rv.visibility = View.GONE
+                tv_hint.visibility = View.VISIBLE
+            }
+            adapter.notifyDataSetChanged()
+        }
     }
 
 }

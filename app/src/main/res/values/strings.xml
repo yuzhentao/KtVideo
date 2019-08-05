@@ -27,5 +27,6 @@
     <string name="cache_complete">Download Completed</string>
     <string name="cache_pause">Download Paused</string>
     <string name="cache_ing">Downloading&#8230;</string>
+    <string name="watch_no">No History</string>
 
 </resources>

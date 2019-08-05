@@ -21,5 +21,6 @@
     <string name="cache_complete">缓存完成</string>
     <string name="cache_pause">缓存暂停</string>
     <string name="cache_ing">缓存中&#8230;</string>
+    <string name="watch_no">暂无内容</string>
 
 </resources>

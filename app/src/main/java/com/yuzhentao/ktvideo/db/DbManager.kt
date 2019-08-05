@@ -12,6 +12,6 @@ interface DbManager<T> {
 
     fun find(value: String): T?
 
-    fun findAll(cls: Class<T>): MutableList<T>?
+    fun findAll(): MutableList<T>?
 
 }

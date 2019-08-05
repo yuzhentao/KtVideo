@@ -36,7 +36,7 @@ class CacheActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.yuzhentao.ktvideo.R.layout.activity_cache)
+        setContentView(R.layout.activity_cache)
         dbManager = VideoDbManager()
         Aria.download(this).register()
         ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init()
@@ -53,7 +53,7 @@ class CacheActivity : AppCompatActivity() {
         setSupportActionBar(tb)
         val bar = supportActionBar
         bar?.let {
-            bar.title = getString(com.yuzhentao.ktvideo.R.string.mine_cache)
+            bar.title = getString(R.string.mine_cache)
             bar.setDisplayHomeAsUpEnabled(true)
             tb.setNavigationOnClickListener {
                 onBackPressed()
@@ -82,7 +82,7 @@ class CacheActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        dbManager.findAll(VideoBean::class.java)?.let {
+        dbManager.findCache()?.let {
             if (beans.size > 0) {
                 beans.clear()
             }

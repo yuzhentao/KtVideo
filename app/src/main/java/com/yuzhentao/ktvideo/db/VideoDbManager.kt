@@ -1,9 +1,11 @@
 package com.yuzhentao.ktvideo.db
 
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.util.DownloadState
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.deleteFromRealm
+import timber.log.Timber
 
 class VideoDbManager : DbManager<VideoBean> {
 
@@ -14,6 +16,7 @@ class VideoDbManager : DbManager<VideoBean> {
             realm!!.beginTransaction()
             realm!!.copyToRealm(data)
             realm!!.commitTransaction()
+            Timber.tag("记录").e(">>>${data.title}")
         }
     }
 
@@ -52,9 +55,18 @@ class VideoDbManager : DbManager<VideoBean> {
         }
     }
 
-    override fun findAll(cls: Class<VideoBean>): MutableList<VideoBean>? {
+    override fun findAll(): MutableList<VideoBean>? {
         return if (realm != null) {
-            val beans: RealmResults<VideoBean> = realm!!.where(cls).findAllAsync()
+            val beans: RealmResults<VideoBean> = realm!!.where(VideoBean::class.java).findAllAsync()
+            return realm!!.copyFromRealm(beans)
+        } else {
+            null
+        }
+    }
+
+    fun findCache(): MutableList<VideoBean>? {
+        return if (realm != null) {
+            val beans: RealmResults<VideoBean> = realm!!.where(VideoBean::class.java).notEqualTo("downloadState", DownloadState.NORMAL.name).findAllAsync()
             return realm!!.copyFromRealm(beans)
         } else {
             null

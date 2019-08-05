@@ -28,7 +28,7 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cache_no"
+        android:text="@string/watch_no"
         android:textColor="@color/black"
         android:textSize="@dimen/x14"
         android:visibility="gone"
