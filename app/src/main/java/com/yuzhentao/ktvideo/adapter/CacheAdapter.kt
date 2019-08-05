@@ -55,12 +55,21 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
             bean?.let {
                 val btnProgress = holder.btnProgress
                 if (bean.playUrl != null) {
+                    dbBean = dbManager.find(bean.playUrl!!)
                     dbBean?.let {
-                        when {
-                            dbBean!!.downloadState == DownloadState.DOWNLOADING.name -> btnProgress!!.setImageRes(R.drawable.selector_pause)
-                            dbBean!!.downloadState == DownloadState.PAUSE.name -> btnProgress!!.setImageRes(R.drawable.selector_play)
-                            dbBean!!.downloadState == DownloadState.COMPLETE.name -> btnProgress!!.setImageRes(R.drawable.selector_play)
-                            else -> btnProgress!!.setImageRes(R.drawable.selector_error)
+                        when (dbBean!!.downloadState) {
+                            DownloadState.DOWNLOADING.name -> {
+                                btnProgress!!.setImageRes(R.drawable.selector_pause)
+                            }
+                            DownloadState.PAUSE.name -> {
+                                btnProgress!!.setImageRes(R.drawable.selector_play)
+                            }
+                            DownloadState.COMPLETE.name -> {
+                                btnProgress!!.setImageRes(R.drawable.selector_play)
+                            }
+                            else -> {
+                                btnProgress!!.setImageRes(R.drawable.selector_error)
+                            }
                         }
                     }
                 } else {
@@ -82,16 +91,15 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
             } else {
                 ViewUtil.setMargins(holder.itemView, 0, 0, 0, 0)
             }
-            val tvBottom = holder.tvBottom
             val btnProgress = holder.btnProgress
             val photoUrl: String? = bean.feed
             photoUrl?.let {
-                dbBean = dbManager.find(bean.playUrl!!)
                 ImageUtil.display(context!!, holder.iv, photoUrl)
             }
             val title: String? = bean.title
             holder.tvTop!!.text = title
             if (bean.playUrl != null) {
+                dbBean = dbManager.find(bean.playUrl!!)
                 dbBean?.let {
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
@@ -109,7 +117,6 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                     }
                 }
             } else {
-//                tvBottom.text =
                 btnProgress!!.setImageRes(R.drawable.selector_error)
             }
             if (bean.downloadProgress!! == 100) {
@@ -117,6 +124,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
             }
             btnProgress!!.setCurrentProgress(bean.downloadProgress!!, true)
             btnProgress.setOnClickListener {
+                dbBean = dbManager.find(bean.playUrl!!)
                 dbBean?.let {
                     when (dbBean!!.downloadState) {
                         DownloadState.DOWNLOADING.name -> {
@@ -164,13 +172,11 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
 
         var iv: AppCompatImageView? = null
         var tvTop: AppCompatTextView? = null
-        var tvBottom: AppCompatTextView? = null
         var btnProgress: ProgressFloatingActionButton? = null
 
         init {
             iv = itemView.findViewById(R.id.iv) as AppCompatImageView
             tvTop = itemView.findViewById(R.id.tv_top) as AppCompatTextView
-            tvBottom = itemView.findViewById(R.id.tv_bottom) as AppCompatTextView
             btnProgress = itemView.findViewById(R.id.btn_progress) as ProgressFloatingActionButton
             tvTop!!.typeface = Typeface.createFromAsset(context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
         }
