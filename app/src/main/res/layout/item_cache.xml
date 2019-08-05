@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:pb_fab_circle_color="@color/orange"
+        app:pb_fab_circle_color="@color/pink"
         app:pb_fab_color="@color/white"
         app:pb_fab_starting_progress="0"
         app:pb_fab_step_size="1"

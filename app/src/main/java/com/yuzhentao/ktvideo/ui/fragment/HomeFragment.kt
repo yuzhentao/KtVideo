@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         presenter = HomePresenter(context, this)
         presenter?.load()
         srl.setOnRefreshListener(this)
-        srl.setColorSchemeResources(R.color.orange)
+        srl.setColorSchemeResources(R.color.pink)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = HomeAdapter(context, beans)
         rv.adapter = adapter

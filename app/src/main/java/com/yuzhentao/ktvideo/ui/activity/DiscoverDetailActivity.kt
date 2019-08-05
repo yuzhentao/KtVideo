@@ -37,7 +37,7 @@ class DiscoverDetailActivity : AppCompatActivity(), DiscoverDetailContract.View,
         presenter = DiscoverDetailPresenter(context, this)
         presenter?.load("12")
         srl.setOnRefreshListener(this)
-        srl.setColorSchemeResources(R.color.orange)
+        srl.setColorSchemeResources(R.color.pink)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 //        adapter = RankingAdapter()
 //        rv.adapter = adapter
