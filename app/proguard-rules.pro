@@ -49,3 +49,7 @@
     @Upload.* <methods>;
     @DownloadGroup.* <methods>;
 }
+
+#ImmersionBar
+-keep class com.gyf.immersionbar.* {*;}
+ -dontwarn com.gyf.immersionbar.**

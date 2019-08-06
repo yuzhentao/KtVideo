@@ -3,6 +3,7 @@ package com.yuzhentao.ktvideo.ui.fragment
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HotAdapter
 import kotlinx.android.synthetic.main.fragment_hot.*
 
@@ -16,7 +17,7 @@ class HotFragment : BaseFragment() {
     var strategy = arrayOf("weekly", "monthly", "historical")
 
     override fun getLayoutResources(): Int {
-        return com.yuzhentao.ktvideo.R.layout.fragment_hot
+        return R.layout.fragment_hot
     }
 
     override fun initView() {

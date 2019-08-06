@@ -1,6 +1,7 @@
 package com.yuzhentao.ktvideo.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.DiscoverBean
+import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yuzhentao.ktvideo.util.ImageUtil
 
 class DiscoverAdapter(context: Context?, beans: MutableList<DiscoverBean>?) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
@@ -37,7 +39,8 @@ class DiscoverAdapter(context: Context?, beans: MutableList<DiscoverBean>?) : Re
         ImageUtil.display(context!!, holder.ivPhoto, bean!!.bgPicture)
         holder.tv?.text = bean.name
         holder.itemView.setOnClickListener {
-
+            val intent = Intent(context, DiscoverDetailActivity::class.java)
+            context?.startActivity(intent)
         }
     }
 
