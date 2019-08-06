@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.rb_home -> {
                 tvTitle?.text = getToday()
                 tvTitle?.visibility = View.VISIBLE
-                ivSearch?.setImageResource(R.drawable.icon_search)
+                ivSearch?.setImageResource(R.drawable.ic_search_black)
                 rbHome?.isSelected = true
                 rbDiscover?.isSelected = false
                 rbRanking?.isSelected = false
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.rb_discover -> {
                 tvTitle?.setText(R.string.discover)
                 tvTitle?.visibility = View.VISIBLE
-                ivSearch?.setImageResource(R.drawable.icon_search)
+                ivSearch?.setImageResource(R.drawable.ic_search_black)
                 rbHome?.isSelected = false
                 rbDiscover?.isSelected = true
                 rbRanking?.isSelected = false
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.rb_ranking -> {
                 tvTitle?.setText(R.string.ranking)
                 tvTitle?.visibility = View.VISIBLE
-                ivSearch?.setImageResource(R.drawable.icon_search)
+                ivSearch?.setImageResource(R.drawable.ic_search_black)
                 rbHome?.isSelected = false
                 rbDiscover?.isSelected = false
                 rbRanking?.isSelected = true
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.rb_mine -> {
                 tvTitle?.visibility = View.GONE
-                ivSearch?.setImageResource(R.drawable.icon_setting)
+                ivSearch?.setImageResource(R.drawable.ic_settings_black)
                 rbHome?.isSelected = false
                 rbDiscover?.isSelected = false
                 rbRanking?.isSelected = false
@@ -206,7 +206,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         tvTitle?.text = getToday()
         tvTitle?.typeface = Typeface.createFromAsset(this.assets, "fonts/Lobster-1.4.otf")
         tvTitle?.visibility = View.VISIBLE
-        ivSearch?.setImageResource(R.drawable.icon_search)
+        ivSearch?.setImageResource(R.drawable.ic_search_black)
         ivSearch?.setOnClickListener(this)
         rbHome?.isSelected = true
         rbHome?.setOnClickListener(this)
