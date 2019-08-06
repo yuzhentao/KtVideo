@@ -8,11 +8,11 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x40"
+        android:layout_height="@dimen/x36"
         android:elevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/vp"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/black"
+        app:tabIndicatorColor="@color/transparent"
         app:tabMode="fixed"
         app:tabPaddingEnd="0dp"
         app:tabPaddingStart="0dp"

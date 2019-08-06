@@ -3,6 +3,8 @@ package com.yuzhentao.ktvideo.ui.fragment
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v7.widget.AppCompatTextView
+import android.view.View
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HotAdapter
 import kotlinx.android.synthetic.main.fragment_hot.*
@@ -60,6 +62,21 @@ class HotFragment : BaseFragment() {
 
             }
         })
+        for (i in titles.indices) {
+            val tab = tl.getTabAt(i) ?: continue
+
+            tab.setCustomView(R.layout.layout_tab)
+            if (tab.customView == null) {
+                continue
+            }
+
+            val tv = tab.customView!!.findViewById<AppCompatTextView>(R.id.tv)
+            tv.text = titles[i]
+            if (i == 0) {
+                tv.isSelected = true
+                tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
+            }
+        }
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
