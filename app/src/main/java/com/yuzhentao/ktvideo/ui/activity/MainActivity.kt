@@ -198,11 +198,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        //隐藏导航栏
-//        val window = window
-//        val params = window.attributes
-//        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//        window.attributes = params
         (findViewById<ConstraintLayout>(R.id.layout_top)).setOnClickListener(this)
         tvTitle = findViewById(R.id.tv_center_top)
         ivSearch = findViewById(R.id.iv_right_top)
