@@ -1,6 +1,7 @@
 package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
@@ -41,6 +42,9 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener {
             R.id.iv_back -> {
                 onBackPressed()
             }
+            R.id.tv_follow -> {
+
+            }
             else -> {
 
             }
@@ -68,6 +72,10 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         })
+
+        tv_name.typeface = Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_follow.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_follow.setOnClickListener(this)
 
         val leftFragment = DiscoverLeftFragment()
         val leftBundle = Bundle()

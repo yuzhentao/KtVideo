@@ -30,8 +30,67 @@
                     android:id="@+id/iv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img_test_1" />
+                    android:scaleType="centerCrop" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_name"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/x30"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x26"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="测试测试测试" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_desc"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:text="测试测试测试" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_count"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_desc"
+                    tools:text="测试测试测试" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_follow"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x12"
+                    android:background="@drawable/shape_white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingStart="@dimen/x10"
+                    android:paddingTop="@dimen/x3"
+                    android:paddingEnd="@dimen/x10"
+                    android:paddingBottom="@dimen/x3"
+                    android:text="@string/follow"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_count"
+                    tools:ignore="UnusedAttribute" />
             </android.support.constraint.ConstraintLayout>
 
             <android.support.v7.widget.Toolbar
@@ -60,7 +119,7 @@
                         tools:ignore="UnusedAttribute" />
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_title"
+                        android:id="@+id/tv_top"
                         style="@style/TextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
