@@ -5,10 +5,10 @@
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/white</item>
+        <!--<item name="colorPrimary">@color/white</item>-->
+        <!--<item name="colorPrimaryDark">@color/white</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--<item name="android:windowBackground">@color/white</item>-->
     </style>
 
     <style name="Splash" parent="AppBaseTheme">

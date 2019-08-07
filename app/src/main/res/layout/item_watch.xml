@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x5"
         android:gravity="center_vertical"
-        android:textColor="@color/gray"
+        android:textColor="@color/gray_2"
         android:textSize="@dimen/x10"
         app:layout_constraintBottom_toBottomOf="@id/iv"
         app:layout_constraintEnd_toEndOf="@id/tv_top"

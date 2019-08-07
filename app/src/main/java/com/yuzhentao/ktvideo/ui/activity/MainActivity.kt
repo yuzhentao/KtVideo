@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatTextView
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
+import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
@@ -191,15 +192,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun initView() {
         //沉浸式状态栏
         immersionBar {
-            transparentBar()
-            barAlpha(0.3F)
+            statusBarColor(R.color.black)
+            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+            navigationBarColor(R.color.black)
+            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         //隐藏导航栏
-        val window = window
-        val params = window.attributes
-        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        window.attributes = params
+//        val window = window
+//        val params = window.attributes
+//        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//        window.attributes = params
         (findViewById<ConstraintLayout>(R.id.layout_top)).setOnClickListener(this)
         tvTitle = findViewById(R.id.tv_center_top)
         ivSearch = findViewById(R.id.iv_right_top)

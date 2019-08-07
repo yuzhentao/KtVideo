@@ -19,8 +19,9 @@ class FeedbackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
         immersionBar {
-            transparentBar()
-            barAlpha(0.3F)
+            statusBarColor(R.color.black)
+            navigationBarColor(R.color.white_50)
+            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         initView()

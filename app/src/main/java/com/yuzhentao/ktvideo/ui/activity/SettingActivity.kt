@@ -16,8 +16,9 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
         immersionBar {
-            transparentBar()
-            barAlpha(0.3F)
+            statusBarColor(R.color.black)
+            navigationBarColor(R.color.white_50)
+            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         initView()

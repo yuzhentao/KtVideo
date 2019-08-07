@@ -40,8 +40,9 @@ class CacheActivity : AppCompatActivity() {
         dbManager = VideoDbManager()
         Aria.download(this).register()
         immersionBar {
-            transparentBar()
-            barAlpha(0.3F)
+            statusBarColor(R.color.black)
+            navigationBarColor(R.color.white_50)
+            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         initView()

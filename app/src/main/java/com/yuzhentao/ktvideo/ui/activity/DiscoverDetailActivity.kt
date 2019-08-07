@@ -43,6 +43,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         immersionBar {
             statusBarColor(R.color.black)
             navigationBarColor(R.color.white_50)
+            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         initView()
