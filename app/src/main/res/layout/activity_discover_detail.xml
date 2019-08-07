@@ -109,11 +109,13 @@
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/iv_back"
-                        android:layout_width="?attr/actionBarSize"
-                        android:layout_height="?attr/actionBarSize"
+                        android:layout_width="@dimen/x40"
+                        android:layout_height="@dimen/x40"
                         android:foreground="?attr/selectableItemBackground"
+                        android:padding="@dimen/x10"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_back_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="UnusedAttribute" />

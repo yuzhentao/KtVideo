@@ -12,6 +12,9 @@ import android.view.View
 import com.gyf.barlibrary.ImmersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HotAdapter
+import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
+import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
+import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverRightFragment
 import com.yuzhentao.ktvideo.ui.fragment.RankingFragment
@@ -22,10 +25,12 @@ import kotlin.math.abs
 /**
  * 发现详情
  */
-class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener {
+class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, DiscoverDetailContract.View {
 
     private var context: Context = this
     private var activity: DiscoverDetailActivity = this
+
+    var presenter: DiscoverDetailPresenter? = null
 
     lateinit var fragments: ArrayList<Fragment>
     private var titles = mutableListOf("推荐", "广场")
@@ -35,6 +40,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_discover_detail)
         ImmersionBar.with(activity).transparentBar().barAlpha(0.2F).init()
         initView()
+        initData()
     }
 
     override fun onClick(v: View?) {
@@ -51,7 +57,31 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun setData(bean: DiscoverDetailBean?) {
+        bean?.let {
+            tv_top.text = bean.tagInfo.name
+            tv_name.text = bean.tagInfo.name
+            tv_desc.text = bean.tagInfo.description
+            var count = ""
+            if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isEmpty()) {
+                count = getString(R.string.discover_follow, bean.tagInfo.tagFollowCount.toString())
+            } else if (bean.tagInfo.tagFollowCount.toString().isEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isNotEmpty()) {
+                count = getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
+            } else if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isNotEmpty()) {
+                count = getString(R.string.discover_follow, bean.tagInfo.tagFollowCount.toString()) + " | " + getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
+            } else {
+                tv_count.visibility = View.GONE
+            }
+            tv_count.text = count
+        }
+    }
+
     private fun initView() {
+        intent.getStringExtra("id")?.let {
+            presenter = DiscoverDetailPresenter(context, this)
+            presenter?.load(intent.getStringExtra("id"))
+        }
+
         setSupportActionBar(tb)
         val bar = supportActionBar
         bar?.let {
@@ -123,6 +153,10 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener {
                 tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
             }
         }
+    }
+
+    private fun initData() {
+
     }
 
 }

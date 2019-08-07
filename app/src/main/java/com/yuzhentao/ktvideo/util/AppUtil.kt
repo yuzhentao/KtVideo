@@ -1,15 +1,24 @@
 package com.yuzhentao.ktvideo.util
 
+import android.os.Build
 import android.text.TextUtils
 import android.view.View
 import java.util.*
 
-class AppUtil {
+object AppUtil {
 
-    companion object {
-        fun isRtl(): Boolean {
-            return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL
-        }
+    /**
+     * 是否是RTL布局
+     */
+    fun isRtl(): Boolean {
+        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL
+    }
+
+    /**
+     * 获取手机型号
+     */
+    fun getOSModel(): String {
+        return Build.MODEL
     }
 
 }

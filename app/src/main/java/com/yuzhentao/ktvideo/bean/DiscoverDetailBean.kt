@@ -1,21 +1,28 @@
 package com.yuzhentao.ktvideo.bean
 
 /**
- * http://baobab.kaiyanapp.com/api/v4/categories/detail/tab?id=%s
+ * http://baobab.kaiyanapp.com/api/v6/tag/index?id=16&vc=524&vn=5.7&deviceModel=SM-G9500
  */
 data class DiscoverDetailBean(
-        val categoryInfo: CategoryInfo,
         val tabInfo: TabInfo,
-        val tagInfo: Any) {
+        val tagInfo: TagInfo) {
 
-    data class CategoryInfo(
-            val actionUrl: String,
+    data class TagInfo(
+            val actionUrl: Any,
+            val bgPicture: String,
+            val childTabList: Any,
             val dataType: String,
             val description: String,
             val follow: Follow,
             val headerImage: String,
             val id: Int,
-            val name: String) {
+            val lookCount: Int,
+            val name: String,
+            val recType: Int,
+            val shareLinkUrl: String,
+            val tagDynamicCount: Int,
+            val tagFollowCount: Int,
+            val tagVideoCount: Int) {
 
         data class Follow(
                 val followed: Boolean,
@@ -34,11 +41,15 @@ data class DiscoverDetailBean(
                 val id: Int,
                 val name: String,
                 val nameType: Int,
-                val tabType: Int)
+                val tabType: Int
+        )
 
     }
 
 }
+
+
+
 
 
 

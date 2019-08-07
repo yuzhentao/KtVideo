@@ -40,6 +40,7 @@ class DiscoverAdapter(context: Context?, beans: MutableList<DiscoverBean>?) : Re
         holder.tv?.text = bean.name
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DiscoverDetailActivity::class.java)
+            intent.putExtra("id", bean.tagId.toString())
             context?.startActivity(intent)
         }
     }
