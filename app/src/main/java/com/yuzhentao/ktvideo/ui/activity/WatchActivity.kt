@@ -30,14 +30,14 @@ class WatchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watch)
-        dbManager = VideoDbManager()
         immersionBar {
             statusBarColor(R.color.black)
             navigationBarColor(R.color.white_50)
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
+        setContentView(R.layout.activity_watch)
+        dbManager = VideoDbManager()
         initView()
         initData()
     }

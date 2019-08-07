@@ -39,13 +39,13 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_discover_detail)
         immersionBar {
             statusBarColor(R.color.black)
             navigationBarColor(R.color.white_50)
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
+        setContentView(R.layout.activity_discover_detail)
         initView()
         initData()
     }

@@ -15,6 +15,7 @@ import android.widget.ImageView
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadTask
+import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoPlayer
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
@@ -54,6 +55,11 @@ class VideoDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        immersionBar {
+            statusBarColor(R.color.black)
+            navigationBarColor(R.color.black)
+            fitsSystemWindows(true)
+        }
         setContentView(R.layout.activity_video_detail)
         dbManager = VideoDbManager()
         Aria.download(this).register()

@@ -51,6 +51,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        immersionBar {
+            statusBarColor(R.color.black)
+            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+            navigationBarColor(R.color.black)
+            navigationBarDarkIcon(true)
+            fitsSystemWindows(true)
+        }
         setContentView(R.layout.activity_main)
         requestPermissions()
         initView()
@@ -190,14 +197,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        //沉浸式状态栏
-        immersionBar {
-            statusBarColor(R.color.black)
-            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
-            navigationBarColor(R.color.black)
-            navigationBarDarkIcon(true)
-            fitsSystemWindows(true)
-        }
         (findViewById<ConstraintLayout>(R.id.layout_top)).setOnClickListener(this)
         tvTitle = findViewById(R.id.tv_center_top)
         ivSearch = findViewById(R.id.iv_right_top)

@@ -36,15 +36,15 @@ class CacheActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cache)
-        dbManager = VideoDbManager()
-        Aria.download(this).register()
         immersionBar {
             statusBarColor(R.color.black)
             navigationBarColor(R.color.white_50)
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
+        setContentView(R.layout.activity_cache)
+        dbManager = VideoDbManager()
+        Aria.download(this).register()
         initView()
         initData()
     }
