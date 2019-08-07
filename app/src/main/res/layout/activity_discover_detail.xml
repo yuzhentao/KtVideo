@@ -15,16 +15,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:collapsedTitleTextAppearance="@style/TitleTextStyle"
-            app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x200"
-                android:background="@color/pink"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.37">
+                app:layout_collapseParallaxMultiplier="0.37"
+                tools:background="@color/pink">
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv"
@@ -93,28 +92,43 @@
                     tools:ignore="UnusedAttribute" />
             </android.support.constraint.ConstraintLayout>
 
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/x10"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_back_white"
+                app:layout_constraintBottom_toBottomOf="@id/tb"
+                app:layout_constraintStart_toStartOf="@id/tb"
+                app:layout_constraintTop_toTopOf="@id/tb"
+                tools:ignore="UnusedAttribute" />
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tb"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/transparent"
+                android:background="@color/white"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                tools:background="@color/transparent">
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/cl_top"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent">
 
                     <android.support.v7.widget.AppCompatImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="@dimen/x40"
-                        android:layout_height="@dimen/x40"
+                        android:id="@+id/iv_top_back"
+                        android:layout_width="?attr/actionBarSize"
+                        android:layout_height="?attr/actionBarSize"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/x10"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_back_white"
+                        android:src="@drawable/ic_back_black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -125,7 +139,7 @@
                         style="@style/TextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/x14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"

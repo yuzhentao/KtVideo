@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.view.View
-import com.gyf.barlibrary.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HotAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
@@ -18,7 +18,7 @@ import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverRightFragment
 import com.yuzhentao.ktvideo.ui.fragment.RankingFragment
-import com.yuzhentao.ktvideo.util.ViewUtil
+import com.yuzhentao.ktvideo.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs
 
@@ -35,17 +35,23 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     lateinit var fragments: ArrayList<Fragment>
     private var titles = mutableListOf("推荐", "广场")
 
+    private var isChange: Boolean? = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_discover_detail)
-        ImmersionBar.with(activity).transparentBar().barAlpha(0.2F).init()
+        immersionBar {
+            statusBarColor(R.color.black)
+            navigationBarColor(R.color.white_50)
+            fitsSystemWindows(true)
+        }
         initView()
         initData()
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.iv_back -> {
+            R.id.iv_back, R.id.iv_top_back -> {
                 onBackPressed()
             }
             R.id.tv_follow -> {
@@ -73,6 +79,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
                 tv_count.visibility = View.GONE
             }
             tv_count.text = count
+            ImageUtil.display(context, iv, bean.tagInfo.headerImage)
         }
     }
 
@@ -82,28 +89,38 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
             presenter?.load(intent.getStringExtra("id"))
         }
 
+        iv_back.setOnClickListener(this)
+//        ViewUtil.setMargins(iv_back, 0, ImmersionBar.getStatusBarHeight(activity), 0, 0)
         setSupportActionBar(tb)
         val bar = supportActionBar
         bar?.let {
             bar.setDisplayShowTitleEnabled(false)
         }
-        ViewUtil.setMargins(tb, 0, ImmersionBar.getStatusBarHeight(activity), 0, 0)
-        iv_back.setOnClickListener(this)
+//        ViewUtil.setPaddings(tb, 0, ImmersionBar.getStatusBarHeight(activity), 0, 0)
+        iv_top_back.setOnClickListener(this)
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
             when {
                 i == 0 -> {//展开
-                    iv_back.setImageResource(R.drawable.ic_back_white)
+                    tb.alpha = 0F
+                    tv_top.visibility = View.GONE
+                    iv_back.visibility = View.VISIBLE
+                    isChange = false
+                }
+                abs(i) > 0 -> {//移动中
+                    tb.alpha = abs(i) / appBarLayout.totalScrollRange.toFloat()
+                    if (!isChange!!) {
+                        tv_top.visibility = View.VISIBLE
+                        iv_back.visibility = View.GONE
+                    }
+                    isChange = true
                 }
                 abs(i) >= appBarLayout.totalScrollRange -> {//收缩
-                    iv_back.setImageResource(R.drawable.ic_back_black)
-                }
-                else -> {//默认
-                    iv_back.setImageResource(R.drawable.ic_back_white)
+                    tb.alpha = 1F
                 }
             }
         })
 
-        tv_name.typeface = Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_name.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
         tv_follow.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
         tv_follow.setOnClickListener(this)
 

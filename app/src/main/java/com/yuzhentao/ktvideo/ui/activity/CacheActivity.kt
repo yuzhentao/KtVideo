@@ -9,7 +9,7 @@ import android.view.View
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadTask
-import com.gyf.barlibrary.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
@@ -39,7 +39,11 @@ class CacheActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cache)
         dbManager = VideoDbManager()
         Aria.download(this).register()
-        ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init()
+        immersionBar {
+            transparentBar()
+            barAlpha(0.3F)
+            fitsSystemWindows(true)
+        }
         initView()
         initData()
     }

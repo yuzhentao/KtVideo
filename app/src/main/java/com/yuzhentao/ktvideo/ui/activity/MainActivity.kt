@@ -12,7 +12,7 @@ import android.support.v7.widget.AppCompatTextView
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
-import com.gyf.barlibrary.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.fragment.*
@@ -190,7 +190,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initView() {
         //沉浸式状态栏
-        ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init();
+        immersionBar {
+            transparentBar()
+            barAlpha(0.3F)
+            fitsSystemWindows(true)
+        }
         //隐藏导航栏
         val window = window
         val params = window.attributes

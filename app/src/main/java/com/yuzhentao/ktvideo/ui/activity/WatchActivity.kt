@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.gyf.barlibrary.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.WatchAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
@@ -32,7 +32,11 @@ class WatchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watch)
         dbManager = VideoDbManager()
-        ImmersionBar.with(activity).transparentBar().barAlpha(0.3F).fitsSystemWindows(true).init()
+        immersionBar {
+            transparentBar()
+            barAlpha(0.3F)
+            fitsSystemWindows(true)
+        }
         initView()
         initData()
     }
