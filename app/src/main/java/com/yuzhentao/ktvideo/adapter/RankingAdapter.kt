@@ -41,7 +41,7 @@ class RankingAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : R
 
         bean?.let {
             val photo = bean.cover.feed
-            ImageUtil.display(context!!, holder.iv, photo)
+            ImageUtil.show(context!!, holder.iv, photo)
             val title = bean.title
             holder.tvTitle.text = title
             val category = bean.category

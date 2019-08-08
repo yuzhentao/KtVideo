@@ -82,7 +82,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
                 tv_count.visibility = View.GONE
             }
             tv_count.text = count
-            ImageUtil.display(context, iv, bean.tagInfo.headerImage)
+            ImageUtil.show(context, iv, bean.tagInfo.headerImage)
         }
     }
 

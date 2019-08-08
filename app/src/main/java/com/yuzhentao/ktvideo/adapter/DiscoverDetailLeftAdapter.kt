@@ -1,9 +1,15 @@
 package com.yuzhentao.ktvideo.adapter
 
 import android.content.Context
+import android.graphics.Typeface
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,13 +42,19 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
         val bean = beans?.get(position)
         bean?.let {
             bean.content?.data?.author?.icon?.let {
-                ImageUtil.display(context!!, holder.ivIcon, bean.content.data.author.icon)
+                ImageUtil.showCircle(context!!, holder.ivIcon, bean.content.data.author.icon)
             }
             bean.content?.data?.author?.name?.let {
                 holder.tvName!!.text = bean.content.data.author.name
             }
             bean.content?.data?.title?.let {
-                holder.tvTitle!!.text = context!!.getString(R.string.discover_release, bean.content.data.title)
+                val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                val spannableString = SpannableString(context!!.getString(R.string.discover_release, bean.content.data.title))
+                val colorSpan = ForegroundColorSpan(ContextCompat.getColor(context!!, R.color.black))
+                spannableString.setSpan(colorSpan, context!!.getString(R.string.discover_release, bean.content.data.title).indexOf(" "), context!!.getString(R.string.discover_release, bean.content.data.title).length, flags)
+                val styleSpan = StyleSpan(Typeface.BOLD)
+                spannableString.setSpan(styleSpan, context!!.getString(R.string.discover_release, bean.content.data.title).indexOf(" "), context!!.getString(R.string.discover_release, bean.content.data.title).length, flags)
+                holder.tvTitle!!.text = spannableString
             }
             bean.content?.data?.description?.let {
                 holder.tvDesc!!.text = bean.content.data.description
@@ -69,6 +81,9 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
             } else {
                 holder.tvReply!!.text = bean.content.data.consumption.replyCount.toString()
             }
+            if (position == itemCount - 1) {
+                holder.vLine!!.visibility = View.GONE
+            }
         }
     }
 
@@ -85,19 +100,21 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
         var tvFavorite: AppCompatTextView? = null
         var tvReply: AppCompatTextView? = null
         var tvPlayTime: AppCompatTextView? = null
+        var vLine: View? = null
 
         init {
-            ivIcon = itemView.findViewById(R.id.iv_icon) as AppCompatImageView
-            tvName = itemView.findViewById(R.id.tv_name) as AppCompatTextView
-            tvTitle = itemView.findViewById(R.id.tv_title) as AppCompatTextView
-            tvDesc = itemView.findViewById(R.id.tv_desc) as AppCompatTextView
-            tvTag1 = itemView.findViewById(R.id.tv_tag_1) as AppCompatTextView
-            tvTag2 = itemView.findViewById(R.id.tv_tag_2) as AppCompatTextView
-            tvTag3 = itemView.findViewById(R.id.tv_tag_3) as AppCompatTextView
-            vp = itemView.findViewById(R.id.vp) as StandardGSYVideoPlayer
-            tvFavorite = itemView.findViewById(R.id.tv_favorite) as AppCompatTextView
-            tvReply = itemView.findViewById(R.id.tv_replay) as AppCompatTextView
-            tvPlayTime = itemView.findViewById(R.id.tv_play_time) as AppCompatTextView
+            ivIcon = itemView.findViewById(com.yuzhentao.ktvideo.R.id.iv_icon) as AppCompatImageView
+            tvName = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_name) as AppCompatTextView
+            tvTitle = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_title) as AppCompatTextView
+            tvDesc = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_desc) as AppCompatTextView
+            tvTag1 = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_tag_1) as AppCompatTextView
+            tvTag2 = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_tag_2) as AppCompatTextView
+            tvTag3 = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_tag_3) as AppCompatTextView
+            vp = itemView.findViewById(com.yuzhentao.ktvideo.R.id.vp) as StandardGSYVideoPlayer
+            tvFavorite = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_favorite) as AppCompatTextView
+            tvReply = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_replay) as AppCompatTextView
+            tvPlayTime = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_play_time) as AppCompatTextView
+            vLine = itemView.findViewById(com.yuzhentao.ktvideo.R.id.v_line)
         }
 
     }

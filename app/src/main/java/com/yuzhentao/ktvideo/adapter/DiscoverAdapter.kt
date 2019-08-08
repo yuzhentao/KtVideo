@@ -36,7 +36,7 @@ class DiscoverAdapter(context: Context?, beans: MutableList<DiscoverBean>?) : Re
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = beans?.get(position)
 
-        ImageUtil.display(context!!, holder.ivPhoto, bean!!.bgPicture)
+        ImageUtil.show(context!!, holder.ivPhoto, bean!!.bgPicture)
         holder.tv?.text = bean.name
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DiscoverDetailActivity::class.java)

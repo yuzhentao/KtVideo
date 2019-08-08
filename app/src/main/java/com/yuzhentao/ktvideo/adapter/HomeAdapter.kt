@@ -41,11 +41,11 @@ class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) :
 
         val photo = bean?.data?.cover?.feed
         val icon = bean?.data?.author?.icon
-        ImageUtil.display(context!!, holder.ivPhoto, photo as String)
+        ImageUtil.show(context!!, holder.ivPhoto, photo as String)
         if (icon == null) {
             holder.ivUser?.visibility = View.GONE
         } else {
-            ImageUtil.display(context!!, holder.ivUser, icon)
+            ImageUtil.show(context!!, holder.ivUser, icon)
         }
 
         val title = bean.data.title

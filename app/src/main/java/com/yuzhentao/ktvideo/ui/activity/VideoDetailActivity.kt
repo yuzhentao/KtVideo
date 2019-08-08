@@ -126,7 +126,7 @@ class VideoDetailActivity : AppCompatActivity() {
         playUrl = bean.playUrl
         val blurred = bean.blurred//接口提供的虚化图
         blurred?.let {
-            ImageUtil.displayHigh(context, iv_bg, blurred)
+            ImageUtil.showHigh(context, iv_bg, blurred)
         }
         tv_title.text = bean.title
         tv_title.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")

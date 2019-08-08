@@ -26,7 +26,7 @@
         android:layout_marginStart="@dimen/x8"
         android:gravity="start"
         android:textColor="@color/black"
-        android:textSize="@dimen/x12"
+        android:textSize="@dimen/x13"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/iv_icon"
         app:layout_constraintTop_toTopOf="@id/iv_icon"
@@ -37,9 +37,9 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x6"
+        android:layout_marginTop="@dimen/x4"
         android:gravity="start"
-        android:textSize="@dimen/x10"
+        android:textSize="@dimen/x12"
         app:layout_constraintStart_toStartOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="测试测试测试"
@@ -53,8 +53,8 @@
         android:layout_marginTop="@dimen/x6"
         android:gravity="start"
         android:maxLines="2"
-        android:textColor="@color/black"
-        android:textSize="@dimen/x12"
+        android:textColor="@color/black_80"
+        android:textSize="@dimen/x13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_icon"
         tools:text="测试测试测试" />
@@ -66,12 +66,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x8"
         android:background="@drawable/shape_tag"
-        android:paddingStart="@dimen/x3"
+        android:paddingStart="@dimen/x4"
         android:paddingTop="@dimen/x2"
-        android:paddingEnd="@dimen/x3"
+        android:paddingEnd="@dimen/x4"
         android:paddingBottom="@dimen/x2"
         android:textColor="@color/pink"
-        android:textSize="@dimen/x10"
+        android:textSize="@dimen/x12"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_desc"
@@ -85,12 +85,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x6"
         android:background="@drawable/shape_tag"
-        android:paddingStart="@dimen/x3"
+        android:paddingStart="@dimen/x4"
         android:paddingTop="@dimen/x2"
-        android:paddingEnd="@dimen/x3"
+        android:paddingEnd="@dimen/x4"
         android:paddingBottom="@dimen/x2"
         android:textColor="@color/pink"
-        android:textSize="@dimen/x10"
+        android:textSize="@dimen/x12"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/tv_tag_1"
         app:layout_constraintTop_toTopOf="@id/tv_tag_1"
@@ -104,12 +104,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x6"
         android:background="@drawable/shape_tag"
-        android:paddingStart="@dimen/x3"
+        android:paddingStart="@dimen/x4"
         android:paddingTop="@dimen/x2"
-        android:paddingEnd="@dimen/x3"
+        android:paddingEnd="@dimen/x4"
         android:paddingBottom="@dimen/x2"
         android:textColor="@color/pink"
-        android:textSize="@dimen/x10"
+        android:textSize="@dimen/x12"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/tv_tag_2"
         app:layout_constraintTop_toTopOf="@id/tv_tag_2"
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/x2"
             android:textColor="@color/gray_2"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x12"
             tools:text="测试" />
     </LinearLayout>
 
@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/x2"
             android:textColor="@color/gray_2"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x12"
             tools:text="测试" />
     </LinearLayout>
 
@@ -190,7 +190,7 @@
         android:paddingStart="@dimen/x10"
         android:paddingEnd="@dimen/x10"
         android:textColor="@color/gray_2"
-        android:textSize="@dimen/x10"
+        android:textSize="@dimen/x12"
         app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
         app:layout_constraintEnd_toStartOf="@id/ll_share"
         app:layout_constraintStart_toEndOf="@id/ll_reply"
@@ -215,5 +215,12 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_share_normal" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_line"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

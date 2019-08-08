@@ -61,7 +61,7 @@ class WatchAdapter(context: Context, beans: ArrayList<VideoBean>) : RecyclerView
             }
             val photoUrl: String? = bean.feed
             photoUrl?.let {
-                ImageUtil.display(context!!, holder.iv, photoUrl)
+                ImageUtil.show(context!!, holder.iv, photoUrl)
             }
             val title: String? = bean.title
             holder.tvTop!!.text = title
