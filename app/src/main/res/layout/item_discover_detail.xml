@@ -66,17 +66,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x8"
         android:background="@drawable/shape_tag"
-        android:gravity="start"
-        android:maxLines="2"
         android:paddingStart="@dimen/x3"
         android:paddingTop="@dimen/x2"
         android:paddingEnd="@dimen/x3"
         android:paddingBottom="@dimen/x2"
         android:textColor="@color/pink"
         android:textSize="@dimen/x10"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_desc"
-        tools:text="测试测试测试" />
+        tools:text="测试测试测试"
+        tools:visibility="visible" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_tag_2"
@@ -85,17 +85,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x6"
         android:background="@drawable/shape_tag"
-        android:gravity="start"
-        android:maxLines="2"
         android:paddingStart="@dimen/x3"
         android:paddingTop="@dimen/x2"
         android:paddingEnd="@dimen/x3"
         android:paddingBottom="@dimen/x2"
         android:textColor="@color/pink"
         android:textSize="@dimen/x10"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/tv_tag_1"
         app:layout_constraintTop_toTopOf="@id/tv_tag_1"
-        tools:text="测试测试测试" />
+        tools:text="测试测试测试"
+        tools:visibility="visible" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_tag_3"
@@ -104,17 +104,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x6"
         android:background="@drawable/shape_tag"
-        android:gravity="start"
-        android:maxLines="2"
         android:paddingStart="@dimen/x3"
         android:paddingTop="@dimen/x2"
         android:paddingEnd="@dimen/x3"
         android:paddingBottom="@dimen/x2"
         android:textColor="@color/pink"
         android:textSize="@dimen/x10"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/tv_tag_2"
         app:layout_constraintTop_toTopOf="@id/tv_tag_2"
-        tools:text="测试测试测试" />
+        tools:text="测试测试测试"
+        tools:visibility="visible" />
 
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
         android:id="@+id/vp"
@@ -154,7 +154,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_comment"
+        android:id="@+id/ll_reply"
         android:layout_width="@dimen/x80"
         android:layout_height="@dimen/x36"
         android:gravity="center_vertical"
@@ -171,7 +171,7 @@
             android:src="@drawable/ic_comment_normal" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_comment"
+            android:id="@+id/tv_replay"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
         android:textSize="@dimen/x10"
         app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
         app:layout_constraintEnd_toStartOf="@id/ll_share"
-        app:layout_constraintStart_toEndOf="@id/ll_comment"
+        app:layout_constraintStart_toEndOf="@id/ll_reply"
         app:layout_constraintTop_toTopOf="@id/ll_favorite"
         tools:text="测试" />
 

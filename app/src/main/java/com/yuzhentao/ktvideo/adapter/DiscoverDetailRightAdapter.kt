@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yuzhentao.ktvideo.R
-import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
+import com.yuzhentao.ktvideo.bean.DiscoverDetailRightBean
 
-class DiscoverLeftAdapter(context: Context?, beans: MutableList<DiscoverDetailLeftBean.Item.Data>?) : RecyclerView.Adapter<DiscoverLeftAdapter.ViewHolder>() {
+class DiscoverDetailRightAdapter(context: Context?, beans: MutableList<DiscoverDetailRightBean.Item.Data>?) : RecyclerView.Adapter<DiscoverDetailRightAdapter.ViewHolder>() {
 
     private var context: Context? = null
-    private var beans: MutableList<DiscoverDetailLeftBean.Item.Data>? = null
+    private var beans: MutableList<DiscoverDetailRightBean.Item.Data>? = null
     private var inflater: LayoutInflater? = null
 
     init {
@@ -25,7 +25,7 @@ class DiscoverLeftAdapter(context: Context?, beans: MutableList<DiscoverDetailLe
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater!!.inflate(R.layout.item_discover_detail_left, parent, false), context!!)
+        return ViewHolder(inflater!!.inflate(R.layout.item_discover_detail, parent, false), context!!)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
