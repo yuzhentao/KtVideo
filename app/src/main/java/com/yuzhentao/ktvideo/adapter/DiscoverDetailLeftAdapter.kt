@@ -103,18 +103,18 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
         var vLine: View? = null
 
         init {
-            ivIcon = itemView.findViewById(com.yuzhentao.ktvideo.R.id.iv_icon) as AppCompatImageView
-            tvName = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_name) as AppCompatTextView
-            tvTitle = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_title) as AppCompatTextView
-            tvDesc = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_desc) as AppCompatTextView
-            tvTag1 = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_tag_1) as AppCompatTextView
-            tvTag2 = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_tag_2) as AppCompatTextView
-            tvTag3 = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_tag_3) as AppCompatTextView
-            vp = itemView.findViewById(com.yuzhentao.ktvideo.R.id.vp) as StandardGSYVideoPlayer
-            tvFavorite = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_favorite) as AppCompatTextView
-            tvReply = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_replay) as AppCompatTextView
-            tvPlayTime = itemView.findViewById(com.yuzhentao.ktvideo.R.id.tv_play_time) as AppCompatTextView
-            vLine = itemView.findViewById(com.yuzhentao.ktvideo.R.id.v_line)
+            ivIcon = itemView.findViewById(R.id.iv_icon) as AppCompatImageView
+            tvName = itemView.findViewById(R.id.tv_name) as AppCompatTextView
+            tvTitle = itemView.findViewById(R.id.tv_title) as AppCompatTextView
+            tvDesc = itemView.findViewById(R.id.tv_desc) as AppCompatTextView
+            tvTag1 = itemView.findViewById(R.id.tv_tag_1) as AppCompatTextView
+            tvTag2 = itemView.findViewById(R.id.tv_tag_2) as AppCompatTextView
+            tvTag3 = itemView.findViewById(R.id.tv_tag_3) as AppCompatTextView
+            vp = itemView.findViewById(R.id.vp) as StandardGSYVideoPlayer
+            tvFavorite = itemView.findViewById(R.id.tv_favorite) as AppCompatTextView
+            tvReply = itemView.findViewById(R.id.tv_replay) as AppCompatTextView
+            tvPlayTime = itemView.findViewById(R.id.tv_play_time) as AppCompatTextView
+            vLine = itemView.findViewById(R.id.v_line)
         }
 
     }
