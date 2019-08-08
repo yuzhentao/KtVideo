@@ -23,7 +23,7 @@ import timber.log.Timber
 
 class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: VideoDbManager) : RecyclerView.Adapter<CacheAdapter.ViewHolder>() {
 
-    var context: Context? = null
+    private var context: Context? = null
     var beans: ArrayList<VideoBean>? = null
     private var inflater: LayoutInflater? = null
 

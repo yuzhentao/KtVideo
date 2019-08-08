@@ -18,7 +18,7 @@ import com.yuzhentao.ktvideo.util.ImageUtil
 
 class HomeAdapter(context: Context?, beans: MutableList<HomeBean.Issue.Item>?) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    var context: Context? = null
+    private var context: Context? = null
     private var beans: MutableList<HomeBean.Issue.Item>? = null
     private var inflater: LayoutInflater? = null
 

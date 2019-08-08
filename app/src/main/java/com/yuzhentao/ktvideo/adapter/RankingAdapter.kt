@@ -18,9 +18,9 @@ import com.yuzhentao.ktvideo.util.ImageUtil
 
 class RankingAdapter(context: Context?, beans: ArrayList<HotBean.Item.Data>) : RecyclerView.Adapter<RankingAdapter.ViewHolder>() {
 
-    var context: Context? = null
-    var beans: ArrayList<HotBean.Item.Data>? = null
-    var inflater: LayoutInflater? = null
+    private var context: Context? = null
+    private var beans: ArrayList<HotBean.Item.Data>? = null
+    private var inflater: LayoutInflater? = null
 
     init {
         this.context = context

@@ -15,7 +15,7 @@ import com.yuzhentao.ktvideo.util.ImageUtil
 
 class DiscoverAdapter(context: Context?, beans: MutableList<DiscoverBean>?) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
 
-    var context: Context? = null
+    private var context: Context? = null
     private var beans: MutableList<DiscoverBean>? = null
     private var inflater: LayoutInflater? = null
 

@@ -1,7 +1,8 @@
 package com.yuzhentao.ktvideo.bean
 
 /**
- * http://baobab.kaiyanapp.com/api/v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83
+ * 首页
+ * http://baobab.kaiyanapp.com/api/v2/feed?&udid=49f77cac078741309bee11c5376c233224d8f2d3&vc=524&num=2
  */
 data class HomeBean(
         val dialog: Any,

@@ -120,7 +120,9 @@ data class DiscoverDetailLeftBean(
                         data class Follow(
                                 val followed: Boolean,
                                 val itemId: Int,
-                                val itemType: String) }
+                                val itemType: String)
+
+                    }
 
                     data class Provider(
                             val alias: String,

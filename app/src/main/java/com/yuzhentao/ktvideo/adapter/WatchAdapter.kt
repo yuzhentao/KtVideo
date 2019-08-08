@@ -19,8 +19,8 @@ import java.util.*
 
 class WatchAdapter(context: Context, beans: ArrayList<VideoBean>) : RecyclerView.Adapter<WatchAdapter.ViewHolder>() {
 
-    var context: Context? = null
-    var beans: ArrayList<VideoBean>? = null
+    private var context: Context? = null
+    private var beans: ArrayList<VideoBean>? = null
     private var inflater: LayoutInflater? = null
 
     private var listener: OnItemClickListener? = null
