@@ -25,5 +25,6 @@
     <string name="follow">＋关注</string>
     <string name="discover_follow">%1$s 人关注</string>
     <string name="discover_join">%1$s 人参与</string>
+    <string name="discover_release">发布：%1$s</string>
 
 </resources>

@@ -31,5 +31,6 @@
     <string name="follow">＋Follow</string>
     <string name="discover_follow">%1$s people follow</string>
     <string name="discover_join">%1$s people join in</string>
+    <string name="discover_release">release:%1$s</string>
 
 </resources>
