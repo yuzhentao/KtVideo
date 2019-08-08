@@ -35,6 +35,8 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     lateinit var fragments: ArrayList<Fragment>
     private var titles = mutableListOf("推荐", "广场")
 
+    private var id: String? = null
+
     private var isChange: Boolean? = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,19 +87,18 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     }
 
     private fun initView() {
-        intent.getStringExtra("id")?.let {
+        id = intent.getStringExtra("id");
+        id?.let {
             presenter = DiscoverDetailPresenter(context, this)
-            presenter?.load(intent.getStringExtra("id"))
+            presenter?.load(id!!)
         }
 
         iv_back.setOnClickListener(this)
-//        ViewUtil.setMargins(iv_back, 0, ImmersionBar.getStatusBarHeight(activity), 0, 0)
         setSupportActionBar(tb)
         val bar = supportActionBar
         bar?.let {
             bar.setDisplayShowTitleEnabled(false)
         }
-//        ViewUtil.setPaddings(tb, 0, ImmersionBar.getStatusBarHeight(activity), 0, 0)
         iv_top_back.setOnClickListener(this)
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
             when {
@@ -127,10 +128,12 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
         val leftFragment = DiscoverLeftFragment()
         val leftBundle = Bundle()
+        leftBundle.putString("id", id)
         leftFragment.arguments = leftBundle
 
         val rightFragment = DiscoverRightFragment()
         val rightBundle = Bundle()
+        rightBundle.putString("id", id)
         rightFragment.arguments = rightBundle
 
         fragments = ArrayList()

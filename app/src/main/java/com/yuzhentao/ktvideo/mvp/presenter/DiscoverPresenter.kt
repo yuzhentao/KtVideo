@@ -1,6 +1,5 @@
 package com.yuzhentao.ktvideo.mvp.presenter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.DiscoverBean
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverContract
@@ -27,7 +26,6 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) : Discov
 
     }
 
-    @SuppressLint("CheckResult")
     override fun load() {
         val observable: Observable<MutableList<DiscoverBean>>? = context?.let {
             model.loadData(context!!)

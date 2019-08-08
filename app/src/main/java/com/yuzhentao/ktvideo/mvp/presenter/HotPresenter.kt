@@ -1,6 +1,5 @@
 package com.yuzhentao.ktvideo.mvp.presenter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.HotBean
 import com.yuzhentao.ktvideo.mvp.contract.HotContract
@@ -27,7 +26,6 @@ class HotPresenter(context: Context?, view: HotContract.View) : HotContract.Pres
 
     }
 
-    @SuppressLint("CheckResult")
     override fun load(strategy: String) {
         val observable: Observable<HotBean>? = context?.let {
             model.loadData(context!!, strategy)

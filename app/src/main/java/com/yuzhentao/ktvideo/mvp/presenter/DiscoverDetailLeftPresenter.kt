@@ -1,20 +1,20 @@
 package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
-import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
-import com.yuzhentao.ktvideo.mvp.model.DiscoverDetailModel
+import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
+import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailLeftContract
+import com.yuzhentao.ktvideo.mvp.model.DiscoverDetailLeftModel
 import com.yuzhentao.ktvideo.util.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) : DiscoverDetailContract.Presenter {
+class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftContract.View) : DiscoverDetailLeftContract.Presenter {
 
     var context: Context? = null
-    var view: DiscoverDetailContract.View? = null
-    private val model: DiscoverDetailModel by lazy {
-        DiscoverDetailModel()
+    var view: DiscoverDetailLeftContract.View? = null
+    private val model: DiscoverDetailLeftModel by lazy {
+        DiscoverDetailLeftModel()
     }
 
     init {
@@ -27,10 +27,10 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
     }
 
     override fun load(id: String) {
-        val observable: Observable<DiscoverDetailBean>? = context?.let {
+        val observable: Observable<DiscoverDetailLeftBean>? = context?.let {
             model.loadData(context!!, id)
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<DiscoverDetailBean> {
+        observable?.normalSchedulers()?.subscribe(object : Observer<DiscoverDetailLeftBean> {
             override fun onComplete() {
 
             }
@@ -39,7 +39,7 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
 
             }
 
-            override fun onNext(t: DiscoverDetailBean) {
+            override fun onNext(t: DiscoverDetailLeftBean) {
                 view?.setData(t)
             }
 

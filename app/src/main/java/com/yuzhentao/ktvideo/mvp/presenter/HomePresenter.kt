@@ -1,6 +1,5 @@
 package com.yuzhentao.ktvideo.mvp.presenter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
@@ -27,7 +26,6 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
 
     }
 
-    @SuppressLint("CheckResult")
     override fun load() {
         val observable: Observable<HomeBean>? = context?.let {
             model.loadData(it, true, "")
@@ -51,7 +49,6 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
         })
     }
 
-    @SuppressLint("CheckResult")
     override fun loadMore(date: String?) {
         val observable: Observable<HomeBean>? = context?.let {
             model.loadData(it, false, date)
