@@ -16,9 +16,8 @@ import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadTask
 import com.gyf.immersionbar.ktx.immersionBar
-import com.shuyu.gsyvideoplayer.GSYVideoPlayer
+import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
-import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
@@ -87,7 +86,7 @@ class VideoDetailActivity : AppCompatActivity() {
             }
         }
         super.onDestroy()
-        GSYVideoPlayer.releaseAllVideos()
+        GSYVideoManager.releaseAllVideos()
         orientationUtils.let {
             orientationUtils.releaseListener()
         }
@@ -103,7 +102,7 @@ class VideoDetailActivity : AppCompatActivity() {
             } else {
                 //新版本isIfCurrentIsFullscreen的标志位内部提前设置了，所以不会和手动点击冲突
                 if (vp.isIfCurrentIsFullscreen) {
-                    StandardGSYVideoPlayer.backFromWindowFull(context)
+                    GSYVideoManager.backFromWindowFull(context)
                 }
                 orientationUtils.let {
                     orientationUtils.isEnable = true
@@ -116,7 +115,7 @@ class VideoDetailActivity : AppCompatActivity() {
         orientationUtils.let {
             orientationUtils.backToProtVideo()
         }
-        if (StandardGSYVideoPlayer.backFromWindowFull(context)) {
+        if (GSYVideoManager.backFromWindowFull(context)) {
             return
         }
         super.onBackPressed()
@@ -218,18 +217,18 @@ class VideoDetailActivity : AppCompatActivity() {
             orientationUtils.resolveByClick()//直接横屏
             vp.startWindowFullscreen(context, true, true)//第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
         }
-        vp.setStandardVideoAllCallBack(object : VideoListener() {
-            override fun onPrepared(url: String?, vararg objects: Any?) {
-                super.onPrepared(url, *objects)
-                orientationUtils.isEnable = true//开始播放了才能旋转和全屏
-                isPlay = true
-            }
-
+        vp.setVideoAllCallBack(object : VideoListener() {
             override fun onQuitFullscreen(url: String?, vararg objects: Any?) {
                 super.onQuitFullscreen(url, *objects)
                 orientationUtils.let {
                     orientationUtils.backToProtVideo()
                 }
+            }
+
+            override fun onPrepared(url: String?, vararg objects: Any?) {
+                super.onPrepared(url, *objects)
+                orientationUtils.isEnable = true//开始播放了才能旋转和全屏
+                isPlay = true
             }
         })
         vp.setLockClickListener { _, lock ->
