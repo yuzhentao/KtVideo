@@ -33,20 +33,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.VideoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.DiscoverDetailActivity" />
-        <activity android:name=".ui.activity.SettingActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.AvatarActivity" />
-        <activity android:name=".ui.activity.FavoriteActivity" />
-        <activity android:name=".ui.activity.CommentActivity" />
-        <activity android:name=".ui.activity.CacheActivity" />
-        <activity android:name=".ui.activity.WatchActivity" />
-        <activity android:name=".ui.activity.FeedbackActivity" />
+        <activity
+            android:name=".ui.activity.DiscoverDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AvatarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.FavoriteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CacheActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WatchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.FeedbackActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

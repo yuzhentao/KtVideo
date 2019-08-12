@@ -2,35 +2,38 @@
 
     <string name="app_name">KtVideo</string>
 
-    <string name="home_bottom_1">Home</string>
-    <string name="home_bottom_2">Discover</string>
-    <string name="home_bottom_3">Hot</string>
-    <string name="home_bottom_4">Mine</string>
-
+    <string name="home_bottom_1">首页</string>
+    <string name="home_bottom_2">发现</string>
+    <string name="home_bottom_3">热门</string>
+    <string name="home_bottom_4">我的</string>
     <string name="discover">Discover</string>
     <string name="ranking">Ranking</string>
     <string name="splash_name_en">Open Eyes</string>
     <string name="splash_name_cn">开  眼</string>
     <string name="splash_intro_en">Daily Video Promotion, Make Your Eye Open.</string>
     <string name="splash_intro_cn">每日精选视频推介，让你大开眼界。</string>
-    <string name="video_cache">Download</string>
-    <string name="mine_setting">Setting</string>
-    <string name="mine_login">Click on login to comment</string>
-    <string name="mine_favorite">Favorite</string>
-    <string name="mine_comment">Comment</string>
-    <string name="mine_cache">My Cache</string>
-    <string name="mine_watch">Watch History</string>
-    <string name="mine_feedback">Feedback</string>
-    <string name="cache_no">No Cache</string>
-    <string name="cache_start">Downloading</string>
-    <string name="cache_fail">Download Failed</string>
-    <string name="cache_complete">Download Completed</string>
-    <string name="cache_pause">Download Paused</string>
-    <string name="cache_ing">Downloading&#8230;</string>
-    <string name="watch_no">No History</string>
-    <string name="follow">＋Follow</string>
-    <string name="discover_follow">%1$s people follow</string>
-    <string name="discover_join">%1$s people join in</string>
-    <string name="discover_release">release: %1$s</string>
+    <string name="video_cache">缓存</string>
+    <string name="mine_setting">设置</string>
+    <string name="mine_login">点击登录即可发表评论</string>
+    <string name="mine_favorite">收藏</string>
+    <string name="mine_comment">评论</string>
+    <string name="mine_cache">我的缓存</string>
+    <string name="mine_watch">观看记录</string>
+    <string name="mine_feedback">意见反馈</string>
+    <string name="cache_no">暂无内容</string>
+    <string name="cache_start">缓存开始</string>
+    <string name="cache_fail">缓存失败</string>
+    <string name="cache_complete">缓存完成</string>
+    <string name="cache_pause">缓存暂停</string>
+    <string name="cache_ing">缓存中&#8230;</string>
+    <string name="watch_no">暂无内容</string>
+    <string name="follow">＋关注</string>
+    <string name="discover_follow">%1$s 人关注</string>
+    <string name="discover_join">%1$s 人参与</string>
+    <string name="discover_release">发布: %1$s</string>
+    <string name="no_net">当前找不到网络</string>
+    <string name="tips_not_wifi">您当前正在使用移动网络，继续播放将消耗流量</string>
+    <string name="tips_not_wifi_cancel">停止播放</string>
+    <string name="tips_not_wifi_confirm">继续播放</string>
 
 </resources>

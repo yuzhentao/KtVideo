@@ -25,8 +25,6 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
     private var beans: MutableList<DiscoverDetailLeftBean.Item.Data>? = null
     private var inflater: LayoutInflater? = null
 
-    private val TAG = "DiscoverDetailLeftAdapter"
-
     init {
         this.context = context
         this.beans = beans
@@ -96,7 +94,6 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
                 vp.setUp(bean.content.data.playUrl, false, null, null)
                 vp.titleTextView.visibility = View.GONE
                 vp.backButton.visibility = View.GONE
-                vp.playTag = TAG
                 vp.playPosition = position
                 vp.setIsTouchWiget(false)
             }

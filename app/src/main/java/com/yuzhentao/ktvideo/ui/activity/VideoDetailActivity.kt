@@ -85,11 +85,11 @@ class VideoDetailActivity : AppCompatActivity() {
                 coverDisposable!!.dispose()
             }
         }
-        super.onDestroy()
         GSYVideoManager.releaseAllVideos()
         orientationUtils.let {
             orientationUtils.releaseListener()
         }
+        super.onDestroy()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {

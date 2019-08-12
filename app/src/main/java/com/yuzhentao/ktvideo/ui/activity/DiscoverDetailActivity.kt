@@ -1,6 +1,8 @@
 package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
+import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HotAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
@@ -38,6 +41,9 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     private var id: String? = null
 
     private var isChange: Boolean? = false
+    private var isLeft: Boolean? = true
+
+    var isFull: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +56,35 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         setContentView(R.layout.activity_discover_detail)
         initView()
         initData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        GSYVideoManager.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        GSYVideoManager.onResume()
+    }
+
+    override fun onDestroy() {
+        GSYVideoManager.releaseAllVideos()
+        super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        if (GSYVideoManager.backFromWindowFull(context)) {
+            return
+        }
+        super.onBackPressed()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        newConfig?.let {
+            isFull = newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER
+        }
     }
 
     override fun onClick(v: View?) {
