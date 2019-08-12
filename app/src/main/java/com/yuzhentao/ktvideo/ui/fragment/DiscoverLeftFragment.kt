@@ -1,13 +1,18 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.DiscoverDetailLeftAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
+import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailLeftContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailLeftPresenter
 import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
+import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.DimenUtil
 import com.yuzhentao.ktvideo.util.NetworkUtil
 import com.yuzhentao.ktvideo.util.ScrollCalculatorHelper
@@ -60,6 +65,30 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
                 scrollCalculatorHelper.onScrollStateChanged(recyclerView, newState)
             }
         })
+        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+            val bean: DiscoverDetailLeftBean.Item.Data.Content? = adapter!!.data[position] as DiscoverDetailLeftBean.Item.Data.Content
+            bean?.let {
+                val intent = Intent(context, VideoDetailActivity::class.java)
+                val id = bean.id
+                val photo = bean.data?.cover?.feed
+                val title = bean.data?.title
+                val desc = bean.data?.description
+                val duration = bean.data?.duration
+                val playUrl = bean.data?.playUrl
+                val category = bean.data?.category
+                val blurred = bean.data?.cover?.blurred
+                val collect = bean.data?.consumption?.collectionCount
+                val share = bean.data?.consumption?.shareCount
+                val reply = bean.data?.consumption?.replyCount
+                val time = System.currentTimeMillis()
+                val videoBean = VideoBean(id, photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+                val bundle = Bundle()
+                bundle.putParcelable("data", videoBean)
+                intent.putExtra("bundle", bundle)
+                intent.putExtra("showCache", true)
+                activity.startActivity(intent)
+            }
+        }
         arguments?.let {
             arguments!!.getString("id")?.let {
                 presenter = DiscoverDetailLeftPresenter(context!!, this)
@@ -73,7 +102,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
     }
 
     override fun setData(beans: List<DiscoverDetailLeftBean.Item.Data.Content>?) {
-            adapter.setNewData(beans)
+        adapter.setNewData(beans)
     }
 
     fun scrollToTop() {
