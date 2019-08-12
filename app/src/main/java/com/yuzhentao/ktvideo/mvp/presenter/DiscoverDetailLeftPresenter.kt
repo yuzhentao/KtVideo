@@ -30,23 +30,34 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
         val observable: Observable<DiscoverDetailLeftBean>? = context?.let {
             model.loadData(context!!, id)
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<DiscoverDetailLeftBean> {
-            override fun onComplete() {
+        observable
+                ?.flatMap { t ->
+                    val beans: ArrayList<DiscoverDetailLeftBean.Item.Data.Content> = ArrayList()
+                    for (item in t.itemList) {
+                        item.data.content?.let {
+                            beans.add(it)
+                        }
+                    }
+                    Observable.just(beans)
+                }
+                ?.normalSchedulers()
+                ?.subscribe(object : Observer<List<DiscoverDetailLeftBean.Item.Data.Content>> {
+                    override fun onComplete() {
 
-            }
+                    }
 
-            override fun onSubscribe(d: Disposable) {
+                    override fun onSubscribe(d: Disposable) {
 
-            }
+                    }
 
-            override fun onNext(t: DiscoverDetailLeftBean) {
-                view?.setData(t)
-            }
+                    override fun onNext(t: List<DiscoverDetailLeftBean.Item.Data.Content>) {
+                        view?.setData(t)
+                    }
 
-            override fun onError(e: Throwable) {
+                    override fun onError(e: Throwable) {
 
-            }
-        })
+                    }
+                })
     }
 
 }

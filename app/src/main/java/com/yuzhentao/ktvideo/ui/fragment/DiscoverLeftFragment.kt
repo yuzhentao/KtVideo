@@ -22,8 +22,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 
     private var presenter: DiscoverDetailLeftPresenter? = null
 
-    lateinit var adapterDetail: DiscoverDetailLeftAdapter
-    private var beans: ArrayList<DiscoverDetailLeftBean.Item.Data> = ArrayList()
+    lateinit var adapter: DiscoverDetailLeftAdapter
     lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
 
     override fun getLayoutResources(): Int {
@@ -41,8 +40,8 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.layoutManager = layoutManager
-        adapterDetail = DiscoverDetailLeftAdapter(context, beans)
-        rv.adapter = adapterDetail
+        adapter = DiscoverDetailLeftAdapter(R.layout.item_discover_detail, null)
+        rv.adapter = adapter
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var firstVisibleItem: Int? = 0
             var lastVisibleItem: Int? = 0
@@ -73,16 +72,8 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 
     }
 
-    override fun setData(bean: DiscoverDetailLeftBean?) {
-        if (beans.size > 0) {
-            beans.clear()
-        }
-        bean?.let {
-            bean.itemList.forEach {
-                beans.add(it.data)
-            }
-            adapterDetail.notifyDataSetChanged()
-        }
+    override fun setData(beans: List<DiscoverDetailLeftBean.Item.Data.Content>?) {
+            adapter.setNewData(beans)
     }
 
     fun scrollToTop() {
