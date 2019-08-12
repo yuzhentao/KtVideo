@@ -13,6 +13,7 @@ import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
@@ -88,6 +89,10 @@ class DiscoverDetailLeftAdapter(context: Context?, beans: MutableList<DiscoverDe
             }
             bean.content?.data?.playUrl?.let {
                 val vp = holder.vp!!
+                val ivCover = ImageView(context)
+                ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
+                ImageUtil.show(context!!, ivCover, bean.content.data.cover.feed)
+                vp.thumbImageView = ivCover
                 vp.setUp(bean.content.data.playUrl, false, null, null)
                 vp.titleTextView.visibility = View.GONE
                 vp.backButton.visibility = View.GONE

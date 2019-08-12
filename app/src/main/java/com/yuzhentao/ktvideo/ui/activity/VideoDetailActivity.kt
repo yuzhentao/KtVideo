@@ -266,7 +266,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
             override fun onNext(bitmap: Bitmap) {
                 ivCover.setImageBitmap(bitmap)
-                vp.setThumbImageView(ivCover)
+                vp.thumbImageView = ivCover
             }
 
             override fun onError(e: Throwable) {
