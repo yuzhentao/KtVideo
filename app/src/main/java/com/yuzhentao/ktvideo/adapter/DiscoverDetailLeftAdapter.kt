@@ -16,11 +16,13 @@ import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.android.flexbox.FlexboxLayout
+import com.shuyu.gsyvideoplayer.utils.CommonUtil
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
 import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ResourcesUtil
+import com.yuzhentao.ktvideo.util.VideoListener
 import com.yuzhentao.ktvideo.util.ViewUtil
 
 class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
@@ -37,6 +39,7 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                 val flexBox = helper.getView<FlexboxLayout>(R.id.flex_box)
                 val tvFavorite = helper.getView<AppCompatTextView>(R.id.tv_favorite)
                 val tvReply = helper.getView<AppCompatTextView>(R.id.tv_replay)
+                val tvPlayTime = helper.getView<AppCompatTextView>(R.id.tv_play_time)
                 val vLine = helper.getView<View>(R.id.v_line)
                 val vp = helper.getView<StandardGSYVideoPlayer>(R.id.vp)
                 data.author?.icon?.let {
@@ -108,6 +111,11 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                     vp.backButton.visibility = View.GONE
                     vp.playPosition = position
                     vp.setIsTouchWiget(false)
+                    vp.setGSYVideoProgressListener { _, _, currentPosition, _ ->
+                        run {
+                            tvPlayTime.text = CommonUtil.stringForTime(currentPosition)
+                        }
+                    }
                 }
             }
         }
