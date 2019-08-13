@@ -59,62 +59,18 @@
         app:layout_constraintTop_toBottomOf="@id/iv_icon"
         tools:text="测试测试测试" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_tag_1"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flex_box"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x8"
-        android:background="@drawable/shape_tag"
-        android:paddingStart="@dimen/x4"
-        android:paddingTop="@dimen/x2"
-        android:paddingEnd="@dimen/x4"
-        android:paddingBottom="@dimen/x2"
-        android:textColor="@color/pink"
-        android:textSize="@dimen/x12"
-        android:visibility="invisible"
+        app:dividerDrawableHorizontal="@drawable/shape_line_horizontal"
+        app:dividerDrawableVertical="@drawable/shape_line_vertical"
+        app:flexWrap="wrap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_desc"
-        tools:text="测试测试测试"
-        tools:visibility="visible" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_tag_2"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/x6"
-        android:background="@drawable/shape_tag"
-        android:paddingStart="@dimen/x4"
-        android:paddingTop="@dimen/x2"
-        android:paddingEnd="@dimen/x4"
-        android:paddingBottom="@dimen/x2"
-        android:textColor="@color/pink"
-        android:textSize="@dimen/x12"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@id/tv_tag_1"
-        app:layout_constraintTop_toTopOf="@id/tv_tag_1"
-        tools:text="测试测试测试"
-        tools:visibility="visible" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_tag_3"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/x6"
-        android:background="@drawable/shape_tag"
-        android:paddingStart="@dimen/x4"
-        android:paddingTop="@dimen/x2"
-        android:paddingEnd="@dimen/x4"
-        android:paddingBottom="@dimen/x2"
-        android:textColor="@color/pink"
-        android:textSize="@dimen/x12"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@id/tv_tag_2"
-        app:layout_constraintTop_toTopOf="@id/tv_tag_2"
-        tools:text="测试测试测试"
-        tools:visibility="visible" />
+        app:showDividerHorizontal="middle"
+        app:showDividerVertical="middle" />
 
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
         android:id="@+id/vp"
@@ -123,7 +79,7 @@
         android:layout_marginTop="@dimen/x8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tag_1" />
+        app:layout_constraintTop_toBottomOf="@id/flex_box" />
 
     <LinearLayout
         android:id="@+id/ll_favorite"

@@ -69,7 +69,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
             val bean: DiscoverDetailLeftBean.Item.Data.Content? = adapter!!.data[position] as DiscoverDetailLeftBean.Item.Data.Content
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
-                val id = bean.id
+                val id = bean.data?.id
                 val photo = bean.data?.cover?.feed
                 val title = bean.data?.title
                 val desc = bean.data?.description

@@ -6,16 +6,22 @@ import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.view.Gravity
 import android.view.View
+import android.view.View.TEXT_DIRECTION_LOCALE
 import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.google.android.flexbox.FlexboxLayout
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
 import com.yuzhentao.ktvideo.util.ImageUtil
+import com.yuzhentao.ktvideo.util.ResourcesUtil
+import com.yuzhentao.ktvideo.util.ViewUtil
 
 class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
 
@@ -23,17 +29,15 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
         helper?.let {
             val position = helper.layoutPosition
             item?.let {
-                val ivIcon = helper.getView(R.id.iv_icon) as AppCompatImageView
-                val tvName = helper.getView(R.id.tv_name) as AppCompatTextView
-                val tvTitle = helper.getView(R.id.tv_title) as AppCompatTextView
-                val tvDesc = helper.getView(R.id.tv_desc) as AppCompatTextView
-                val tvTag1 = helper.getView(R.id.tv_tag_1) as AppCompatTextView
-                val tvTag2 = helper.getView(R.id.tv_tag_2) as AppCompatTextView
-                val tvTag3 = helper.getView(R.id.tv_tag_3) as AppCompatTextView
-                val tvFavorite = helper.getView(R.id.tv_favorite) as AppCompatTextView
-                val tvReply = helper.getView(R.id.tv_replay) as AppCompatTextView
-                val vLine = helper.getView(R.id.v_line) as View
-                val vp = helper.getView(R.id.vp) as StandardGSYVideoPlayer
+                val ivIcon = helper.getView<AppCompatImageView>(R.id.iv_icon)
+                val tvName = helper.getView<AppCompatTextView>(R.id.tv_name)
+                val tvTitle = helper.getView<AppCompatTextView>(R.id.tv_title)
+                val tvDesc = helper.getView<AppCompatTextView>(R.id.tv_desc)
+                val flexBox = helper.getView<FlexboxLayout>(R.id.flex_box)
+                val tvFavorite = helper.getView<AppCompatTextView>(R.id.tv_favorite)
+                val tvReply = helper.getView<AppCompatTextView>(R.id.tv_replay)
+                val vLine = helper.getView<View>(R.id.v_line)
+                val vp = helper.getView<StandardGSYVideoPlayer>(R.id.vp)
                 item.data?.author?.icon?.let {
                     ImageUtil.showCircle(mContext, ivIcon, item.data.author.icon)
                 }
@@ -52,17 +56,31 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                 item.data?.description?.let {
                     tvDesc.text = item.data.description
                 }
-                item.data?.tags?.get(0)?.name?.let {
-                    tvTag1.text = item.data.tags[0].name
-                    tvTag1.visibility = View.VISIBLE
-                }
-                item.data?.tags?.get(1)?.name?.let {
-                    tvTag2.text = item.data.tags[1].name
-                    tvTag2.visibility = View.VISIBLE
-                }
-                item.data?.tags?.get(2)?.name?.let {
-                    tvTag3.text = item.data.tags[2].name
-                    tvTag3.visibility = View.VISIBLE
+                item.data?.tags?.let {
+                    if (flexBox.childCount > 0) {
+                        return
+                    }
+
+                    for (i in item.data.tags.indices) {
+                        item.data.tags[i].name?.let {
+                            val tv = AppCompatTextView(mContext)
+                            tv.text = item.data.tags[i].name
+                            tv.setTextColor(ContextCompat.getColor(mContext, R.color.pink))
+                            tv.setBackgroundResource(R.drawable.shape_tag)
+                            tv.ellipsize = TextUtils.TruncateAt.END
+                            tv.gravity = Gravity.CENTER
+                            tv.includeFontPadding = false
+                            tv.maxLines = 1
+                            tv.textDirection = TEXT_DIRECTION_LOCALE
+                            tv.visibility = View.VISIBLE
+                            ViewUtil.setPaddings(tv,
+                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x4),
+                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x2),
+                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x4),
+                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x2))
+                            flexBox.addView(tv)
+                        }
+                    }
                 }
                 if (item.data?.consumption?.collectionCount == null) {
                     tvFavorite.text = "0"
