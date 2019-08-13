@@ -22,7 +22,6 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
 import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ResourcesUtil
-import com.yuzhentao.ktvideo.util.VideoListener
 import com.yuzhentao.ktvideo.util.ViewUtil
 
 class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
