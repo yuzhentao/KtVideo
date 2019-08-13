@@ -8,7 +8,6 @@ import com.yuzhentao.ktvideo.util.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import timber.log.Timber
 
 class DiscoverDetailRightPresenter (context: Context, view: DiscoverDetailRightContract.View) : DiscoverDetailRightContract.Presenter {
 
@@ -31,23 +30,34 @@ class DiscoverDetailRightPresenter (context: Context, view: DiscoverDetailRightC
         val observable: Observable<DiscoverDetailRightBean>? = context?.let {
             model.loadData(context!!, id)
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<DiscoverDetailRightBean> {
-            override fun onComplete() {
+        observable
+                ?.flatMap { t ->
+                    val beans: ArrayList<DiscoverDetailRightBean.Item.Data.Content> = ArrayList()
+                    for (item in t.itemList) {
+                        item.data?.content?.let {
+                            beans.add(it)
+                        }
+                    }
+                    Observable.just(beans)
+                }
+                ?.normalSchedulers()
+                ?.subscribe(object : Observer<List<DiscoverDetailRightBean.Item.Data.Content>> {
+                    override fun onComplete() {
 
-            }
+                    }
 
-            override fun onSubscribe(d: Disposable) {
+                    override fun onSubscribe(d: Disposable) {
 
-            }
+                    }
 
-            override fun onNext(t: DiscoverDetailRightBean) {
-                view?.setData(t)
-            }
+                    override fun onNext(t: List<DiscoverDetailRightBean.Item.Data.Content>) {
+                        view?.setData(t)
+                    }
 
-            override fun onError(e: Throwable) {
-                Timber.e(">>>${e.message}")
-            }
-        })
+                    override fun onError(e: Throwable) {
+
+                    }
+                })
     }
 
 }

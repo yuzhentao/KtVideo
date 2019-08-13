@@ -34,7 +34,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
                 ?.flatMap { t ->
                     val beans: ArrayList<DiscoverDetailLeftBean.Item.Data.Content> = ArrayList()
                     for (item in t.itemList) {
-                        item.data.content?.let {
+                        item.data?.content?.let {
                             beans.add(it)
                         }
                     }

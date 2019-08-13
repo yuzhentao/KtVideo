@@ -13,7 +13,7 @@ data class DiscoverDetailRightBean(
         val total: Int) {
 
     data class Item(
-            val data: Data,
+            val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
@@ -21,12 +21,12 @@ data class DiscoverDetailRightBean(
 
         data class Data(
                 val adTrack: Any,
-                val content: Content,
+                val content: Content?,
                 val dataType: String,
                 val header: Header) {
 
             data class Content(
-                    val data: Data,
+                    val data: Data?,
                     val adIndex: Int,
                     val id: Int,
                     val tag: Any,
@@ -38,11 +38,11 @@ data class DiscoverDetailRightBean(
                         val checkStatus: String,
                         val city: String,
                         val collected: Boolean,
-                        val consumption: Consumption,
-                        val cover: Cover,
+                        val consumption: Consumption?,
+                        val cover: Cover?,
                         val createTime: Long,
                         val dataType: String,
-                        val description: String,
+                        val description: String?,
                         val height: Int,
                         val id: Int,
                         val ifMock: Boolean,
@@ -56,8 +56,8 @@ data class DiscoverDetailRightBean(
                         val resourceType: String,
                         val selectedTime: Any,
                         val status: String,
-                        val tags: List<Tag>,
-                        val title: String,
+                        val tags: List<Tag>?,
+                        val title: String?,
                         val uid: Int,
                         val updateTime: Long,
                         val url: String,
@@ -80,7 +80,7 @@ data class DiscoverDetailRightBean(
                             val id: Int,
                             val ifShow: Boolean,
                             val level: Int,
-                            val name: String,
+                            val name: String?,
                             val parentId: Int,
                             val recWeight: Double,
                             val relationType: Int,
@@ -90,9 +90,9 @@ data class DiscoverDetailRightBean(
                             val type: String)
 
                     data class Cover(
-                            val blurred: Any,
+                            val blurred: Any?,
                             val detail: String,
-                            val feed: String,
+                            val feed: String?,
                             val homepage: Any,
                             val sharing: Any)
 

@@ -8,7 +8,7 @@ interface DiscoverDetailRightContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setData(bean: DiscoverDetailRightBean?)
+        fun setData(beans: List<DiscoverDetailRightBean.Item.Data.Content>?)
 
     }
 

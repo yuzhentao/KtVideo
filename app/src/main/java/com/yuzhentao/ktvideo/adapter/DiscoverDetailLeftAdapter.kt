@@ -27,8 +27,9 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
 
     override fun convert(helper: BaseViewHolder?, item: DiscoverDetailLeftBean.Item.Data.Content?) {
         helper?.let {
-            val position = helper.layoutPosition
-            item?.let {
+            val data = item?.data
+            data?.let {
+                val position = helper.layoutPosition
                 val ivIcon = helper.getView<AppCompatImageView>(R.id.iv_icon)
                 val tvName = helper.getView<AppCompatTextView>(R.id.tv_name)
                 val tvTitle = helper.getView<AppCompatTextView>(R.id.tv_title)
@@ -38,13 +39,13 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                 val tvReply = helper.getView<AppCompatTextView>(R.id.tv_replay)
                 val vLine = helper.getView<View>(R.id.v_line)
                 val vp = helper.getView<StandardGSYVideoPlayer>(R.id.vp)
-                item.data?.author?.icon?.let {
-                    ImageUtil.showCircle(mContext, ivIcon, item.data.author.icon)
+                data.author?.icon?.let {
+                    ImageUtil.showCircle(mContext, ivIcon, data.author.icon)
                 }
-                item.data?.author?.name?.let {
-                    tvName.text = item.data.author.name
+                data.author?.name?.let {
+                    tvName.text = item.data.author!!.name
                 }
-                item.data?.title?.let {
+                data.title?.let {
                     val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
                     val spannableString = SpannableString(mContext.getString(R.string.discover_release, item.data.title))
                     val colorSpan = ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.black))
@@ -53,18 +54,18 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                     spannableString.setSpan(styleSpan, mContext.getString(R.string.discover_release, item.data.title).indexOf(" "), mContext.getString(R.string.discover_release, item.data.title).length, flags)
                     tvTitle.text = spannableString
                 }
-                item.data?.description?.let {
+                data.description?.let {
                     tvDesc.text = item.data.description
                 }
-                item.data?.tags?.let {
+                data.tags?.let {
                     if (flexBox.childCount > 0) {
                         return
                     }
 
-                    for (i in item.data.tags.indices) {
-                        item.data.tags[i].name?.let {
+                    for (i in data.tags.indices) {
+                        data.tags[i].name?.let {
                             val tv = AppCompatTextView(mContext)
-                            tv.text = item.data.tags[i].name
+                            tv.text = data.tags[i].name
                             tv.setTextColor(ContextCompat.getColor(mContext, R.color.pink))
                             tv.setBackgroundResource(R.drawable.shape_tag)
                             tv.ellipsize = TextUtils.TruncateAt.END
@@ -82,23 +83,25 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                         }
                     }
                 }
-                if (item.data?.consumption?.collectionCount == null) {
+                if (data.consumption?.collectionCount == null) {
                     tvFavorite.text = "0"
                 } else {
-                    tvFavorite.text = item.data.consumption.collectionCount.toString()
+                    tvFavorite.text = item.data.consumption!!.collectionCount.toString()
                 }
-                if (item.data?.consumption?.replyCount == null) {
+                if (data.consumption?.replyCount == null) {
                     tvReply.text = "0"
                 } else {
-                    tvReply.text = item.data.consumption.replyCount.toString()
+                    tvReply.text = item.data.consumption!!.replyCount.toString()
                 }
                 if (position == itemCount - 1) {
                     vLine.visibility = View.GONE
                 }
-                item.data?.playUrl?.let {
+                data.playUrl?.let {
                     val ivCover = ImageView(mContext)
                     ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
-                    ImageUtil.show(mContext, ivCover, item.data.cover.feed)
+                    item.data.cover?.feed?.let {
+                        ImageUtil.show(mContext, ivCover, item.data.cover.feed)
+                    }
                     vp.thumbImageView = ivCover
                     vp.setUp(item.data.playUrl, false, null, null)
                     vp.titleTextView.visibility = View.GONE

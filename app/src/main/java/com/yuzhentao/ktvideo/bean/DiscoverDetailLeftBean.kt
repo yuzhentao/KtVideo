@@ -13,7 +13,7 @@ data class DiscoverDetailLeftBean(
         val total: Int) {
 
     data class Item(
-            val data: Data,
+            val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
@@ -39,10 +39,10 @@ data class DiscoverDetailLeftBean(
                         val author: Author?,
                         val campaign: Any,
                         val candidateId: Int,
-                        val category: String,
+                        val category: String?,
                         val collected: Boolean,
-                        val consumption: Consumption,
-                        val cover: Cover,
+                        val consumption: Consumption?,
+                        val cover: Cover?,
                         val createTime: Long,
                         val dataType: String,
                         val date: Long,
@@ -60,7 +60,7 @@ data class DiscoverDetailLeftBean(
                         val lastViewTime: Any,
                         val library: String,
                         val playInfo: List<PlayInfo>,
-                        val playUrl: String,
+                        val playUrl: String?,
                         val played: Boolean,
                         val playlists: Any,
                         val premiereDate: Any,
@@ -160,9 +160,9 @@ data class DiscoverDetailLeftBean(
                             val type: String)
 
                     data class Cover(
-                            val blurred: String,
+                            val blurred: String?,
                             val detail: String,
-                            val feed: String,
+                            val feed: String?,
                             val homepage: String,
                             val sharing: Any)
 
