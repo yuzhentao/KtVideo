@@ -21,8 +21,10 @@ object NetworkUtil {
         cm?.let {
             return if (Build.VERSION.SDK_INT > 22) {
                 val networkCapabilities = cm.getNetworkCapabilities(cm.activeNetwork)
-                (networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                        && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED))
+                //NetworkCapabilities.NET_CAPABILITY_VALIDATED：需要认证或者不能联通的wifi这个判断会为false，所以还是要慎用
+                (networkCapabilities != null
+                        && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                        /*&& networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)*/)
             } else {
                 val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
                 activeNetwork?.isConnected == true

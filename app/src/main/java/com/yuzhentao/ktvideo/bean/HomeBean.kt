@@ -39,7 +39,7 @@ data class HomeBean(
                     val date: Long,
                     val description: String,
                     val descriptionEditor: String,
-                    val descriptionPgc: Any,
+                    val descriptionPgc: String,
                     val duration: Int,
                     val favoriteAdTrack: Any,
                     val id: Int,
@@ -56,26 +56,63 @@ data class HomeBean(
                     val promotion: Any,
                     val provider: Provider,
                     val releaseTime: Long,
-                    val remark: Any,
+                    val remark: String,
                     val resourceType: String,
                     val searchWeight: Int,
                     val shareAdTrack: Any,
-                    val slogan: String,
+                    val slogan: Any,
                     val src: Any,
                     val subtitles: List<Any>,
                     val tags: List<Tag>,
                     val thumbPlayUrl: Any,
                     val title: String,
-                    val titlePgc: Any,
+                    val titlePgc: String,
                     val type: String,
                     val waterMarks: Any,
                     val webAdTrack: Any,
                     val webUrl: WebUrl) {
 
+                data class PlayInfo(
+                        val height: Int,
+                        val name: String,
+                        val type: String,
+                        val url: String,
+                        val urlList: List<Url>,
+                        val width: Int) {
+
+                    data class Url(
+                            val name: String,
+                            val size: Int,
+                            val url: String)
+
+                }
+
+                data class Tag(
+                        val actionUrl: String,
+                        val adTrack: Any,
+                        val bgPicture: String,
+                        val childTagIdList: Any,
+                        val childTagList: Any,
+                        val communityIndex: Int,
+                        val desc: String,
+                        val headerImage: String,
+                        val id: Int,
+                        val name: String,
+                        val tagRecType: String)
+
                 data class Provider(
                         val alias: String,
                         val icon: String,
                         val name: String)
+
+                data class WebUrl(
+                        val forWeibo: String,
+                        val raw: String)
+
+                data class Consumption(
+                        val collectionCount: Int,
+                        val replyCount: Int,
+                        val shareCount: Int)
 
                 data class Author(
                         val adTrack: Any,
@@ -102,43 +139,6 @@ data class HomeBean(
                             val followed: Boolean,
                             val itemId: Int,
                             val itemType: String)
-
-                }
-
-                data class Consumption(
-                        val collectionCount: Int,
-                        val replyCount: Int,
-                        val shareCount: Int)
-
-                data class WebUrl(
-                        val forWeibo: String,
-                        val raw: String)
-
-                data class Tag(
-                        val actionUrl: String,
-                        val adTrack: Any,
-                        val bgPicture: String,
-                        val childTagIdList: Any,
-                        val childTagList: Any,
-                        val communityIndex: Int,
-                        val desc: String,
-                        val headerImage: String,
-                        val id: Int,
-                        val name: String,
-                        val tagRecType: String)
-
-                data class PlayInfo(
-                        val height: Int,
-                        val name: String,
-                        val type: String,
-                        val url: String,
-                        val urlList: List<Url>,
-                        val width: Int) {
-
-                    data class Url(
-                            val name: String,
-                            val size: Int,
-                            val url: String)
 
                 }
 
