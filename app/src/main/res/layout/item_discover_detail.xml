@@ -45,18 +45,22 @@
         tools:text="测试测试测试"
         tools:textColor="@color/gray_2" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
         android:id="@+id/tv_desc"
-        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x6"
-        android:gravity="start"
-        android:maxLines="2"
-        android:textColor="@color/black_80"
-        android:textSize="@dimen/x13"
+        app:contentTextColor="@color/black_80"
+        app:contentTextSize="@dimen/x13"
+        app:ellipsizeText="...  "
+        app:expandCollapseTextColor="@color/pink"
+        app:expandCollapseTextGravity="right"
+        app:expandCollapseTextSize="@dimen/x13"
+        app:expandText="@string/more"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_icon"
+        app:maxCollapsedLines="2"
+        app:middlePadding="-20dp"
         tools:text="测试测试测试" />
 
     <com.google.android.flexbox.FlexboxLayout

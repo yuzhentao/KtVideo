@@ -23,6 +23,7 @@ import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
 import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ResourcesUtil
 import com.yuzhentao.ktvideo.util.ViewUtil
+import com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
 
 class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
 
@@ -34,7 +35,7 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                 val ivIcon = helper.getView<AppCompatImageView>(R.id.iv_icon)
                 val tvName = helper.getView<AppCompatTextView>(R.id.tv_name)
                 val tvTitle = helper.getView<AppCompatTextView>(R.id.tv_title)
-                val tvDesc = helper.getView<AppCompatTextView>(R.id.tv_desc)
+                val tvDesc = helper.getView<ExpandLayout>(R.id.tv_desc)
                 val flexBox = helper.getView<FlexboxLayout>(R.id.flex_box)
                 val tvFavorite = helper.getView<AppCompatTextView>(R.id.tv_favorite)
                 val tvReply = helper.getView<AppCompatTextView>(R.id.tv_replay)
@@ -57,7 +58,11 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                     tvTitle.text = spannableString
                 }
                 data.description?.let {
-                    tvDesc.text = item.data.description
+                    tvDesc.setText(item.data.description!!, false, object : ExpandLayout.OnExpandListener {
+                        override fun expandChange() {
+
+                        }
+                    })
                 }
                 data.tags?.let {
                     if (flexBox.childCount > 0) {

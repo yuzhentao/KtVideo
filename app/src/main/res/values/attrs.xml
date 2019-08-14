@@ -13,4 +13,21 @@
         <attr name="pb_fab_step_size" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="ExpandLayout">
+        <attr name="maxCollapsedLines" format="integer" />
+        <attr name="contentTextSize" format="dimension" />
+        <attr name="contentTextColor" format="color|reference" />
+        <attr name="expandText" format="string" />
+        <attr name="collapseText" format="string" />
+        <attr name="expandCollapseTextSize" format="dimension" />
+        <attr name="expandCollapseTextColor" format="color|reference" />
+        <attr name="expandCollapseTextGravity">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="ellipsizeText" format="string" />
+        <attr name="middlePadding" format="dimension" />
+    </declare-styleable>
+
 </resources>

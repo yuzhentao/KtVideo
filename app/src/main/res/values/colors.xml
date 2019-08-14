@@ -126,5 +126,7 @@
     <color name="yellow">#33FFC125</color>
     <color name="blue">#3300BFFF</color>
     <color name="green">#33CAFF70</color>
+    <color name="text_black">#333333</color>
+    <color name="text_blue">#39a4d2</color>
 
 </resources>
