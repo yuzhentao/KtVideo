@@ -47,14 +47,15 @@
 
     <com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
         android:id="@+id/tv_desc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x6"
         app:contentTextColor="@color/black_80"
         app:contentTextSize="@dimen/x13"
-        app:ellipsizeText="...  "
+        app:ellipsizeText="...      "
         app:expandCollapseTextColor="@color/pink"
-        app:expandCollapseTextGravity="right"
+        app:expandCollapseTextGravity="end"
+        app:expandCollapseTextLayoutGravity="end"
         app:expandCollapseTextSize="@dimen/x13"
         app:expandText="@string/more"
         app:layout_constraintStart_toStartOf="parent"
