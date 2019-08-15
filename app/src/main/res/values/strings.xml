@@ -8,9 +8,7 @@
     <string name="home_bottom_4">我的</string>
     <string name="discover">Discover</string>
     <string name="ranking">Ranking</string>
-    <string name="splash_name_en">Open Eyes</string>
-    <string name="splash_name_cn">开  眼</string>
-    <string name="splash_intro_en">Daily Video Promotion, Make Your Eye Open.</string>
+    <string name="splash_intro_en">Daily appetizers for your eyes. Bon eyepetizer.</string>
     <string name="splash_intro_cn">每日精选视频推介，让你大开眼界。</string>
     <string name="video_cache">缓存</string>
     <string name="mine_setting">设置</string>
