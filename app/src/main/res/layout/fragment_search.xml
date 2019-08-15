@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_search">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:contentInsetStart="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        tools:background="@color/transparent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_search">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/x10"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_back_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnusedAttribute" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et"
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/x12"
+                app:layout_constraintEnd_toStartOf="@id/iv_search"
+                app:layout_constraintStart_toEndOf="@id/iv_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_search"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/x10"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_search_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnusedAttribute" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_tip"
+        style="@style/TextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:text="@string/search_tip"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/x10"
+        app:layout_constraintTop_toBottomOf="@id/tb" />
+
+    <TextView
+        android:id="@+id/tv_hot"
+        style="@style/TextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:text="@string/search_hot"
+        android:textColor="@color/black"
+        android:textSize="@dimen/x10"
+        app:layout_constraintTop_toBottomOf="@id/tv_tip" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_hot" />
 
 </android.support.constraint.ConstraintLayout>
