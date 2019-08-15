@@ -14,9 +14,10 @@
     </declare-styleable>
 
     <declare-styleable name="ExpandLayout">
-        <attr name="maxCollapsedLines" format="integer" />
         <attr name="contentTextSize" format="dimension" />
         <attr name="contentTextColor" format="color|reference" />
+        <attr name="maxCollapsedLines" format="integer" />
+        <attr name="ellipsizeText" format="string" />
         <attr name="expandText" format="string" />
         <attr name="collapseText" format="string" />
         <attr name="expandCollapseTextSize" format="dimension" />
@@ -31,8 +32,7 @@
             <enum name="center" value="1" />
             <enum name="end" value="2" />
         </attr>
-        <attr name="ellipsizeText" format="string" />
-        <attr name="middlePadding" format="dimension" />
+        <attr name="expandCollapseTextMarginTop" format="dimension" />
     </declare-styleable>
 
 </resources>

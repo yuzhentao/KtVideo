@@ -54,14 +54,12 @@
         app:contentTextSize="@dimen/x13"
         app:ellipsizeText="...      "
         app:expandCollapseTextColor="@color/pink"
-        app:expandCollapseTextGravity="end"
         app:expandCollapseTextLayoutGravity="end"
         app:expandCollapseTextSize="@dimen/x13"
         app:expandText="@string/more"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_icon"
         app:maxCollapsedLines="2"
-        app:middlePadding="-20dp"
         tools:text="测试测试测试" />
 
     <com.google.android.flexbox.FlexboxLayout

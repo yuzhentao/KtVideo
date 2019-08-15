@@ -1,5 +1,6 @@
 package com.yuzhentao.ktvideo.view.expandtextview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.support.v7.widget.AppCompatTextView
@@ -31,6 +32,7 @@ class ExpandTextView @JvmOverloads constructor(context: Context, attrs: Attribut
         this.ellipsizeText = ellipsizeText
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val sl = StaticLayout(mText, paint, measuredWidth - paddingLeft - paddingRight, Layout.Alignment.ALIGN_CENTER, 1F, 0F, true)
@@ -46,7 +48,6 @@ class ExpandTextView @JvmOverloads constructor(context: Context, attrs: Attribut
                 }
                 false -> {
                     mCallback?.onCollapse()
-
                     lineCount = maxLineCount
                     //省略文字的宽度
                     val dotWidth = paint.measureText(ellipsizeText)
@@ -62,7 +63,8 @@ class ExpandTextView @JvmOverloads constructor(context: Context, attrs: Attribut
                         }
                     }
                     val newEndLineText = lineText.substring(0, endIndex) + ellipsizeText
-                    text = mText.substring(0, start) + newEndLineText
+                    val result = mText.substring(0, start) + newEndLineText
+                    text = result
                 }
             }
         } else {
