@@ -16,16 +16,16 @@ class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private var listener: OnExpandListener? = null
 
-    private var maxCollapsedLines = 3
     private var contentTextSize = 18F
     private var contentTextColor = 0
+    private var maxCollapsedLines = 3
+    private var ellipsizeText = "..."
     private var expandText = ""
     private var collapseText = ""
     private var expandCollapseTextSize = 18F
     private var expandCollapseTextColor = 0
     private var expandCollapseTextGravity = 0
     private var expandCollapseTextLayoutGravity = 0
-    private var ellipsizeText = "..."
     private var expandCollapseTextMarginTop = 0F
 
     init {
@@ -68,8 +68,8 @@ class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         contentTextColor = ta.getColor(R.styleable.ExpandLayout_contentTextColor, ContextCompat.getColor(context, R.color.text_black))
         maxCollapsedLines = ta.getInt(R.styleable.ExpandLayout_maxCollapsedLines, 3)
         ellipsizeText = if (ta.getString(R.styleable.ExpandLayout_ellipsizeText).isNullOrEmpty()) "..." else ta.getString(R.styleable.ExpandLayout_ellipsizeText)!!
-        expandText = if (ta.getString(R.styleable.ExpandLayout_expandText).isNullOrEmpty()) "全文" else ta.getString(R.styleable.ExpandLayout_expandText)!!
-        collapseText = if (ta.getString(R.styleable.ExpandLayout_collapseText).isNullOrEmpty()) "收起" else ta.getString(R.styleable.ExpandLayout_collapseText)!!
+        expandText = if (ta.getString(R.styleable.ExpandLayout_expandText).isNullOrEmpty()) "更多" else ta.getString(R.styleable.ExpandLayout_expandText)!!
+        collapseText = if (ta.getString(R.styleable.ExpandLayout_collapseText).isNullOrEmpty()) "" else ta.getString(R.styleable.ExpandLayout_collapseText)!!
         expandCollapseTextSize = ta.getDimension(R.styleable.ExpandLayout_expandCollapseTextSize, DimenUtil.sp2px(context, 18F).toFloat())
         expandCollapseTextColor = ta.getColor(R.styleable.ExpandLayout_expandCollapseTextColor, ContextCompat.getColor(context, R.color.text_blue))
         expandCollapseTextGravity = ta.getInt(R.styleable.ExpandLayout_expandCollapseTextGravity, 0)

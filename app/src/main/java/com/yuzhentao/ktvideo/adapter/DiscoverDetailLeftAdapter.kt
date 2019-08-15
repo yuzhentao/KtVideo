@@ -58,9 +58,12 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                     tvTitle.text = spannableString
                 }
                 data.description?.let {
-                    tvDesc.setText(item.data.description!!, false, object : ExpandLayout.OnExpandListener {
+                    tvDesc.setText(item.data.description!!, data.isExpand, object : ExpandLayout.OnExpandListener {
                         override fun expandChange() {
-
+                            if (!data.isExpand) {
+                                data.isExpand = true
+                                notifyItemChanged(position)
+                            }
                         }
                     })
                 }

@@ -88,7 +88,8 @@ data class DiscoverDetailLeftBean(
                         val updateTime: Long,
                         val waterMarks: Any,
                         val webAdTrack: Any,
-                        val webUrl: WebUrl) {
+                        val webUrl: WebUrl,
+                        var isExpand: Boolean) { //是否扩展
 
                     data class Author(
                             val adTrack: Any,
