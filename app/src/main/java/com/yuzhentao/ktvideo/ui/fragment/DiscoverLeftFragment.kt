@@ -14,7 +14,6 @@ import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailLeftPresenter
 import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.DimenUtil
-import com.yuzhentao.ktvideo.util.NetworkUtil
 import com.yuzhentao.ktvideo.util.ScrollCalculatorHelper
 import kotlinx.android.synthetic.main.fragment_ranking.*
 
@@ -36,9 +35,6 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
     }
 
     override fun initView() {
-        NetworkUtil.isConnected()
-        NetworkUtil.isWifi()
-        NetworkUtil.isCellular()
         val playTop = DimenUtil.getHeightInPx() / 2 - DimenUtil.getHeightInPx() / 4
         val playBottom = DimenUtil.getHeightInPx() / 2 + DimenUtil.getHeightInPx() / 4
         scrollCalculatorHelper = ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())

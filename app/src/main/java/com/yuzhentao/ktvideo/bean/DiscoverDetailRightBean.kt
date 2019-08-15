@@ -49,7 +49,7 @@ data class DiscoverDetailRightBean(
                         val latitude: Double,
                         val library: String,
                         val longitude: Double,
-                        val owner: Owner,
+                        val owner: Owner?,
                         val privateMessageActionUrl: String,
                         val recentOnceReply: Any,
                         val releaseTime: Long,
@@ -65,7 +65,10 @@ data class DiscoverDetailRightBean(
                         val urlsWithWatermark: List<String>,
                         val validateResult: String,
                         val validateStatus: String,
-                        val width: Int) {
+                        val width: Int,
+                        val playUrl: String?,
+                        val duration: Int,
+                        var isExpand: Boolean) {//是否扩展
 
                     data class Tag(
                             val actionUrl: String,
@@ -90,7 +93,7 @@ data class DiscoverDetailRightBean(
                             val type: String)
 
                     data class Cover(
-                            val blurred: Any?,
+                            val blurred: String?,
                             val detail: String,
                             val feed: String?,
                             val homepage: Any,
@@ -105,7 +108,7 @@ data class DiscoverDetailRightBean(
                     data class Owner(
                             val actionUrl: String,
                             val area: Any,
-                            val avatar: String,
+                            val avatar: String?,
                             val bannedDate: Any,
                             val bannedDays: Any,
                             val birthday: Any,
@@ -120,7 +123,7 @@ data class DiscoverDetailRightBean(
                             val job: Any,
                             val library: String,
                             val limitVideoOpen: Boolean,
-                            val nickname: String,
+                            val nickname: String?,
                             val registDate: Long,
                             val releaseDate: Long,
                             val tagIds: Any,

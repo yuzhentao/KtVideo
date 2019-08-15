@@ -34,8 +34,8 @@ class DiscoverDetailRightPresenter (context: Context, view: DiscoverDetailRightC
                 ?.flatMap { t ->
                     val beans: ArrayList<DiscoverDetailRightBean.Item.Data.Content> = ArrayList()
                     for (item in t.itemList) {
-                        item.data?.content?.let {
-                            beans.add(it)
+                        item.data?.content?.data?.playUrl?.let {
+                            beans.add(item.data.content)
                         }
                     }
                     Observable.just(beans)

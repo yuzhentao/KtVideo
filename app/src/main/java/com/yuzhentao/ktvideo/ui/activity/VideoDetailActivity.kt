@@ -124,7 +124,9 @@ class VideoDetailActivity : AppCompatActivity() {
     private fun initView() {
         playUrl = bean.playUrl
         val blurred = bean.blurred//接口提供的虚化图
-        blurred?.let {
+        if (blurred.isNullOrEmpty()) {
+            iv_bg.setImageResource(R.color.black_80)
+        } else {
             ImageUtil.showHigh(context, iv_bg, blurred)
         }
         tv_title.text = bean.title

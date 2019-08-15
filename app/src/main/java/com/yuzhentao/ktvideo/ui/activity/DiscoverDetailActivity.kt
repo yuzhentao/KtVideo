@@ -39,6 +39,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     private var titles = mutableListOf("推荐", "广场")
 
     private var id: String? = null
+    var category: String? = null
 
     private var isChange: Boolean? = false
     private var isLeft: Boolean? = true
@@ -103,8 +104,9 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
     override fun setData(bean: DiscoverDetailBean?) {
         bean?.let {
-            tv_top.text = bean.tagInfo.name
-            tv_name.text = bean.tagInfo.name
+            category = bean.tagInfo.name
+            tv_top.text = category
+            tv_name.text = category
             tv_desc.text = bean.tagInfo.description
             var count = ""
             if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isEmpty()) {
