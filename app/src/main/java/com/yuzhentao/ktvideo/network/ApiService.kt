@@ -72,6 +72,6 @@ interface ApiService {
      * 搜索
      */
     @GET("v3/search?${Constant.PARAMS}")
-    fun getSearch(@Query("query") key: String): Observable<MutableList<SearchBean>>
+    fun getSearch(@Query("query") key: String, @Query("deviceModel") deviceModel: String): Observable<SearchBean>
 
 }

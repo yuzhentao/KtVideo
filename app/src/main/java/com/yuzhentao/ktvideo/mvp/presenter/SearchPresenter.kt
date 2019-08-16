@@ -27,26 +27,36 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
     }
 
     override fun load(key: String) {
-        val observable: Observable<MutableList<SearchBean>>? = context?.let {
+        val observable: Observable<SearchBean>? = context?.let {
             model.loadData(context!!, key)
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<MutableList<SearchBean>> {
-            override fun onComplete() {
+        observable
+                ?.flatMap { t ->
+                    val beans: ArrayList<SearchBean.Item.Data.Content> = ArrayList()
+                    for (item in t.itemList) {
+                        item.data?.content?.data?.playUrl?.let {
+                            beans.add(item.data.content)
+                        }
+                    }
+                    Observable.just(beans)
+                }
+                ?.normalSchedulers()?.subscribe(object : Observer<ArrayList<SearchBean.Item.Data.Content>> {
+                    override fun onComplete() {
 
-            }
+                    }
 
-            override fun onSubscribe(d: Disposable) {
+                    override fun onSubscribe(d: Disposable) {
 
-            }
+                    }
 
-            override fun onNext(t: MutableList<SearchBean>) {
-                view?.setData(t)
-            }
+                    override fun onNext(t: ArrayList<SearchBean.Item.Data.Content>) {
+                        view?.setData(t)
+                    }
 
-            override fun onError(e: Throwable) {
+                    override fun onError(e: Throwable) {
 
-            }
-        })
+                    }
+                })
     }
 
 }

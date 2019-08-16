@@ -8,7 +8,7 @@ interface SearchContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setData(beans: MutableList<SearchBean>)
+        fun setData(beans: ArrayList<SearchBean.Item.Data.Content>)
 
     }
 

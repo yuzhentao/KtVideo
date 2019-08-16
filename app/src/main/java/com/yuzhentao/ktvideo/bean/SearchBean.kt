@@ -2,7 +2,7 @@ package com.yuzhentao.ktvideo.bean
 
 /**
  * 搜索
- * http://baobab.kaiyanapp.com/api/v3/search?query=%E7%BE%8E%E9%A3%9F&udid=474a4740c9784203a739fb84a35d51425b59d609&vc=524&deviceModel=SM-G9500
+ * http://baobab.kaiyanapp.com/api/v3/search?query=汽车&udid=474a4740c9784203a739fb84a35d51425b59d609&vc=524&deviceModel=SM-G9500
  */
 data class SearchBean(
         val adExist: Boolean,
@@ -12,7 +12,7 @@ data class SearchBean(
         val total: Int) {
 
     data class Item(
-            val data: Data,
+            val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
@@ -20,7 +20,7 @@ data class SearchBean(
 
         data class Data(
                 val adTrack: Any,
-                val content: Content,
+                val content: Content?,
                 val dataType: String,
                 val header: Header) {
 
@@ -43,7 +43,7 @@ data class SearchBean(
                     val title: String)
 
             data class Content(
-                    val data: Data,
+                    val data: Data?,
                     val adIndex: Int,
                     val id: Int,
                     val tag: Any,
