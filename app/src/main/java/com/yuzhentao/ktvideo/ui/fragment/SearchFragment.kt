@@ -10,6 +10,7 @@ import android.view.*
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.SearchAdapter
 import com.yuzhentao.ktvideo.util.CircularRevealAnim
@@ -43,6 +44,10 @@ class SearchFragment : DialogFragment(), View.OnClickListener, ViewTreeObserver.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        immersionBar {
+            statusBarColor(R.color.black)
+            fitsSystemWindows(true)
+        }
         initView()
     }
 
