@@ -62,4 +62,16 @@ interface ApiService {
     @GET("v3/ranklist")
     fun getHotData(@Query("num") num: Int, @Query("strategy") strategy: String, @Query("udid") udid: String, @Query("vc") vc: Int): Observable<HotBean>
 
+    /**
+     * 热门搜索
+     */
+    @GET("v3/queries/hot?${Constant.PARAMS}")
+    fun getHotSearch(): Observable<MutableList<String>>
+
+    /**
+     * 搜索
+     */
+    @GET("v3/search?${Constant.PARAMS}")
+    fun getSearch(@Query("query") key: String): Observable<MutableList<SearchBean>>
+
 }
