@@ -18,22 +18,22 @@ interface ApiService {
      * 闪屏页
      */
     @GET("v2/configs?${Constant.PARAMS}")
-    fun getSplashData(): Observable<SplashBean>
+    fun getSplashData(@Query("deviceModel") deviceModel: String): Observable<SplashBean>
 
     /**
-     * 首页第一页
+     * 首页
      */
-    @GET("v2/feed?${Constant.PARAMS}&num=2")
+    @GET("v2/feed?${Constant.PARAMS}")
     fun getHomeData(): Observable<HomeBean>
 
     /**
      * 首页更多
      */
     @GET("v2/feed")
-    fun getHomeMoreData(@Query("date") date: String, @Query("num") num: String): Observable<HomeBean>
+    fun getHomeMoreData(@Query("date") date: String): Observable<HomeBean>
 
     /**
-     * 发现
+     * 分类
      */
     @GET("v2/categories?${Constant.PARAMS}")
     fun getDiscoverData(): Observable<MutableList<DiscoverBean>>
@@ -57,7 +57,7 @@ interface ApiService {
     fun getDiscoverDetailRightData(@Query("id") id: String, @Query("deviceModel") deviceModel: String): Observable<DiscoverDetailRightBean>
 
     /**
-     * 热门排行
+     * 排行
      */
     @GET("v3/ranklist")
     fun getHotData(@Query("num") num: Int, @Query("strategy") strategy: String, @Query("udid") udid: String, @Query("vc") vc: Int): Observable<HotBean>
@@ -66,7 +66,7 @@ interface ApiService {
      * 热门搜索
      */
     @GET("v3/queries/hot?${Constant.PARAMS}")
-    fun getHotSearch(): Observable<MutableList<String>>
+    fun getHotSearch(@Query("deviceModel") deviceModel: String): Observable<MutableList<String>>
 
     /**
      * 搜索

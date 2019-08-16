@@ -36,12 +36,9 @@ class SearchFragment : DialogFragment(),
     private lateinit var rootView: View
     private lateinit var circularRevealAnim: CircularRevealAnim
 
-    private var presenter: HotSearchPresenter? = null
+    lateinit var adapter: HotSearchAdapter
 
-    private var data: MutableList<String> = mutableListOf("脱口秀", "城会玩", "666", "笑cry", "漫威",
-            "清新", "匠心", "VR", "心理学", "舞蹈", "品牌广告", "粉丝自制", "电影相关", "萝莉", "魔性"
-            , "第一视角", "教程", "毕业设计", "奥斯卡", "燃", "冰与火之歌", "温情", "线下campaign", "公益")
-    lateinit var adapterHot: HotSearchAdapter
+    private var presenter: HotSearchPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +88,7 @@ class SearchFragment : DialogFragment(),
         } else if (keyCode == KeyEvent.KEYCODE_ENTER && event?.action == KeyEvent.ACTION_DOWN) {
             search()
         }
-        return false
+        return true
     }
 
     override fun onHideAnimationEnd() {
@@ -106,7 +103,7 @@ class SearchFragment : DialogFragment(),
     }
 
     override fun setData(beans: MutableList<String>?) {
-        adapterHot.setNewData(beans)
+        adapter.setNewData(beans)
     }
 
     private fun initView() {
@@ -125,10 +122,10 @@ class SearchFragment : DialogFragment(),
             layoutManager.flexDirection = FlexDirection.ROW//主轴排列方式
             layoutManager.flexWrap = FlexWrap.WRAP//是否换行
             rv.layoutManager = layoutManager
-            adapterHot = HotSearchAdapter(null)
-            rv.adapter = adapterHot
+            adapter = HotSearchAdapter(null)
+            rv.adapter = adapter
             rv.itemAnimator = DefaultItemAnimator()
-            adapterHot.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+            adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
                 val bean: String? = adapter!!.data[position] as String
                 bean?.let {
                     KeyBoardUtil.closeKeyboard(context, et)
