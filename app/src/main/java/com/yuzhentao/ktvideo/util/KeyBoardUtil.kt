@@ -6,15 +6,18 @@ import android.widget.EditText
 
 object KeyBoardUtil {
 
-    fun openKeyboard(context: Context, editText: EditText) {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(editText, InputMethodManager.RESULT_SHOWN)
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    fun openKeyboard(context: Context?, et: EditText) {
+        context?.let {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
+        }
     }
 
-    fun closeKeyboard(context: Context, editText: EditText) {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(editText.windowToken, 0)
+    fun closeKeyboard(context: Context?, et: EditText) {
+        context?.let {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(et.windowToken, 0)
+        }
     }
 
 }
