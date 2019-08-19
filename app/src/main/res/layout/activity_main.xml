@@ -13,8 +13,6 @@
         android:elevation="4dp"
         app:contentInsetStart="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-        tools:background="@color/transparent"
         tools:ignore="UnusedAttribute">
 
         <android.support.constraint.ConstraintLayout

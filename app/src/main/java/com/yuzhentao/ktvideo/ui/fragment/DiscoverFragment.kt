@@ -41,4 +41,8 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         adapter?.notifyDataSetChanged()
     }
 
+    fun scrollToTop() {
+        rv.smoothScrollToPosition(0)
+    }
+
 }

@@ -3,6 +3,7 @@ package com.yuzhentao.ktvideo.ui.activity
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import kotlinx.android.synthetic.main.activity_cache.*
@@ -10,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_cache.*
 /**
  * 收藏
  */
-class FavoriteActivity : AppCompatActivity() {
+class FavoriteActivity : AppCompatActivity(), View.OnClickListener {
 
     var context: Context = this
     var activity: FavoriteActivity = this
@@ -28,16 +29,17 @@ class FavoriteActivity : AppCompatActivity() {
         initData()
     }
 
-    private fun initView() {
-        setSupportActionBar(tb)
-        val bar = supportActionBar
-        bar?.let {
-            bar.title = getString(R.string.mine_favorite)
-            bar.setDisplayHomeAsUpEnabled(true)
-            tb.setNavigationOnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.iv_top -> {
                 onBackPressed()
             }
         }
+    }
+
+    private fun initView() {
+        tv_top.text = getString(R.string.mine_favorite)
+        iv_top.setOnClickListener(this)
     }
 
     private fun initData() {

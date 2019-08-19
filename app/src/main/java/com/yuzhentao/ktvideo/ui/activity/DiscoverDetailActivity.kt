@@ -90,13 +90,10 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.iv_back, R.id.iv_top_back -> {
+            R.id.iv_back, R.id.iv_top -> {
                 onBackPressed()
             }
             R.id.tv_follow -> {
-
-            }
-            else -> {
 
             }
         }
@@ -131,12 +128,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         }
 
         iv_back.setOnClickListener(this)
-        setSupportActionBar(tb)
-        val bar = supportActionBar
-        bar?.let {
-            bar.setDisplayShowTitleEnabled(false)
-        }
-        iv_top_back.setOnClickListener(this)
+        iv_top.setOnClickListener(this)
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
             when {
                 i == 0 -> {//展开

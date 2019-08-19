@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_cache.*
 /**
  * 观看记录
  */
-class WatchActivity : AppCompatActivity(), SearchContract.View {
+class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.View {
 
     var context: Context = this
     var activity: WatchActivity = this
@@ -54,6 +54,14 @@ class WatchActivity : AppCompatActivity(), SearchContract.View {
         super.onDestroy()
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.iv_top -> {
+                onBackPressed()
+            }
+        }
+    }
+
     override fun setData(beans: ArrayList<SearchBean.Item.Data.Content>) {
         beans.forEach {
             val data = it.data
@@ -76,19 +84,12 @@ class WatchActivity : AppCompatActivity(), SearchContract.View {
 
     private fun initView() {
         noKey = intent.getStringExtra("key").isNullOrEmpty()
-        setSupportActionBar(tb)
-        val bar = supportActionBar
-        bar?.let {
-            if (noKey!!) {
-                bar.title = getString(R.string.mine_watch)
-            } else {
-                bar.title = intent.getStringExtra("key")
-            }
-            bar.setDisplayHomeAsUpEnabled(true)
-            tb.setNavigationOnClickListener {
-                onBackPressed()
-            }
+        if (noKey!!) {
+            tv_top.text = getString(R.string.mine_cache)
+        } else {
+            tv_top.text = intent.getStringExtra("key")
         }
+        iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = WatchAdapter(null)
         rv.adapter = adapter

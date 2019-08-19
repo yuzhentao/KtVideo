@@ -14,16 +14,16 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.DownloadState
-import com.yuzhentao.ktvideo.extension.shortToast
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
 
 /**
  * 我的缓存
  */
-class CacheActivity : AppCompatActivity() {
+class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     var context: Context = this
     var activity: CacheActivity = this
@@ -54,16 +54,17 @@ class CacheActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun initView() {
-        setSupportActionBar(tb)
-        val bar = supportActionBar
-        bar?.let {
-            bar.title = getString(R.string.mine_cache)
-            bar.setDisplayHomeAsUpEnabled(true)
-            tb.setNavigationOnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.iv_top -> {
                 onBackPressed()
             }
         }
+    }
+
+    private fun initView() {
+        tv_top.text = getString(R.string.mine_cache)
+        iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = CacheAdapter(context, beans, dbManager)
         rv.adapter = adapter

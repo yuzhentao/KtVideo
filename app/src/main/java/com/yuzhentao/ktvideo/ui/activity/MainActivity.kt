@@ -16,10 +16,11 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
-import com.yuzhentao.ktvideo.ui.fragment.*
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.extension.shortToast
+import com.yuzhentao.ktvideo.ui.fragment.*
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 /**
@@ -101,7 +102,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tb -> {
-                homeFragment?.scrollToTop()
+                when (rg_bottom.checkedRadioButtonId) {
+                    R.id.rb_home -> {
+                        homeFragment?.scrollToTop()
+                    }
+                    R.id.rb_discover -> {
+                        discoverFragment?.scrollToTop()
+                    }
+                }
             }
             R.id.iv_top -> {
                 if (rbMine?.isChecked!!) {//设置
