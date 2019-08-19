@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.LinearLayout
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.util.DimenUtil
-import com.yuzhentao.ktvideo.util.color
+import com.yuzhentao.ktvideo.extension.color
 import kotlinx.android.synthetic.main.layout_expand_view.view.*
 
 class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {

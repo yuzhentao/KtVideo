@@ -2,19 +2,22 @@ package com.yuzhentao.ktvideo.view
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.support.v7.widget.AppCompatRadioButton
 import android.util.AttributeSet
-import android.widget.RadioButton
-import com.yuzhentao.ktvideo.util.ResourcesUtil
+import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 
-class CustomRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RadioButton(context, attrs, defStyleAttr) {
+class CustomRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : AppCompatRadioButton(context, attrs, defStyleAttr) {
 
     private var imgWidth: Float = 0F
     private var imgHeight: Float = 0F
 
     init {
-        val ta: TypedArray = context.obtainStyledAttributes(attrs, com.yuzhentao.ktvideo.R.styleable.CustomRadioButton)
-        imgWidth = ta.getDimension(com.yuzhentao.ktvideo.R.styleable.CustomRadioButton_rb_width, ResourcesUtil.getDimensionPixelOffset(context, com.yuzhentao.ktvideo.R.dimen.x20).toFloat())
-        imgHeight = ta.getDimension(com.yuzhentao.ktvideo.R.styleable.CustomRadioButton_rb_height, ResourcesUtil.getDimensionPixelOffset(context, com.yuzhentao.ktvideo.R.dimen.x20).toFloat())
+        val ta: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomRadioButton)
+        imgWidth = ta.getDimension(R.styleable.CustomRadioButton_rb_width,
+                context.dimensionPixelOffset(R.dimen.x20).toFloat())
+        imgHeight = ta.getDimension(R.styleable.CustomRadioButton_rb_height,
+                context.dimensionPixelOffset(R.dimen.x20).toFloat())
         ta.recycle()
     }
 

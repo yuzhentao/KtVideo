@@ -17,8 +17,8 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.fragment.*
-import com.yuzhentao.ktvideo.util.newIntent
-import com.yuzhentao.ktvideo.util.shortToast
+import com.yuzhentao.ktvideo.extension.newIntent
+import com.yuzhentao.ktvideo.extension.shortToast
 import io.reactivex.disposables.Disposable
 import java.util.*
 

@@ -6,8 +6,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 import com.yuzhentao.ktvideo.util.ImageUtil
-import com.yuzhentao.ktvideo.util.ResourcesUtil
 import com.yuzhentao.ktvideo.util.ViewUtil
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,7 +19,7 @@ class WatchAdapter(data: MutableList<VideoBean>?) : BaseQuickAdapter<VideoBean, 
             item?.let {
                 val position = helper.layoutPosition
                 if (position != itemCount - 1) {
-                    ViewUtil.setMargins(helper.itemView, 0, 0, 0, ResourcesUtil.getDimensionPixelOffset(mContext!!, R.dimen.x2))
+                    ViewUtil.setMargins(helper.itemView, 0, 0, 0, mContext.dimensionPixelOffset(R.dimen.x2))
                 } else {
                     ViewUtil.setMargins(helper.itemView, 0, 0, 0, 0)
                 }

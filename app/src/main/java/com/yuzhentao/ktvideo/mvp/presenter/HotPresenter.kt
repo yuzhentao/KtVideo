@@ -4,7 +4,7 @@ import android.content.Context
 import com.yuzhentao.ktvideo.bean.HotBean
 import com.yuzhentao.ktvideo.mvp.contract.HotContract
 import com.yuzhentao.ktvideo.mvp.model.HotModel
-import com.yuzhentao.ktvideo.util.normalSchedulers
+import com.yuzhentao.ktvideo.extension.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

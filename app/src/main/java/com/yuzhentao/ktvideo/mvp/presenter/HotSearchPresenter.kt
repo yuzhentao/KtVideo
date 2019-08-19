@@ -3,7 +3,7 @@ package com.yuzhentao.ktvideo.mvp.presenter
 import android.content.Context
 import com.yuzhentao.ktvideo.mvp.contract.HotSearchContract
 import com.yuzhentao.ktvideo.mvp.model.HotSearchModel
-import com.yuzhentao.ktvideo.util.normalSchedulers
+import com.yuzhentao.ktvideo.extension.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

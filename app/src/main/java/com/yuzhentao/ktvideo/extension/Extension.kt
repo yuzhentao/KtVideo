@@ -1,8 +1,9 @@
-package com.yuzhentao.ktvideo.util
+package com.yuzhentao.ktvideo.extension
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.support.annotation.DimenRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.view.Gravity
@@ -29,6 +30,8 @@ inline fun <reified T : Activity> Activity.newIntent(isFinish: Boolean) {
  * }
  */
 fun Context.color(resId: Int) = ContextCompat.getColor(this, resId)
+
+fun Context.dimensionPixelOffset(@DimenRes resId: Int) = this.resources.getDimensionPixelOffset(resId)
 
 fun Context.shortToast(message: String): Toast {
     val toast = Toast(App.app)

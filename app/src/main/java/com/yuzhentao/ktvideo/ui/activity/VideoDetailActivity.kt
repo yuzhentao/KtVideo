@@ -21,6 +21,8 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.extension.normalSchedulers
+import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.util.*
 import io.reactivex.Observable
 import io.reactivex.Observer

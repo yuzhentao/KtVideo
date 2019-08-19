@@ -4,7 +4,7 @@ import android.content.Context
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.model.DiscoverDetailModel
-import com.yuzhentao.ktvideo.util.normalSchedulers
+import com.yuzhentao.ktvideo.extension.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

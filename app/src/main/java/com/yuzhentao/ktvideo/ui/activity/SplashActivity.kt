@@ -16,7 +16,7 @@ import com.yuzhentao.ktvideo.bean.SplashBean
 import com.yuzhentao.ktvideo.mvp.contract.SplashContract
 import com.yuzhentao.ktvideo.mvp.presenter.SplashPresenter
 import com.yuzhentao.ktvideo.util.ImageUtil
-import com.yuzhentao.ktvideo.util.newIntent
+import com.yuzhentao.ktvideo.extension.newIntent
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**

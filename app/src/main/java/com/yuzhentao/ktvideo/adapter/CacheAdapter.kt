@@ -14,9 +14,14 @@ import com.arialyy.aria.core.Aria
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.extension.color
+import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
+import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
-import com.yuzhentao.ktvideo.util.*
+import com.yuzhentao.ktvideo.util.DownloadState
+import com.yuzhentao.ktvideo.util.ImageUtil
+import com.yuzhentao.ktvideo.util.ViewUtil
 import com.yuzhentao.ktvideo.view.progressbutton.ProgressButton
 import timber.log.Timber
 
@@ -86,7 +91,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
         val bean = beans?.get(position)
         bean?.let {
             if (position != itemCount - 1) {
-                ViewUtil.setMargins(holder.itemView, 0, 0, 0, ResourcesUtil.getDimensionPixelOffset(context!!, R.dimen.x2))
+                ViewUtil.setMargins(holder.itemView, 0, 0, 0, context!!.dimensionPixelOffset(R.dimen.x2))
             } else {
                 ViewUtil.setMargins(holder.itemView, 0, 0, 0, 0)
             }

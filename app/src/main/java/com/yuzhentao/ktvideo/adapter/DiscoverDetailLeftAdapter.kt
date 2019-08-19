@@ -19,10 +19,10 @@ import com.shuyu.gsyvideoplayer.utils.CommonUtil
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
+import com.yuzhentao.ktvideo.extension.color
+import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 import com.yuzhentao.ktvideo.util.ImageUtil
-import com.yuzhentao.ktvideo.util.ResourcesUtil
 import com.yuzhentao.ktvideo.util.ViewUtil
-import com.yuzhentao.ktvideo.util.color
 import com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
 
 class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
@@ -85,10 +85,10 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                             tv.textDirection = TEXT_DIRECTION_LOCALE
                             tv.visibility = View.VISIBLE
                             ViewUtil.setPaddings(tv,
-                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x4),
-                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x2),
-                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x4),
-                                    ResourcesUtil.getDimensionPixelOffset(mContext, R.dimen.x2))
+                                    mContext.dimensionPixelOffset(R.dimen.x4),
+                                    mContext.dimensionPixelOffset(R.dimen.x2),
+                                    mContext.dimensionPixelOffset(R.dimen.x4),
+                                    mContext.dimensionPixelOffset(R.dimen.x2))
                             flexBox.addView(tv)
                         }
                     }

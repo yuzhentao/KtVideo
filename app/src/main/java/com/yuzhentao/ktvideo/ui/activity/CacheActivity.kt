@@ -16,7 +16,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.DownloadState
-import com.yuzhentao.ktvideo.util.shortToast
+import com.yuzhentao.ktvideo.extension.shortToast
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
 
