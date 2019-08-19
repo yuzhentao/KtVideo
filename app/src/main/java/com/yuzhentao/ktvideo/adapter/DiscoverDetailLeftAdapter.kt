@@ -1,7 +1,6 @@
 package com.yuzhentao.ktvideo.adapter
 
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.text.SpannableString
@@ -23,6 +22,7 @@ import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
 import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ResourcesUtil
 import com.yuzhentao.ktvideo.util.ViewUtil
+import com.yuzhentao.ktvideo.util.color
 import com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
 
 class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
@@ -51,7 +51,7 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                 data.title?.let {
                     val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
                     val spannableString = SpannableString(mContext.getString(R.string.discover_release, item.data.title))
-                    val colorSpan = ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.black))
+                    val colorSpan = ForegroundColorSpan(mContext.color(R.color.app_black))
                     spannableString.setSpan(colorSpan, mContext.getString(R.string.discover_release, item.data.title).indexOf(" "), mContext.getString(R.string.discover_release, item.data.title).length, flags)
                     val styleSpan = StyleSpan(Typeface.BOLD)
                     spannableString.setSpan(styleSpan, mContext.getString(R.string.discover_release, item.data.title).indexOf(" "), mContext.getString(R.string.discover_release, item.data.title).length, flags)
@@ -76,7 +76,7 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                         data.tags[i].name?.let {
                             val tv = AppCompatTextView(mContext)
                             tv.text = data.tags[i].name
-                            tv.setTextColor(ContextCompat.getColor(mContext, R.color.app_pink))
+                            tv.setTextColor(mContext.color(R.color.app_pink))
                             tv.setBackgroundResource(R.drawable.shape_tag)
                             tv.ellipsize = TextUtils.TruncateAt.END
                             tv.gravity = Gravity.CENTER

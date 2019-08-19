@@ -3,6 +3,7 @@ package com.yuzhentao.ktvideo.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.view.Gravity
 import android.view.View
@@ -20,6 +21,14 @@ inline fun <reified T : Activity> Activity.newIntent(isFinish: Boolean) {
         finish()
     }
 }
+
+/**
+ * 相当于
+ * fun Context.getColor(resId: Int): Int {
+ * return ContextCompat.getColor(this, resId)
+ * }
+ */
+fun Context.color(resId: Int) = ContextCompat.getColor(this, resId)
 
 fun Context.shortToast(message: String): Toast {
     val toast = Toast(App.app)

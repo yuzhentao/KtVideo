@@ -37,7 +37,7 @@
 
     <style name="TitleTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/x14</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/app_black</item>
     </style>
 
 </resources>

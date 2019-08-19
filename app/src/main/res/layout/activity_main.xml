@@ -55,7 +55,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/rg_bottom"
         app:layout_constraintTop_toBottomOf="@id/tb"
-        tools:background="@color/black" />
+        tools:background="@color/app_pink" />
 
     <View
         android:id="@+id/v_line_bottom"

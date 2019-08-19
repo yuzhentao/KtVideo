@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -76,7 +75,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                     btnProgress!!.setImageRes(R.drawable.selector_error)
                 }
                 if (bean.downloadProgress!! == 100) {
-                    btnProgress!!.setProgressColor(ContextCompat.getColor(context!!, R.color.transparent))
+                    btnProgress!!.setProgressColor(context!!.color(R.color.transparent))
                 }
                 btnProgress!!.setCurrentProgress(bean.downloadProgress!!, true)
             }
@@ -120,7 +119,7 @@ class CacheAdapter(context: Context, beans: ArrayList<VideoBean>, dbManager: Vid
                 btnProgress!!.setImageRes(R.drawable.selector_error)
             }
             if (bean.downloadProgress!! == 100) {
-                btnProgress!!.setProgressColor(ContextCompat.getColor(context!!, R.color.transparent))
+                btnProgress!!.setProgressColor(context!!.color(R.color.transparent))
             }
             btnProgress!!.setCurrentProgress(bean.downloadProgress!!, true)
             btnProgress.setOnClickListener {
