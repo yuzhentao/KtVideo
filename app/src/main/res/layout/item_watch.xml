@@ -25,7 +25,7 @@
         android:layout_marginEnd="@dimen/x5"
         android:gravity="center_vertical"
         android:maxLines="2"
-        android:textColor="@color/black"
+        android:textColor="@color/app_black"
         android:textSize="@dimen/x14"
         app:layout_constraintBottom_toTopOf="@id/tv_bottom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x5"
         android:gravity="center_vertical"
-        android:textColor="@color/gray_2"
+        android:textColor="@color/app_gray"
         android:textSize="@dimen/x10"
         app:layout_constraintBottom_toBottomOf="@id/iv"
         app:layout_constraintEnd_toEndOf="@id/tv_top"
@@ -52,7 +52,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1px"
-        android:background="@color/divider"
+        android:background="@color/gray_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

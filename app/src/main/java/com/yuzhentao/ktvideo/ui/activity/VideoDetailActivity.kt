@@ -125,7 +125,7 @@ class VideoDetailActivity : AppCompatActivity() {
         playUrl = bean.playUrl
         val blurred = bean.blurred//接口提供的虚化图
         if (blurred.isNullOrEmpty()) {
-            iv_bg.setImageResource(R.color.black_80)
+            iv_bg.setImageResource(R.color.app_black)
         } else {
             ImageUtil.showHigh(context, iv_bg, blurred)
         }

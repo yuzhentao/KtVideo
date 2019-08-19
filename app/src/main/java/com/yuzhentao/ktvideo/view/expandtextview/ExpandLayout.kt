@@ -65,13 +65,13 @@ class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     private fun initAttrs(context: Context, attrs: AttributeSet?) {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.ExpandLayout)
         contentTextSize = ta.getDimension(R.styleable.ExpandLayout_contentTextSize, DimenUtil.sp2px(context, 18F).toFloat())
-        contentTextColor = ta.getColor(R.styleable.ExpandLayout_contentTextColor, ContextCompat.getColor(context, R.color.text_black))
+        contentTextColor = ta.getColor(R.styleable.ExpandLayout_contentTextColor, ContextCompat.getColor(context, R.color.app_black))
         maxCollapsedLines = ta.getInt(R.styleable.ExpandLayout_maxCollapsedLines, 3)
         ellipsizeText = if (ta.getString(R.styleable.ExpandLayout_ellipsizeText).isNullOrEmpty()) "..." else ta.getString(R.styleable.ExpandLayout_ellipsizeText)!!
         expandText = if (ta.getString(R.styleable.ExpandLayout_expandText).isNullOrEmpty()) "更多" else ta.getString(R.styleable.ExpandLayout_expandText)!!
         collapseText = if (ta.getString(R.styleable.ExpandLayout_collapseText).isNullOrEmpty()) "" else ta.getString(R.styleable.ExpandLayout_collapseText)!!
         expandCollapseTextSize = ta.getDimension(R.styleable.ExpandLayout_expandCollapseTextSize, DimenUtil.sp2px(context, 18F).toFloat())
-        expandCollapseTextColor = ta.getColor(R.styleable.ExpandLayout_expandCollapseTextColor, ContextCompat.getColor(context, R.color.text_blue))
+        expandCollapseTextColor = ta.getColor(R.styleable.ExpandLayout_expandCollapseTextColor, ContextCompat.getColor(context, R.color.app_pink))
         expandCollapseTextGravity = ta.getInt(R.styleable.ExpandLayout_expandCollapseTextGravity, 0)
         expandCollapseTextLayoutGravity = ta.getInt(R.styleable.ExpandLayout_expandCollapseTextLayoutGravity, 0)
         expandCollapseTextMarginTop = ta.getDimension(R.styleable.ExpandLayout_expandCollapseTextMarginTop, 0f)

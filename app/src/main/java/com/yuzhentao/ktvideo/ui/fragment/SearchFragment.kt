@@ -139,9 +139,7 @@ class SearchFragment : DialogFragment(),
 
     private fun initDialog() {
         val window = dialog.window
-        val metrics = resources.displayMetrics
-        val width = (metrics.widthPixels * 0.98).toInt()
-        window!!.setLayout(width, WindowManager.LayoutParams.MATCH_PARENT)
+        window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
         window.setGravity(Gravity.TOP)
         window.setWindowAnimations(R.style.DialogEmptyAnimation)//取消过渡动画
     }

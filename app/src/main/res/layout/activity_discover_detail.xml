@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/x200"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.37"
-                tools:background="@color/pink">
+                tools:background="@color/app_pink">
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv"
@@ -139,7 +139,7 @@
                         style="@style/TextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:textColor="@color/app_black"
                         android:textSize="@dimen/x14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,14 +167,14 @@
             app:tabMode="fixed"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
-            tools:background="@color/blue"
+            tools:background="@color/bg_blue"
             tools:ignore="UnusedAttribute" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="@color/green" />
+            tools:background="@color/bg_green" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

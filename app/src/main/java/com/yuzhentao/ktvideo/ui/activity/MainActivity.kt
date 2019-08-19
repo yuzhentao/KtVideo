@@ -4,11 +4,11 @@ import android.Manifest
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
@@ -100,10 +100,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.layout_top -> {
+            R.id.tb -> {
                 homeFragment?.scrollToTop()
             }
-            R.id.iv_right_top -> {
+            R.id.iv_top -> {
                 if (rbMine?.isChecked!!) {//设置
                     newIntent<SettingActivity>(false)
                 } else {//搜索
@@ -197,9 +197,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        (findViewById<ConstraintLayout>(R.id.layout_top)).setOnClickListener(this)
-        tvTitle = findViewById(R.id.tv_center_top)
-        ivSearch = findViewById(R.id.iv_right_top)
+        (findViewById<Toolbar>(R.id.tb)).setOnClickListener(this)
+        tvTitle = findViewById(R.id.tv_top)
+        ivSearch = findViewById(R.id.iv_top)
         rbHome = findViewById(R.id.rb_home)
         rbDiscover = findViewById(R.id.rb_discover)
         rbRanking = findViewById(R.id.rb_ranking)

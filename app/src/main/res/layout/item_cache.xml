@@ -25,7 +25,7 @@
         android:layout_marginEnd="@dimen/x5"
         android:gravity="center_vertical"
         android:maxLines="2"
-        android:textColor="@color/black"
+        android:textColor="@color/app_black"
         android:textSize="@dimen/x14"
         app:layout_constraintBottom_toBottomOf="@id/iv"
         app:layout_constraintEnd_toStartOf="@id/btn_progress"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:pb_fab_circle_color="@color/pink"
+        app:pb_fab_circle_color="@color/app_pink"
         app:pb_fab_color="@color/white"
         app:pb_fab_starting_progress="0"
         app:pb_fab_step_size="1"
@@ -51,7 +51,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1px"
-        android:background="@color/divider"
+        android:background="@color/gray_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

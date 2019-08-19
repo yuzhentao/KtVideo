@@ -32,7 +32,7 @@
             android:layout_marginTop="@dimen/x20"
             android:maxLines="2"
             android:text="@string/mine_login"
-            android:textColor="@color/gray_2"
+            android:textColor="@color/app_gray"
             android:textSize="@dimen/x12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
                 android:layout_marginStart="@dimen/x5"
                 android:maxWidth="@dimen/x100"
                 android:text="@string/mine_favorite"
-                android:textColor="@color/gray_2"
+                android:textColor="@color/app_gray"
                 android:textSize="@dimen/x12" />
         </LinearLayout>
 
@@ -96,7 +96,7 @@
                 android:layout_marginStart="@dimen/x5"
                 android:maxWidth="@dimen/x100"
                 android:text="@string/mine_comment"
-                android:textColor="@color/gray_2"
+                android:textColor="@color/app_gray"
                 android:textSize="@dimen/x12" />
         </LinearLayout>
 
@@ -104,7 +104,7 @@
             android:id="@+id/v_line_1"
             android:layout_width="@dimen/x1"
             android:layout_height="@dimen/x20"
-            android:background="@color/gray_2"
+            android:background="@color/app_gray"
             app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/x1"
             android:layout_marginTop="@dimen/x5"
-            android:background="@color/gray_2"
+            android:background="@color/app_gray"
             app:layout_constraintTop_toBottomOf="@id/ll_favorite" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -128,7 +128,7 @@
             android:paddingStart="@dimen/x2"
             android:paddingEnd="@dimen/x2"
             android:text="@string/mine_cache"
-            android:textColor="@color/gray_2"
+            android:textColor="@color/app_gray"
             android:textSize="@dimen/x12"
             app:layout_constraintTop_toBottomOf="@id/v_line_2"
             tools:ignore="UnusedAttribute" />
@@ -142,7 +142,7 @@
             android:paddingStart="@dimen/x2"
             android:paddingEnd="@dimen/x2"
             android:text="@string/mine_watch"
-            android:textColor="@color/gray_2"
+            android:textColor="@color/app_gray"
             android:textSize="@dimen/x12"
             app:layout_constraintTop_toBottomOf="@id/tv_cache"
             tools:ignore="UnusedAttribute" />
@@ -156,7 +156,7 @@
             android:paddingStart="@dimen/x2"
             android:paddingEnd="@dimen/x2"
             android:text="@string/mine_feedback"
-            android:textColor="@color/gray_2"
+            android:textColor="@color/app_gray"
             android:textSize="@dimen/x12"
             app:layout_constraintTop_toBottomOf="@id/tv_watch"
             tools:ignore="UnusedAttribute" />

@@ -76,7 +76,7 @@ class DiscoverDetailLeftAdapter(layoutResId: Int, data: MutableList<DiscoverDeta
                         data.tags[i].name?.let {
                             val tv = AppCompatTextView(mContext)
                             tv.text = data.tags[i].name
-                            tv.setTextColor(ContextCompat.getColor(mContext, R.color.pink))
+                            tv.setTextColor(ContextCompat.getColor(mContext, R.color.app_pink))
                             tv.setBackgroundResource(R.drawable.shape_tag)
                             tv.ellipsize = TextUtils.TruncateAt.END
                             tv.gravity = Gravity.CENTER

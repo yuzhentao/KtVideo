@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         tools:layout_gravity="end"
         tools:text="更多"
-        tools:textColor="@color/pink" />
+        tools:textColor="@color/app_pink" />
 
 </LinearLayout>

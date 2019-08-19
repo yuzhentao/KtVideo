@@ -11,6 +11,6 @@
     android:paddingTop="@dimen/x2"
     android:paddingEnd="@dimen/x4"
     android:paddingBottom="@dimen/x2"
-    android:textColor="@color/pink"
+    android:textColor="@color/app_pink"
     android:textSize="@dimen/x12"
     tools:text="测试测试测试" />

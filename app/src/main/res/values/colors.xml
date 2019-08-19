@@ -105,28 +105,19 @@
     0% 00
     -->
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="app_black">#CC000000</color>
+    <color name="app_gray">#FF848383</color>
+    <color name="app_pink">#80F06292</color>
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_50">#80FFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="black_80">#CC000000</color>
-    <color name="black_50">#80000000</color>
-    <color name="gray">#FF808080</color>
-    <color name="gray_2">#848383</color>
+    <color name="black_50">#80000000</color>>
     <color name="gray_line">#FFF0F0F0</color>
-    <color name="divider">#e6e6e6</color>
-    <color name="transparent">#0000</color>
-    <color name="textbg">#8F9AA8</color>
-    <color name="color_line">#FFEDEBEB</color>
-    <color name="pink">#80F06292</color>
     <color name="pink_10">#1AF06292</color>
-    <color name="red">#33FF6A6A</color>
-    <color name="yellow">#33FFC125</color>
-    <color name="blue">#3300BFFF</color>
-    <color name="green">#33CAFF70</color>
-    <color name="text_black">#333333</color>
-    <color name="text_blue">#39a4d2</color>
+    <color name="bg_red">#33FF6A6A</color>
+    <color name="bg_yellow">#33FFC125</color>
+    <color name="bg_blue">#3300BFFF</color>
+    <color name="bg_green">#33CAFF70</color>
 
 </resources>
