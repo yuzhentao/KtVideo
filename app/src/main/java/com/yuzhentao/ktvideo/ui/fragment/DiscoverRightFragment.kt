@@ -41,7 +41,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.layoutManager = layoutManager
-        adapter = DiscoverDetailRightAdapter(R.layout.item_discover_detail, null)
+        adapter = DiscoverDetailRightAdapter(null)
         rv.adapter = adapter
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var firstVisibleItem: Int? = 0

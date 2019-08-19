@@ -6,7 +6,7 @@ package com.yuzhentao.ktvideo.bean
  */
 data class HomeBean(
         val dialog: Any,
-        val issueList: List<Issue>,
+        val issueList: List<Issue>?,
         val newestIssueType: String,
         val nextPageUrl: String,
         val nextPublishTime: Long) {
@@ -14,13 +14,13 @@ data class HomeBean(
     data class Issue(
             val count: Int,
             val date: Long,
-            val itemList: List<Item>,
+            val itemList: List<Item>?,
             val publishTime: Long,
             val releaseTime: Long,
             val type: String) {
 
         data class Item(
-                val data: Data,
+                val data: Data?,
                 val adIndex: Int,
                 val id: Int,
                 val tag: Any,
@@ -31,13 +31,13 @@ data class HomeBean(
                     val adTrack: Any,
                     val author: Author,
                     val campaign: Any,
-                    val category: String,
+                    val category: String?,
                     val collected: Boolean,
-                    val consumption: Consumption,
-                    val cover: Cover,
+                    val consumption: Consumption?,
+                    val cover: Cover?,
                     val dataType: String,
                     val date: Long,
-                    val description: String,
+                    val description: String?,
                     val descriptionEditor: String,
                     val descriptionPgc: String,
                     val duration: Int,
@@ -50,7 +50,7 @@ data class HomeBean(
                     val lastViewTime: Any,
                     val library: String,
                     val playInfo: List<PlayInfo>,
-                    val playUrl: String,
+                    val playUrl: String?,
                     val played: Boolean,
                     val playlists: Any,
                     val promotion: Any,
@@ -65,7 +65,7 @@ data class HomeBean(
                     val subtitles: List<Any>,
                     val tags: List<Tag>,
                     val thumbPlayUrl: Any,
-                    val title: String,
+                    val title: String?,
                     val titlePgc: String,
                     val type: String,
                     val waterMarks: Any,
@@ -143,9 +143,9 @@ data class HomeBean(
                 }
 
                 data class Cover(
-                        val blurred: String,
+                        val blurred: String?,
                         val detail: String,
-                        val feed: String,
+                        val feed: String?,
                         val homepage: String,
                         val sharing: Any)
 

@@ -24,7 +24,8 @@ import com.yuzhentao.ktvideo.util.ImageUtil
 import com.yuzhentao.ktvideo.util.ViewUtil
 import com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
 
-class DiscoverDetailRightAdapter(layoutResId: Int, data: MutableList<DiscoverDetailRightBean.Item.Data.Content>?) : BaseQuickAdapter<DiscoverDetailRightBean.Item.Data.Content, BaseViewHolder>(layoutResId, data) {
+class DiscoverDetailRightAdapter(data: MutableList<DiscoverDetailRightBean.Item.Data.Content>?)
+    : BaseQuickAdapter<DiscoverDetailRightBean.Item.Data.Content, BaseViewHolder>(R.layout.item_discover_detail, data) {
 
     override fun convert(helper: BaseViewHolder?, item: DiscoverDetailRightBean.Item.Data.Content?) {
         helper?.let {

@@ -1,13 +1,18 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
+import android.content.Intent
+import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HomeAdapter
 import com.yuzhentao.ktvideo.bean.HomeBean
+import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.presenter.HomePresenter
+import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.regex.Pattern
 
@@ -17,7 +22,7 @@ import java.util.regex.Pattern
 class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private var isRefresh: Boolean = false
-    private var adapter: HomeAdapter? = null
+    private lateinit var adapter: HomeAdapter
     var beans = ArrayList<HomeBean.Issue.Item>()
     var presenter: HomePresenter? = null
     var date: String? = null
@@ -32,7 +37,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         srl.setOnRefreshListener(this)
         srl.setColorSchemeResources(R.color.app_pink)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = HomeAdapter(context, beans)
+        adapter = HomeAdapter(null)
         rv.adapter = adapter
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -46,6 +51,30 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                 }
             }
         })
+        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+            val bean: HomeBean.Issue.Item? = adapter!!.data[position] as HomeBean.Issue.Item
+            bean?.let {
+                val intent = Intent(context, VideoDetailActivity::class.java)
+                val id = bean.data?.id
+                val photo = bean.data?.cover?.feed
+                val title = bean.data?.title
+                val duration = bean.data?.duration
+                val desc = bean.data?.description
+                val playUrl = bean.data?.playUrl
+                val category = bean.data?.category
+                val blurred = bean.data?.cover?.blurred
+                val collect = bean.data?.consumption?.collectionCount
+                val share = bean.data?.consumption?.shareCount
+                val reply = bean.data?.consumption?.replyCount
+                val time = System.currentTimeMillis()
+                val videoBean = VideoBean(id, photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+                val bundle = Bundle()
+                bundle.putParcelable("data", videoBean)
+                intent.putExtra("bundle", bundle)
+                intent.putExtra("showCache", true)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
@@ -65,10 +94,10 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             }
         }
         bean.issueList
-                .flatMap { it.itemList }
-                .filter { it.type == "video" }
-                .forEach { beans.add(it) }
-        adapter?.notifyDataSetChanged()
+                ?.flatMap { it.itemList!! }
+                ?.filter { it.type == "video" }
+                ?.forEach { beans.add(it) }
+        adapter.setNewData(beans)
     }
 
     override fun onRefresh() {
