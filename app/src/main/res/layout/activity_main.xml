@@ -73,53 +73,61 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <RadioButton
+        <com.yuzhentao.ktvideo.view.CustomRadioButton
             android:id="@+id/rb_home"
             android:layout_width="0dp"
-            android:layout_height="@dimen/x34"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/home_bg_selected"
+            android:drawableTop="@drawable/selector_bottom_home"
             android:gravity="center"
             android:text="@string/home_bottom_1"
             android:textColor="@color/color_gray_black"
-            android:textSize="@dimen/x10" />
+            android:textSize="@dimen/x10"
+            app:rb_height="@dimen/x20"
+            app:rb_width="@dimen/x33" />
 
-        <RadioButton
+        <com.yuzhentao.ktvideo.view.CustomRadioButton
             android:id="@+id/rb_discover"
             android:layout_width="0dp"
-            android:layout_height="@dimen/x34"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/find_bg_selected"
+            android:drawableTop="@drawable/selector_bottom_discover"
             android:gravity="center"
             android:text="@string/home_bottom_2"
             android:textColor="@color/color_gray_black"
-            android:textSize="@dimen/x10" />
+            android:textSize="@dimen/x10"
+            app:rb_height="@dimen/x20"
+            app:rb_width="@dimen/x33" />
 
-        <RadioButton
+        <com.yuzhentao.ktvideo.view.CustomRadioButton
             android:id="@+id/rb_ranking"
             android:layout_width="0dp"
-            android:layout_height="@dimen/x34"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/hot_bg_selected"
+            android:drawableTop="@drawable/selector_bottom_hot"
             android:gravity="center"
             android:text="@string/home_bottom_3"
             android:textColor="@color/color_gray_black"
-            android:textSize="@dimen/x10" />
+            android:textSize="@dimen/x10"
+            app:rb_height="@dimen/x20"
+            app:rb_width="@dimen/x33" />
 
-        <RadioButton
+        <com.yuzhentao.ktvideo.view.CustomRadioButton
             android:id="@+id/rb_mine"
             android:layout_width="0dp"
-            android:layout_height="@dimen/x34"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/mine_bg_selected"
+            android:drawableTop="@drawable/selector_bottom_mine"
             android:gravity="center"
             android:text="@string/home_bottom_4"
             android:textColor="@color/color_gray_black"
-            android:textSize="@dimen/x10" />
+            android:textSize="@dimen/x10"
+            app:rb_height="@dimen/x20"
+            app:rb_width="@dimen/x33" />
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
