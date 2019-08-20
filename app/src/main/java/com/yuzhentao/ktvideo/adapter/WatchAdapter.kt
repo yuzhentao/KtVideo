@@ -23,9 +23,9 @@ class WatchAdapter(data: MutableList<VideoBean>?) : BaseQuickAdapter<VideoBean, 
                 } else {
                     ViewUtil.setMargins(helper.itemView, 0, 0, 0, 0)
                 }
-                val photoUrl: String? = item.feed
-                photoUrl?.let {
-                    ImageUtil.show(mContext!!, helper.getView<AppCompatImageView>(R.id.iv), photoUrl)
+                val img: String? = item.feed
+                img?.let {
+                    ImageUtil.show(mContext!!, helper.getView<AppCompatImageView>(R.id.iv), img)
                 }
                 val title: String? = item.title
                 helper.getView<AppCompatTextView>(R.id.tv_top)!!.text = title

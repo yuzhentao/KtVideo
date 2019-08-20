@@ -9,13 +9,13 @@ import android.view.View
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadTask
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.extension.shortToast
-import com.yuzhentao.ktvideo.interfaces.OnItemClickListener
 import com.yuzhentao.ktvideo.util.DownloadState
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
@@ -30,7 +30,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     var beans = ArrayList<VideoBean>()
 
-    lateinit var adapter: CacheAdapter
+    private lateinit var adapter: CacheAdapter
 
     private lateinit var dbManager: VideoDbManager
 
@@ -66,25 +66,19 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         tv_top.text = getString(R.string.mine_cache)
         iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = CacheAdapter(context, beans, dbManager)
+        adapter = CacheAdapter(beans, dbManager)
         rv.adapter = adapter
-        adapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(view: View, position: Int) {
-                val bean: VideoBean? = beans[position]
-                bean?.let {
-                    val intent = Intent(context, VideoDetailActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putParcelable("data", bean)
-                    intent.putExtra("bundle", bundle)
-                    intent.putExtra("showCache", false)
-                    context.startActivity(intent)
-                }
+        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+            val bean: VideoBean? = adapter!!.data[position] as VideoBean
+            bean?.let {
+                val intent = Intent(context, VideoDetailActivity::class.java)
+                val bundle = Bundle()
+                bundle.putParcelable("data", bean)
+                intent.putExtra("bundle", bundle)
+                intent.putExtra("showCache", false)
+                context.startActivity(intent)
             }
-
-            override fun onItemLongClick(view: View, position: Int): Boolean {
-                return false
-            }
-        })
+        }
     }
 
     private fun initData() {
@@ -100,15 +94,15 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 rv.visibility = View.GONE
                 tv_hint.visibility = View.VISIBLE
             }
-            adapter.notifyDataSetChanged()
+            adapter.setNewData(beans)
         }
     }
 
     @Download.onTaskRunning
     fun onDownloadProgress(task: DownloadTask) {
-        if (adapter.beans != null && adapter.beans!!.size > 0) {
-            for (index in adapter.beans!!.indices) {
-                val bean = adapter.beans!![index]
+        if (adapter.data.size > 0) {
+            for (index in adapter.data.indices) {
+                val bean = adapter.data[index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("缓存").e("进度>>>${task.percent}>>>${bean.title}")
                     bean.downloadProgress = task.percent
@@ -121,9 +115,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     @Download.onTaskFail
     fun onDownloadFail(task: DownloadTask) {
-        if (adapter.beans != null && adapter.beans!!.size > 0) {
-            for (index in adapter.beans!!.indices) {
-                val bean = adapter.beans!![index]
+        if (adapter.data.size > 0) {
+            for (index in adapter.data.indices) {
+                val bean = adapter.data[index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("缓存").e("失败>>>${bean.title}")
                     shortToast(getString(R.string.cache_fail))
@@ -138,9 +132,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     @Download.onTaskComplete
     fun onDownloadComplete(task: DownloadTask) {
-        if (adapter.beans != null && adapter.beans!!.size > 0) {
-            for (index in adapter.beans!!.indices) {
-                val bean = adapter.beans!![index]
+        if (adapter.data.size > 0) {
+            for (index in adapter.data.indices) {
+                val bean = adapter.data[index]
                 if (task.key == bean.playUrl) {
                     Timber.tag("缓存").e("完成>>>${bean.title}")
                     shortToast(getString(R.string.cache_complete))

@@ -120,7 +120,7 @@ data class HomeBean(
                         val description: String,
                         val expert: Boolean,
                         val follow: Follow,
-                        val icon: String,
+                        val icon: String?,
                         val id: Int,
                         val ifPgc: Boolean,
                         val latestReleaseTime: Long,

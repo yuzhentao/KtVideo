@@ -13,9 +13,9 @@ class RankingAdapter(data: MutableList<HotBean.Item.Data>?) : BaseQuickAdapter<H
     override fun convert(helper: BaseViewHolder?, item: HotBean.Item.Data?) {
         helper?.let {
             item?.let {
-                val photo = item.cover!!.feed
-                photo?.let {
-                    ImageUtil.show(mContext!!, helper.getView<AppCompatImageView>(R.id.iv), photo)
+                val img = item.cover?.feed
+                img?.let {
+                    ImageUtil.show(mContext!!, helper.getView<AppCompatImageView>(R.id.iv), img)
                 }
                 val title = item.title
                 helper.getView<AppCompatTextView>(R.id.tv_title).text = title
