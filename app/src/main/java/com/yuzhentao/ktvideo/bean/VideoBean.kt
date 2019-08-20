@@ -21,7 +21,8 @@ open class VideoBean(
         var collect: Int? = 0,
         var share: Int? = 0,
         var reply: Int? = 0,
-        var time: Long = 0L) : Parcelable, RealmModel {
+        var time: Long = 0L,
+        var savePath: String? = "") : Parcelable, RealmModel {
 
     var downloadState: String? = DownloadState.NORMAL.name
     var downloadProgress: Int? = 0
@@ -38,7 +39,8 @@ open class VideoBean(
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readLong()) {
+            parcel.readLong(),
+            parcel.readString()) {
         downloadState = parcel.readString()
         downloadProgress = parcel.readValue(Int::class.java.classLoader) as? Int
     }
@@ -56,6 +58,7 @@ open class VideoBean(
         parcel.writeValue(share)
         parcel.writeValue(reply)
         parcel.writeLong(time)
+        parcel.writeString(savePath)
         parcel.writeString(downloadState)
         parcel.writeValue(downloadProgress)
     }

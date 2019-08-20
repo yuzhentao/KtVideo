@@ -17,6 +17,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.util.DownloadState
+import com.yuzhentao.ktvideo.util.FileUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
 
@@ -82,7 +83,11 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     private fun initData() {
         beans = mutableListOf()
         dbManager.findCache()?.let {
-            beans.addAll(it)
+            it.forEach { bean ->
+                if (FileUtil.isFileExist(bean.savePath)) {//经查本地是否还有视频
+                    beans.add(bean)
+                }
+            }
             if (beans.size > 0) {
                 rv.visibility = View.VISIBLE
                 tv_hint.visibility = View.GONE

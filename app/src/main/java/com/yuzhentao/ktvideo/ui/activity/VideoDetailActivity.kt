@@ -23,7 +23,10 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.extension.shortToast
-import com.yuzhentao.ktvideo.util.*
+import com.yuzhentao.ktvideo.util.DownloadState
+import com.yuzhentao.ktvideo.util.GlideApp
+import com.yuzhentao.ktvideo.util.ImageUtil
+import com.yuzhentao.ktvideo.util.VideoListener
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -124,6 +127,7 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        bean.savePath = Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo" + File.separator + "download_${bean.id}.mp4"
         playUrl = bean.playUrl
         val blurred = bean.blurred//接口提供的虚化图
         if (blurred.isNullOrEmpty()) {
@@ -163,16 +167,12 @@ class VideoDetailActivity : AppCompatActivity() {
         tv_download.setOnClickListener {
             playUrl?.let {
                 if (dbManager.find(playUrl!!) == null) {
-                    bean.id?.let {
-                        cache(bean.id!!)
-                    }
+                    cache()
                 } else {
                     dbBean = dbManager.find(playUrl!!)
                     when (dbBean!!.downloadState) {
                         DownloadState.NORMAL.name -> {
-                            bean.id?.let {
-                                cache(bean.id!!)
-                            }
+                            cache()
                         }
                         DownloadState.DOWNLOADING.name -> shortToast(getString(R.string.cache_ing))
                         DownloadState.PAUSE.name -> shortToast(getString(R.string.cache_ing))
@@ -192,11 +192,13 @@ class VideoDetailActivity : AppCompatActivity() {
     /**
      * 缓存
      */
-    private fun cache(name: Int) {
-        Aria.download(this)
-                .load(playUrl!!)
-                .setFilePath(Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo" + File.separator + "download_$name.mp4")
-                .start()
+    private fun cache() {
+        bean.savePath?.let {
+            Aria.download(this)
+                    .load(playUrl!!)
+                    .setFilePath(bean.savePath!!)
+                    .start()
+        }
     }
 
     private fun prepareVideo() {
