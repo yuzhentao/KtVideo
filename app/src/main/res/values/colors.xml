@@ -112,7 +112,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_50">#80FFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="black_50">#80000000</color>>
+    <color name="black_50">#80000000</color>
+    <color name="black_25">#40000000</color>
+    <color name="black_10">#1A000000</color>
     <color name="gray_line">#FFF0F0F0</color>
     <color name="pink_10">#1AF06292</color>
     <color name="bg_red">#33FF6A6A</color>

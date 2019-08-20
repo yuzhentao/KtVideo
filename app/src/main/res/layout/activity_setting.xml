@@ -35,8 +35,9 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_top"
                 style="@style/TextStyle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="@dimen/x240"
                 android:textColor="@color/app_black"
                 android:textSize="@dimen/x14"
                 android:textStyle="bold"

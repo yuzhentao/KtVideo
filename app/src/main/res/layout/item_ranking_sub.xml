@@ -12,12 +12,6 @@
         android:scaleType="centerCrop"
         tools:src="@drawable/img_test_1" />
 
-    <View
-        android:id="@+id/v_mask"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boman_selector" />
-
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_title"
         style="@style/TextStyle"

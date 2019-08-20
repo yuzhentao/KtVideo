@@ -7,18 +7,11 @@
     android:layout_margin="@dimen/x2">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_photo"
+        android:id="@+id/iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         tools:src="@drawable/img_test_2" />
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_mask"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.6"
-        android:background="@drawable/boman_selector" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv"
