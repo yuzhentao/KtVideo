@@ -100,7 +100,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     }
 
     override fun setData(bean: DiscoverDetailBean?) {
-        bean?.let {
+        bean?.tagInfo?.let {
             category = bean.tagInfo.name
             tv_top.text = category
             tv_name.text = category

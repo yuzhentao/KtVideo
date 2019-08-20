@@ -6,7 +6,7 @@ package com.yuzhentao.ktvideo.bean
  */
 data class DiscoverDetailBean(
         val tabInfo: TabInfo,
-        val tagInfo: TagInfo) {
+        val tagInfo: TagInfo?) {
 
     data class TagInfo(
             val actionUrl: Any,
