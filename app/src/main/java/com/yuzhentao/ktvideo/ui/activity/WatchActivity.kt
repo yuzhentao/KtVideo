@@ -22,12 +22,10 @@ import kotlinx.android.synthetic.main.activity_cache.*
  */
 class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.View {
 
-    var context: Context = this
-    var activity: WatchActivity = this
+    private var context: Context = this
 
-    var beans = ArrayList<VideoBean>()
-
-    lateinit var adapter: WatchAdapter
+    private var beans = ArrayList<VideoBean>()
+    private lateinit var adapter: WatchAdapter
 
     private lateinit var dbManager: VideoDbManager
 
@@ -101,7 +99,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                 bundle.putParcelable("data", bean)
                 intent.putExtra("bundle", bundle)
                 intent.putExtra("showCache", !noKey!!)
-                context.startActivity(intent)
+                startActivity(intent)
             }
         }
     }

@@ -25,11 +25,9 @@ import timber.log.Timber
  */
 class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
-    var context: Context = this
-    var activity: CacheActivity = this
+    private var context: Context = this
 
-    var beans = ArrayList<VideoBean>()
-
+    private var beans = ArrayList<VideoBean>()
     private lateinit var adapter: CacheAdapter
 
     private lateinit var dbManager: VideoDbManager
@@ -76,7 +74,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 bundle.putParcelable("data", bean)
                 intent.putExtra("bundle", bundle)
                 intent.putExtra("showCache", false)
-                context.startActivity(intent)
+                startActivity(intent)
             }
         }
     }
