@@ -105,8 +105,8 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     }
 
     private fun initData() {
+        beans = mutableListOf()
         if (noKey!!) {
-            beans = mutableListOf()
             dbManager.findAll()?.let {
                 beans.addAll(it)
                 if (beans.size > 0) {

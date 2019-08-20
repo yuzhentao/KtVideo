@@ -23,7 +23,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
 
     private var isRefresh: Boolean = false
     private lateinit var adapter: HomeAdapter
-    private lateinit var beans: MutableList<HomeBean.Issue.Item>
+    private var beans: MutableList<HomeBean.Issue.Item> = mutableListOf()
     var presenter: HomePresenter? = null
     var date: String? = null
 
@@ -82,7 +82,6 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     }
 
     override fun setData(bean: HomeBean) {
-        beans = mutableListOf()
         val regEx = "[^0-9]"
         val p = Pattern.compile(regEx)
         val m = p.matcher(bean.nextPageUrl)
