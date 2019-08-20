@@ -1,17 +1,18 @@
 package com.yuzhentao.ktvideo.mvp.model
 
 import android.content.Context
-import com.yuzhentao.ktvideo.bean.HotBean
+import com.yuzhentao.ktvideo.bean.RankingSubBean
 import com.yuzhentao.ktvideo.network.ApiService
 import com.yuzhentao.ktvideo.network.RetrofitClient
+import com.yuzhentao.ktvideo.util.AppUtil
 import io.reactivex.Observable
 
-class HotModel {
+class RankingSubModel {
 
-    fun loadData(context: Context, strategy: String?): Observable<HotBean>? {
+    fun loadData(context: Context, strategy: String): Observable<RankingSubBean>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getHotData(10, strategy!!, "26868b32e808498db32fd51fb422d00175e179df", 83)
+        return apiService?.getRankingSubData(strategy, AppUtil.getOSModel())
     }
 
 }

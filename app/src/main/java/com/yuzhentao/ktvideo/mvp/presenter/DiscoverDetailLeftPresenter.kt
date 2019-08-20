@@ -41,7 +41,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
                     Observable.just(beans)
                 }
                 ?.normalSchedulers()
-                ?.subscribe(object : Observer<List<DiscoverDetailLeftBean.Item.Data.Content>> {
+                ?.subscribe(object : Observer<MutableList<DiscoverDetailLeftBean.Item.Data.Content>> {
                     override fun onComplete() {
 
                     }
@@ -50,7 +50,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
 
                     }
 
-                    override fun onNext(t: List<DiscoverDetailLeftBean.Item.Data.Content>) {
+                    override fun onNext(t: MutableList<DiscoverDetailLeftBean.Item.Data.Content>) {
                         view?.setData(t)
                     }
 

@@ -14,13 +14,13 @@ import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yuzhentao.ktvideo.R
-import com.yuzhentao.ktvideo.adapter.HotAdapter
+import com.yuzhentao.ktvideo.adapter.RankingAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverRightFragment
-import com.yuzhentao.ktvideo.ui.fragment.RankingFragment
+import com.yuzhentao.ktvideo.ui.fragment.RankingSubFragment
 import com.yuzhentao.ktvideo.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs
@@ -169,13 +169,13 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         fragments.add(leftFragment)
         fragments.add(rightFragment)
 
-        vp.adapter = HotAdapter(supportFragmentManager, fragments, titles)
+        vp.adapter = RankingAdapter(supportFragmentManager, fragments, titles)
         tl.setupWithViewPager(vp)
         tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 tab?.let {
                     if (tab.position < fragments.size) {
-                        (fragments[tab.position] as RankingFragment).scrollToTop()
+                        (fragments[tab.position] as RankingSubFragment).scrollToTop()
                     }
                 }
             }

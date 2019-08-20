@@ -24,7 +24,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
 
     private var context: Context = this
 
-    private var beans = ArrayList<VideoBean>()
+    private lateinit var beans: MutableList<VideoBean>
     private lateinit var adapter: WatchAdapter
 
     private lateinit var dbManager: VideoDbManager
@@ -106,10 +106,8 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
 
     private fun initData() {
         if (noKey!!) {
+            beans = mutableListOf()
             dbManager.findAll()?.let {
-                if (beans.size > 0) {
-                    beans.clear()
-                }
                 beans.addAll(it)
                 if (beans.size > 0) {
                     rv.visibility = View.VISIBLE

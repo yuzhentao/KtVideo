@@ -27,7 +27,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     private var context: Context = this
 
-    private var beans = ArrayList<VideoBean>()
+    private lateinit var beans: MutableList<VideoBean>
     private lateinit var adapter: CacheAdapter
 
     private lateinit var dbManager: VideoDbManager
@@ -64,7 +64,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         tv_top.text = getString(R.string.mine_cache)
         iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = CacheAdapter(beans, dbManager)
+        adapter = CacheAdapter(null, dbManager)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter!!.data[position] as VideoBean
@@ -80,10 +80,8 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initData() {
+        beans = mutableListOf()
         dbManager.findCache()?.let {
-            if (beans.size > 0) {
-                beans.clear()
-            }
             beans.addAll(it)
             if (beans.size > 0) {
                 rv.visibility = View.VISIBLE

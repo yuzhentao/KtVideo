@@ -59,8 +59,14 @@ interface ApiService {
     /**
      * 排行
      */
-    @GET("v3/ranklist")
-    fun getHotData(@Query("num") num: Int, @Query("strategy") strategy: String, @Query("udid") udid: String, @Query("vc") vc: Int): Observable<HotBean>
+    @GET("v4/rankList?${Constant.PARAMS}")
+    fun getRankingData(@Query("deviceModel") deviceModel: String): Observable<RankingBean>
+
+    /**
+     * 排行子页
+     */
+    @GET("v4/rankList/videos?${Constant.PARAMS}")
+    fun getRankingSubData(@Query("strategy") strategy: String, @Query("deviceModel") deviceModel: String): Observable<RankingSubBean>
 
     /**
      * 热门搜索

@@ -38,9 +38,9 @@ data class DiscoverDetailBean(
 
         data class Tab(
                 val adTrack: Any,
-                val apiUrl: String,
+                val apiUrl: String?,
                 val id: Int,
-                val name: String,
+                val name: String?,
                 val nameType: Int,
                 val tabType: Int
         )

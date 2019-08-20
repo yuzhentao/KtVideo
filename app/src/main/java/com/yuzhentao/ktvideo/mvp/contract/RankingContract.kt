@@ -2,19 +2,19 @@ package com.yuzhentao.ktvideo.mvp.contract
 
 import com.yuzhentao.ktvideo.base.BasePresenter
 import com.yuzhentao.ktvideo.base.BaseView
-import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
+import com.yuzhentao.ktvideo.bean.RankingBean
 
-interface DiscoverDetailLeftContract {
+interface RankingContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setData(beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?)
+        fun setData(beans: MutableList<RankingBean.TabInfo.Tab>?)
 
     }
 
     interface Presenter : BasePresenter {
 
-        fun load(id: String)
+        fun load()
 
     }
 

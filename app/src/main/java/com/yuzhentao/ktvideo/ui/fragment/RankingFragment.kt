@@ -1,83 +1,106 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
+import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
+import android.support.v7.widget.AppCompatTextView
+import android.view.View
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingAdapter
-import com.yuzhentao.ktvideo.bean.HotBean
-import com.yuzhentao.ktvideo.bean.VideoBean
-import com.yuzhentao.ktvideo.mvp.contract.HotContract
-import com.yuzhentao.ktvideo.mvp.presenter.HotPresenter
-import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
-import kotlinx.android.synthetic.main.fragment_ranking.*
+import com.yuzhentao.ktvideo.bean.RankingBean
+import com.yuzhentao.ktvideo.mvp.contract.RankingContract
+import com.yuzhentao.ktvideo.mvp.presenter.RankingPresenter
+import kotlinx.android.synthetic.main.fragment_hot.*
 
 /**
- * 排行
+ * 热门
  */
-class RankingFragment : BaseFragment(), HotContract.View {
+class RankingFragment : BaseFragment(), RankingContract.View {
 
-    lateinit var presenter: HotPresenter
-    lateinit var strategy: String
-    private lateinit var adapter: RankingAdapter
-    private var beans: MutableList<HotBean.Item.Data> = mutableListOf()
+    private lateinit var titles: MutableList<String>
+    private lateinit var strategies: MutableList<String>
+    private lateinit var fragments: MutableList<Fragment>
+
+    private var presenter: RankingPresenter? = null
 
     override fun getLayoutResources(): Int {
-        return R.layout.fragment_ranking
+        return R.layout.fragment_hot
     }
 
     override fun initView() {
-        if (arguments != null) {
-            strategy = arguments!!.getString("strategy")!!
-            presenter = HotPresenter(context, this)
-            presenter.load(strategy)
-        }
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = RankingAdapter(beans)
-        rv.adapter = adapter
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: HotBean.Item.Data? = adapter!!.data[position] as HotBean.Item.Data
-            bean?.let {
-                val intent = Intent(context, VideoDetailActivity::class.java)
-                val id = bean.id
-                val img = bean.cover?.feed
-                val title = bean.title
-                val desc = bean.description
-                val duration = bean.duration
-                val playUrl = bean.playUrl
-                val category = bean.category
-                val blurred = bean.cover?.blurred
-                val collect = bean.consumption?.collectionCount
-                val share = bean.consumption?.shareCount
-                val reply = bean.consumption?.replyCount
-                val time = System.currentTimeMillis()
-                val videoBean = VideoBean(id, img, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
-                val bundle = Bundle()
-                bundle.putParcelable("data", videoBean)
-                intent.putExtra("bundle", bundle)
-                intent.putExtra("showCache", true)
-                startActivity(intent)
-            }
-        }
+        presenter = RankingPresenter(context, this)
+        presenter?.load()
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
 
     }
 
-    override fun setData(bean: HotBean) {
-        if (beans.size > 0) {
-            beans.clear()
-        }
-        bean.itemList?.forEach {
-            beans.add(it.data!!)
-        }
-        adapter.setNewData(beans)
-    }
+    override fun setData(beans: MutableList<RankingBean.TabInfo.Tab>?) {
+        beans?.let {
+            titles = mutableListOf()
+            strategies = mutableListOf()
+            fragments = mutableListOf()
 
-    fun scrollToTop() {
-        rv.smoothScrollToPosition(0)
+            for (item in beans) {
+                item.name?.let {
+                    titles.add(item.name)
+                }
+                item.apiUrl?.let {
+                    strategies.add(item.apiUrl.substring(item.apiUrl.lastIndexOf("=") + 1))
+                }
+            }
+            val weekFragment = RankingSubFragment()
+            val weekBundle = Bundle()
+            weekBundle.putString("strategy", strategies[0])
+            weekFragment.arguments = weekBundle
+            val monthFragment = RankingSubFragment()
+            val monthBundle = Bundle()
+            monthBundle.putString("strategy", strategies[1])
+            monthFragment.arguments = monthBundle
+            val allFragment = RankingSubFragment()
+            val allBundle = Bundle()
+            allBundle.putString("strategy", strategies[2])
+            allFragment.arguments = allBundle
+            fragments.add(weekFragment)
+            fragments.add(monthFragment)
+            fragments.add(allFragment)
+
+            vp.adapter = RankingAdapter(fragmentManager, fragments, titles)
+            tl.setupWithViewPager(vp)
+            tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                    tab?.let {
+                        if (tab.position < fragments.size) {
+                            (fragments[tab.position] as RankingSubFragment).scrollToTop()
+                        }
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                }
+            })
+            for (i in titles.indices) {
+                val tab = tl.getTabAt(i) ?: continue
+
+                tab.setCustomView(R.layout.layout_tab)
+                if (tab.customView == null) {
+                    continue
+                }
+
+                val tv = tab.customView!!.findViewById<AppCompatTextView>(R.id.tv)
+                tv.text = titles[i]
+                if (i == 0) {
+                    tv.isSelected = true
+                    tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
+                }
+            }
+        }
     }
 
 }

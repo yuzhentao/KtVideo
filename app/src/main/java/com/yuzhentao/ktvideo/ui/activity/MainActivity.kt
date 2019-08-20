@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var homeFragment: HomeFragment? = null
     private var discoverFragment: DiscoverFragment? = null
-    private var hotFragment: HotFragment? = null
+    private var rankingFragment: RankingFragment? = null
     private var mineFragment: MineFragment? = null
     private lateinit var searchFragment: SearchFragment
 
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .beginTransaction()
                         .show(homeFragment!!)
                         .hide(discoverFragment!!)
-                        .hide(hotFragment!!)
+                        .hide(rankingFragment!!)
                         .hide(mineFragment!!)
                         .commit()
             }
@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .beginTransaction()
                         .hide(homeFragment!!)
                         .show(discoverFragment!!)
-                        .hide(hotFragment!!)
+                        .hide(rankingFragment!!)
                         .hide(mineFragment!!)
                         .commit()
             }
@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .beginTransaction()
                         .hide(homeFragment!!)
                         .hide(discoverFragment!!)
-                        .show(hotFragment!!)
+                        .show(rankingFragment!!)
                         .hide(mineFragment!!)
                         .commit()
             }
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .beginTransaction()
                         .hide(homeFragment!!)
                         .hide(discoverFragment!!)
-                        .hide(hotFragment!!)
+                        .hide(rankingFragment!!)
                         .show(mineFragment!!)
                         .commit()
             }
@@ -234,8 +234,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (fragment is DiscoverFragment) {
                     discoverFragment = fragment
                 }
-                if (fragment is HotFragment) {
-                    hotFragment = fragment
+                if (fragment is RankingFragment) {
+                    rankingFragment = fragment
                 }
                 if (fragment is MineFragment) {
                     mineFragment = fragment
@@ -244,12 +244,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             homeFragment = HomeFragment()
             discoverFragment = DiscoverFragment()
-            hotFragment = HotFragment()
+            rankingFragment = RankingFragment()
             mineFragment = MineFragment()
             val ft = supportFragmentManager.beginTransaction()
             ft.add(R.id.content, homeFragment!!)
                     .add(R.id.content, discoverFragment!!)
-                    .add(R.id.content, hotFragment!!)
+                    .add(R.id.content, rankingFragment!!)
                     .add(R.id.content, mineFragment!!)
                     .commit()
         }
@@ -257,7 +257,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 .beginTransaction()
                 .show(homeFragment!!)
                 .hide(discoverFragment!!)
-                .hide(hotFragment!!)
+                .hide(rankingFragment!!)
                 .hide(mineFragment!!)
                 .commit()
     }

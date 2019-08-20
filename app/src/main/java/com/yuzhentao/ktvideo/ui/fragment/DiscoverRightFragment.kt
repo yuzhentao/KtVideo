@@ -97,7 +97,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
     }
 
-    override fun setData(beans: List<DiscoverDetailRightBean.Item.Data.Content>?) {
+    override fun setData(beans: MutableList<DiscoverDetailRightBean.Item.Data.Content>?) {
         adapter.setNewData(beans)
     }
 
