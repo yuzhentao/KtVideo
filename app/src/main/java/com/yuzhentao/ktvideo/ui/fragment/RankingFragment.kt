@@ -21,7 +21,7 @@ class RankingFragment : BaseFragment(), HotContract.View {
     lateinit var presenter: HotPresenter
     lateinit var strategy: String
     private lateinit var adapter: RankingAdapter
-    private var beans: ArrayList<HotBean.Item.Data> = ArrayList()
+    private var beans: MutableList<HotBean.Item.Data> = mutableListOf()
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_ranking

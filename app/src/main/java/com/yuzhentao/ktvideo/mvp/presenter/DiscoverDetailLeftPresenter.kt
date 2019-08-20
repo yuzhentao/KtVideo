@@ -2,9 +2,9 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.DiscoverDetailLeftBean
+import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailLeftContract
 import com.yuzhentao.ktvideo.mvp.model.DiscoverDetailLeftModel
-import com.yuzhentao.ktvideo.extension.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -32,7 +32,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
         }
         observable
                 ?.flatMap { t ->
-                    val beans: ArrayList<DiscoverDetailLeftBean.Item.Data.Content> = ArrayList()
+                    val beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content> = mutableListOf()
                     for (item in t.itemList) {
                         item.data?.content?.data?.playUrl?.let {
                             beans.add(item.data.content)

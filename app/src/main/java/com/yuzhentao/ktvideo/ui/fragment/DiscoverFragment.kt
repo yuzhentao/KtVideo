@@ -18,7 +18,6 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     private var presenter: DiscoverPresenter? = null
     private lateinit var adapter: DiscoverAdapter
-    private var beans: MutableList<DiscoverBean> = mutableListOf()
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_discover
@@ -31,10 +30,10 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         adapter = DiscoverAdapter(null)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: DiscoverBean? = adapter!!.data[position] as DiscoverBean
+            val bean: DiscoverBean.Item.Data? = adapter!!.data[position] as DiscoverBean.Item.Data
             bean?.let {
                 val intent = Intent(context, DiscoverDetailActivity::class.java)
-                intent.putExtra("id", bean.tagId.toString())
+                intent.putExtra("id", bean.id.toString())
                 context?.startActivity(intent)
             }
         }
@@ -44,11 +43,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     }
 
-    override fun setData(beans: MutableList<DiscoverBean>) {
-        if (this.beans.size > 0) {
-            this.beans.clear()
-        }
-        this.beans.addAll(beans)
+    override fun setData(beans: MutableList<DiscoverBean.Item.Data>) {
         adapter.setNewData(beans)
     }
 

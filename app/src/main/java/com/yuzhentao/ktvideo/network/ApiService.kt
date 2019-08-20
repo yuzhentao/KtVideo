@@ -35,8 +35,8 @@ interface ApiService {
     /**
      * 分类
      */
-    @GET("v2/categories?${Constant.PARAMS}")
-    fun getDiscoverData(): Observable<MutableList<DiscoverBean>>
+    @GET("v4/categories/all?${Constant.PARAMS}")
+    fun getDiscoverData(@Query("deviceModel") deviceModel: String): Observable<DiscoverBean>
 
     /**
      * 分类详情

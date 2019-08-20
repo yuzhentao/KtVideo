@@ -35,7 +35,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
     var presenter: DiscoverDetailPresenter? = null
 
-    lateinit var fragments: ArrayList<Fragment>
+    lateinit var fragments: MutableList<Fragment>
     private var titles = mutableListOf("推荐", "广场")
 
     private var id: String? = null
@@ -165,7 +165,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         rightBundle.putString("id", id)
         rightFragment.arguments = rightBundle
 
-        fragments = ArrayList()
+        fragments = mutableListOf()
         fragments.add(leftFragment)
         fragments.add(rightFragment)
 

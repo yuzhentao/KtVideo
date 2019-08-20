@@ -2,9 +2,9 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.SearchBean
+import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.mvp.contract.SearchContract
 import com.yuzhentao.ktvideo.mvp.model.SearchModel
-import com.yuzhentao.ktvideo.extension.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -32,7 +32,7 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
         }
         observable
                 ?.flatMap { t ->
-                    val beans: ArrayList<SearchBean.Item.Data.Content> = ArrayList()
+                    val beans: MutableList<SearchBean.Item.Data.Content> = mutableListOf()
                     for (item in t.itemList) {
                         item.data?.content?.data?.playUrl?.let {
                             beans.add(item.data.content)
@@ -40,7 +40,7 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
                     }
                     Observable.just(beans)
                 }
-                ?.normalSchedulers()?.subscribe(object : Observer<ArrayList<SearchBean.Item.Data.Content>> {
+                ?.normalSchedulers()?.subscribe(object : Observer<MutableList<SearchBean.Item.Data.Content>> {
                     override fun onComplete() {
 
                     }
@@ -49,7 +49,7 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
 
                     }
 
-                    override fun onNext(t: ArrayList<SearchBean.Item.Data.Content>) {
+                    override fun onNext(t: MutableList<SearchBean.Item.Data.Content>) {
                         view?.setData(t)
                     }
 

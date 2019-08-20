@@ -60,7 +60,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
         }
     }
 
-    override fun setData(beans: ArrayList<SearchBean.Item.Data.Content>) {
+    override fun setData(beans: MutableList<SearchBean.Item.Data.Content>) {
         beans.forEach {
             val data = it.data
             data?.let {
