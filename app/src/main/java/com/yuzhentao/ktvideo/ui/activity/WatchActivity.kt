@@ -83,7 +83,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     private fun initView() {
         noKey = intent.getStringExtra("key").isNullOrEmpty()
         if (noKey!!) {
-            tv_top.text = getString(R.string.mine_cache)
+            tv_top.text = getString(R.string.mine_watch)
         } else {
             tv_top.text = intent.getStringExtra("key")
         }
