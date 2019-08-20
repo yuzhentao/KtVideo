@@ -67,16 +67,16 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
             val data = it.data
             data?.let {
                 this.beans.add(VideoBean(data.id,
-                        data.cover.feed,
+                        data.cover?.feed,
                         data.title,
                         data.description,
                         data.duration,
                         data.playUrl,
                         data.category,
-                        data.cover.blurred,
-                        data.consumption.collectionCount,
-                        data.consumption.shareCount,
-                        data.consumption.replyCount))
+                        data.cover?.blurred,
+                        data.consumption?.collectionCount,
+                        data.consumption?.shareCount,
+                        data.consumption?.replyCount))
             }
         }
         adapter.setNewData(this.beans)

@@ -41,18 +41,18 @@ class RankingFragment : BaseFragment(), HotContract.View {
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.id
-                val photo = bean.cover?.feed
+                val img = bean.cover?.feed
                 val title = bean.title
                 val desc = bean.description
                 val duration = bean.duration
                 val playUrl = bean.playUrl
                 val category = bean.category
                 val blurred = bean.cover?.blurred
-                val collect = bean.consumption.collectionCount
-                val share = bean.consumption.shareCount
-                val reply = bean.consumption.replyCount
+                val collect = bean.consumption?.collectionCount
+                val share = bean.consumption?.shareCount
+                val reply = bean.consumption?.replyCount
                 val time = System.currentTimeMillis()
-                val videoBean = VideoBean(id, photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+                val videoBean = VideoBean(id, img, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
                 val bundle = Bundle()
                 bundle.putParcelable("data", videoBean)
                 intent.putExtra("bundle", bundle)

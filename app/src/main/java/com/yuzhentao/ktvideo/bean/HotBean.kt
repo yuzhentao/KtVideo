@@ -21,7 +21,7 @@ data class HotBean(
                 val campaign: Any,
                 val category: String?,
                 val collected: Boolean,
-                val consumption: Consumption,
+                val consumption: Consumption?,
                 val cover: Cover?,
                 val dataType: String,
                 val date: Long,

@@ -56,7 +56,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.data?.id
-                val photo = bean.data?.cover?.feed
+                val img = bean.data?.cover?.feed
                 val title = bean.data?.title
                 val duration = bean.data?.duration
                 val desc = bean.data?.description
@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                 val share = bean.data?.consumption?.shareCount
                 val reply = bean.data?.consumption?.replyCount
                 val time = System.currentTimeMillis()
-                val videoBean = VideoBean(id, photo, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+                val videoBean = VideoBean(id, img, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
                 val bundle = Bundle()
                 bundle.putParcelable("data", videoBean)
                 intent.putExtra("bundle", bundle)
