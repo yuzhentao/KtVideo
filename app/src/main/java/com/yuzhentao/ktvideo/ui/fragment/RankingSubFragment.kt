@@ -18,8 +18,9 @@ import kotlinx.android.synthetic.main.fragment_ranking.*
  */
 class RankingSubFragment : BaseFragment(), RankingSubContract.View {
 
-    private lateinit var presenter: RankingSubPresenter
     private lateinit var adapter: RankingSubAdapter
+
+    private lateinit var presenter: RankingSubPresenter
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_ranking

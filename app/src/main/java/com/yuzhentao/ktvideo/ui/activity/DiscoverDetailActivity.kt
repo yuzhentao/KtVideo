@@ -16,6 +16,7 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverLeftFragment
@@ -31,19 +32,15 @@ import kotlin.math.abs
 class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, DiscoverDetailContract.View {
 
     private var context: Context = this
-    private var activity: DiscoverDetailActivity = this
 
-    var presenter: DiscoverDetailPresenter? = null
+    private var presenter: DiscoverDetailPresenter? = null
 
-    lateinit var fragments: MutableList<Fragment>
+    private lateinit var fragments: MutableList<Fragment>
     private var titles = mutableListOf("推荐", "广场")
 
     private var id: String? = null
     var category: String? = null
-
     private var isChange: Boolean? = false
-    private var isLeft: Boolean? = true
-
     var isFull: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -117,6 +114,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
             }
             tv_count.text = count
             ImageUtil.show(context, iv, bean.tagInfo.headerImage)
+            iv.setColorFilter(context.color(R.color.black_25))
         }
     }
 

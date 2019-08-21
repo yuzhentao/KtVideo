@@ -13,10 +13,10 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.SplashBean
+import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.mvp.contract.SplashContract
 import com.yuzhentao.ktvideo.mvp.presenter.SplashPresenter
 import com.yuzhentao.ktvideo.util.ImageUtil
-import com.yuzhentao.ktvideo.extension.newIntent
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
 
     private var context: Context = this
 
-    var presenter: SplashPresenter? = null
+    private var presenter: SplashPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

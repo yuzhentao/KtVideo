@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.activity_cache.*
  */
 class FavoriteActivity : AppCompatActivity(), View.OnClickListener {
 
-    var context: Context = this
-    var activity: FavoriteActivity = this
+    private var context: Context = this
+    private var activity: FavoriteActivity = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

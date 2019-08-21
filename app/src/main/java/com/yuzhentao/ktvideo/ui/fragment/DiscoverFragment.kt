@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
-    private var presenter: DiscoverPresenter? = null
     private lateinit var adapter: DiscoverAdapter
+
+    private var presenter: DiscoverPresenter? = null
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_discover

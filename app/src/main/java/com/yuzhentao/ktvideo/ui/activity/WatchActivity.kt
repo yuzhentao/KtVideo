@@ -27,9 +27,8 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     private lateinit var beans: MutableList<VideoBean>
     private lateinit var adapter: WatchAdapter
 
-    private lateinit var dbManager: VideoDbManager
-
     private var presenter: SearchPresenter? = null
+    private lateinit var dbManager: VideoDbManager
 
     private var noKey: Boolean? = true
 

@@ -31,12 +31,12 @@ class SearchFragment : DialogFragment(),
         CircularRevealAnim.AnimListener,
         HotSearchContract.View {
 
-    lateinit var activity: Activity
+    private lateinit var activity: Activity
 
     private lateinit var rootView: View
     private lateinit var circularRevealAnim: CircularRevealAnim
 
-    lateinit var adapter: HotSearchAdapter
+    private lateinit var adapter: HotSearchAdapter
 
     private var presenter: HotSearchPresenter? = null
 

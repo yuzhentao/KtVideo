@@ -22,12 +22,12 @@ import kotlinx.android.synthetic.main.fragment_ranking.*
  */
 class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
-    lateinit var activity: DiscoverDetailActivity
+    private lateinit var activity: DiscoverDetailActivity
+
+    private lateinit var adapter: DiscoverDetailRightAdapter
 
     private var presenter: DiscoverDetailRightPresenter? = null
-
-    lateinit var adapter: DiscoverDetailRightAdapter
-    lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
+    private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
 
     override fun getLayoutResources(): Int {
         activity = getActivity() as DiscoverDetailActivity

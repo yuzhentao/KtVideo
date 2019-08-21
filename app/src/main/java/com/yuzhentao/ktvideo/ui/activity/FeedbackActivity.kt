@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.activity_cache.*
  */
 class FeedbackActivity : AppCompatActivity(), View.OnClickListener {
 
-    var context: Context = this
-    var activity: FeedbackActivity = this
+    private var context: Context = this
+    private var activity: FeedbackActivity = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

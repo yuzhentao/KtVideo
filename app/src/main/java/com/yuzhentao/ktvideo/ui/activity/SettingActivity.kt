@@ -8,10 +8,13 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import kotlinx.android.synthetic.main.activity_cache.*
 
+/**
+ * 设置
+ */
 class SettingActivity : AppCompatActivity(), View.OnClickListener {
 
-    var context: Context = this
-    var activity: SettingActivity = this
+    private var context: Context = this
+    private var activity: SettingActivity = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

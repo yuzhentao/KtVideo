@@ -21,11 +21,13 @@ import java.util.regex.Pattern
  */
 class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    private var isRefresh: Boolean = false
     private lateinit var adapter: HomeAdapter
     private var beans: MutableList<HomeBean.Issue.Item> = mutableListOf()
-    var presenter: HomePresenter? = null
-    var date: String? = null
+
+    private var presenter: HomePresenter? = null
+
+    private var date: String? = null
+    private var isRefresh: Boolean = false
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_home
