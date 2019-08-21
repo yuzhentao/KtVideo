@@ -85,6 +85,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
                 activity.startActivity(intent)
             }
         }
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
         arguments?.let {
             arguments!!.getString("id")?.let {
                 presenter = DiscoverDetailLeftPresenter(context!!, this)

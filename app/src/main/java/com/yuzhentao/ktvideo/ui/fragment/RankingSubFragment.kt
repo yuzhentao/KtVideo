@@ -57,6 +57,7 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
                 startActivity(intent)
             }
         }
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {

@@ -102,6 +102,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                 startActivity(intent)
             }
         }
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
     }
 
     private fun initData() {

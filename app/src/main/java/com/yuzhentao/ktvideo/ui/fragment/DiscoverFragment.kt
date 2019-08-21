@@ -37,6 +37,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
                 context?.startActivity(intent)
             }
         }
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
