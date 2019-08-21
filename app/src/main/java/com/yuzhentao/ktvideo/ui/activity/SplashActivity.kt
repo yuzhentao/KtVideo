@@ -39,7 +39,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         Aria.get(this).downloadConfig.maxTaskNum = 5
     }
 
-    override fun setData(bean: SplashBean) {
+    override fun setData(bean: SplashBean?) {
         anim(bean)
     }
 
@@ -50,8 +50,8 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         tv_intro_en.typeface = font
     }
 
-    private fun anim(bean: SplashBean) {
-        if (bean.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
+    private fun anim(bean: SplashBean?) {
+        if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
             ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
         } else {
             iv_bg.setImageResource(R.drawable.bg_splash)

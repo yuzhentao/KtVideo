@@ -8,7 +8,7 @@ interface SplashContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setData(bean: SplashBean)
+        fun setData(bean: SplashBean?)
 
     }
 

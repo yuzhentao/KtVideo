@@ -2,9 +2,9 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.SplashBean
+import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.mvp.contract.SplashContract
 import com.yuzhentao.ktvideo.mvp.model.SplashModel
-import com.yuzhentao.ktvideo.extension.normalSchedulers
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -44,7 +44,7 @@ class SplashPresenter(context: Context, view: SplashContract.View) : SplashContr
             }
 
             override fun onError(e: Throwable) {
-
+                view?.setData(null)
             }
         })
     }
