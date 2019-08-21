@@ -84,7 +84,12 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         beans = mutableListOf()
         dbManager.findCache()?.let {
             it.forEach { bean ->
-                if (FileUtil.isFileExist(bean.savePath)) {//经查本地是否还有视频
+                if ((FileUtil.isFileExist(bean.savePath)
+                                && bean.downloadState == DownloadState.COMPLETE.name
+                                && bean.downloadProgress == 100)
+                        || (!FileUtil.isFileExist(bean.savePath)
+                                && bean.downloadState != DownloadState.COMPLETE.name
+                                && bean.downloadProgress != 100)) {//检查本地是否还有视频
                     beans.add(bean)
                 }
             }
