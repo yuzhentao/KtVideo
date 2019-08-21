@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        tv_top.text = getString(R.string.mine_feedback)
+        tv_top.text = getString(R.string.mine_login)
         iv_top.setOnClickListener(this)
     }
 
