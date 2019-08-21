@@ -91,7 +91,10 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                             dialog.dismiss()
                             if (FileUtil.deleteFile(bean.savePath)) {
                                 adapter.remove(position)
-                                dbManager.delete(bean)
+                                bean.downloadState = DownloadState.NORMAL.name
+                                bean.downloadProgress = 0
+                                bean.savePath = ""
+                                dbManager.update(bean)
                             }
                             if (adapter.data.size == 0) {
                                 rv.visibility = View.GONE
