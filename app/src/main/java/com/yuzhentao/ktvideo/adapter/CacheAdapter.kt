@@ -98,6 +98,7 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
                         }
                     }
                 }
+                helper.addOnClickListener(R.id.tv_delete)
             }
         }
     }

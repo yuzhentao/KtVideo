@@ -1,5 +1,6 @@
 package com.yuzhentao.ktvideo.ui.activity
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.util.DownloadState
 import com.yuzhentao.ktvideo.util.FileUtil
+import com.yuzhentao.ktvideo.view.EasySwipeMenuLayout
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
 
@@ -78,6 +80,35 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
         }
+        adapter.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
+            val bean: VideoBean? = adapter!!.data[position] as VideoBean
+            bean?.let {
+                when (view.id) {
+                    R.id.tv_delete -> {
+                        val builder = AlertDialog.Builder(context)
+                        builder.setMessage(context.resources.getString(R.string.delete_tip))
+                        builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
+                            dialog.dismiss()
+                            if (FileUtil.deleteFile(bean.savePath)) {
+                                adapter.remove(position)
+                                dbManager.delete(bean)
+                            }
+                            if (adapter.data.size == 0) {
+                                rv.visibility = View.GONE
+                                tv_hint.visibility = View.VISIBLE
+                            }
+                        }
+                        builder.setNegativeButton(context.resources.getString(R.string.no)) { dialog, _ ->
+                            dialog.dismiss()
+                            val swipe = adapter.getViewByPosition(rv, position, R.id.swipe) as EasySwipeMenuLayout
+                            swipe.resetStatus()
+                        }
+                        builder.create().show()
+                    }
+                }
+            }
+        }
+        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
     }
 
     private fun initData() {

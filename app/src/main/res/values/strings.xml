@@ -37,5 +37,9 @@
     <string name="search_hint">帮你找到感兴趣的视频</string>
     <string name="search_tip">输入标题或描述中的关键词找到更多视频</string>
     <string name="search_hot">— 热门搜索词 —</string>
+    <string name="delete">删除</string>
+    <string name="delete_tip">是否删除缓存？</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
 
 </resources>

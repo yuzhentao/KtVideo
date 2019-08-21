@@ -9,3 +9,11 @@ enum class DownloadState {
     ERROR
 
 }
+
+enum class State {
+
+    LEFT,
+    RIGHT,
+    CLOSE
+
+}
