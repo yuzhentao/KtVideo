@@ -7,15 +7,16 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.extension.bindView
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.ui.fragment.*
@@ -28,15 +29,21 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    var context: Context = this
-    var activity: MainActivity = this
+    private var context: Context = this
+    private var activity: MainActivity = this
 
-    private var tvTitle: AppCompatTextView? = null
-    private var ivSearch: AppCompatImageView? = null
-    private var rbHome: RadioButton? = null
-    private var rbDiscover: RadioButton? = null
-    private var rbRanking: RadioButton? = null
-    private var rbMine: RadioButton? = null
+    //    private var tvTop: AppCompatTextView? = null
+//    private var ivTop: AppCompatImageView? = null
+//    private var rbHome: RadioButton? = null
+//    private var rbDiscover: RadioButton? = null
+//    private var rbRanking: RadioButton? = null
+//    private var rbMine: RadioButton? = null
+    private val tvTop by bindView<TextView>(R.id.tv_top)
+    private val ivTop by bindView<AppCompatImageView>(R.id.iv_top)
+    private val rbHome by bindView<RadioButton>(R.id.rb_home)
+    private val rbDiscover by bindView<RadioButton>(R.id.rb_discover)
+    private val rbRanking by bindView<RadioButton>(R.id.rb_ranking)
+    private val rbMine by bindView<RadioButton>(R.id.rb_mine)
 
     private var homeFragment: HomeFragment? = null
     private var discoverFragment: DiscoverFragment? = null
@@ -48,7 +55,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var exitTime: Long = 0
 
     private var permissionsDisposable: Disposable? = null
-    private var rxPermissions: RxPermissions? = null
+//    private var rxPermissions: RxPermissions? = null
+
+    private val rxPermissions: RxPermissions by lazy {
+        RxPermissions(activity)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +123,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.iv_top -> {
-                if (rbMine?.isChecked!!) {//设置
+                if (rbMine.isChecked) {//设置
                     newIntent<SettingActivity>(false)
                 } else {//搜索
                     searchFragment = SearchFragment()
@@ -120,13 +131,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.rb_home -> {
-                tvTitle?.text = getToday()
-                tvTitle?.visibility = View.VISIBLE
-                ivSearch?.setImageResource(R.drawable.ic_search_black)
-                rbHome?.isSelected = true
-                rbDiscover?.isSelected = false
-                rbRanking?.isSelected = false
-                rbMine?.isSelected = false
+                tvTop.text = getToday()
+                tvTop.visibility = View.VISIBLE
+                ivTop.setImageResource(R.drawable.ic_search_black)
+                rbHome.isSelected = true
+                rbDiscover.isSelected = false
+                rbRanking.isSelected = false
+                rbMine.isSelected = false
                 supportFragmentManager
                         .beginTransaction()
                         .show(homeFragment!!)
@@ -136,13 +147,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
             R.id.rb_discover -> {
-                tvTitle?.setText(R.string.discover)
-                tvTitle?.visibility = View.VISIBLE
-                ivSearch?.setImageResource(R.drawable.ic_search_black)
-                rbHome?.isSelected = false
-                rbDiscover?.isSelected = true
-                rbRanking?.isSelected = false
-                rbMine?.isSelected = false
+                tvTop.setText(R.string.discover)
+                tvTop.visibility = View.VISIBLE
+                ivTop.setImageResource(R.drawable.ic_search_black)
+                rbHome.isSelected = false
+                rbDiscover.isSelected = true
+                rbRanking.isSelected = false
+                rbMine.isSelected = false
                 supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -152,13 +163,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
             R.id.rb_ranking -> {
-                tvTitle?.setText(R.string.ranking)
-                tvTitle?.visibility = View.VISIBLE
-                ivSearch?.setImageResource(R.drawable.ic_search_black)
-                rbHome?.isSelected = false
-                rbDiscover?.isSelected = false
-                rbRanking?.isSelected = true
-                rbMine?.isSelected = false
+                tvTop.setText(R.string.ranking)
+                tvTop.visibility = View.VISIBLE
+                ivTop.setImageResource(R.drawable.ic_search_black)
+                rbHome.isSelected = false
+                rbDiscover.isSelected = false
+                rbRanking.isSelected = true
+                rbMine.isSelected = false
                 supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -168,12 +179,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
             R.id.rb_mine -> {
-                tvTitle?.visibility = View.GONE
-                ivSearch?.setImageResource(R.drawable.ic_settings_black)
-                rbHome?.isSelected = false
-                rbDiscover?.isSelected = false
-                rbRanking?.isSelected = false
-                rbMine?.isSelected = true
+                tvTop.visibility = View.GONE
+                ivTop.setImageResource(R.drawable.ic_settings_black)
+                rbHome.isSelected = false
+                rbDiscover.isSelected = false
+                rbRanking.isSelected = false
+                rbMine.isSelected = true
                 supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -186,8 +197,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun requestPermissions() {
-        rxPermissions = RxPermissions(this)
-        permissionsDisposable = rxPermissions!!
+//        rxPermissions = RxPermissions(activity)
+        permissionsDisposable = rxPermissions
                 .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe { permission ->
                     when {
@@ -206,22 +217,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initView() {
         (findViewById<Toolbar>(R.id.tb)).setOnClickListener(this)
-        tvTitle = findViewById(R.id.tv_top)
-        ivSearch = findViewById(R.id.iv_top)
-        rbHome = findViewById(R.id.rb_home)
-        rbDiscover = findViewById(R.id.rb_discover)
-        rbRanking = findViewById(R.id.rb_ranking)
-        rbMine = findViewById(R.id.rb_mine)
-        tvTitle?.text = getToday()
-        tvTitle?.typeface = Typeface.createFromAsset(this.assets, "fonts/Lobster-1.4.otf")
-        tvTitle?.visibility = View.VISIBLE
-        ivSearch?.setImageResource(R.drawable.ic_search_black)
-        ivSearch?.setOnClickListener(this)
-        rbHome?.isSelected = true
-        rbHome?.setOnClickListener(this)
-        rbDiscover?.setOnClickListener(this)
-        rbRanking?.setOnClickListener(this)
-        rbMine?.setOnClickListener(this)
+//        tvTop = findViewById(R.id.tv_top)
+//        ivTop = findViewById(R.id.iv_top)
+//        rbHome = findViewById(R.id.rb_home)
+//        rbDiscover = findViewById(R.id.rb_discover)
+//        rbRanking = findViewById(R.id.rb_ranking)
+//        rbMine = findViewById(R.id.rb_mine)
+        tvTop.text = getToday()
+        tvTop.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
+        tvTop.visibility = View.VISIBLE
+        ivTop.setImageResource(R.drawable.ic_search_black)
+        ivTop.setOnClickListener(this)
+        rbHome.isSelected = true
+        rbHome.setOnClickListener(this)
+        rbDiscover.setOnClickListener(this)
+        rbRanking.setOnClickListener(this)
+        rbMine.setOnClickListener(this)
     }
 
     private fun initFragment(savedInstanceState: Bundle?) {

@@ -23,6 +23,16 @@ inline fun <reified T : Activity> Activity.newIntent(isFinish: Boolean) {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
+fun <V : View> Activity.bindView(id: Int): Lazy<V> = lazy {
+    viewFinder(id) as V
+}
+
+private val viewFinder: Activity.(Int) -> View?
+    get() = {
+        findViewById(it)
+    }
+
 /**
  * 相当于
  * fun Context.getColor(resId: Int): Int {
