@@ -68,7 +68,7 @@ class VideoDetailActivity : AppCompatActivity() {
         dbManager = VideoDbManager()
         Aria.download(this).register()
         val bundle = intent.getBundleExtra("bundle")
-        bean = bundle.getParcelable("data")
+        bean = bundle.getParcelable("data") as VideoBean
         initView()
         prepareVideo()
     }
