@@ -5,12 +5,11 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Bundle
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.tabs.TabLayout
-import androidx.fragment.app.Fragment
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
-import android.view.View
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayout
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yuzhentao.ktvideo.R
@@ -21,7 +20,6 @@ import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverRightFragment
-import com.yuzhentao.ktvideo.ui.fragment.RankingSubFragment
 import com.yuzhentao.ktvideo.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs
@@ -129,8 +127,13 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
             tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                     tab?.let {
-                        if (tab.position < fragments.size) {
-                            (fragments[tab.position] as RankingSubFragment).scrollToTop()
+                        when (tab.position) {
+                            0 -> {
+                                (fragments[0] as DiscoverLeftFragment).scrollToTop()
+                            }
+                            1 -> {
+                                (fragments[1] as DiscoverRightFragment).scrollToTop()
+                            }
                         }
                     }
                 }
