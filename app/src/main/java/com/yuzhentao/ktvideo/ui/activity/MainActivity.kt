@@ -32,12 +32,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var context: Context = this
     private var activity: MainActivity = this
 
-    //    private var tvTop: AppCompatTextView? = null
-//    private var ivTop: AppCompatImageView? = null
-//    private var rbHome: RadioButton? = null
-//    private var rbDiscover: RadioButton? = null
-//    private var rbRanking: RadioButton? = null
-//    private var rbMine: RadioButton? = null
     private val tvTop by bindView<TextView>(R.id.tv_top)
     private val ivTop by bindView<AppCompatImageView>(R.id.iv_top)
     private val rbHome by bindView<RadioButton>(R.id.rb_home)
@@ -54,12 +48,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var toast: Toast? = null
     private var exitTime: Long = 0
 
-    private var permissionsDisposable: Disposable? = null
-//    private var rxPermissions: RxPermissions? = null
-
     private val rxPermissions: RxPermissions by lazy {
         RxPermissions(activity)
     }
+    private var permissionsDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,8 +86,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onDestroy() {
-        if (permissionsDisposable != null && !permissionsDisposable!!.isDisposed) {
-            permissionsDisposable!!.dispose()
+        permissionsDisposable?.let {
+            if (!permissionsDisposable!!.isDisposed) {
+                permissionsDisposable!!.dispose()
+            }
         }
         super.onDestroy()
     }
@@ -197,7 +191,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun requestPermissions() {
-//        rxPermissions = RxPermissions(activity)
         permissionsDisposable = rxPermissions
                 .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe { permission ->
@@ -217,12 +210,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initView() {
         (findViewById<Toolbar>(R.id.tb)).setOnClickListener(this)
-//        tvTop = findViewById(R.id.tv_top)
-//        ivTop = findViewById(R.id.iv_top)
-//        rbHome = findViewById(R.id.rb_home)
-//        rbDiscover = findViewById(R.id.rb_discover)
-//        rbRanking = findViewById(R.id.rb_ranking)
-//        rbMine = findViewById(R.id.rb_mine)
         tvTop.text = getToday()
         tvTop.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
         tvTop.visibility = View.VISIBLE

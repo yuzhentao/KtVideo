@@ -33,7 +33,10 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
     private var context: Context = this
 
-    private var presenter: DiscoverDetailPresenter? = null
+    private val presenter: DiscoverDetailPresenter? by lazy {
+        DiscoverDetailPresenter(context, this)
+    }
+//    private var presenter: DiscoverDetailPresenter? = null
 
     private lateinit var fragments: MutableList<Fragment>
     private var titles = mutableListOf("推荐", "广场")
@@ -121,7 +124,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     private fun initView() {
         id = intent.getStringExtra("id");
         id?.let {
-            presenter = DiscoverDetailPresenter(context, this)
+//            presenter = DiscoverDetailPresenter(context, this)
             presenter?.load(id!!)
         }
 

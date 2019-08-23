@@ -27,7 +27,9 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     private lateinit var beans: MutableList<VideoBean>
     private lateinit var adapter: WatchAdapter
 
-    private var presenter: SearchPresenter? = null
+    private val presenter: SearchPresenter? by lazy {
+        SearchPresenter(context, this)
+    }
     private lateinit var dbManager: VideoDbManager
 
     private var noKey: Boolean? = true
@@ -119,7 +121,6 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                 adapter.setNewData(beans)
             }
         } else {
-            presenter = SearchPresenter(context, this)
             presenter?.load(intent.getStringExtra("key"))
         }
     }
