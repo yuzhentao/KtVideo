@@ -8,8 +8,8 @@ import io.reactivex.disposables.Disposable
 
 class HotSearchPresenter(context: Context, view: HotSearchContract.View) : HotSearchContract.Presenter {
 
-    var context: Context? = null
-    var view: HotSearchContract.View? = null
+    private var context: Context? = null
+    private var view: HotSearchContract.View? = null
     private val model: HotSearchModel by lazy {
         HotSearchModel()
     }

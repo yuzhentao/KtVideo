@@ -10,8 +10,8 @@ import io.reactivex.disposables.Disposable
 
 class DiscoverDetailRightPresenter(context: Context, view: DiscoverDetailRightContract.View) : DiscoverDetailRightContract.Presenter {
 
-    var context: Context? = null
-    var view: DiscoverDetailRightContract.View? = null
+    private var context: Context? = null
+    private var view: DiscoverDetailRightContract.View? = null
     private val model: DiscoverDetailRightModel by lazy {
         DiscoverDetailRightModel()
     }

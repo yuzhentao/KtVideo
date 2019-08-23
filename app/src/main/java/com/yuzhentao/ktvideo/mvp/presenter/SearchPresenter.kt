@@ -10,8 +10,8 @@ import io.reactivex.disposables.Disposable
 
 class SearchPresenter(context: Context, view: SearchContract.View) : SearchContract.Presenter {
 
-    var context: Context? = null
-    var view: SearchContract.View? = null
+    private var context: Context? = null
+    private var view: SearchContract.View? = null
     private val model: SearchModel by lazy {
         SearchModel()
     }

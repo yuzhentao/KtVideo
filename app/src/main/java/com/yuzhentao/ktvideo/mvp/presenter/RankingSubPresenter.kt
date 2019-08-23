@@ -10,8 +10,8 @@ import io.reactivex.disposables.Disposable
 
 class RankingSubPresenter(context: Context?, view: RankingSubContract.View) : RankingSubContract.Presenter {
 
-    var context: Context? = null
-    var view: RankingSubContract.View? = null
+    private var context: Context? = null
+    private var view: RankingSubContract.View? = null
     private val model: RankingSubModel by lazy {
         RankingSubModel()
     }

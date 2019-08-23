@@ -9,8 +9,8 @@ import io.reactivex.disposables.Disposable
 
 class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.Presenter {
 
-    var context: Context? = null
-    var view: HomeContract.View? = null
+    private var context: Context? = null
+    private var view: HomeContract.View? = null
     private val model: HomeModel by lazy {
         HomeModel()
     }

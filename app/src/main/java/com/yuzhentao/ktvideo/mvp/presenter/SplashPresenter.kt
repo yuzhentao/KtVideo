@@ -9,8 +9,8 @@ import io.reactivex.disposables.Disposable
 
 class SplashPresenter(context: Context, view: SplashContract.View) : SplashContract.Presenter {
 
-    var context: Context? = null
-    var view: SplashContract.View? = null
+    private var context: Context? = null
+    private var view: SplashContract.View? = null
     private val model: SplashModel by lazy {
         SplashModel()
     }
