@@ -2,7 +2,6 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.DiscoverBean
-import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverContract
 import com.yuzhentao.ktvideo.mvp.model.DiscoverModel
 import io.reactivex.Observable
@@ -27,10 +26,9 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) : Discov
     }
 
     override fun load() {
-        val observable: Observable<DiscoverBean>? = context?.let {
+        context?.let {
             model.loadData(context!!)
         }
-        observable
                 ?.flatMap { t ->
                     val beans: MutableList<DiscoverBean.Item.Data> = mutableListOf()
                     for (item in t.itemList) {
@@ -42,7 +40,6 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) : Discov
                     }
                     Observable.just(beans)
                 }
-                ?.normalSchedulers()
                 ?.subscribe(object : Observer<MutableList<DiscoverBean.Item.Data>> {
                     override fun onComplete() {
 

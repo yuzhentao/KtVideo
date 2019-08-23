@@ -2,7 +2,6 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.RankingBean
-import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.mvp.contract.RankingContract
 import com.yuzhentao.ktvideo.mvp.model.RankingModel
 import io.reactivex.Observable
@@ -27,10 +26,10 @@ class RankingPresenter(context: Context?, view: RankingContract.View) : RankingC
     }
 
     override fun load() {
-        val observable: Observable<RankingBean>? = context?.let {
-            model.loadData(context!!)
+        context?.let {
+            model
+                    .loadData(context!!)
         }
-        observable
                 ?.flatMap { t ->
                     val beans: MutableList<RankingBean.TabInfo.Tab> = mutableListOf()
                     t.tabInfo.tabList?.let {
@@ -42,7 +41,6 @@ class RankingPresenter(context: Context?, view: RankingContract.View) : RankingC
                         Observable.just(beans)
                     }
                 }
-                ?.normalSchedulers()
                 ?.subscribe(object : Observer<MutableList<RankingBean.TabInfo.Tab>> {
                     override fun onComplete() {
 

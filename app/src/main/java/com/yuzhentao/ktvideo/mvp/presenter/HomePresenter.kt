@@ -4,8 +4,6 @@ import android.content.Context
 import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.model.HomeModel
-import com.yuzhentao.ktvideo.extension.normalSchedulers
-import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -27,49 +25,49 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
     }
 
     override fun load() {
-        val observable: Observable<HomeBean>? = context?.let {
+        context?.let {
             model.loadData(it, true, "")
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<HomeBean> {
-            override fun onComplete() {
+                ?.subscribe(object : Observer<HomeBean> {
+                    override fun onComplete() {
 
-            }
+                    }
 
-            override fun onSubscribe(d: Disposable) {
+                    override fun onSubscribe(d: Disposable) {
 
-            }
+                    }
 
-            override fun onNext(t: HomeBean) {
-                view?.setData(t)
-            }
+                    override fun onNext(t: HomeBean) {
+                        view?.setData(t)
+                    }
 
-            override fun onError(e: Throwable) {
+                    override fun onError(e: Throwable) {
 
-            }
-        })
+                    }
+                })
     }
 
     override fun loadMore(date: String?) {
-        val observable: Observable<HomeBean>? = context?.let {
+        context?.let {
             model.loadData(it, false, date)
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<HomeBean> {
-            override fun onComplete() {
+                ?.subscribe(object : Observer<HomeBean> {
+                    override fun onComplete() {
 
-            }
+                    }
 
-            override fun onSubscribe(d: Disposable) {
+                    override fun onSubscribe(d: Disposable) {
 
-            }
+                    }
 
-            override fun onNext(t: HomeBean) {
-                view?.setData(t)
-            }
+                    override fun onNext(t: HomeBean) {
+                        view?.setData(t)
+                    }
 
-            override fun onError(e: Throwable) {
+                    override fun onError(e: Throwable) {
 
-            }
-        })
+                    }
+                })
     }
 
 }

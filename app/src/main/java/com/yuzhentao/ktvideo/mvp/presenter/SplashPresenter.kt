@@ -2,10 +2,8 @@ package com.yuzhentao.ktvideo.mvp.presenter
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.SplashBean
-import com.yuzhentao.ktvideo.extension.normalSchedulers
 import com.yuzhentao.ktvideo.mvp.contract.SplashContract
 import com.yuzhentao.ktvideo.mvp.model.SplashModel
-import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -27,10 +25,9 @@ class SplashPresenter(context: Context, view: SplashContract.View) : SplashContr
     }
 
     override fun load() {
-        val observable: Observable<SplashBean>? = context?.let {
+        context?.let {
             model.loadData(context!!)
-        }
-        observable?.normalSchedulers()?.subscribe(object : Observer<SplashBean> {
+        }?.subscribe(object : Observer<SplashBean> {
             override fun onComplete() {
 
             }

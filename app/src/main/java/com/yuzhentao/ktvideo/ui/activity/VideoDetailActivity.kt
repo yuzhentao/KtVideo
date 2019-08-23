@@ -21,7 +21,7 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
-import com.yuzhentao.ktvideo.extension.normalSchedulers
+import com.yuzhentao.ktvideo.extension.ioMain
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.util.DownloadState
 import com.yuzhentao.ktvideo.util.GlideApp
@@ -262,7 +262,7 @@ class VideoDetailActivity : AppCompatActivity() {
             val bitmap = BitmapFactory.decodeStream(inputStream)
             emitter.onNext(bitmap)
         }
-        observable.normalSchedulers().subscribe(object : Observer<Bitmap> {
+        observable.ioMain().subscribe(object : Observer<Bitmap> {
             override fun onComplete() {
 
             }

@@ -4,15 +4,13 @@ import android.content.Context
 import com.yuzhentao.ktvideo.bean.DiscoverDetailBean
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.model.DiscoverDetailModel
-import com.yuzhentao.ktvideo.extension.normalSchedulers
-import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) : DiscoverDetailContract.Presenter {
 
-    var context: Context? = null
-    var view: DiscoverDetailContract.View? = null
+    private var context: Context? = null
+    private var view: DiscoverDetailContract.View? = null
     private val model: DiscoverDetailModel by lazy {
         DiscoverDetailModel()
     }
@@ -27,26 +25,26 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
     }
 
     override fun load(id: String) {
-        val observable: Observable<DiscoverDetailBean>? = context?.let {
+        context?.let {
             model.loadData(context!!, id)
         }
-        observable?.normalSchedulers()?.subscribe(object : Observer<DiscoverDetailBean> {
-            override fun onComplete() {
+                ?.subscribe(object : Observer<DiscoverDetailBean> {
+                    override fun onComplete() {
 
-            }
+                    }
 
-            override fun onSubscribe(d: Disposable) {
+                    override fun onSubscribe(d: Disposable) {
 
-            }
+                    }
 
-            override fun onNext(t: DiscoverDetailBean) {
-                view?.setData(t)
-            }
+                    override fun onNext(t: DiscoverDetailBean) {
+                        view?.setData(t)
+                    }
 
-            override fun onError(e: Throwable) {
+                    override fun onError(e: Throwable) {
 
-            }
-        })
+                    }
+                })
     }
 
 }

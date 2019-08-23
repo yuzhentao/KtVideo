@@ -67,7 +67,7 @@ fun Context.longToast(message: String): Toast {
     return toast
 }
 
-fun <T> Observable<T>.normalSchedulers(): Observable<T> {
+fun <T> Observable<T>.ioMain(): Observable<T> {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }
