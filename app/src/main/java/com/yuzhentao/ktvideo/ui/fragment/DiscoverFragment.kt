@@ -1,7 +1,7 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.DiscoverAdapter
@@ -29,7 +29,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     override fun initView() {
         presenter.load()
-        rv.layoutManager = GridLayoutManager(context, 2)
+        rv.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 2)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: DiscoverBean.Item.Data? = adapter!!.data[position] as DiscoverBean.Item.Data

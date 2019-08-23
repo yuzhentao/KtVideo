@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="3" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_weight="2"
         tools:background="@color/app_pink" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         style="@style/TextStyle"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_bg"
         tools:text="测试测试测试" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_time"
         style="@style/TextStyle"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="测试测试测试" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_desc"
         style="@style/TextStyle"
         android:layout_width="match_parent"
@@ -84,13 +84,13 @@
         app:layout_constraintTop_toBottomOf="@id/tv_desc"
         tools:ignore="UnusedAttribute">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/x12"
             android:scaleType="fitXY"
             android:src="@drawable/ic_action_favorites_without_padding" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_favorite"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
@@ -115,13 +115,13 @@
         app:layout_constraintTop_toTopOf="@id/ll_favorite"
         tools:ignore="UnusedAttribute">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/x12"
             android:scaleType="fitXY"
             android:src="@drawable/ic_action_share_without_padding" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_share"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
@@ -146,13 +146,13 @@
         app:layout_constraintTop_toTopOf="@id/ll_favorite"
         tools:ignore="UnusedAttribute">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/x12"
             android:scaleType="fitXY"
             android:src="@drawable/ic_action_reply_nopadding" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_reply"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
@@ -177,13 +177,13 @@
         app:layout_constraintTop_toTopOf="@id/ll_favorite"
         tools:ignore="UnusedAttribute">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/x12"
             android:scaleType="fitXY"
             android:src="@drawable/action_download_cut" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_download"
             style="@style/TextStyle"
             android:layout_width="wrap_content"
@@ -194,4 +194,4 @@
             android:textSize="@dimen/x12" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

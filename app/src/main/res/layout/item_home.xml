@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/x210">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_photo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x160"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/img_test_1" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_user"
         android:layout_width="@dimen/x50"
         android:layout_height="@dimen/x50"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_photo"
         tools:src="@drawable/img_test_2" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         style="@style/TextStyle"
         android:layout_width="0dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_user"
         tools:text="测试测试测试" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_content"
         style="@style/TextStyle"
         android:layout_width="0dp"
@@ -56,4 +56,4 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="测试测试测试" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

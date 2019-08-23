@@ -2,7 +2,7 @@ package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R

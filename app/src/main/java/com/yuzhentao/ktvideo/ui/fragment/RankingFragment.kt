@@ -1,9 +1,9 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v7.widget.AppCompatTextView
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.AppCompatTextView
 import android.view.View
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingAdapter
@@ -19,7 +19,7 @@ class RankingFragment : BaseFragment(), RankingContract.View {
 
     private lateinit var titles: MutableList<String>
     private lateinit var strategies: MutableList<String>
-    private lateinit var fragments: MutableList<Fragment>
+    private lateinit var fragments: MutableList<androidx.fragment.app.Fragment>
 
     private val presenter: RankingPresenter by lazy {
         RankingPresenter(context, this)

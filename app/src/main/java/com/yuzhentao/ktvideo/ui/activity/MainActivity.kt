@@ -4,10 +4,10 @@ import android.Manifest
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.widget.RadioButton
 import android.widget.TextView
@@ -224,7 +224,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            val fragments: List<Fragment> = supportFragmentManager.fragments
+            val fragments: List<androidx.fragment.app.Fragment> = supportFragmentManager.fragments
             for (fragment in fragments) {
                 if (fragment is HomeFragment) {
                     homeFragment = fragment

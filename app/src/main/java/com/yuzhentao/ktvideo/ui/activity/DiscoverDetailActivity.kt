@@ -5,11 +5,11 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatTextView
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
@@ -37,7 +37,7 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         DiscoverDetailPresenter(context, this)
     }
 
-    private lateinit var fragments: MutableList<Fragment>
+    private lateinit var fragments: MutableList<androidx.fragment.app.Fragment>
     private lateinit var titles: MutableList<String>
 
     private var id: String? = null

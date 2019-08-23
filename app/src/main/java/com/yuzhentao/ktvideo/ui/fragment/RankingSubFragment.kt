@@ -2,7 +2,7 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingSubAdapter
@@ -34,7 +34,7 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
         arguments?.getString("strategy")?.let {
             presenter.load(arguments!!.getString("strategy")!!)
         }
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: RankingSubBean.Item.Data.Content.DataX? = adapter!!.data[position] as RankingSubBean.Item.Data.Content.DataX

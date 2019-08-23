@@ -3,9 +3,9 @@ package com.yuzhentao.ktvideo.extension
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.annotation.DimenRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatTextView
+import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatTextView
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast

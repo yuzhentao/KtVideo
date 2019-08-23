@@ -5,8 +5,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.widget.DefaultItemAnimator
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.DefaultItemAnimator
 import android.view.*
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.flexbox.FlexDirection
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 
 const val SEARCH_TAG = "SearchFragment"
 
-class SearchFragment : DialogFragment(),
+class SearchFragment : androidx.fragment.app.DialogFragment(),
         View.OnClickListener,
         ViewTreeObserver.OnPreDrawListener,
         DialogInterface.OnKeyListener,
@@ -128,7 +128,7 @@ class SearchFragment : DialogFragment(),
             layoutManager.flexWrap = FlexWrap.WRAP//是否换行
             rv.layoutManager = layoutManager
             rv.adapter = adapter
-            rv.itemAnimator = DefaultItemAnimator()
+            rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
             adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
                 val bean: String? = adapter!!.data[position] as String
                 bean?.let {

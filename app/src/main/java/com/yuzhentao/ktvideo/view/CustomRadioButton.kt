@@ -2,7 +2,7 @@ package com.yuzhentao.ktvideo.view
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.support.v7.widget.AppCompatRadioButton
+import androidx.appcompat.widget.AppCompatRadioButton
 import android.util.AttributeSet
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.extension.dimensionPixelOffset

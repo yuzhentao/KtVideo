@@ -2,9 +2,9 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HomeAdapter
@@ -19,7 +19,7 @@ import java.util.regex.Pattern
 /**
  * 首页
  */
-class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
+class HomeFragment : BaseFragment(), HomeContract.View, androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
 
     private var beans: MutableList<HomeBean.Issue.Item> = mutableListOf()
     private val adapter: HomeAdapter by lazy {
@@ -41,14 +41,14 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         presenter.load()
         srl.setOnRefreshListener(this)
         srl.setColorSchemeResources(R.color.app_pink)
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         rv.adapter = adapter
-        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        rv.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                val layoutManager: LinearLayoutManager = rv.layoutManager as LinearLayoutManager
+                val layoutManager: androidx.recyclerview.widget.LinearLayoutManager = rv.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
                 val lastPosition = layoutManager.findLastVisibleItemPosition()
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastPosition == beans.size - 1) {
+                if (newState == androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE && lastPosition == beans.size - 1) {
                     if (date != null) {
                         presenter.loadMore(date)
                     }

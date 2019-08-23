@@ -3,8 +3,8 @@ package com.yuzhentao.ktvideo.util
 import android.os.Build
 import android.os.Handler
 import android.os.Message
-import android.support.annotation.StringRes
-import android.support.v7.widget.AppCompatTextView
+import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatTextView
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast

@@ -3,7 +3,7 @@ package com.yuzhentao.ktvideo.view.expandtextview
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.Layout
 import android.text.StaticLayout
 import android.util.AttributeSet
