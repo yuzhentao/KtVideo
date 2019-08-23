@@ -25,12 +25,16 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     private var context: Context = this
 
     private lateinit var beans: MutableList<VideoBean>
-    private lateinit var adapter: WatchAdapter
+    private val adapter: WatchAdapter by lazy {
+        WatchAdapter(null)
+    }
 
-    private val presenter: SearchPresenter? by lazy {
+    private val presenter: SearchPresenter by lazy {
         SearchPresenter(context, this)
     }
-    private lateinit var dbManager: VideoDbManager
+    private val dbManager: VideoDbManager by lazy {
+        VideoDbManager()
+    }
 
     private var noKey: Boolean? = true
 
@@ -43,7 +47,6 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
             fitsSystemWindows(true)
         }
         setContentView(R.layout.activity_watch)
-        dbManager = VideoDbManager()
         initView()
         initData()
     }
@@ -90,7 +93,6 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
         }
         iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = WatchAdapter(null)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter!!.data[position] as VideoBean
@@ -121,7 +123,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                 adapter.setNewData(beans)
             }
         } else {
-            presenter?.load(intent.getStringExtra("key"))
+            presenter.load(intent.getStringExtra("key"))
         }
     }
 

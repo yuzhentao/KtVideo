@@ -16,19 +16,20 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
-    private lateinit var adapter: DiscoverAdapter
-
-    private var presenter: DiscoverPresenter? = null
+    private val adapter: DiscoverAdapter by lazy {
+        DiscoverAdapter(null)
+    }
+    private val presenter: DiscoverPresenter by lazy {
+        DiscoverPresenter(context, this)
+    }
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_discover
     }
 
     override fun initView() {
-        presenter = DiscoverPresenter(context, this)
-        presenter?.load()
+        presenter.load()
         rv.layoutManager = GridLayoutManager(context, 2)
-        adapter = DiscoverAdapter(null)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: DiscoverBean.Item.Data? = adapter!!.data[position] as DiscoverBean.Item.Data

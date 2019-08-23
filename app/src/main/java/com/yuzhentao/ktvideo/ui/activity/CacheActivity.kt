@@ -30,10 +30,14 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
 
     private var context: Context = this
 
-    private lateinit var beans: MutableList<VideoBean>
-    private lateinit var adapter: CacheAdapter
+    private var beans: MutableList<VideoBean> = mutableListOf()
+    private val adapter: CacheAdapter by lazy {
+        CacheAdapter(null, dbManager)
+    }
 
-    private lateinit var dbManager: VideoDbManager
+    private val dbManager: VideoDbManager by lazy {
+        VideoDbManager()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +48,6 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             fitsSystemWindows(true)
         }
         setContentView(R.layout.activity_cache)
-        dbManager = VideoDbManager()
         Aria.download(this).register()
         initView()
         initData()
@@ -67,7 +70,6 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         tv_top.text = getString(R.string.mine_cache)
         iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = CacheAdapter(null, dbManager)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter!!.data[position] as VideoBean
@@ -115,7 +117,6 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initData() {
-        beans = mutableListOf()
         dbManager.findCache()?.let {
             it.forEach { bean ->
                 if ((FileUtil.isFileExist(bean.savePath)

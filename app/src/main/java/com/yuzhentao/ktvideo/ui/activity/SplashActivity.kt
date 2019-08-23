@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
 
     private var context: Context = this
 
-    private val presenter: SplashPresenter? by lazy {
+    private val presenter: SplashPresenter by lazy {
         SplashPresenter(context, this)
     }
 
@@ -46,7 +46,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     private fun initView() {
-        presenter?.load()
+        presenter.load()
         val font: Typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
         tv_intro_en.typeface = font
     }

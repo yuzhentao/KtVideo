@@ -21,10 +21,14 @@ import java.util.regex.Pattern
  */
 class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var adapter: HomeAdapter
     private var beans: MutableList<HomeBean.Issue.Item> = mutableListOf()
+    private val adapter: HomeAdapter by lazy {
+        HomeAdapter(null)
+    }
 
-    private var presenter: HomePresenter? = null
+    private val presenter: HomePresenter by lazy {
+        HomePresenter(context, this)
+    }
 
     private var date: String? = null
     private var isRefresh: Boolean = false
@@ -34,12 +38,10 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     }
 
     override fun initView() {
-        presenter = HomePresenter(context, this)
-        presenter?.load()
+        presenter.load()
         srl.setOnRefreshListener(this)
         srl.setColorSchemeResources(R.color.app_pink)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = HomeAdapter(null)
         rv.adapter = adapter
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -48,7 +50,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                 val lastPosition = layoutManager.findLastVisibleItemPosition()
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastPosition == beans.size - 1) {
                     if (date != null) {
-                        presenter?.loadMore(date)
+                        presenter.loadMore(date)
                     }
                 }
             }
@@ -105,7 +107,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     override fun onRefresh() {
         if (!isRefresh) {
             isRefresh = true
-            presenter?.load()
+            presenter.load()
         }
     }
 

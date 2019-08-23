@@ -24,9 +24,14 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
     private lateinit var activity: DiscoverDetailActivity
 
-    private lateinit var adapter: DiscoverDetailRightAdapter
+    private val adapter: DiscoverDetailRightAdapter by lazy {
+        DiscoverDetailRightAdapter(null)
+    }
 
-    private var presenter: DiscoverDetailRightPresenter? = null
+    private val presenter: DiscoverDetailRightPresenter by lazy {
+        DiscoverDetailRightPresenter(context!!, this)
+    }
+
     private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
 
     override fun getLayoutResources(): Int {
@@ -41,7 +46,6 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.layoutManager = layoutManager
-        adapter = DiscoverDetailRightAdapter(null)
         rv.adapter = adapter
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var firstVisibleItem: Int? = 0
@@ -88,8 +92,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
         arguments?.let {
             arguments!!.getString("id")?.let {
-                presenter = DiscoverDetailRightPresenter(context!!, this)
-                presenter!!.load(arguments!!.getString("id")!!)
+                presenter.load(arguments!!.getString("id")!!)
             }
         }
     }

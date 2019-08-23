@@ -33,13 +33,12 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
 
     private var context: Context = this
 
-    private val presenter: DiscoverDetailPresenter? by lazy {
+    private val presenter: DiscoverDetailPresenter by lazy {
         DiscoverDetailPresenter(context, this)
     }
-//    private var presenter: DiscoverDetailPresenter? = null
 
     private lateinit var fragments: MutableList<Fragment>
-    private var titles = mutableListOf("推荐", "广场")
+    private lateinit var titles: MutableList<String>
 
     private var id: String? = null
     var category: String? = null
@@ -118,14 +117,54 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
             tv_count.text = count
             ImageUtil.show(context, iv, bean.tagInfo.headerImage)
             iv.setColorFilter(context.color(R.color.black_25))
+
+            titles = mutableListOf()
+            bean.tabInfo.tabList.forEach {
+                it.name?.let { name ->
+                    titles.add(name)
+                }
+            }
+            vp.adapter = RankingAdapter(supportFragmentManager, fragments, titles)
+            tl.setupWithViewPager(vp)
+            tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                    tab?.let {
+                        if (tab.position < fragments.size) {
+                            (fragments[tab.position] as RankingSubFragment).scrollToTop()
+                        }
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                }
+            })
+            for (i in titles.indices) {
+                val tab = tl.getTabAt(i) ?: continue
+
+                tab.setCustomView(R.layout.layout_tab)
+                if (tab.customView == null) {
+                    continue
+                }
+
+                val tv = tab.customView!!.findViewById<AppCompatTextView>(R.id.tv)
+                tv.text = titles[i]
+                if (i == 0) {
+                    tv.isSelected = true
+                    tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
+                }
+            }
         }
     }
 
     private fun initView() {
         id = intent.getStringExtra("id");
         id?.let {
-//            presenter = DiscoverDetailPresenter(context, this)
-            presenter?.load(id!!)
+            presenter.load(id!!)
         }
 
         iv_back.setOnClickListener(this)
@@ -169,41 +208,6 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
         fragments = mutableListOf()
         fragments.add(leftFragment)
         fragments.add(rightFragment)
-
-        vp.adapter = RankingAdapter(supportFragmentManager, fragments, titles)
-        tl.setupWithViewPager(vp)
-        tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                tab?.let {
-                    if (tab.position < fragments.size) {
-                        (fragments[tab.position] as RankingSubFragment).scrollToTop()
-                    }
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-            }
-        })
-        for (i in titles.indices) {
-            val tab = tl.getTabAt(i) ?: continue
-
-            tab.setCustomView(R.layout.layout_tab)
-            if (tab.customView == null) {
-                continue
-            }
-
-            val tv = tab.customView!!.findViewById<AppCompatTextView>(R.id.tv)
-            tv.text = titles[i]
-            if (i == 0) {
-                tv.isSelected = true
-                tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
-            }
-        }
     }
 
     private fun initData() {

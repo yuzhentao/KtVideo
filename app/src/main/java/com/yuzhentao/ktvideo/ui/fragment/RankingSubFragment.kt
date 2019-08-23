@@ -18,9 +18,13 @@ import kotlinx.android.synthetic.main.fragment_ranking.*
  */
 class RankingSubFragment : BaseFragment(), RankingSubContract.View {
 
-    private lateinit var adapter: RankingSubAdapter
+    private val adapter: RankingSubAdapter by lazy {
+        RankingSubAdapter(null)
+    }
 
-    private lateinit var presenter: RankingSubPresenter
+    private val presenter: RankingSubPresenter by lazy {
+        RankingSubPresenter(context, this)
+    }
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_ranking
@@ -28,11 +32,9 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
 
     override fun initView() {
         arguments?.getString("strategy")?.let {
-            presenter = RankingSubPresenter(context, this)
             presenter.load(arguments!!.getString("strategy")!!)
         }
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = RankingSubAdapter(null)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: RankingSubBean.Item.Data.Content.DataX? = adapter!!.data[position] as RankingSubBean.Item.Data.Content.DataX

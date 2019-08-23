@@ -50,7 +50,9 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private lateinit var orientationUtils: OrientationUtils//处理屏幕旋转的逻辑
 
-    private lateinit var dbManager: VideoDbManager
+    private val dbManager: VideoDbManager by lazy {
+        VideoDbManager()
+    }
     private var dbBean: VideoBean? = null
 
     private var playUrl: String? = null
@@ -65,7 +67,6 @@ class VideoDetailActivity : AppCompatActivity() {
             fitsSystemWindows(true)
         }
         setContentView(R.layout.activity_video_detail)
-        dbManager = VideoDbManager()
         Aria.download(this).register()
         val bundle = intent.getBundleExtra("bundle")
         bean = bundle.getParcelable("data") as VideoBean

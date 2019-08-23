@@ -34,11 +34,18 @@ class SearchFragment : DialogFragment(),
     private lateinit var activity: Activity
 
     private lateinit var rootView: View
-    private lateinit var circularRevealAnim: CircularRevealAnim
 
-    private lateinit var adapter: HotSearchAdapter
+    private val adapter: HotSearchAdapter by lazy {
+        HotSearchAdapter(null)
+    }
 
-    private var presenter: HotSearchPresenter? = null
+    private val presenter: HotSearchPresenter by lazy {
+        HotSearchPresenter(context!!, this)
+    }
+
+    private val circularRevealAnim: CircularRevealAnim by lazy {
+        CircularRevealAnim()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,9 +115,7 @@ class SearchFragment : DialogFragment(),
 
     private fun initView() {
         context?.let {
-            presenter = HotSearchPresenter(context!!, this)
-            presenter?.load()
-            circularRevealAnim = CircularRevealAnim()
+            presenter.load()
             circularRevealAnim.setAnimListener(this)
             iv_back.setOnClickListener(this)
             iv_search.setOnClickListener(this)
@@ -122,7 +127,6 @@ class SearchFragment : DialogFragment(),
             layoutManager.flexDirection = FlexDirection.ROW//主轴排列方式
             layoutManager.flexWrap = FlexWrap.WRAP//是否换行
             rv.layoutManager = layoutManager
-            adapter = HotSearchAdapter(null)
             rv.adapter = adapter
             rv.itemAnimator = DefaultItemAnimator()
             adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->

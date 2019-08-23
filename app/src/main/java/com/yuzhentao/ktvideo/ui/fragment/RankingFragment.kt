@@ -21,15 +21,16 @@ class RankingFragment : BaseFragment(), RankingContract.View {
     private lateinit var strategies: MutableList<String>
     private lateinit var fragments: MutableList<Fragment>
 
-    private var presenter: RankingPresenter? = null
+    private val presenter: RankingPresenter by lazy {
+        RankingPresenter(context, this)
+    }
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_hot
     }
 
     override fun initView() {
-        presenter = RankingPresenter(context, this)
-        presenter?.load()
+        presenter.load()
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
