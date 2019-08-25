@@ -2,7 +2,6 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingSubAdapter
@@ -11,7 +10,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.mvp.contract.RankingSubContract
 import com.yuzhentao.ktvideo.mvp.presenter.RankingSubPresenter
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
-import kotlinx.android.synthetic.main.fragment_ranking.*
+import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
 /**
  * 排行
@@ -27,7 +26,7 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
     }
 
     override fun getLayoutResources(): Int {
-        return R.layout.fragment_ranking
+        return R.layout.fragment_ranking_sub
     }
 
     override fun initView() {

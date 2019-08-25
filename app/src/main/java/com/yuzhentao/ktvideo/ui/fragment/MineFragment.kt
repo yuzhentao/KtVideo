@@ -17,6 +17,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun initView() {
+        iv_avatar.setOnClickListener(this)
         tv_login.setOnClickListener(this)
         ll_favorite.setOnClickListener(this)
         ll_comment.setOnClickListener(this)
@@ -34,7 +35,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_login -> {
+            R.id.iv_avatar, R.id.tv_login -> {
                 startActivity(Intent(activity, LoginActivity::class.java))
             }
             R.id.ll_favorite -> {

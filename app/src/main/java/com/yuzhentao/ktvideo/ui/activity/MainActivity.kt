@@ -3,15 +3,16 @@ package com.yuzhentao.ktvideo.ui.activity
 import android.Manifest
 import android.content.Context
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.Toolbar
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -20,6 +21,7 @@ import com.yuzhentao.ktvideo.extension.bindView
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.ui.fragment.*
+import com.yuzhentao.ktvideo.util.DimenUtil
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -104,6 +106,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tb -> {
@@ -125,6 +128,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.rb_home -> {
+                tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                 tvTop.text = getToday()
                 tvTop.visibility = View.VISIBLE
                 ivTop.setImageResource(R.drawable.ic_search_black)
@@ -141,6 +145,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
             R.id.rb_discover -> {
+                tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                 tvTop.setText(R.string.discover)
                 tvTop.visibility = View.VISIBLE
                 ivTop.setImageResource(R.drawable.ic_search_black)
@@ -157,6 +162,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
             R.id.rb_ranking -> {
+                tb.elevation = 0F
                 tvTop.setText(R.string.ranking)
                 tvTop.visibility = View.VISIBLE
                 ivTop.setImageResource(R.drawable.ic_search_black)
@@ -173,6 +179,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .commit()
             }
             R.id.rb_mine -> {
+                tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                 tvTop.visibility = View.GONE
                 ivTop.setImageResource(R.drawable.ic_settings_black)
                 rbHome.isSelected = false

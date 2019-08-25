@@ -22,7 +22,6 @@
     <string name="cache_start">缓存开始</string>
     <string name="cache_fail">缓存失败</string>
     <string name="cache_complete">缓存完成</string>
-    <string name="cache_pause">缓存暂停</string>
     <string name="cache_ing">缓存中&#8230;</string>
     <string name="watch_no">暂无内容</string>
     <string name="follow">＋关注</string>
@@ -41,5 +40,6 @@
     <string name="delete_tip">是否删除缓存？</string>
     <string name="yes">确定</string>
     <string name="no">取消</string>
+    <string name="login">登录</string>
 
 </resources>

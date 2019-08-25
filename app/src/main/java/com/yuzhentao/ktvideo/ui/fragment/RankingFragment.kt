@@ -2,7 +2,6 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
-import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.AppCompatTextView
 import android.view.View
 import com.yuzhentao.ktvideo.R
@@ -10,7 +9,7 @@ import com.yuzhentao.ktvideo.adapter.RankingAdapter
 import com.yuzhentao.ktvideo.bean.RankingBean
 import com.yuzhentao.ktvideo.mvp.contract.RankingContract
 import com.yuzhentao.ktvideo.mvp.presenter.RankingPresenter
-import kotlinx.android.synthetic.main.fragment_hot.*
+import kotlinx.android.synthetic.main.fragment_ranking.*
 
 /**
  * 热门
@@ -26,7 +25,7 @@ class RankingFragment : BaseFragment(), RankingContract.View {
     }
 
     override fun getLayoutResources(): Int {
-        return R.layout.fragment_hot
+        return R.layout.fragment_ranking
     }
 
     override fun initView() {

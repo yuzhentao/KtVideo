@@ -2,8 +2,8 @@ package com.yuzhentao.ktvideo.util
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions

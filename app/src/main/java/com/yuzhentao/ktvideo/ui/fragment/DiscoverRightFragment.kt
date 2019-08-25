@@ -15,7 +15,7 @@ import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.DimenUtil
 import com.yuzhentao.ktvideo.util.ScrollCalculatorHelper
-import kotlinx.android.synthetic.main.fragment_ranking.*
+import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
 /**
  * 发现详情-广场

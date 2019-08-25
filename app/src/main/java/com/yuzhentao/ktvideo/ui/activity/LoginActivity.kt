@@ -2,8 +2,8 @@ package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import kotlinx.android.synthetic.main.activity_cache.*
@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        tv_top.text = getString(R.string.mine_login)
+        tv_top.text = getString(R.string.login)
         iv_top.setOnClickListener(this)
     }
 

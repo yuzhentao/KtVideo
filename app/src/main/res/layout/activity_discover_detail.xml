@@ -1,180 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:collapsedTitleTextAppearance="@style/TitleTextStyle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="false">
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:collapsedTitleTextAppearance="@style/TitleTextStyle"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x200"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.37"
-                tools:background="@color/app_pink">
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x200"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.37"
+                    tools:background="@color/app_pink">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                        android:id="@+id/iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_name"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/x30"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/x26"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="测试测试测试" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_desc"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/x8"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/x14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name"
-                    tools:text="测试测试测试" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_count"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/x8"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/x12"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_desc"
-                    tools:text="测试测试测试" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_follow"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/x12"
-                    android:background="@drawable/shape_white"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:paddingStart="@dimen/x10"
-                    android:paddingTop="@dimen/x3"
-                    android:paddingEnd="@dimen/x10"
-                    android:paddingBottom="@dimen/x3"
-                    android:text="@string/follow"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/x10"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_count"
-                    tools:ignore="UnusedAttribute" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_back"
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/x40"
-                android:foreground="?attr/selectableItemBackground"
-                android:padding="@dimen/x10"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_back_white"
-                app:layout_constraintBottom_toBottomOf="@id/tb"
-                app:layout_constraintStart_toStartOf="@id/tb"
-                app:layout_constraintTop_toTopOf="@id/tb"
-                tools:ignore="UnusedAttribute" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tb"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x40"
-                android:background="@color/white"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-                tools:background="@color/transparent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/transparent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_top"
-                        android:layout_width="@dimen/x40"
-                        android:layout_height="@dimen/x40"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:padding="@dimen/x10"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_back_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="UnusedAttribute" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_top"
+                        android:id="@+id/tv_name"
                         style="@style/TextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxWidth="@dimen/x240"
-                        android:textColor="@color/app_black"
-                        android:textSize="@dimen/x14"
-                        android:textStyle="bold"
+                        android:layout_marginBottom="@dimen/x30"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x26"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="测试测试测试" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_desc"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/x8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name"
+                        tools:text="测试测试测试" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_count"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/x8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_desc"
+                        tools:text="测试测试测试" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_follow"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/x12"
+                        android:background="@drawable/shape_white"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:paddingStart="@dimen/x10"
+                        android:paddingTop="@dimen/x3"
+                        android:paddingEnd="@dimen/x10"
+                        android:paddingBottom="@dimen/x3"
+                        android:text="@string/follow"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_count"
+                        tools:ignore="UnusedAttribute" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/x10"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_back_white"
+                    app:layout_constraintBottom_toBottomOf="@id/tb"
+                    app:layout_constraintStart_toStartOf="@id/tb"
+                    app:layout_constraintTop_toTopOf="@id/tb"
+                    tools:ignore="UnusedAttribute" />
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x40"
+                    android:background="@color/white"
+                    app:contentInsetStart="0dp"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                    tools:background="@color/transparent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_top"
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/x40"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:padding="@dimen/x10"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_back_black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="UnusedAttribute" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_top"
+                            style="@style/TextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="@dimen/x240"
+                            android:textColor="@color/app_black"
+                            android:textSize="@dimen/x14"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="测试测试测试" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x36"
-            android:elevation="4dp"
-            app:tabIndicatorColor="@color/transparent"
-            app:tabMode="fixed"
-            app:tabPaddingEnd="0dp"
-            app:tabPaddingStart="0dp"
-            tools:background="@color/bg_blue"
-            tools:ignore="UnusedAttribute" />
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="@color/bg_green" />
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x36"
+                android:elevation="4dp"
+                app:tabIndicatorColor="@color/transparent"
+                app:tabMode="fixed"
+                app:tabPaddingEnd="0dp"
+                app:tabPaddingStart="0dp"
+                tools:background="@color/bg_blue"
+                tools:ignore="UnusedAttribute" />
+
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:background="@color/bg_green" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
