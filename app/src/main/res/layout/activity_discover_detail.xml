@@ -8,7 +8,8 @@
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsingToolbar"
@@ -162,6 +163,7 @@
                 android:id="@+id/tl"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x36"
+                android:background="@color/white"
                 android:elevation="4dp"
                 app:tabIndicatorColor="@color/transparent"
                 app:tabMode="fixed"
