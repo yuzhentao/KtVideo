@@ -18,14 +18,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
         immersionBar {
             statusBarColor(R.color.black)
             navigationBarColor(R.color.white_50)
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_feedback)
+        setContentView(R.layout.activity_login)
         initView()
         initData()
     }
@@ -35,12 +34,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             R.id.iv_top -> {
                 onBackPressed()
             }
+            R.id.tv_top -> {
+
+            }
         }
     }
 
     private fun initView() {
-        tv_top.text = getString(R.string.login)
         iv_top.setOnClickListener(this)
+        tv_top.setOnClickListener(this)
     }
 
     private fun initData() {

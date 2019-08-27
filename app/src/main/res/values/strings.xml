@@ -41,5 +41,7 @@
     <string name="yes">确定</string>
     <string name="no">取消</string>
     <string name="login">登录</string>
+    <string name="login_find_password">找回密码</string>
+    <string name="login_desc">登录后即可关注作者、\n发表评论、同步收藏视频和播放记录</string>
 
 </resources>

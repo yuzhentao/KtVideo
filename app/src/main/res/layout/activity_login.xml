@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_login" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_top"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/x10"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_close_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_top"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/x10"
+            android:text="@string/login_find_password"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="@id/iv_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_top" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="@dimen/x118"
+            android:layout_height="@dimen/x40"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@drawable/img_logo_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_top" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_logo"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x20"
+            android:maxLines="3"
+            android:text="@string/login_desc"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@
             android:id="@+id/iv"
             android:layout_width="@dimen/x150"
             android:layout_height="@dimen/x56"
-            android:background="@drawable/img_splash"
+            android:background="@drawable/img_logo_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
