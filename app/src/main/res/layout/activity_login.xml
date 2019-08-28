@@ -38,10 +38,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logo"
-            android:layout_width="@dimen/x118"
-            android:layout_height="@dimen/x40"
-            android:layout_marginTop="@dimen/x20"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/x56"
             android:background="@drawable/img_logo_white"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_top" />
@@ -51,7 +51,7 @@
             style="@style/TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x20"
+            android:layout_marginTop="@dimen/x10"
             android:maxLines="3"
             android:text="@string/login_desc"
             android:textColor="@color/white"
@@ -59,5 +59,60 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_wb"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:layout_marginBottom="@dimen/x40"
+            android:background="@drawable/shape_login"
+            android:padding="@dimen/x8"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_login_wb"
+            app:layout_constraintBottom_toTopOf="@id/tv_bottom"
+            app:layout_constraintEnd_toStartOf="@id/iv_wx"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_wx"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:layout_marginStart="@dimen/x30"
+            android:layout_marginEnd="@dimen/x30"
+            android:background="@drawable/shape_login"
+            android:padding="@dimen/x8"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_login_wx"
+            app:layout_constraintBottom_toBottomOf="@id/iv_wb"
+            app:layout_constraintEnd_toStartOf="@id/iv_qq"
+            app:layout_constraintStart_toEndOf="@id/iv_wb"
+            app:layout_constraintTop_toTopOf="@id/iv_wb" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_qq"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:background="@drawable/shape_login"
+            android:padding="@dimen/x8"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_login_qq"
+            app:layout_constraintBottom_toBottomOf="@id/iv_wb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_wx"
+            app:layout_constraintTop_toTopOf="@id/iv_wb" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_bottom"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x20"
+            android:text="@string/login_protocol"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

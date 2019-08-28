@@ -43,5 +43,6 @@
     <string name="login">登录</string>
     <string name="login_find_password">找回密码</string>
     <string name="login_desc">登录后即可关注作者、\n发表评论、同步收藏视频和播放记录</string>
+    <string name="login_protocol">登录或注册即可同意开眼用户服务协议</string>
 
 </resources>
