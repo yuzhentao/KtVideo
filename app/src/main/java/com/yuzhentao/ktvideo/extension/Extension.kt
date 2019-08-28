@@ -3,12 +3,12 @@ package com.yuzhentao.ktvideo.extension
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.annotation.DimenRes
-import androidx.core.content.ContextCompat
-import androidx.appcompat.widget.AppCompatTextView
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.DimenRes
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.app.App
 import io.reactivex.Observable
@@ -41,7 +41,10 @@ private val viewFinder: Activity.(Int) -> View?
  */
 fun Context.color(resId: Int) = ContextCompat.getColor(this, resId)
 
-fun Context.dimensionPixelOffset(@DimenRes resId: Int) = this.resources.getDimensionPixelOffset(resId)
+fun Context.drawable(resId: Int) = ContextCompat.getDrawable(this, resId)
+
+fun Context.dimensionPixelOffset(@DimenRes resId: Int) =
+    this.resources.getDimensionPixelOffset(resId)
 
 fun Context.shortToast(message: String): Toast {
     val toast = Toast(App.app)
@@ -69,5 +72,5 @@ fun Context.longToast(message: String): Toast {
 
 fun <T> Observable<T>.ioMain(): Observable<T> {
     return subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        .observeOn(AndroidSchedulers.mainThread())
 }

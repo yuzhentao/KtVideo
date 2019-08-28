@@ -42,31 +42,38 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
     override fun initView() {
         val playTop = DimenUtil.getHeightInPx() / 2 - DimenUtil.getHeightInPx() / 4
         val playBottom = DimenUtil.getHeightInPx() / 2 + DimenUtil.getHeightInPx() / 4
-        scrollCalculatorHelper = ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
+        scrollCalculatorHelper =
+            ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
 
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.layoutManager = layoutManager
         rv.adapter = adapter
-        rv.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var firstVisibleItem: Int? = 0
             var lastVisibleItem: Int? = 0
 
-            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition()
                 if (!activity.isFull) {
-                    scrollCalculatorHelper.onScroll(recyclerView, firstVisibleItem!!, lastVisibleItem!!, lastVisibleItem!! - firstVisibleItem!!)
+                    scrollCalculatorHelper.onScroll(
+                        recyclerView,
+                        firstVisibleItem!!,
+                        lastVisibleItem!!,
+                        lastVisibleItem!! - firstVisibleItem!!
+                    )
                 }
             }
 
-            override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 scrollCalculatorHelper.onScrollStateChanged(recyclerView, newState)
             }
         })
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: DiscoverDetailRightBean.Item.Data.Content? = adapter!!.data[position] as DiscoverDetailRightBean.Item.Data.Content
+            val bean: DiscoverDetailRightBean.Item.Data.Content? =
+                adapter!!.data[position] as DiscoverDetailRightBean.Item.Data.Content
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.data?.id
@@ -81,7 +88,20 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
                 val share = bean.data?.consumption?.shareCount
                 val reply = bean.data?.consumption?.replyCount
                 val time = System.currentTimeMillis()
-                val videoBean = VideoBean(id, img, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+                val videoBean = VideoBean(
+                    id,
+                    img,
+                    title,
+                    desc,
+                    duration,
+                    playUrl,
+                    category,
+                    blurred,
+                    collect,
+                    share,
+                    reply,
+                    time
+                )
                 val bundle = Bundle()
                 bundle.putParcelable("data", videoBean)
                 intent.putExtra("bundle", bundle)

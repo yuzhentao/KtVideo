@@ -60,11 +60,87 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user"
+            style="@style/TextStyle"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/x40"
+            android:layout_marginTop="@dimen/x90"
+            android:gravity="center_vertical"
+            android:hint="@string/login_hint_user"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_logo" />
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            style="@style/TextStyle"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/x40"
+            android:gravity="center_vertical"
+            android:hint="@string/login_hint_password"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_user" />
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn"
+            style="@style/TextStyle"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/x40"
+            android:layout_marginTop="@dimen/x15"
+            android:alpha="0.8"
+            android:text="@string/login"
+            android:textColor="@color/app_gray"
+            android:textSize="@dimen/x14"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_register"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x15"
+            android:layout_marginEnd="@dimen/x20"
+            android:text="@string/login_register"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintEnd_toStartOf="@id/tv_author"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_author"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_author"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="@id/tv_register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_register"
+            app:layout_constraintTop_toTopOf="@id/tv_register" />
+
     <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_wb"
             android:layout_width="@dimen/x40"
             android:layout_height="@dimen/x40"
-            android:layout_marginBottom="@dimen/x40"
+            android:layout_marginBottom="@dimen/x60"
             android:background="@drawable/shape_login"
             android:padding="@dimen/x8"
             android:scaleType="fitXY"
@@ -109,7 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/x20"
             android:text="@string/login_protocol"
-            android:textColor="@color/white"
+            android:textColor="@color/app_gray"
             android:textSize="@dimen/x12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
