@@ -6,8 +6,8 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar

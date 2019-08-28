@@ -57,4 +57,5 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0-beta05'
     implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0-beta05'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation project(path: ':transitionhelper')
 }

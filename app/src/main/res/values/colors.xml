@@ -121,5 +121,7 @@
     <color name="bg_yellow">#33FFC125</color>
     <color name="bg_blue">#3300BFFF</color>
     <color name="bg_green">#33CAFF70</color>
+    <color name="pink">#FFF06292</color>
+    <color name="purple">#FF673AB7</color>
 
 </resources>

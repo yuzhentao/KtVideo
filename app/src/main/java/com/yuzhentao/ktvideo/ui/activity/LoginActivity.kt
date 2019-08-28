@@ -1,5 +1,7 @@
 package com.yuzhentao.ktvideo.ui.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,20 +10,25 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.animation.AccelerateInterpolator
+import android.widget.ImageView
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.base.BaseActivity
 import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 import com.yuzhentao.ktvideo.extension.drawable
 import com.yuzhentao.ktvideo.util.DimenUtil
+import com.yuzhentao.transitionhelper.TransitionsHelper
+import com.yuzhentao.transitionhelper.bean.InfoBean
+import com.yuzhentao.transitionhelper.method.ColorShowMethod
 import kotlinx.android.synthetic.main.activity_cache.iv_top
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * 登录
  */
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private var context: Context = this
     private var activity: LoginActivity = this
@@ -35,6 +42,26 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             fitsSystemWindows(true)
         }
         setContentView(R.layout.activity_login)
+        TransitionsHelper.build(this)
+            .setShowMethod(object : ColorShowMethod(R.color.purple, R.color.pink) {
+                override fun loadPlaceholder(bean: InfoBean<*>, placeholder: ImageView) {
+                    val set = AnimatorSet()
+                    set.playTogether(
+                        ObjectAnimator.ofFloat(placeholder, "rotation", 0F, 180F),
+                        ObjectAnimator.ofFloat(placeholder, "scaleX", 1F, 0F),
+                        ObjectAnimator.ofFloat(placeholder, "scaleY", 1F, 0F)
+                    )
+                    set.interpolator = AccelerateInterpolator()
+                    set.setDuration((showDuration / 4 * 5).toLong()).start()
+                }
+
+                override fun loadTargetView(bean: InfoBean<*>, targetView: View) {
+
+                }
+            })
+            .setTransitionDuration(300)
+            .setExposeColor(context.color(R.color.pink))
+            .show()
         initView()
         initData()
     }

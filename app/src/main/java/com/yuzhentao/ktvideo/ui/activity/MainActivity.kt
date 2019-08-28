@@ -10,13 +10,13 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.base.BaseActivity
 import com.yuzhentao.ktvideo.extension.bindView
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.extension.shortToast
@@ -29,7 +29,7 @@ import java.util.*
 /**
  * 主类
  */
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var context: Context = this
     private var activity: MainActivity = this
@@ -137,12 +137,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbRanking.isSelected = false
                 rbMine.isSelected = false
                 supportFragmentManager
-                        .beginTransaction()
-                        .show(homeFragment!!)
-                        .hide(discoverFragment!!)
-                        .hide(rankingFragment!!)
-                        .hide(mineFragment!!)
-                        .commit()
+                    .beginTransaction()
+                    .show(homeFragment!!)
+                    .hide(discoverFragment!!)
+                    .hide(rankingFragment!!)
+                    .hide(mineFragment!!)
+                    .commit()
             }
             R.id.rb_discover -> {
                 tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
@@ -154,12 +154,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbRanking.isSelected = false
                 rbMine.isSelected = false
                 supportFragmentManager
-                        .beginTransaction()
-                        .hide(homeFragment!!)
-                        .show(discoverFragment!!)
-                        .hide(rankingFragment!!)
-                        .hide(mineFragment!!)
-                        .commit()
+                    .beginTransaction()
+                    .hide(homeFragment!!)
+                    .show(discoverFragment!!)
+                    .hide(rankingFragment!!)
+                    .hide(mineFragment!!)
+                    .commit()
             }
             R.id.rb_ranking -> {
                 tb.elevation = 0F
@@ -171,12 +171,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbRanking.isSelected = true
                 rbMine.isSelected = false
                 supportFragmentManager
-                        .beginTransaction()
-                        .hide(homeFragment!!)
-                        .hide(discoverFragment!!)
-                        .show(rankingFragment!!)
-                        .hide(mineFragment!!)
-                        .commit()
+                    .beginTransaction()
+                    .hide(homeFragment!!)
+                    .hide(discoverFragment!!)
+                    .show(rankingFragment!!)
+                    .hide(mineFragment!!)
+                    .commit()
             }
             R.id.rb_mine -> {
                 tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
@@ -187,32 +187,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 rbRanking.isSelected = false
                 rbMine.isSelected = true
                 supportFragmentManager
-                        .beginTransaction()
-                        .hide(homeFragment!!)
-                        .hide(discoverFragment!!)
-                        .hide(rankingFragment!!)
-                        .show(mineFragment!!)
-                        .commit()
+                    .beginTransaction()
+                    .hide(homeFragment!!)
+                    .hide(discoverFragment!!)
+                    .hide(rankingFragment!!)
+                    .show(mineFragment!!)
+                    .commit()
+            }
+            R.id.fab -> {
+
             }
         }
     }
 
     private fun requestPermissions() {
         permissionsDisposable = rxPermissions
-                .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe { permission ->
-                    when {
-                        permission.granted -> {
+            .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .subscribe { permission ->
+                when {
+                    permission.granted -> {
 
-                        }
-                        permission.shouldShowRequestPermissionRationale -> {
+                    }
+                    permission.shouldShowRequestPermissionRationale -> {
 
-                        }
-                        else -> {
+                    }
+                    else -> {
 
-                        }
                     }
                 }
+            }
     }
 
     private fun initView() {
@@ -227,6 +230,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         rbDiscover.setOnClickListener(this)
         rbRanking.setOnClickListener(this)
         rbMine.setOnClickListener(this)
+        fab.setOnClickListener(this)
     }
 
     private fun initFragment(savedInstanceState: Bundle?) {
@@ -253,22 +257,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             mineFragment = MineFragment()
             val ft = supportFragmentManager.beginTransaction()
             ft.add(R.id.content, homeFragment!!)
-                    .add(R.id.content, discoverFragment!!)
-                    .add(R.id.content, rankingFragment!!)
-                    .add(R.id.content, mineFragment!!)
-                    .commit()
+                .add(R.id.content, discoverFragment!!)
+                .add(R.id.content, rankingFragment!!)
+                .add(R.id.content, mineFragment!!)
+                .commit()
         }
         supportFragmentManager
-                .beginTransaction()
-                .show(homeFragment!!)
-                .hide(discoverFragment!!)
-                .hide(rankingFragment!!)
-                .hide(mineFragment!!)
-                .commit()
+            .beginTransaction()
+            .show(homeFragment!!)
+            .hide(discoverFragment!!)
+            .hide(rankingFragment!!)
+            .hide(mineFragment!!)
+            .commit()
     }
 
     private fun getToday(): String {
-        val week = arrayOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+        val week =
+            arrayOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
         val date = Date()
         val calendar: Calendar = Calendar.getInstance()
         calendar.time = date

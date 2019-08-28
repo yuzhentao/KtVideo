@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.view.View
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.activity.*
+import com.yuzhentao.transitionhelper.TransitionsHelper
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
@@ -12,7 +13,10 @@ import kotlinx.android.synthetic.main.fragment_mine.*
  */
 class MineFragment : BaseFragment(), View.OnClickListener {
 
+    private lateinit var activity: MainActivity
+
     override fun getLayoutResources(): Int {
+        activity = getActivity() as MainActivity
         return R.layout.fragment_mine
     }
 
@@ -24,9 +28,12 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         tv_cache.setOnClickListener(this)
         tv_watch.setOnClickListener(this)
         tv_feedback.setOnClickListener(this)
-        tv_cache.typeface = Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
-        tv_watch.typeface = Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
-        tv_feedback.typeface = Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_cache.typeface =
+            Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_watch.typeface =
+            Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_feedback.typeface =
+            Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
@@ -36,7 +43,11 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_avatar, R.id.tv_login -> {
-                startActivity(Intent(activity, LoginActivity::class.java))
+                TransitionsHelper.startActivity(
+                    activity,
+                    LoginActivity::class.java,
+                    iv_avatar
+                )
             }
             R.id.ll_favorite -> {
                 startActivity(Intent(activity, FavoriteActivity::class.java))
