@@ -59,7 +59,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                 }
             })
-            .setTransitionDuration(300)
             .setExposeColor(context.color(R.color.pink))
             .show()
         initView()
