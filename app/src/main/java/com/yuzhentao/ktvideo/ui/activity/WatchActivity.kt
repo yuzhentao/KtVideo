@@ -3,9 +3,9 @@ package com.yuzhentao.ktvideo.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
@@ -15,6 +15,7 @@ import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.mvp.contract.SearchContract
 import com.yuzhentao.ktvideo.mvp.presenter.SearchPresenter
+import com.yuzhentao.ktvideo.util.ClickUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
@@ -59,7 +60,9 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_top -> {
-                onBackPressed()
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
+                    onBackPressed()
+                }
             }
         }
     }

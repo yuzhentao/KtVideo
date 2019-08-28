@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.view.View
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.ui.activity.*
+import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.transitionhelper.TransitionsHelper
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -43,26 +44,42 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_avatar, R.id.tv_login -> {
-                TransitionsHelper.startActivity(
-                    activity,
-                    LoginActivity::class.java,
-                    iv_avatar
-                )
+                if (!ClickUtil.isFastDoubleClick(
+                        R.id.iv_avatar,
+                        1000
+                    ) || !ClickUtil.isFastDoubleClick(R.id.tv_login, 1000)
+                ) {
+                    TransitionsHelper.startActivity(
+                        activity,
+                        LoginActivity::class.java,
+                        iv_avatar
+                    )
+                }
             }
             R.id.ll_favorite -> {
-                startActivity(Intent(activity, FavoriteActivity::class.java))
+                if (!ClickUtil.isFastDoubleClick(R.id.ll_favorite, 1000)) {
+                    startActivity(Intent(activity, FavoriteActivity::class.java))
+                }
             }
             R.id.ll_comment -> {
-                startActivity(Intent(activity, CommentActivity::class.java))
+                if (!ClickUtil.isFastDoubleClick(R.id.ll_comment, 1000)) {
+                    startActivity(Intent(activity, CommentActivity::class.java))
+                }
             }
             R.id.tv_cache -> {
-                startActivity(Intent(activity, CacheActivity::class.java))
+                if (!ClickUtil.isFastDoubleClick(R.id.tv_cache, 1000)) {
+                    startActivity(Intent(activity, CacheActivity::class.java))
+                }
             }
             R.id.tv_watch -> {
-                startActivity(Intent(activity, WatchActivity::class.java))
+                if (!ClickUtil.isFastDoubleClick(R.id.tv_watch, 1000)) {
+                    startActivity(Intent(activity, WatchActivity::class.java))
+                }
             }
             R.id.tv_feedback -> {
-                startActivity(Intent(activity, FeedbackActivity::class.java))
+                if (!ClickUtil.isFastDoubleClick(R.id.tv_feedback, 1000)) {
+                    startActivity(Intent(activity, FeedbackActivity::class.java))
+                }
             }
         }
     }

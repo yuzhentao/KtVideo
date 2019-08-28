@@ -2,7 +2,7 @@ package com.yuzhentao.ktvideo.util
 
 import android.graphics.Color
 
-object ColorUtils {
+object ColorUtil {
 
     fun lighten(color: Int, factor: Float): Int {
         val red = ((Color.red(color) * (1 - factor) / 255 + factor) * 255).toInt()

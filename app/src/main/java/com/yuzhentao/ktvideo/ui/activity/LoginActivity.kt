@@ -18,6 +18,7 @@ import com.yuzhentao.ktvideo.base.BaseActivity
 import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 import com.yuzhentao.ktvideo.extension.drawable
+import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.DimenUtil
 import com.yuzhentao.transitionhelper.TransitionsHelper
 import com.yuzhentao.transitionhelper.bean.InfoBean
@@ -68,7 +69,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_top -> {
-                onBackPressed()
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
+                    onBackPressed()
+                }
             }
         }
     }

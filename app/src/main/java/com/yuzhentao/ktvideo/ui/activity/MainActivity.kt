@@ -21,6 +21,7 @@ import com.yuzhentao.ktvideo.extension.bindView
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.ui.fragment.*
+import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.DimenUtil
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,8 +35,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     private var context: Context = this
     private var activity: MainActivity = this
 
-    private val tvTop by bindView<TextView>(R.id.tv_top)
-    private val ivTop by bindView<AppCompatImageView>(R.id.iv_top)
+    private val tvTitle by bindView<TextView>(R.id.tv_title)
+    private val ivSearch by bindView<AppCompatImageView>(R.id.iv_search)
     private val rbHome by bindView<RadioButton>(R.id.rb_home)
     private val rbDiscover by bindView<RadioButton>(R.id.rb_discover)
     private val rbRanking by bindView<RadioButton>(R.id.rb_ranking)
@@ -110,89 +111,101 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tb -> {
-                when (rg_bottom.checkedRadioButtonId) {
-                    R.id.rb_home -> {
-                        homeFragment?.scrollToTop()
-                    }
-                    R.id.rb_discover -> {
-                        discoverFragment?.scrollToTop()
+                if (!ClickUtil.isFastDoubleClick(R.id.tb, 1000)) {
+                    when (rg_bottom.checkedRadioButtonId) {
+                        R.id.rb_home -> {
+                            homeFragment?.scrollToTop()
+                        }
+                        R.id.rb_discover -> {
+                            discoverFragment?.scrollToTop()
+                        }
                     }
                 }
             }
-            R.id.iv_top -> {
-                if (rbMine.isChecked) {//设置
-                    newIntent<SettingActivity>(false)
-                } else {//搜索
-                    searchFragment = SearchFragment()
-                    searchFragment.show(supportFragmentManager, SEARCH_TAG)
+            R.id.iv_search -> {
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_search, 1000)) {
+                    if (rbMine.isChecked) {//设置
+                        newIntent<SettingActivity>(false)
+                    } else {//搜索
+                        searchFragment = SearchFragment()
+                        searchFragment.show(supportFragmentManager, SEARCH_TAG)
+                    }
                 }
             }
             R.id.rb_home -> {
-                tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
-                tvTop.text = getToday()
-                tvTop.visibility = View.VISIBLE
-                ivTop.setImageResource(R.drawable.ic_search_black)
-                rbHome.isSelected = true
-                rbDiscover.isSelected = false
-                rbRanking.isSelected = false
-                rbMine.isSelected = false
-                supportFragmentManager
-                    .beginTransaction()
-                    .show(homeFragment!!)
-                    .hide(discoverFragment!!)
-                    .hide(rankingFragment!!)
-                    .hide(mineFragment!!)
-                    .commit()
+                if (!ClickUtil.isFastDoubleClick(R.id.rb_home, 1000)) {
+                    tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
+                    tvTitle.text = getToday()
+                    tvTitle.visibility = View.VISIBLE
+                    ivSearch.setImageResource(R.drawable.ic_search_black)
+                    rbHome.isSelected = true
+                    rbDiscover.isSelected = false
+                    rbRanking.isSelected = false
+                    rbMine.isSelected = false
+                    supportFragmentManager
+                        .beginTransaction()
+                        .show(homeFragment!!)
+                        .hide(discoverFragment!!)
+                        .hide(rankingFragment!!)
+                        .hide(mineFragment!!)
+                        .commit()
+                }
             }
             R.id.rb_discover -> {
-                tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
-                tvTop.setText(R.string.discover)
-                tvTop.visibility = View.VISIBLE
-                ivTop.setImageResource(R.drawable.ic_search_black)
-                rbHome.isSelected = false
-                rbDiscover.isSelected = true
-                rbRanking.isSelected = false
-                rbMine.isSelected = false
-                supportFragmentManager
-                    .beginTransaction()
-                    .hide(homeFragment!!)
-                    .show(discoverFragment!!)
-                    .hide(rankingFragment!!)
-                    .hide(mineFragment!!)
-                    .commit()
+                if (!ClickUtil.isFastDoubleClick(R.id.rb_discover, 1000)) {
+                    tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
+                    tvTitle.setText(R.string.discover)
+                    tvTitle.visibility = View.VISIBLE
+                    ivSearch.setImageResource(R.drawable.ic_search_black)
+                    rbHome.isSelected = false
+                    rbDiscover.isSelected = true
+                    rbRanking.isSelected = false
+                    rbMine.isSelected = false
+                    supportFragmentManager
+                        .beginTransaction()
+                        .hide(homeFragment!!)
+                        .show(discoverFragment!!)
+                        .hide(rankingFragment!!)
+                        .hide(mineFragment!!)
+                        .commit()
+                }
             }
             R.id.rb_ranking -> {
-                tb.elevation = 0F
-                tvTop.setText(R.string.ranking)
-                tvTop.visibility = View.VISIBLE
-                ivTop.setImageResource(R.drawable.ic_search_black)
-                rbHome.isSelected = false
-                rbDiscover.isSelected = false
-                rbRanking.isSelected = true
-                rbMine.isSelected = false
-                supportFragmentManager
-                    .beginTransaction()
-                    .hide(homeFragment!!)
-                    .hide(discoverFragment!!)
-                    .show(rankingFragment!!)
-                    .hide(mineFragment!!)
-                    .commit()
+                if (!ClickUtil.isFastDoubleClick(R.id.rb_ranking, 1000)) {
+                    tb.elevation = 0F
+                    tvTitle.setText(R.string.ranking)
+                    tvTitle.visibility = View.VISIBLE
+                    ivSearch.setImageResource(R.drawable.ic_search_black)
+                    rbHome.isSelected = false
+                    rbDiscover.isSelected = false
+                    rbRanking.isSelected = true
+                    rbMine.isSelected = false
+                    supportFragmentManager
+                        .beginTransaction()
+                        .hide(homeFragment!!)
+                        .hide(discoverFragment!!)
+                        .show(rankingFragment!!)
+                        .hide(mineFragment!!)
+                        .commit()
+                }
             }
             R.id.rb_mine -> {
-                tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
-                tvTop.visibility = View.GONE
-                ivTop.setImageResource(R.drawable.ic_settings_black)
-                rbHome.isSelected = false
-                rbDiscover.isSelected = false
-                rbRanking.isSelected = false
-                rbMine.isSelected = true
-                supportFragmentManager
-                    .beginTransaction()
-                    .hide(homeFragment!!)
-                    .hide(discoverFragment!!)
-                    .hide(rankingFragment!!)
-                    .show(mineFragment!!)
-                    .commit()
+                if (!ClickUtil.isFastDoubleClick(R.id.rb_mine, 1000)) {
+                    tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
+                    tvTitle.visibility = View.GONE
+                    ivSearch.setImageResource(R.drawable.ic_settings_black)
+                    rbHome.isSelected = false
+                    rbDiscover.isSelected = false
+                    rbRanking.isSelected = false
+                    rbMine.isSelected = true
+                    supportFragmentManager
+                        .beginTransaction()
+                        .hide(homeFragment!!)
+                        .hide(discoverFragment!!)
+                        .hide(rankingFragment!!)
+                        .show(mineFragment!!)
+                        .commit()
+                }
             }
             R.id.fab -> {
 
@@ -220,11 +233,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     private fun initView() {
         (findViewById<Toolbar>(R.id.tb)).setOnClickListener(this)
-        tvTop.text = getToday()
-        tvTop.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
-        tvTop.visibility = View.VISIBLE
-        ivTop.setImageResource(R.drawable.ic_search_black)
-        ivTop.setOnClickListener(this)
+        tvTitle.text = getToday()
+        tvTitle.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
+        tvTitle.visibility = View.VISIBLE
+        ivSearch.setImageResource(R.drawable.ic_search_black)
+        ivSearch.setOnClickListener(this)
         rbHome.isSelected = true
         rbHome.setOnClickListener(this)
         rbDiscover.setOnClickListener(this)

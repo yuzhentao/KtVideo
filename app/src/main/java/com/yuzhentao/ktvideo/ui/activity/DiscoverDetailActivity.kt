@@ -20,6 +20,7 @@ import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yuzhentao.ktvideo.ui.fragment.DiscoverRightFragment
+import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs
@@ -27,7 +28,8 @@ import kotlin.math.abs
 /**
  * 发现详情
  */
-class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, DiscoverDetailContract.View {
+class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener,
+    DiscoverDetailContract.View {
 
     private var context: Context = this
 
@@ -88,7 +90,13 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.iv_back, R.id.iv_top -> {
-                onBackPressed()
+                if (!ClickUtil.isFastDoubleClick(
+                        R.id.iv_back,
+                        1000
+                    ) || !ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)
+                ) {
+                    onBackPressed()
+                }
             }
             R.id.tv_follow -> {
 
@@ -103,12 +111,27 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
             tv_name.text = category
             tv_desc.text = bean.tagInfo.description
             var count = ""
-            if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isEmpty()) {
+            if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(
+                    R.string.discover_join,
+                    bean.tagInfo.lookCount.toString()
+                ).isEmpty()
+            ) {
                 count = getString(R.string.discover_follow, bean.tagInfo.tagFollowCount.toString())
-            } else if (bean.tagInfo.tagFollowCount.toString().isEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isNotEmpty()) {
+            } else if (bean.tagInfo.tagFollowCount.toString().isEmpty() && getString(
+                    R.string.discover_join,
+                    bean.tagInfo.lookCount.toString()
+                ).isNotEmpty()
+            ) {
                 count = getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
-            } else if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(R.string.discover_join, bean.tagInfo.lookCount.toString()).isNotEmpty()) {
-                count = getString(R.string.discover_follow, bean.tagInfo.tagFollowCount.toString()) + " | " + getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
+            } else if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(
+                    R.string.discover_join,
+                    bean.tagInfo.lookCount.toString()
+                ).isNotEmpty()
+            ) {
+                count = getString(
+                    R.string.discover_follow,
+                    bean.tagInfo.tagFollowCount.toString()
+                ) + " | " + getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
             } else {
                 tv_count.visibility = View.GONE
             }
@@ -194,8 +217,10 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener, Discov
             }
         })
 
-        tv_name.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
-        tv_follow.typeface = Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_name.typeface =
+            Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+        tv_follow.typeface =
+            Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
         tv_follow.setOnClickListener(this)
 
         val leftFragment = DiscoverLeftFragment()

@@ -5,8 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.DefaultItemAnimator
 import android.view.*
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.flexbox.FlexDirection
@@ -19,17 +17,18 @@ import com.yuzhentao.ktvideo.mvp.contract.HotSearchContract
 import com.yuzhentao.ktvideo.mvp.presenter.HotSearchPresenter
 import com.yuzhentao.ktvideo.ui.activity.WatchActivity
 import com.yuzhentao.ktvideo.util.CircularRevealAnim
+import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.KeyBoardUtil
 import kotlinx.android.synthetic.main.fragment_search.*
 
 const val SEARCH_TAG = "SearchFragment"
 
 class SearchFragment : androidx.fragment.app.DialogFragment(),
-        View.OnClickListener,
-        ViewTreeObserver.OnPreDrawListener,
-        DialogInterface.OnKeyListener,
-        CircularRevealAnim.AnimListener,
-        HotSearchContract.View {
+    View.OnClickListener,
+    ViewTreeObserver.OnPreDrawListener,
+    DialogInterface.OnKeyListener,
+    CircularRevealAnim.AnimListener,
+    HotSearchContract.View {
 
     private lateinit var activity: Activity
 
@@ -52,7 +51,11 @@ class SearchFragment : androidx.fragment.app.DialogFragment(),
         setStyle(STYLE_NO_FRAME, R.style.DialogStyle)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         activity = requireActivity()
         rootView = inflater.inflate(R.layout.fragment_search, container, false)
         return rootView
@@ -75,10 +78,14 @@ class SearchFragment : androidx.fragment.app.DialogFragment(),
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> {
-                hideAnim()
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_back, 1000)) {
+                    hideAnim()
+                }
             }
             R.id.iv_search -> {
-                search()
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_search, 1000)) {
+                    search()
+                }
             }
         }
     }
@@ -121,7 +128,8 @@ class SearchFragment : androidx.fragment.app.DialogFragment(),
             iv_search.setOnClickListener(this)
             iv_search.viewTreeObserver.addOnPreDrawListener(this)
             et.requestFocus()
-            tv_hot.typeface = Typeface.createFromAsset(activity.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
+            tv_hot.typeface =
+                Typeface.createFromAsset(activity.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
             dialog.setOnKeyListener(this)
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW//主轴排列方式
@@ -129,21 +137,25 @@ class SearchFragment : androidx.fragment.app.DialogFragment(),
             rv.layoutManager = layoutManager
             rv.adapter = adapter
             rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
-            adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-                val bean: String? = adapter!!.data[position] as String
-                bean?.let {
-                    KeyBoardUtil.closeKeyboard(context, et)
-                    val intent = Intent(context, WatchActivity::class.java)
-                    intent.putExtra("key", bean)
-                    context?.startActivity(intent)
+            adapter.onItemClickListener =
+                BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+                    val bean: String? = adapter!!.data[position] as String
+                    bean?.let {
+                        KeyBoardUtil.closeKeyboard(context, et)
+                        val intent = Intent(context, WatchActivity::class.java)
+                        intent.putExtra("key", bean)
+                        context?.startActivity(intent)
+                    }
                 }
-            }
         }
     }
 
     private fun initDialog() {
         val window = dialog.window
-        window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
+        window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
         window.setGravity(Gravity.TOP)
         window.setWindowAnimations(R.style.DialogEmptyAnimation)//取消过渡动画
     }

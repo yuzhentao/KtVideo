@@ -4,9 +4,9 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.view.View
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.download.DownloadTask
@@ -17,6 +17,7 @@ import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.extension.shortToast
+import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.DownloadState
 import com.yuzhentao.ktvideo.util.FileUtil
 import com.yuzhentao.ktvideo.view.EasySwipeMenuLayout
@@ -61,7 +62,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_top -> {
-                onBackPressed()
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
+                    onBackPressed()
+                }
             }
         }
     }
@@ -69,7 +72,11 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     private fun initView() {
         tv_top.text = getString(R.string.mine_cache)
         iv_top.setOnClickListener(this)
-        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter!!.data[position] as VideoBean
@@ -82,37 +89,42 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
         }
-        adapter.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
-            val bean: VideoBean? = adapter!!.data[position] as VideoBean
-            bean?.let {
-                when (view.id) {
-                    R.id.tv_delete -> {
-                        val builder = AlertDialog.Builder(context)
-                        builder.setMessage(context.resources.getString(R.string.delete_tip))
-                        builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
-                            dialog.dismiss()
-                            if (FileUtil.deleteFile(bean.savePath)) {
-                                adapter.remove(position)
-                                bean.downloadState = DownloadState.NORMAL.name
-                                bean.downloadProgress = 0
-                                bean.savePath = ""
-                                dbManager.update(bean)
+        adapter.onItemChildClickListener =
+            BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
+                val bean: VideoBean? = adapter!!.data[position] as VideoBean
+                bean?.let {
+                    when (view.id) {
+                        R.id.tv_delete -> {
+                            val builder = AlertDialog.Builder(context)
+                            builder.setMessage(context.resources.getString(R.string.delete_tip))
+                            builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
+                                dialog.dismiss()
+                                if (FileUtil.deleteFile(bean.savePath)) {
+                                    adapter.remove(position)
+                                    bean.downloadState = DownloadState.NORMAL.name
+                                    bean.downloadProgress = 0
+                                    bean.savePath = ""
+                                    dbManager.update(bean)
+                                }
+                                if (adapter.data.size == 0) {
+                                    rv.visibility = View.GONE
+                                    tv_hint.visibility = View.VISIBLE
+                                }
                             }
-                            if (adapter.data.size == 0) {
-                                rv.visibility = View.GONE
-                                tv_hint.visibility = View.VISIBLE
+                            builder.setNegativeButton(context.resources.getString(R.string.no)) { dialog, _ ->
+                                dialog.dismiss()
+                                val swipe = adapter.getViewByPosition(
+                                    rv,
+                                    position,
+                                    R.id.swipe
+                                ) as EasySwipeMenuLayout
+                                swipe.resetStatus()
                             }
+                            builder.create().show()
                         }
-                        builder.setNegativeButton(context.resources.getString(R.string.no)) { dialog, _ ->
-                            dialog.dismiss()
-                            val swipe = adapter.getViewByPosition(rv, position, R.id.swipe) as EasySwipeMenuLayout
-                            swipe.resetStatus()
-                        }
-                        builder.create().show()
                     }
                 }
             }
-        }
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
     }
 
@@ -120,11 +132,12 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         dbManager.findCache()?.let {
             it.forEach { bean ->
                 if ((FileUtil.isFileExist(bean.savePath)
-                                && bean.downloadState == DownloadState.COMPLETE.name
-                                && bean.downloadProgress == 100)
-                        || (!FileUtil.isFileExist(bean.savePath)
-                                && bean.downloadState != DownloadState.COMPLETE.name
-                                && bean.downloadProgress != 100)) {//检查本地是否还有视频
+                            && bean.downloadState == DownloadState.COMPLETE.name
+                            && bean.downloadProgress == 100)
+                    || (!FileUtil.isFileExist(bean.savePath)
+                            && bean.downloadState != DownloadState.COMPLETE.name
+                            && bean.downloadProgress != 100)
+                ) {//检查本地是否还有视频
                     beans.add(bean)
                 }
             }

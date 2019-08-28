@@ -2,10 +2,11 @@ package com.yuzhentao.ktvideo.ui.activity
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
+import com.yuzhentao.ktvideo.util.ClickUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
@@ -32,7 +33,9 @@ class FavoriteActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_top -> {
-                onBackPressed()
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
+                    onBackPressed()
+                }
             }
         }
     }

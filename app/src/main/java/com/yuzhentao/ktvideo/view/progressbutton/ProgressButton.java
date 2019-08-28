@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yuzhentao.ktvideo.R;
-import com.yuzhentao.ktvideo.util.ColorUtils;
+import com.yuzhentao.ktvideo.util.ColorUtil;
 import com.yuzhentao.ktvideo.util.ThemeUtils;
 
 public class ProgressButton extends FrameLayout /*implements ProgressView.OnCompletedListener*/ {
@@ -44,7 +44,7 @@ public class ProgressButton extends FrameLayout /*implements ProgressView.OnComp
 
         mPrimaryColor = ThemeUtils.INSTANCE.getThemePrimaryColor(context);
         mAccentColor = ThemeUtils.INSTANCE.getThemeAccentColor(context);
-        mAccentColorLight = ColorUtils.INSTANCE.lighten(mAccentColor, 0.5f);
+        mAccentColorLight = ColorUtil.INSTANCE.lighten(mAccentColor, 0.5f);
 
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ProgressButton, defStyleAttr, 0);
