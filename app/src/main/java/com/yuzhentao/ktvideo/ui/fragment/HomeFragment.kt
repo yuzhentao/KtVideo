@@ -150,12 +150,4 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         this.onRvScrollListener = onRvScrollListener
     }
 
-    fun getScollYDistance(): Int {
-        val layoutManager = rv.layoutManager as LinearLayoutManager
-        val position = layoutManager.findFirstVisibleItemPosition()
-        val firstVisibleChildView = layoutManager.findViewByPosition(position)
-        val itemHeight = firstVisibleChildView!!.height
-        return position * itemHeight - firstVisibleChildView.top
-    }
-
 }
