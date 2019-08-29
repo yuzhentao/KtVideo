@@ -57,14 +57,14 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         } else {
             iv_bg.setImageResource(R.drawable.bg_splash)
         }
-        val alphaAnim = ObjectAnimator.ofFloat(iv_bg, "alpha", 0.1F, 1.0F)
-        val scaleAnimX = ObjectAnimator.ofFloat(iv_bg, "scaleX", 1.0F, 1.2F)
-        val scaleAnimY = ObjectAnimator.ofFloat(iv_bg, "scaleY", 1.0F, 1.2F)
-        val animSet = AnimatorSet()
-        animSet.play(alphaAnim).with(scaleAnimX).with(scaleAnimY)
-        animSet.duration = 2000
-        animSet.interpolator = FastOutSlowInInterpolator()
-        animSet.addListener(object : Animator.AnimatorListener {
+        val alphaAnimBg = ObjectAnimator.ofFloat(iv_bg, "alpha", 0.1F, 1.0F)
+        val scaleAnimXBg = ObjectAnimator.ofFloat(iv_bg, "scaleX", 1.0F, 1.2F)
+        val scaleAnimYBg = ObjectAnimator.ofFloat(iv_bg, "scaleY", 1.0F, 1.2F)
+        val animSetBg = AnimatorSet()
+        animSetBg.play(alphaAnimBg).with(scaleAnimXBg).with(scaleAnimYBg)
+        animSetBg.duration = 2000
+        animSetBg.interpolator = FastOutSlowInInterpolator()
+        animSetBg.addListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
 
             }
@@ -81,7 +81,11 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
 
             }
         })
-        animSet.start()
+        animSetBg.start()
+        val alphaAnimLogo = ObjectAnimator.ofFloat(iv_logo, "alpha", 0.1F, 1.0F)
+        alphaAnimLogo.duration = 2000
+        alphaAnimLogo.interpolator = FastOutSlowInInterpolator()
+        alphaAnimLogo.start()
     }
 
 }
