@@ -7,10 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
@@ -18,8 +18,10 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.base.BaseActivity
 import com.yuzhentao.ktvideo.extension.bindView
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.extension.shortToast
+import com.yuzhentao.ktvideo.interfaces.OnRvScrollListener
 import com.yuzhentao.ktvideo.ui.fragment.*
 import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.DimenUtil
@@ -35,7 +37,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     private var context: Context = this
     private var activity: MainActivity = this
 
-    private val tvTitle by bindView<TextView>(R.id.tv_title)
+    private val tb by bindView<Toolbar>(R.id.tb)
+    private val tvTitle by bindView<AppCompatTextView>(R.id.tv_title)
     private val ivSearch by bindView<AppCompatImageView>(R.id.iv_search)
     private val rbHome by bindView<RadioButton>(R.id.rb_home)
     private val rbDiscover by bindView<RadioButton>(R.id.rb_discover)
@@ -50,6 +53,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var toast: Toast? = null
     private var exitTime: Long = 0
+    private var changeBgHome: Boolean = false
+    private var changeBgDiscover: Boolean = false
 
     private val rxPermissions: RxPermissions by lazy {
         RxPermissions(activity)
@@ -134,6 +139,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_home -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_home, 1000)) {
+                    tb.setBackgroundColor(
+                        if (changeBgHome) {
+                            context.color(R.color.white_50)
+                        } else context.color(R.color.white)
+                    )
                     tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                     tvTitle.text = getToday()
                     tvTitle.visibility = View.VISIBLE
@@ -153,6 +163,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_discover -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_discover, 1000)) {
+                    tb.setBackgroundColor(
+                        if (changeBgDiscover) {
+                            context.color(R.color.white_50)
+                        } else context.color(R.color.white)
+                    )
                     tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                     tvTitle.setText(R.string.discover)
                     tvTitle.visibility = View.VISIBLE
@@ -172,6 +187,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_ranking -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_ranking, 1000)) {
+                    tb.setBackgroundColor(context.color(R.color.white))
                     tb.elevation = 0F
                     tvTitle.setText(R.string.ranking)
                     tvTitle.visibility = View.VISIBLE
@@ -191,6 +207,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_mine -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_mine, 1000)) {
+                    tb.setBackgroundColor(context.color(R.color.white))
                     tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                     tvTitle.visibility = View.GONE
                     ivSearch.setImageResource(R.drawable.ic_settings_black)
@@ -232,7 +249,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        (findViewById<Toolbar>(R.id.tb)).setOnClickListener(this)
+        tb.setOnClickListener(this)
         tvTitle.text = getToday()
         tvTitle.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
         tvTitle.visibility = View.VISIBLE
@@ -282,6 +299,32 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             .hide(rankingFragment!!)
             .hide(mineFragment!!)
             .commit()
+        homeFragment?.setOnRvScrollListener(object : OnRvScrollListener {
+            override fun onRvScroll(totalDy: Int) {
+                tb.setBackgroundColor(
+                    if (totalDy < 0) {
+                        this@MainActivity.changeBgHome = true
+                        context.color(R.color.white_50)
+                    } else {
+                        this@MainActivity.changeBgHome = false
+                        context.color(R.color.white)
+                    }
+                )
+            }
+        })
+        discoverFragment?.setOnRvScrollListener(object : OnRvScrollListener {
+            override fun onRvScroll(totalDy: Int) {
+                tb.setBackgroundColor(
+                    if (totalDy < 0) {
+                        this@MainActivity.changeBgDiscover = true
+                        context.color(R.color.white_50)
+                    } else {
+                        this@MainActivity.changeBgDiscover = false
+                        context.color(R.color.white)
+                    }
+                )
+            }
+        })
     }
 
     private fun getToday(): String {

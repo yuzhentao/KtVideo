@@ -3,14 +3,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tl" />
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/x40">
 
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl"
@@ -25,5 +19,12 @@
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
             tools:ignore="UnusedAttribute" />
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tl" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

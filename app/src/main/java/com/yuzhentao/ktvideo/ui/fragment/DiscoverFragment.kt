@@ -2,10 +2,12 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.DiscoverAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverBean
+import com.yuzhentao.ktvideo.interfaces.OnRvScrollListener
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverPresenter
 import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
@@ -23,13 +25,15 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         DiscoverPresenter(context, this)
     }
 
+    private var onRvScrollListener: OnRvScrollListener? = null
+
     override fun getLayoutResources(): Int {
         return R.layout.fragment_discover
     }
 
     override fun initView() {
         presenter.load()
-        rv.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 2)
+        rv.layoutManager = GridLayoutManager(context, 2)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: DiscoverBean.Item.Data? = adapter!!.data[position] as DiscoverBean.Item.Data
@@ -40,6 +44,15 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
             }
         }
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            private var totalDy = 0
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                totalDy -= dy
+                onRvScrollListener?.onRvScroll(totalDy)
+            }
+        })
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
@@ -52,6 +65,10 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     fun scrollToTop() {
         rv.smoothScrollToPosition(0)
+    }
+
+    fun setOnRvScrollListener(onRvScrollListener: OnRvScrollListener) {
+        this.onRvScrollListener = onRvScrollListener
     }
 
 }
