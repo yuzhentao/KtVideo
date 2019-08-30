@@ -7,9 +7,11 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingSubAdapter
 import com.yuzhentao.ktvideo.bean.RankingSubBean
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.mvp.contract.RankingSubContract
 import com.yuzhentao.ktvideo.mvp.presenter.RankingSubPresenter
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
+import com.yuzhentao.ktvideo.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
 /**
@@ -69,6 +71,7 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
     override fun setData(beans: MutableList<RankingSubBean.Item.Data.Content.DataX>?) {
         beans?.let {
             adapter.setNewData(beans)
+            adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
         }
     }
 

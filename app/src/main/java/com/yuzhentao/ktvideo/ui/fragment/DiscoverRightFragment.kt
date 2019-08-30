@@ -9,11 +9,13 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.DiscoverDetailRightAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverDetailRightBean
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverDetailRightContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverDetailRightPresenter
 import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.DimenUtil
+import com.yuzhentao.ktvideo.util.FooterUtil
 import com.yuzhentao.ktvideo.util.ScrollCalculatorHelper
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
@@ -123,6 +125,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
     override fun setData(beans: MutableList<DiscoverDetailRightBean.Item.Data.Content>?) {
         adapter.setNewData(beans)
+        adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
     }
 
     fun scrollToTop() {

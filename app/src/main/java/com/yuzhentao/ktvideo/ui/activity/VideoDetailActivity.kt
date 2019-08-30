@@ -28,14 +28,12 @@ import com.yuzhentao.ktvideo.adapter.VideoRelatedAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.bean.VideoRelatedBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.ioMain
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.mvp.contract.VideoRelatedContract
 import com.yuzhentao.ktvideo.mvp.presenter.VideoRelatedPresenter
-import com.yuzhentao.ktvideo.util.DownloadState
-import com.yuzhentao.ktvideo.util.GlideApp
-import com.yuzhentao.ktvideo.util.ImageUtil
-import com.yuzhentao.ktvideo.util.VideoListener
+import com.yuzhentao.ktvideo.util.*
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -145,6 +143,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
         beans?.let {
             adapter.setNewData(beans)
+            adapter.addFooterView(FooterUtil.getFooter(context, context.color(R.color.white)))
         }
     }
 

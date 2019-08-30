@@ -7,10 +7,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.DiscoverAdapter
 import com.yuzhentao.ktvideo.bean.DiscoverBean
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.interfaces.OnRvScrollListener
 import com.yuzhentao.ktvideo.mvp.contract.DiscoverContract
 import com.yuzhentao.ktvideo.mvp.presenter.DiscoverPresenter
 import com.yuzhentao.ktvideo.ui.activity.DiscoverDetailActivity
+import com.yuzhentao.ktvideo.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -61,6 +63,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     override fun setData(beans: MutableList<DiscoverBean.Item.Data>) {
         adapter.setNewData(beans)
+        adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
     }
 
     fun scrollToTop() {

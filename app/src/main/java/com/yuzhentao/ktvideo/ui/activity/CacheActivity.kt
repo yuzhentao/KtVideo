@@ -16,10 +16,12 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.CacheAdapter
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.shortToast
 import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.DownloadState
 import com.yuzhentao.ktvideo.util.FileUtil
+import com.yuzhentao.ktvideo.util.FooterUtil
 import com.yuzhentao.ktvideo.view.EasySwipeMenuLayout
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
@@ -72,9 +74,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
     private fun initView() {
         tv_top.text = getString(R.string.mine_cache)
         iv_top.setOnClickListener(this)
-        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+        rv.layoutManager = LinearLayoutManager(
             context,
-            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            LinearLayoutManager.VERTICAL,
             false
         )
         rv.adapter = adapter
@@ -149,6 +151,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 tv_hint.visibility = View.VISIBLE
             }
             adapter.setNewData(beans)
+            adapter.addFooterView(FooterUtil.getFooter(context, context.color(R.color.app_black)))
         }
     }
 

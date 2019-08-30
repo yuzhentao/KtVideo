@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.HomeAdapter
 import com.yuzhentao.ktvideo.bean.HomeBean
 import com.yuzhentao.ktvideo.bean.VideoBean
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 import com.yuzhentao.ktvideo.interfaces.OnRvScrollListener
 import com.yuzhentao.ktvideo.mvp.contract.HomeContract
 import com.yuzhentao.ktvideo.mvp.presenter.HomePresenter
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
+import com.yuzhentao.ktvideo.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.regex.Pattern
 
@@ -132,7 +135,16 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             ?.flatMap { it.itemList!! }
             ?.filter { it.type == "video" }
             ?.forEach { beans.add(it) }
-        adapter.setNewData(beans)
+        if (beans.size > 0) {
+            adapter.setNewData(beans)
+        } else if (adapter.data.size > 0) {
+            adapter.addFooterView(
+                FooterUtil.getFooter(
+                    context!!,
+                    context!!.color(R.color.app_black)
+                )
+            )
+        }
     }
 
     override fun onRefresh() {

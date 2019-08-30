@@ -13,9 +13,11 @@ import com.yuzhentao.ktvideo.adapter.WatchAdapter
 import com.yuzhentao.ktvideo.bean.SearchBean
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.db.VideoDbManager
+import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.mvp.contract.SearchContract
 import com.yuzhentao.ktvideo.mvp.presenter.SearchPresenter
 import com.yuzhentao.ktvideo.util.ClickUtil
+import com.yuzhentao.ktvideo.util.FooterUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
@@ -128,6 +130,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                     tv_hint.visibility = View.VISIBLE
                 }
                 adapter.setNewData(beans)
+                adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
             }
         } else {
             presenter.load(intent.getStringExtra("key"))
