@@ -71,7 +71,9 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
         beans.forEach {
             val data = it.data
             data?.let {
-                this.beans.add(VideoBean(data.id,
+                this.beans.add(
+                    VideoBean(
+                        data.id,
                         data.cover?.feed,
                         data.title,
                         data.description,
@@ -81,7 +83,9 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                         data.cover?.blurred,
                         data.consumption?.collectionCount,
                         data.consumption?.shareCount,
-                        data.consumption?.replyCount))
+                        data.consumption?.replyCount
+                    )
+                )
             }
         }
         adapter.setNewData(this.beans)
@@ -95,7 +99,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
             tv_top.text = intent.getStringExtra("key")
         }
         iv_top.setOnClickListener(this)
-        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter!!.data[position] as VideoBean

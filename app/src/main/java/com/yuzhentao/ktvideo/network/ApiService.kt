@@ -33,6 +33,12 @@ interface ApiService {
     fun getHomeMoreData(@Query("date") date: String): Observable<HomeBean>
 
     /**
+     * 视频相关推荐
+     */
+    @GET("v4/video/related")
+    fun getVideoRelatedData(@Query("id") id: String, @Query("deviceModel") deviceModel: String): Observable<VideoRelatedBean>
+
+    /**
      * 分类
      */
     @GET("v4/categories/all?${Constant.PARAMS}")

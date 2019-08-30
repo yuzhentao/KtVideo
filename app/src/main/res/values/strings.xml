@@ -11,6 +11,7 @@
     <string name="splash_intro_en">Daily appetizers for your eyes. Bon eyepetizer.</string>
     <string name="splash_intro_cn">每日精选视频推介，让你大开眼界。</string>
     <string name="video_cache">缓存</string>
+    <string name="video_related">相关推荐</string>
     <string name="mine_setting">设置</string>
     <string name="mine_login">点击登录即可发表评论</string>
     <string name="mine_favorite">收藏</string>
