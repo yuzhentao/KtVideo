@@ -6,8 +6,6 @@ import android.util.TypedValue
 import android.view.WindowManager
 import com.yuzhentao.ktvideo.app.App
 
-
-
 object DimenUtil {
 
     fun getWidthInPxHasNav(): Float {
@@ -76,14 +74,22 @@ object DimenUtil {
      * 使用TypedValue类将dp转px
      */
     fun dp2px(context: Context, dp: Int): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp.toFloat(),
+            context.resources.displayMetrics
+        ).toInt()
     }
 
     /**
      * 使用TypedValue类将sp转px
      */
     fun sp2px(context: Context, sp: Int): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp.toFloat(), context.resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp.toFloat(),
+            context.resources.displayMetrics
+        ).toInt()
     }
 
 }

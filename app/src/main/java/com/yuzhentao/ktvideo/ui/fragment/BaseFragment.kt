@@ -1,7 +1,6 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,11 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     var rootView: View? = null
     var isShow: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         if (rootView == null) {
             rootView = inflater.inflate(getLayoutResources(), container, false)
         }
@@ -43,7 +46,9 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     }
 
     abstract fun getLayoutResources(): Int
+
     abstract fun initView()
+
     abstract fun onFragmentVisibleChange(b: Boolean)
 
 }

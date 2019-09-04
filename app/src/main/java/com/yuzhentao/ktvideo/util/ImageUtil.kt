@@ -11,7 +11,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.extension.dimensionPixelOffset
 
-
 object ImageUtil {
 
     fun show(context: Context, imageView: ImageView?, url: String) {
