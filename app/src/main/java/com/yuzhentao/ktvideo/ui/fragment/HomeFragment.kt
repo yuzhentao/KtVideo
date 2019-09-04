@@ -20,7 +20,6 @@ import com.yuzhentao.ktvideo.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.regex.Pattern
 
-
 /**
  * 首页
  */
@@ -41,17 +40,17 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     private var onRvScrollListener: OnRvScrollListener? = null
 
     override fun getLayoutResources(): Int {
-        return com.yuzhentao.ktvideo.R.layout.fragment_home
+        return R.layout.fragment_home
     }
 
     override fun initView() {
         presenter.load()
         srl.setOnRefreshListener(this)
-        srl.setColorSchemeResources(com.yuzhentao.ktvideo.R.color.app_pink)
+        srl.setColorSchemeResources(R.color.app_pink)
         srl.setProgressViewOffset(
             false,
-            context!!.dimensionPixelOffset(com.yuzhentao.ktvideo.R.dimen.x40),
-            context!!.dimensionPixelOffset(com.yuzhentao.ktvideo.R.dimen.x80)
+            context!!.dimensionPixelOffset(R.dimen.x40),
+            context!!.dimensionPixelOffset(R.dimen.x80)
         )
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.adapter = adapter
