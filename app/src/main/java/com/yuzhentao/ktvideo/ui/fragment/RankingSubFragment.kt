@@ -2,6 +2,8 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
@@ -9,23 +11,22 @@ import com.yuzhentao.ktvideo.adapter.RankingSubAdapter
 import com.yuzhentao.ktvideo.bean.RankingSubBean
 import com.yuzhentao.ktvideo.bean.VideoBean
 import com.yuzhentao.ktvideo.extension.color
-import com.yuzhentao.ktvideo.mvp.contract.RankingSubContract
-import com.yuzhentao.ktvideo.mvp.presenter.RankingSubPresenter
 import com.yuzhentao.ktvideo.ui.activity.VideoDetailActivity
 import com.yuzhentao.ktvideo.util.FooterUtil
+import com.yuzhentao.ktvideo.viewmodel.RankingSubViewModel
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
 /**
  * 排行
  */
-class RankingSubFragment : BaseFragment(), RankingSubContract.View {
+class RankingSubFragment : BaseFragment() {
 
     private val adapter: RankingSubAdapter by lazy {
         RankingSubAdapter(null)
     }
 
-    private val presenter: RankingSubPresenter by lazy {
-        RankingSubPresenter(context, this)
+    private val viewModel: RankingSubViewModel by lazy {
+        ViewModelProviders.of(this).get(RankingSubViewModel::class.java)
     }
 
     override fun getLayoutResources(): Int {
@@ -34,7 +35,20 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
 
     override fun initView() {
         arguments?.getString("strategy")?.let {
-            presenter.load(arguments!!.getString("strategy")!!)
+            viewModel.load(context, arguments!!.getString("strategy")!!)
+            viewModel.liveData.observe(
+                this,
+                Observer<MutableList<RankingSubBean.Item.Data.Content.DataX>> { beans ->
+                    beans?.let {
+                        adapter.setNewData(beans)
+                        adapter.addFooterView(
+                            FooterUtil.getFooter(
+                                context!!,
+                                context!!.color(R.color.app_black)
+                            )
+                        )
+                    }
+                })
         }
         rv.layoutManager = LinearLayoutManager(
             context,
@@ -84,19 +98,7 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
-
-    }
-
-    override fun setData(beans: MutableList<RankingSubBean.Item.Data.Content.DataX>?) {
-        beans?.let {
-            adapter.setNewData(beans)
-            adapter.addFooterView(
-                FooterUtil.getFooter(
-                    context!!,
-                    context!!.color(R.color.app_black)
-                )
-            )
-        }
+        
     }
 
     fun scrollToTop() {

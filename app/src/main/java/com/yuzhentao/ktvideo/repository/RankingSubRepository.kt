@@ -1,4 +1,4 @@
-package com.yuzhentao.ktvideo.mvp.model
+package com.yuzhentao.ktvideo.repository
 
 import android.content.Context
 import com.yuzhentao.ktvideo.bean.RankingSubBean
@@ -8,7 +8,7 @@ import com.yuzhentao.ktvideo.network.RetrofitClient
 import com.yuzhentao.ktvideo.util.AppUtil
 import io.reactivex.Observable
 
-class RankingSubModel {
+object RankingSubRepository {
 
     fun loadData(context: Context, strategy: String): Observable<RankingSubBean>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
