@@ -78,12 +78,14 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
                 }
 
                 override fun onNext(url: String) {
-                    if (url.isNotEmpty()) {
-                        ImageUtil.show(context, iv_bg, url)
-                    } else {
-                        if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
-                            ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
+                    if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
+                        ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
+                        if (bean.startPage.imageUrl != url) {
                             downloadSplash(bean.startPage.imageUrl)
+                        }
+                    } else {
+                        if (url.isNotEmpty()) {
+                            ImageUtil.show(context, iv_bg, url)
                         } else {
                             iv_bg.setImageResource(R.drawable.bg_splash)
                         }

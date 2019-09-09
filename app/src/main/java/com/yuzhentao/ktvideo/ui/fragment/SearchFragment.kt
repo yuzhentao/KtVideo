@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.DialogFragment
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -21,14 +22,16 @@ import com.yuzhentao.ktvideo.util.ClickUtil
 import com.yuzhentao.ktvideo.util.KeyBoardUtil
 import kotlinx.android.synthetic.main.fragment_search.*
 
-const val SEARCH_TAG = "SearchFragment"
-
-class SearchFragment : androidx.fragment.app.DialogFragment(),
+class SearchFragment : DialogFragment(),
     View.OnClickListener,
     ViewTreeObserver.OnPreDrawListener,
     DialogInterface.OnKeyListener,
     CircularRevealAnim.AnimListener,
     HotSearchContract.View {
+
+    val simpleName: String by lazy {
+        this::class.java.simpleName
+    }
 
     private lateinit var activity: Activity
 

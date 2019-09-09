@@ -133,7 +133,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                         newIntent<SettingActivity>(false)
                     } else {//搜索
                         searchFragment = SearchFragment()
-                        searchFragment.show(supportFragmentManager, SEARCH_TAG)
+                        searchFragment.show(supportFragmentManager, searchFragment.simpleName)
                     }
                 }
             }

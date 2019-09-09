@@ -2,6 +2,7 @@ package com.yuzhentao.ktvideo.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingSubAdapter
@@ -35,10 +36,15 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
         arguments?.getString("strategy")?.let {
             presenter.load(arguments!!.getString("strategy")!!)
         }
-        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        rv.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         rv.adapter = adapter
         adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: RankingSubBean.Item.Data.Content.DataX? = adapter!!.data[position] as RankingSubBean.Item.Data.Content.DataX
+            val bean: RankingSubBean.Item.Data.Content.DataX? =
+                adapter!!.data[position] as RankingSubBean.Item.Data.Content.DataX
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.id
@@ -53,7 +59,20 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
                 val share = bean.consumption?.shareCount
                 val reply = bean.consumption?.replyCount
                 val time = System.currentTimeMillis()
-                val videoBean = VideoBean(id, img, title, desc, duration, playUrl, category, blurred, collect, share, reply, time)
+                val videoBean = VideoBean(
+                    id,
+                    img,
+                    title,
+                    desc,
+                    duration,
+                    playUrl,
+                    category,
+                    blurred,
+                    collect,
+                    share,
+                    reply,
+                    time
+                )
                 val bundle = Bundle()
                 bundle.putParcelable("data", videoBean)
                 intent.putExtra("bundle", bundle)
@@ -71,7 +90,12 @@ class RankingSubFragment : BaseFragment(), RankingSubContract.View {
     override fun setData(beans: MutableList<RankingSubBean.Item.Data.Content.DataX>?) {
         beans?.let {
             adapter.setNewData(beans)
-            adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
+            adapter.addFooterView(
+                FooterUtil.getFooter(
+                    context!!,
+                    context!!.color(R.color.app_black)
+                )
+            )
         }
     }
 
