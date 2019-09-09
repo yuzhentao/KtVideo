@@ -8,16 +8,26 @@ import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.work.Constraints
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.SplashBean
+import com.yuzhentao.ktvideo.extension.ioMain
 import com.yuzhentao.ktvideo.extension.newIntent
 import com.yuzhentao.ktvideo.mvp.contract.SplashContract
 import com.yuzhentao.ktvideo.mvp.presenter.SplashPresenter
 import com.yuzhentao.ktvideo.util.ImageUtil
+import com.yuzhentao.ktvideo.util.SPUtils
+import com.yuzhentao.ktvideo.worker.DownloadSplashWorker
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_splash.*
-
 
 /**
  * 闪屏页
@@ -35,7 +45,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         immersionBar {
             hideBar(BarHide.FLAG_HIDE_BAR)
         }
-        setContentView(com.yuzhentao.ktvideo.R.layout.activity_splash)
+        setContentView(R.layout.activity_splash)
         initView()
         Aria.get(this).downloadConfig.threadNum = 5
         Aria.get(this).downloadConfig.maxTaskNum = 5
@@ -52,12 +62,38 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     private fun anim(bean: SplashBean?) {
-        if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
-            ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
-            downloadSplash()
-        } else {
-            iv_bg.setImageResource(com.yuzhentao.ktvideo.R.drawable.bg_splash)
-        }
+        Observable
+            .create(ObservableOnSubscribe<String> { emitter ->
+                val url = SPUtils.getInstance(context, "KtVideo").getString("splash_url")
+                emitter.onNext(url)
+            })
+            .ioMain()
+            .subscribe(object : Observer<String> {
+                override fun onComplete() {
+
+                }
+
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(url: String) {
+                    if (url.isNotEmpty()) {
+                        ImageUtil.show(context, iv_bg, url)
+                    } else {
+                        if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
+                            ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
+                            downloadSplash(bean.startPage.imageUrl)
+                        } else {
+                            iv_bg.setImageResource(R.drawable.bg_splash)
+                        }
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+            })
         val alphaAnimBg = ObjectAnimator.ofFloat(iv_bg, "alpha", 0.1F, 1.0F)
         val scaleAnimXBg = ObjectAnimator.ofFloat(iv_bg, "scaleX", 1.0F, 1.2F)
         val scaleAnimYBg = ObjectAnimator.ofFloat(iv_bg, "scaleY", 1.0F, 1.2F)
@@ -89,17 +125,18 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         alphaAnimLogo.start()
     }
 
-    private fun downloadSplash() {
-//        val constraints = Constraints.Builder()
-//            .setRequiresStorageNotLow(false)//内存不足时不执行
-//            .setRequiresBatteryNotLow(false)//电量低时不执行
-//            .build()
-//        val request = OneTimeWorkRequest.Builder(DownloadSplashWorker::class.java)
-//            .setConstraints(constraints)
-//            .build()
-//        WorkManager
-//            .getInstance(context)
-//            .enqueue(request)
+    private fun downloadSplash(url: String) {
+        SPUtils.getInstance(context, "KtVideo").put("splash_url", url)
+        val constraints = Constraints.Builder()
+            .setRequiresStorageNotLow(false)//内存不足时不执行
+            .setRequiresBatteryNotLow(false)//电量低时不执行
+            .build()
+        val request = OneTimeWorkRequest.Builder(DownloadSplashWorker::class.java)
+            .setConstraints(constraints)
+            .build()
+        WorkManager
+            .getInstance(context)
+            .enqueue(request)
     }
 
 }
