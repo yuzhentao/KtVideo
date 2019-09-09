@@ -31,6 +31,7 @@ import com.yuzhentao.ktvideo.db.VideoDbManager
 import com.yuzhentao.ktvideo.extension.color
 import com.yuzhentao.ktvideo.extension.ioMain
 import com.yuzhentao.ktvideo.extension.shortToast
+import com.yuzhentao.ktvideo.key.Constant.KT_VIDEO
 import com.yuzhentao.ktvideo.mvp.contract.VideoRelatedContract
 import com.yuzhentao.ktvideo.mvp.presenter.VideoRelatedPresenter
 import com.yuzhentao.ktvideo.util.*
@@ -152,7 +153,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             bean!!.id?.let {
                 presenter.load(bean!!.id.toString())
                 bean!!.savePath =
-                    Environment.getExternalStorageDirectory().absolutePath + File.separator + "KtVideo" + File.separator + "download_${bean!!.id}.mp4"
+                    Environment.getExternalStorageDirectory().absolutePath + File.separator + KT_VIDEO + File.separator + "download_${bean!!.id}.mp4"
             }
             val blurred = bean!!.blurred
             if (blurred.isNullOrEmpty()) {

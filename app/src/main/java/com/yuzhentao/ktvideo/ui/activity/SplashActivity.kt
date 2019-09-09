@@ -9,6 +9,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.work.Constraints
+import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.arialyy.aria.core.Aria
@@ -18,6 +19,7 @@ import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.bean.SplashBean
 import com.yuzhentao.ktvideo.extension.ioMain
 import com.yuzhentao.ktvideo.extension.newIntent
+import com.yuzhentao.ktvideo.key.Constant.KT_VIDEO
 import com.yuzhentao.ktvideo.mvp.contract.SplashContract
 import com.yuzhentao.ktvideo.mvp.presenter.SplashPresenter
 import com.yuzhentao.ktvideo.util.ImageUtil
@@ -32,6 +34,8 @@ import kotlinx.android.synthetic.main.activity_splash.*
 /**
  * 闪屏页
  */
+const val SPLASH_URL = "splash_url"
+
 class SplashActivity : AppCompatActivity(), SplashContract.View {
 
     private var context: Context = this
@@ -64,7 +68,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     private fun anim(bean: SplashBean?) {
         Observable
             .create(ObservableOnSubscribe<String> { emitter ->
-                val url = SPUtils.getInstance(context, "KtVideo").getString("splash_url")
+                val url = SPUtils.getInstance(context, KT_VIDEO).getString(SPLASH_URL)
                 emitter.onNext(url)
             })
             .ioMain()
@@ -128,12 +132,13 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     private fun downloadSplash(url: String) {
-        SPUtils.getInstance(context, "KtVideo").put("splash_url", url)
+        SPUtils.getInstance(context, KT_VIDEO).put(SPLASH_URL, url)
         val constraints = Constraints.Builder()
             .setRequiresStorageNotLow(false)//内存不足时不执行
             .setRequiresBatteryNotLow(false)//电量低时不执行
             .build()
         val request = OneTimeWorkRequest.Builder(DownloadSplashWorker::class.java)
+            .setInputData(Data.Builder().putString(SPLASH_URL, url).build())
             .setConstraints(constraints)
             .build()
         WorkManager
