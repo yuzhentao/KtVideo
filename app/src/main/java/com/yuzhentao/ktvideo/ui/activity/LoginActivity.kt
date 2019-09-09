@@ -12,6 +12,7 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
+import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.base.BaseActivity
@@ -38,7 +39,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         immersionBar {
             statusBarColor(R.color.black)
-            navigationBarColor(R.color.white_50)
+            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+            navigationBarColor(R.color.black)
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
