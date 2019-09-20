@@ -17,6 +17,7 @@
 <img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo7.png" width="320">
 <img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo8.png" width="320">
 </div>  
+
 #### 功能：
 含有开眼APP每日推荐、分类、热门排行等内容  
 
