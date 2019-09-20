@@ -14,3 +14,15 @@ KtVideo是适合初学者用来学习Kotlin的一个项目，可以在项目中�
 <img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo1.png" width="320">
 <img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo2.png" width="320">
 </div>
+<div align=center>
+<img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo3.png" width="320">
+<img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo4.png" width="320">
+</div>
+<div align=center>
+<img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo5.png" width="320">
+<img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo6.png" width="320">
+</div>
+<div align=center>
+<img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo7.png" width="320">
+<img src="https://github.com/yuzhentao/KtVideo/blob/master/screenshot/ktvideo8.png" width="320">
+</div>
