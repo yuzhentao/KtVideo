@@ -133,7 +133,7 @@ class SearchFragment : DialogFragment(),
             et.requestFocus()
             tv_hot.typeface =
                 Typeface.createFromAsset(activity.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
-            dialog.setOnKeyListener(this)
+            dialog?.setOnKeyListener(this)
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW//主轴排列方式
             layoutManager.flexWrap = FlexWrap.WRAP//是否换行
@@ -154,7 +154,7 @@ class SearchFragment : DialogFragment(),
     }
 
     private fun initDialog() {
-        val window = dialog.window
+        val window = dialog?.window
         window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT

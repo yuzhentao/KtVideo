@@ -112,10 +112,10 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         super.onDestroy()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         if (isPlay && !isPause) {
-            if (newConfig?.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
+            if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
                 if (!vp.isIfCurrentIsFullscreen) {
                     vp.startWindowFullscreen(context, true, true)
                 }

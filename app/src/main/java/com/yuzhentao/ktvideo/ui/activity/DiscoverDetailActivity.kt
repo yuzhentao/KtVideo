@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.gyf.immersionbar.ktx.immersionBar
@@ -80,11 +81,9 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener,
         super.onBackPressed()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        newConfig?.let {
-            isFull = newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER
-        }
+        isFull = newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER
     }
 
     override fun onClick(v: View?) {
@@ -145,7 +144,12 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener,
                     titles.add(name)
                 }
             }
-            vp.adapter = RankingAdapter(supportFragmentManager, fragments, titles)
+            vp.adapter = RankingAdapter(
+                supportFragmentManager,
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+                fragments,
+                titles
+            )
             tl.setupWithViewPager(vp)
             tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {

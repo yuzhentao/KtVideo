@@ -2,8 +2,14 @@ package com.yuzhentao.ktvideo.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-class RankingAdapter(fm: FragmentManager?, var beans: MutableList<Fragment>, var titles: MutableList<String>) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+class RankingAdapter(
+    fm: FragmentManager,
+    behavior: Int,
+    var beans: MutableList<Fragment>,
+    var titles: MutableList<String>
+) : FragmentPagerAdapter(fm, behavior) {
 
     override fun getItem(position: Int): Fragment {
         return beans[position]

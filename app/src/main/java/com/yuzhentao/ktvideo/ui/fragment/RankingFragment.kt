@@ -1,9 +1,10 @@
 package com.yuzhentao.ktvideo.ui.fragment
 
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.appcompat.widget.AppCompatTextView
 import android.view.View
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.fragment.app.FragmentPagerAdapter
+import com.google.android.material.tabs.TabLayout
 import com.yuzhentao.ktvideo.R
 import com.yuzhentao.ktvideo.adapter.RankingAdapter
 import com.yuzhentao.ktvideo.bean.RankingBean
@@ -66,7 +67,12 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             fragments.add(monthFragment)
             fragments.add(allFragment)
 
-            vp.adapter = RankingAdapter(fragmentManager, fragments, titles)
+            vp.adapter = RankingAdapter(
+                fragmentManager!!,
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+                fragments,
+                titles
+            )
             tl.setupWithViewPager(vp)
             tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
