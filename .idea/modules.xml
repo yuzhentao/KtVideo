@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KtVideo.iml" filepath="$PROJECT_DIR$/KtVideo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/transitionhelper/KtVideo-transitionhelper.iml" filepath="$PROJECT_DIR$/transitionhelper/KtVideo-transitionhelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/transitionhelper/transitionhelper.iml" filepath="$PROJECT_DIR$/transitionhelper/transitionhelper.iml" />
     </modules>
