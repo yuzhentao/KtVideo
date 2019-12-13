@@ -15,37 +15,35 @@ class VideoRelatedAdapter(data: MutableList<VideoRelatedBean.Item.Data>?) :
         R.layout.item_video_related, data
     ) {
 
-    override fun convert(helper: BaseViewHolder?, item: VideoRelatedBean.Item.Data?) {
-        helper?.let {
-            item?.let {
-                val position = helper.layoutPosition
-                helper.getView<AppCompatTextView>(R.id.tv_related).visibility =
-                    if (position == headerLayoutCount) {
-                        View.VISIBLE
-                    } else View.GONE
-                helper.getView<AppCompatTextView>(R.id.tv_related).typeface =
-                    Typeface.createFromAsset(
-                        mContext.assets,
-                        "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF"
-                    )
-                val img = item.cover?.feed
-                img?.let {
-                    ImageUtil.showRoundedCorners(
-                        mContext!!,
-                        helper.getView<AppCompatImageView>(R.id.iv),
-                        img,
-                        R.dimen.x6
-                    )
-                }
-                val title = item.title
-                helper.getView<AppCompatTextView>(R.id.tv_top).text = title
-                helper.getView<AppCompatTextView>(R.id.tv_top).typeface = Typeface.createFromAsset(
+    override fun convert(helper: BaseViewHolder, item: VideoRelatedBean.Item.Data?) {
+        item?.let {
+            val position = helper.layoutPosition
+            helper.getView<AppCompatTextView>(R.id.tv_related).visibility =
+                if (position == headerLayoutCount) {
+                    View.VISIBLE
+                } else View.GONE
+            helper.getView<AppCompatTextView>(R.id.tv_related).typeface =
+                Typeface.createFromAsset(
                     mContext.assets,
                     "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF"
                 )
-                val category = "#" + item.category
-                helper.getView<AppCompatTextView>(R.id.tv_bottom).text = category
+            val img = item.cover?.feed
+            img?.let {
+                ImageUtil.showRoundedCorners(
+                    mContext!!,
+                    helper.getView<AppCompatImageView>(R.id.iv),
+                    img,
+                    R.dimen.x6
+                )
             }
+            val title = item.title
+            helper.getView<AppCompatTextView>(R.id.tv_top).text = title
+            helper.getView<AppCompatTextView>(R.id.tv_top).typeface = Typeface.createFromAsset(
+                mContext.assets,
+                "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF"
+            )
+            val category = "#" + item.category
+            helper.getView<AppCompatTextView>(R.id.tv_bottom).text = category
         }
     }
 
