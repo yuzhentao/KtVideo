@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/x12"
+        android:paddingTop="@dimen/x18"
+        android:paddingEnd="@dimen/x12"
+        android:paddingBottom="@dimen/x6">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/x34"
+            android:layout_height="@dimen/x34"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/bg_green" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x8"
+            android:gravity="start"
+            android:textColor="@color/app_black"
+            android:textSize="@dimen/x13"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_icon"
+            tools:text="测试测试测试" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x4"
+            android:gravity="start"
+            android:textSize="@dimen/x12"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="测试测试测试"
+            tools:textColor="@color/app_gray" />
+
+    <com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x6"
+            app:contentTextColor="@color/app_black"
+            app:contentTextSize="@dimen/x13"
+            app:ellipsizeText="...      "
+            app:expandCollapseTextColor="@color/app_pink"
+            app:expandCollapseTextLayoutGravity="end"
+            app:expandCollapseTextSize="@dimen/x13"
+            app:expandText="@string/more"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon"
+            app:maxCollapsedLines="2"
+            tools:text="测试测试测试" />
+
+    <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flex_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x8"
+            app:dividerDrawableHorizontal="@drawable/shape_line_horizontal"
+            app:dividerDrawableVertical="@drawable/shape_line_vertical"
+            app:flexWrap="wrap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_desc"
+            app:showDividerHorizontal="middle"
+            app:showDividerVertical="middle" />
+
+    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x165"
+            android:layout_marginTop="@dimen/x8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flex_box" />
+
+    <LinearLayout
+            android:id="@+id/ll_favorite"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x36"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp"
+            tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/x12"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_favorite_gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_favorite"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x2"
+                android:textColor="@color/app_gray"
+                android:textSize="@dimen/x12"
+                tools:text="测试" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_reply"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x36"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
+            app:layout_constraintStart_toEndOf="@id/ll_favorite"
+            app:layout_constraintTop_toTopOf="@id/ll_favorite"
+            tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/x12"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_comment_gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_replay"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x2"
+                android:textColor="@color/app_gray"
+                android:textSize="@dimen/x12"
+                tools:text="测试" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_play_time"
+            style="@style/TextStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x36"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/x10"
+            android:paddingEnd="@dimen/x10"
+            android:textColor="@color/app_gray"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
+            app:layout_constraintEnd_toStartOf="@id/ll_share"
+            app:layout_constraintStart_toEndOf="@id/ll_reply"
+            app:layout_constraintTop_toTopOf="@id/ll_favorite"
+            tools:text="测试" />
+
+    <LinearLayout
+            android:id="@+id/ll_share"
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/x36"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_play_time"
+            app:layout_constraintTop_toTopOf="@id/ll_favorite"
+            tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/x12"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_share_gray" />
+    </LinearLayout>
+
+    <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_line"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,2 @@
+include ':app', ':transitionhelper'
+rootProject.name = 'KtVideo'

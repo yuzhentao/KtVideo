@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yuzhentao.ktvideo.view.EasySwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x80"
+        app:contentView="@id/cl"
+        app:rightMenuView="@id/tv_delete">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:foreground="?attr/selectableItemBackground"
+            tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv"
+                android:layout_width="@dimen/x140"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/bg_splash" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_top"
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x10"
+                android:layout_marginEnd="@dimen/x5"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:textColor="@color/app_black"
+                android:textSize="@dimen/x14"
+                app:layout_constraintBottom_toBottomOf="@id/iv"
+                app:layout_constraintEnd_toStartOf="@id/btn_progress"
+                app:layout_constraintStart_toEndOf="@id/iv"
+                app:layout_constraintTop_toTopOf="@id/iv"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="测试测试测试" />
+
+        <com.yuzhentao.ktvideo.view.progressbutton.ProgressButton
+                android:id="@+id/btn_progress"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
+                android:layout_marginEnd="@dimen/x5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:pb_fab_circle_color="@color/app_pink"
+                app:pb_fab_color="@color/white"
+                app:pb_fab_starting_progress="0"
+                app:pb_fab_step_size="1"
+                app:pb_fab_total_progress="100" />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:background="@color/gray_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_delete"
+            style="@style/TextStyle"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:background="@color/app_pink"
+            android:text="@string/delete"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12" />
+
+</com.yuzhentao.ktvideo.view.EasySwipeMenuLayout>
