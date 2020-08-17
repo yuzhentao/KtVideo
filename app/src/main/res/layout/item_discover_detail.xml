@@ -45,7 +45,7 @@
             tools:text="测试测试测试"
             tools:textColor="@color/app_gray" />
 
-    <com.yuzhentao.ktvideo.view.expandtextview.ExpandLayout
+    <com.yzt.ktvideo.view.expandtextview.ExpandLayout
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

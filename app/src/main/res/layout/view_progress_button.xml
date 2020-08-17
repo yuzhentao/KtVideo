@@ -4,7 +4,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <com.yuzhentao.ktvideo.view.progressbutton.ProgressView
+    <com.yzt.ktvideo.view.progressbutton.ProgressView
             android:id="@+id/pfProgress"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

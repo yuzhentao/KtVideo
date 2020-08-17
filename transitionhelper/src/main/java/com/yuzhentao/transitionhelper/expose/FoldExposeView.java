@@ -1,10 +1,10 @@
-package com.yuzhentao.transitionhelper.expose;
+package com.yzt.transitionhelper.expose;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.yuzhentao.transitionhelper.expose.base.ExposeView;
+import com.yzt.transitionhelper.expose.base.ExposeView;
 
 /**
  * Created by Mr_immortalZ on 2017/12/6.

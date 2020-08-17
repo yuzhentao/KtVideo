@@ -1,4 +1,4 @@
-package com.yuzhentao.transitionhelper;
+package com.yzt.transitionhelper;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,19 +16,19 @@ import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 
-import com.yuzhentao.transitionhelper.bean.InfoBean;
-import com.yuzhentao.transitionhelper.expose.CircleExposeView;
-import com.yuzhentao.transitionhelper.expose.base.ExposeView;
-import com.yuzhentao.transitionhelper.listener.ExposeListener;
-import com.yuzhentao.transitionhelper.listener.TransitionListener;
-import com.yuzhentao.transitionhelper.method.InflateShowMethod;
-import com.yuzhentao.transitionhelper.method.NoneShowMethod;
-import com.yuzhentao.transitionhelper.method.ShowMethod;
+import com.yzt.transitionhelper.bean.InfoBean;
+import com.yzt.transitionhelper.expose.CircleExposeView;
+import com.yzt.transitionhelper.expose.base.ExposeView;
+import com.yzt.transitionhelper.listener.ExposeListener;
+import com.yzt.transitionhelper.listener.TransitionListener;
+import com.yzt.transitionhelper.method.InflateShowMethod;
+import com.yzt.transitionhelper.method.NoneShowMethod;
+import com.yzt.transitionhelper.method.ShowMethod;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
-import static com.yuzhentao.transitionhelper.util.BitmapUtils.createBitmap;
+import static com.yzt.transitionhelper.util.BitmapUtils.createBitmap;
 
 /**
  * Created by Mr_immortalZ on 2016/10/18.

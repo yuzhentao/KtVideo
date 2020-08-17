@@ -1,11 +1,11 @@
-package com.yuzhentao.transitionhelper.method;
+package com.yzt.transitionhelper.method;
 
 import android.animation.AnimatorSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.yuzhentao.transitionhelper.bean.InfoBean;
-import com.yuzhentao.transitionhelper.expose.base.ExposeView;
+import com.yzt.transitionhelper.bean.InfoBean;
+import com.yzt.transitionhelper.expose.base.ExposeView;
 
 /**
  * Created by Mr_immortalZ on 2016/10/24.

@@ -1,2 +1,3 @@
-include ':app', ':transitionhelper'
-rootProject.name = 'KtVideo'
+rootProject.name = "KtVideo"
+include ':app'
+include ':transitionhelper'

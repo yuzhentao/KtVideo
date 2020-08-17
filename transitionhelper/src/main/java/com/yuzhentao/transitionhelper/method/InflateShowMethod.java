@@ -1,4 +1,4 @@
-package com.yuzhentao.transitionhelper.method;
+package com.yzt.transitionhelper.method;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
-import com.yuzhentao.transitionhelper.bean.InfoBean;
-import com.yuzhentao.transitionhelper.expose.base.ExposeView;
+import com.yzt.transitionhelper.bean.InfoBean;
+import com.yzt.transitionhelper.expose.base.ExposeView;
 
 /**
  * Created by Mr_immortalZ on 2016/10/24.

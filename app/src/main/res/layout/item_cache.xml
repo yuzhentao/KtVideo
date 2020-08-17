@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yuzhentao.ktvideo.view.EasySwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.yzt.ktvideo.view.EasySwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/swipe"
@@ -42,7 +42,7 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="测试测试测试" />
 
-        <com.yuzhentao.ktvideo.view.progressbutton.ProgressButton
+        <com.yzt.ktvideo.view.progressbutton.ProgressButton
                 android:id="@+id/btn_progress"
                 android:layout_width="@dimen/x30"
                 android:layout_height="@dimen/x30"
@@ -75,4 +75,4 @@
             android:textColor="@color/white"
             android:textSize="@dimen/x12" />
 
-</com.yuzhentao.ktvideo.view.EasySwipeMenuLayout>
+</com.yzt.ktvideo.view.EasySwipeMenuLayout>

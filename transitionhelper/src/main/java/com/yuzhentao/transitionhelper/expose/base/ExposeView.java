@@ -1,4 +1,4 @@
-package com.yuzhentao.transitionhelper.expose.base;
+package com.yzt.transitionhelper.expose.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,9 +11,9 @@ import android.graphics.Xfermode;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
-import com.yuzhentao.transitionhelper.R;
-import com.yuzhentao.transitionhelper.bean.InfoBean;
-import com.yuzhentao.transitionhelper.listener.ExposeListener;
+import com.yzt.transitionhelper.R;
+import com.yzt.transitionhelper.bean.InfoBean;
+import com.yzt.transitionhelper.listener.ExposeListener;
 
 
 /**

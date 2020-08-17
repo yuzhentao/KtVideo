@@ -1,4 +1,4 @@
-package com.yuzhentao.transitionhelper.bean;
+package com.yzt.transitionhelper.bean;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
