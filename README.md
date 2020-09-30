@@ -15,5 +15,5 @@ An open-eye app developed with Kotlin. 一个用Kotlin开发的开眼APP。
 支持关键字搜索
 
 #### 特点：
-项目采用Kotlin编写，主要用于学习Kotlin的语法与特性，采用MVP模式开发 
+项目采用Kotlin编写，主要用于学习Kotlin的语法与特性，采用MVP模式开发  
 KtVideo是适合初学者用来学习Kotlin的一个项目，可以在项目中体验到Kotlin语言的优点
