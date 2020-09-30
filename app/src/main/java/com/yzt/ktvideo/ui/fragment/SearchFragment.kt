@@ -67,7 +67,8 @@ class SearchFragment : DialogFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         immersionBar {
-            statusBarColor(R.color.black)
+            statusBarColor(R.color.white)
+            statusBarDarkFont(true)
             fitsSystemWindows(true)
         }
         initView()

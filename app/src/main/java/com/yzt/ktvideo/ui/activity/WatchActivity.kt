@@ -44,7 +44,8 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         immersionBar {
-            statusBarColor(R.color.black)
+            statusBarColor(R.color.white)
+            statusBarDarkFont(true)
             navigationBarColor(R.color.white_50)
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)

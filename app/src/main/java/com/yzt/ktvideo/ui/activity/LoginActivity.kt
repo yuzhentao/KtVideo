@@ -38,7 +38,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         immersionBar {
-            statusBarColor(R.color.black)
+            statusBarColor(R.color.white)
+            statusBarDarkFont(true)
             hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
             navigationBarColor(R.color.black)
             navigationBarDarkIcon(true)
