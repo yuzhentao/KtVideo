@@ -130,10 +130,17 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                     tv_hint.visibility = View.VISIBLE
                 }
                 adapter.setNewData(beans)
-                adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
+                adapter.addFooterView(
+                    FooterUtil.getFooter(
+                        context,
+                        context.color(R.color.app_black)
+                    )
+                )
             }
         } else {
-            presenter.load(intent.getStringExtra("key"))
+            intent.getStringExtra("key")?.let {
+                presenter.load(it)
+            }
         }
     }
 

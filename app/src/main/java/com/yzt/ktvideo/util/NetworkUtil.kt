@@ -41,10 +41,11 @@ object NetworkUtil {
             val cm = getConnectivityManager()
             cm?.let {
                 return if (Build.VERSION.SDK_INT > 22) {
-                    val networkCapabilities = cm.getNetworkCapabilities(cm.activeNetwork)
-                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    val networkCapabilities = it.getNetworkCapabilities(it.activeNetwork)
+                    networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                        ?: false
                 } else {
-                    val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+                    val activeNetwork: NetworkInfo? = it.activeNetworkInfo
                     activeNetwork?.type == ConnectivityManager.TYPE_WIFI
                 }
             }
@@ -55,15 +56,16 @@ object NetworkUtil {
     /**
      * 是否是蜂窝移动网络
      */
-    fun isCellular(): Boolean {
+    fun isCellular(): Boolean? {
         if (isConnected()) {
             val cm = getConnectivityManager()
             cm?.let {
                 return if (Build.VERSION.SDK_INT > 22) {
-                    val networkCapabilities = cm.getNetworkCapabilities(cm.activeNetwork)
-                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    val networkCapabilities = it.getNetworkCapabilities(it.activeNetwork)
+                    networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                        ?: false
                 } else {
-                    val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+                    val activeNetwork: NetworkInfo? = it.activeNetworkInfo
                     activeNetwork?.type == ConnectivityManager.TYPE_MOBILE
                 }
             }
