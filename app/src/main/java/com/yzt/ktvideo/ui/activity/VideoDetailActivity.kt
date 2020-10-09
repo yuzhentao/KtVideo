@@ -146,7 +146,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
 
     override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
         beans?.let {
-            adapter.setNewData(beans)
+            adapter.setList(beans)
             adapter.addFooterView(FooterUtil.getFooter(context, context.color(R.color.white)))
         }
     }
@@ -229,10 +229,9 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                 }
             }
             adapter.addHeaderView(header)
-            adapter.onItemClickListener =
-                BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+            adapter.setOnItemClickListener { adapter, _, position ->
                     val bean: VideoRelatedBean.Item.Data? =
-                        adapter!!.data[position] as VideoRelatedBean.Item.Data
+                        adapter.data[position] as VideoRelatedBean.Item.Data
                     bean?.let {
                         val intent = Intent(context, VideoDetailActivity::class.java)
                         val videoBean = VideoBean(
@@ -257,7 +256,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                         finish()
                     }
                 }
-            adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+            adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
         }
     }
 

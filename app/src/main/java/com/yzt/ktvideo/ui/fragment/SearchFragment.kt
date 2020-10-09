@@ -7,7 +7,6 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -121,7 +120,7 @@ class SearchFragment : DialogFragment(),
     }
 
     override fun setData(beans: MutableList<String>?) {
-        adapter.setNewData(beans)
+        adapter.setList(beans)
     }
 
     private fun initView() {
@@ -141,9 +140,8 @@ class SearchFragment : DialogFragment(),
             rv.layoutManager = layoutManager
             rv.adapter = adapter
             rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
-            adapter.onItemClickListener =
-                BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-                    val bean: String? = adapter!!.data[position] as String
+            adapter.setOnItemClickListener { adapter, _, position ->
+                    val bean: String? = adapter.data[position] as String
                     bean?.let {
                         KeyBoardUtil.closeKeyboard(context, et)
                         val intent = Intent(context, WatchActivity::class.java)

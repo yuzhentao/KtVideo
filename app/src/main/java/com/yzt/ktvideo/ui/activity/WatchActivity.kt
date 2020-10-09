@@ -104,8 +104,8 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
         iv_top.setOnClickListener(this)
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.adapter = adapter
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: VideoBean? = adapter!!.data[position] as VideoBean
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val bean: VideoBean? = adapter.data[position] as VideoBean
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val bundle = Bundle()
@@ -115,7 +115,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                 startActivity(intent)
             }
         }
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
     }
 
     private fun initData() {
@@ -130,7 +130,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
                     rv.visibility = View.GONE
                     tv_hint.visibility = View.VISIBLE
                 }
-                adapter.setNewData(beans)
+                adapter.setList(beans)
                 adapter.addFooterView(
                     FooterUtil.getFooter(
                         context,

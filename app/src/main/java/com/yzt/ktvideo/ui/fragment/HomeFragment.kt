@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HomeAdapter
 import com.yzt.ktvideo.bean.HomeBean
@@ -75,8 +74,8 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                 onRvScrollListener?.onRvScroll(totalDy)
             }
         })
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: HomeBean.Issue.Item? = adapter!!.data[position] as HomeBean.Issue.Item
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val bean: HomeBean.Issue.Item? = adapter.data[position] as HomeBean.Issue.Item
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.data?.id
@@ -135,7 +134,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             ?.filter { it.type == "video" }
             ?.forEach { beans.add(it) }
         if (beans.size > 0) {
-            adapter.setNewData(beans)
+            adapter.setList(beans)
         } else if (adapter.data.size > 0) {
             adapter.addFooterView(
                 FooterUtil.getFooter(

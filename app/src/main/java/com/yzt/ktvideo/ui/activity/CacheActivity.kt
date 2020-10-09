@@ -81,8 +81,8 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             false
         )
         rv.adapter = adapter
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: VideoBean? = adapter!!.data[position] as VideoBean
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val bean: VideoBean? = adapter.data[position] as VideoBean
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val bundle = Bundle()
@@ -92,43 +92,41 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
         }
-        adapter.onItemChildClickListener =
-            BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
-                val bean: VideoBean? = adapter!!.data[position] as VideoBean
-                bean?.let {
-                    when (view.id) {
-                        R.id.tv_delete -> {
-                            val builder = AlertDialog.Builder(context)
-                            builder.setMessage(context.resources.getString(R.string.delete_tip))
-                            builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
-                                dialog.dismiss()
-                                if (FileUtil.deleteFile(bean.savePath)) {
-                                    adapter.remove(position)
-                                    bean.downloadState = DownloadState.NORMAL.name
-                                    bean.downloadProgress = 0
-                                    bean.savePath = ""
-                                    dbManager.update(bean)
-                                }
-                                if (adapter.data.size == 0) {
-                                    rv.visibility = View.GONE
-                                    tv_hint.visibility = View.VISIBLE
-                                }
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+            val bean: VideoBean? = adapter.data[position] as VideoBean
+            bean?.let {
+                when (view.id) {
+                    R.id.tv_delete -> {
+                        val builder = AlertDialog.Builder(context)
+                        builder.setMessage(context.resources.getString(R.string.delete_tip))
+                        builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
+                            dialog.dismiss()
+                            if (FileUtil.deleteFile(bean.savePath)) {
+                                adapter.removeAt(position)
+                                bean.downloadState = DownloadState.NORMAL.name
+                                bean.downloadProgress = 0
+                                bean.savePath = ""
+                                dbManager.update(bean)
                             }
-                            builder.setNegativeButton(context.resources.getString(R.string.no)) { dialog, _ ->
-                                dialog.dismiss()
-                                val swipe = adapter.getViewByPosition(
-                                    rv,
-                                    position,
-                                    R.id.swipe
-                                ) as EasySwipeMenuLayout
-                                swipe.resetStatus()
+                            if (adapter.data.size == 0) {
+                                rv.visibility = View.GONE
+                                tv_hint.visibility = View.VISIBLE
                             }
-                            builder.create().show()
                         }
+                        builder.setNegativeButton(context.resources.getString(R.string.no)) { dialog, _ ->
+                            dialog.dismiss()
+                            val swipe = adapter.getViewByPosition(
+                                position,
+                                R.id.swipe
+                            ) as EasySwipeMenuLayout
+                            swipe.resetStatus()
+                        }
+                        builder.create().show()
                     }
                 }
             }
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        }
+        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
     }
 
     private fun initData() {
@@ -151,7 +149,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 rv.visibility = View.GONE
                 tv_hint.visibility = View.VISIBLE
             }
-            adapter.setNewData(beans)
+            adapter.setList(beans)
             adapter.addFooterView(FooterUtil.getFooter(context, context.color(R.color.app_black)))
         }
     }

@@ -37,15 +37,15 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         presenter.load()
         rv.layoutManager = GridLayoutManager(context, 2)
         rv.adapter = adapter
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
-            val bean: DiscoverBean.Item.Data? = adapter!!.data[position] as DiscoverBean.Item.Data
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val bean: DiscoverBean.Item.Data? = adapter.data[position] as DiscoverBean.Item.Data
             bean?.let {
                 val intent = Intent(context, DiscoverDetailActivity::class.java)
                 intent.putExtra("id", bean.id.toString())
                 context?.startActivity(intent)
             }
         }
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             private var totalDy = 0
 
@@ -62,7 +62,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
     }
 
     override fun setData(beans: MutableList<DiscoverBean.Item.Data>) {
-        adapter.setNewData(beans)
+        adapter.setList(beans)
         adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
     }
 

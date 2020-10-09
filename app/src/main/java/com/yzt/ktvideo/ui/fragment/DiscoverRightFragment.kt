@@ -73,9 +73,9 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
                 scrollCalculatorHelper.onScrollStateChanged(recyclerView, newState)
             }
         })
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+        adapter.setOnItemClickListener { adapter, _, position ->
             val bean: DiscoverDetailRightBean.Item.Data.Content? =
-                adapter!!.data[position] as DiscoverDetailRightBean.Item.Data.Content
+                adapter.data[position] as DiscoverDetailRightBean.Item.Data.Content
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.data?.id
@@ -111,7 +111,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
                 activity.startActivity(intent)
             }
         }
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
         arguments?.let {
             arguments!!.getString("id")?.let {
                 presenter.load(arguments!!.getString("id")!!)
@@ -124,7 +124,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
     }
 
     override fun setData(beans: MutableList<DiscoverDetailRightBean.Item.Data.Content>?) {
-        adapter.setNewData(beans)
+        adapter.setList(beans)
         adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
     }
 

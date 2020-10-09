@@ -56,9 +56,9 @@ class RankingSubFragment : BaseFragment() {
             false
         )
         rv.adapter = adapter
-        adapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, _, position ->
+        adapter.setOnItemClickListener { adapter, _, position ->
             val bean: RankingSubBean.Item.Data.Content.DataX? =
-                adapter!!.data[position] as RankingSubBean.Item.Data.Content.DataX
+                adapter.data[position] as RankingSubBean.Item.Data.Content.DataX
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = bean.id
@@ -94,7 +94,7 @@ class RankingSubFragment : BaseFragment() {
                 startActivity(intent)
             }
         }
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
