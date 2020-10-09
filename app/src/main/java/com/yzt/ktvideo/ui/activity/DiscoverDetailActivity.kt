@@ -106,42 +106,42 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun setData(bean: DiscoverDetailBean?) {
         bean?.tagInfo?.let {
-            category = bean.tagInfo.name
+            category = it.name
             tv_top.text = category
             tv_name.text = category
-            tv_desc.text = bean.tagInfo.description
+            tv_desc.text = it.description
             var count = ""
-            if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(
+            if (it.tagFollowCount.toString().isNotEmpty() && getString(
                     R.string.discover_join,
-                    bean.tagInfo.lookCount.toString()
+                    it.lookCount.toString()
                 ).isEmpty()
             ) {
-                count = getString(R.string.discover_follow, bean.tagInfo.tagFollowCount.toString())
-            } else if (bean.tagInfo.tagFollowCount.toString().isEmpty() && getString(
+                count = getString(R.string.discover_follow, it.tagFollowCount.toString())
+            } else if (it.tagFollowCount.toString().isEmpty() && getString(
                     R.string.discover_join,
-                    bean.tagInfo.lookCount.toString()
+                    it.lookCount.toString()
                 ).isNotEmpty()
             ) {
-                count = getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
-            } else if (bean.tagInfo.tagFollowCount.toString().isNotEmpty() && getString(
+                count = getString(R.string.discover_join, it.lookCount.toString())
+            } else if (it.tagFollowCount.toString().isNotEmpty() && getString(
                     R.string.discover_join,
-                    bean.tagInfo.lookCount.toString()
+                    it.lookCount.toString()
                 ).isNotEmpty()
             ) {
                 count = getString(
                     R.string.discover_follow,
-                    bean.tagInfo.tagFollowCount.toString()
-                ) + " | " + getString(R.string.discover_join, bean.tagInfo.lookCount.toString())
+                    it.tagFollowCount.toString()
+                ) + " | " + getString(R.string.discover_join, it.lookCount.toString())
             } else {
                 tv_count.visibility = View.GONE
             }
             tv_count.text = count
-            ImageUtil.show(context, iv, bean.tagInfo.headerImage)
+            ImageUtil.show(context, iv, it.headerImage)
             iv.setColorFilter(context.color(R.color.black_25))
 
             titles = mutableListOf()
-            bean.tabInfo.tabList.forEach {
-                it.name?.let { name ->
+            bean.tabInfo.tabList.forEach { itt ->
+                itt.name?.let { name ->
                     titles.add(name)
                 }
             }
@@ -154,8 +154,8 @@ class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener,
             tl.setupWithViewPager(vp)
             tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    tab?.let {
-                        when (tab.position) {
+                    tab?.let { itt ->
+                        when (itt.position) {
                             0 -> {
                                 (fragments[0] as DiscoverLeftFragment).scrollToTop()
                             }

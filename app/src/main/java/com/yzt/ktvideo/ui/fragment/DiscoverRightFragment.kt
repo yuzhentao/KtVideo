@@ -78,17 +78,17 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
                 adapter.data[position] as DiscoverDetailRightBean.Item.Data.Content
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
-                val id = bean.data?.id
-                val img = bean.data?.cover?.feed
+                val id = it.data?.id
+                val img = it.data?.cover?.feed
                 val title = activity.category//都为""，使用大类别
-                val desc = bean.data?.description
-                val duration = bean.data?.duration
-                val playUrl = bean.data?.playUrl
+                val desc = it.data?.description
+                val duration = it.data?.duration
+                val playUrl = it.data?.playUrl
                 val category = activity.category//没有分类字段，使用大类别
-                val blurred = bean.data?.cover?.blurred
-                val collect = bean.data?.consumption?.collectionCount
-                val share = bean.data?.consumption?.shareCount
-                val reply = bean.data?.consumption?.replyCount
+                val blurred = it.data?.cover?.blurred
+                val collect = it.data?.consumption?.collectionCount
+                val share = it.data?.consumption?.shareCount
+                val reply = it.data?.consumption?.replyCount
                 val time = System.currentTimeMillis()
                 val videoBean = VideoBean(
                     id,
@@ -113,8 +113,8 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
         }
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
         arguments?.let {
-            arguments!!.getString("id")?.let {
-                presenter.load(arguments!!.getString("id")!!)
+            it.getString("id")?.let { itt ->
+                presenter.load(itt)
             }
         }
     }

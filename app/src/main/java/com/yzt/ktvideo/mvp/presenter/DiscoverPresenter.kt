@@ -8,7 +8,8 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class DiscoverPresenter(context: Context?, view: DiscoverContract.View) : DiscoverContract.Presenter {
+class DiscoverPresenter(context: Context?, view: DiscoverContract.View) :
+    DiscoverContract.Presenter {
 
     private var context: Context? = null
     private var view: DiscoverContract.View? = null
@@ -27,36 +28,36 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) : Discov
 
     override fun load() {
         context?.let {
-            model.loadData(context!!)
+            model.loadData(it)
         }
-                ?.flatMap { t ->
-                    val beans: MutableList<DiscoverBean.Item.Data> = mutableListOf()
-                    for (item in t.itemList) {
-                        item.data?.let {
-                            if (it.id > 0) {
-                                beans.add(it)
-                            }
+            ?.flatMap { t ->
+                val beans: MutableList<DiscoverBean.Item.Data> = mutableListOf()
+                for (item in t.itemList) {
+                    item.data?.let {
+                        if (it.id > 0) {
+                            beans.add(it)
                         }
                     }
-                    Observable.just(beans)
                 }
-                ?.subscribe(object : Observer<MutableList<DiscoverBean.Item.Data>> {
-                    override fun onComplete() {
+                Observable.just(beans)
+            }
+            ?.subscribe(object : Observer<MutableList<DiscoverBean.Item.Data>> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: MutableList<DiscoverBean.Item.Data>) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: MutableList<DiscoverBean.Item.Data>) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
 }

@@ -86,7 +86,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val bundle = Bundle()
-                bundle.putParcelable("data", bean)
+                bundle.putParcelable("data", it)
                 intent.putExtra("bundle", bundle)
                 intent.putExtra("showCache", false)
                 startActivity(intent)
@@ -101,12 +101,12 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                         builder.setMessage(context.resources.getString(R.string.delete_tip))
                         builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
                             dialog.dismiss()
-                            if (FileUtil.deleteFile(bean.savePath)) {
+                            if (FileUtil.deleteFile(it.savePath)) {
                                 adapter.removeAt(position)
-                                bean.downloadState = DownloadState.NORMAL.name
-                                bean.downloadProgress = 0
-                                bean.savePath = ""
-                                dbManager.update(bean)
+                                it.downloadState = DownloadState.NORMAL.name
+                                it.downloadProgress = 0
+                                it.savePath = ""
+                                dbManager.update(it)
                             }
                             if (adapter.data.size == 0) {
                                 rv.visibility = View.GONE

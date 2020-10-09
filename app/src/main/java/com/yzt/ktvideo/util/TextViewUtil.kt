@@ -8,9 +8,9 @@ class TextViewUtil {
     companion object {
         fun setBold(tv: TextView?, isBold: Boolean) {
             tv?.let {
-                val paint: Paint? = tv.paint
-                paint?.let {
-                    paint.isFakeBoldText = isBold
+                val paint: Paint? = it.paint
+                paint?.let { itt ->
+                    itt.isFakeBoldText = isBold
                 }
                 tv.postInvalidate()
             }

@@ -29,10 +29,10 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
         R.layout.item_discover_detail,
         data
     ) {
-    
+
     override fun convert(holder: BaseViewHolder, item: DiscoverDetailLeftBean.Item.Data.Content) {
         val data = item.data
-        data?.let {
+        data?.let { dataBean ->
             val position = holder.layoutPosition
             val ivIcon = holder.getView<AppCompatImageView>(R.id.iv_icon)
             val tvName = holder.getView<AppCompatTextView>(R.id.tv_name)
@@ -44,54 +44,54 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
             val tvPlayTime = holder.getView<AppCompatTextView>(R.id.tv_play_time)
             val vLine = holder.getView<View>(R.id.v_line)
             val vp = holder.getView<StandardGSYVideoPlayer>(R.id.vp)
-            data.author?.icon?.let {
-                ImageUtil.showCircle(context, ivIcon, data.author.icon)
+            dataBean.author?.icon?.let {
+                ImageUtil.showCircle(context, ivIcon, it)
             }
-            data.author?.name?.let {
-                tvName.text = item.data.author!!.name
+            dataBean.author?.name?.let {
+                tvName.text = it
             }
-            data.title?.let {
+            dataBean.title?.let {
                 val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
                 val spannableString =
-                    SpannableString(context.getString(R.string.discover_release, item.data.title))
+                    SpannableString(context.getString(R.string.discover_release, it))
                 val colorSpan = ForegroundColorSpan(context.color(R.color.app_black))
                 spannableString.setSpan(
                     colorSpan,
-                    context.getString(R.string.discover_release, item.data.title).indexOf(" "),
-                    context.getString(R.string.discover_release, item.data.title).length,
+                    context.getString(R.string.discover_release, it).indexOf(" "),
+                    context.getString(R.string.discover_release, it).length,
                     flags
                 )
                 val styleSpan = StyleSpan(Typeface.BOLD)
                 spannableString.setSpan(
                     styleSpan,
-                    context.getString(R.string.discover_release, item.data.title).indexOf(" "),
-                    context.getString(R.string.discover_release, item.data.title).length,
+                    context.getString(R.string.discover_release, it).indexOf(" "),
+                    context.getString(R.string.discover_release, it).length,
                     flags
                 )
                 tvTitle.text = spannableString
             }
-            data.description?.let {
+            dataBean.description?.let {
                 tvDesc.setText(
-                    item.data.description!!,
-                    data.isExpand,
+                    it,
+                    dataBean.isExpand,
                     object : ExpandLayout.OnExpandListener {
                         override fun expandChange() {
-                            if (!data.isExpand) {
-                                data.isExpand = true
+                            if (!dataBean.isExpand) {
+                                dataBean.isExpand = true
                                 notifyItemChanged(position)
                             }
                         }
                     })
             }
-            data.tags?.let {
+            dataBean.tags?.let {
                 if (flexBox.childCount > 0) {
                     return
                 }
 
-                for (i in data.tags.indices) {
-                    data.tags[i].name?.let {
+                for (i in it.indices) {
+                    it[i].name?.let { itt ->
                         val tv = AppCompatTextView(context)
-                        tv.text = data.tags[i].name
+                        tv.text = itt
                         tv.setTextColor(context.color(R.color.app_pink))
                         tv.setBackgroundResource(R.drawable.shape_tag)
                         tv.ellipsize = TextUtils.TruncateAt.END
@@ -111,27 +111,27 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
                     }
                 }
             }
-            if (data.consumption?.collectionCount == null) {
+            if (dataBean.consumption?.collectionCount == null) {
                 tvFavorite.text = "0"
             } else {
-                tvFavorite.text = item.data.consumption!!.collectionCount.toString()
+                tvFavorite.text = dataBean.consumption.collectionCount.toString()
             }
-            if (data.consumption?.replyCount == null) {
+            if (dataBean.consumption?.replyCount == null) {
                 tvReply.text = "0"
             } else {
-                tvReply.text = item.data.consumption!!.replyCount.toString()
+                tvReply.text = dataBean.consumption.replyCount.toString()
             }
             if (position == itemCount - 1) {
                 vLine.visibility = View.GONE
             }
-            data.playUrl?.let {
+            dataBean.playUrl?.let {
                 val ivCover = ImageView(context)
                 ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
-                item.data.cover?.feed?.let {
-                    ImageUtil.show(context, ivCover, item.data.cover.feed)
+                dataBean.cover?.feed?.let { itt ->
+                    ImageUtil.show(context, ivCover, itt)
                 }
                 vp.thumbImageView = ivCover
-                vp.setUp(item.data.playUrl, false, null, null)
+                vp.setUp(it, false, null, null)
                 vp.titleTextView.visibility = View.GONE
                 vp.backButton.visibility = View.GONE
                 vp.playPosition = position
@@ -142,7 +142,7 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
                     }
                 }
             }
-        }    
+        }
     }
-    
+
 }

@@ -10,27 +10,31 @@ data class DiscoverDetailLeftBean(
         val count: Int,
         val itemList: List<Item>,
         val nextPageUrl: String,
-        val total: Int) {
+        val total: Int
+) {
 
     data class Item(
             val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
-            val type: String) {
+            val type: String
+    ) {
 
         data class Data(
                 val adTrack: Any,
                 val content: Content?,
                 val dataType: String,
-                val header: Header) {
+                val header: Header
+        ) {
 
             data class Content(
                     val data: Data?,
                     val adIndex: Int,
                     val id: Int,
                     val tag: Any,
-                    val type: String) {
+                    val type: String
+            ) {
 
                 data class Data(
                         val ad: Boolean,
@@ -89,7 +93,8 @@ data class DiscoverDetailLeftBean(
                         val waterMarks: Any,
                         val webAdTrack: Any,
                         val webUrl: WebUrl,
-                        var isExpand: Boolean) { //是否扩展
+                        var isExpand: Boolean
+                ) { //是否扩展
 
                     data class Author(
                             val adTrack: Any,
@@ -111,17 +116,20 @@ data class DiscoverDetailLeftBean(
                             val pendingVideoCount: Int,
                             val recSort: Int,
                             val shield: Shield,
-                            val videoNum: Int) {
+                            val videoNum: Int
+                    ) {
 
                         data class Shield(
                                 val itemId: Int,
                                 val itemType: String,
-                                val shielded: Boolean)
+                                val shielded: Boolean
+                        )
 
                         data class Follow(
                                 val followed: Boolean,
                                 val itemId: Int,
-                                val itemType: String)
+                                val itemType: String
+                        )
 
                     }
 
@@ -130,13 +138,15 @@ data class DiscoverDetailLeftBean(
                             val icon: String,
                             val id: Int,
                             val name: String,
-                            val status: String)
+                            val status: String
+                    )
 
                     data class Consumption(
                             val collectionCount: Int,
                             val playCount: Int,
                             val replyCount: Int,
-                            val shareCount: Int)
+                            val shareCount: Int
+                    )
 
                     data class Tag(
                             val actionUrl: String,
@@ -158,18 +168,21 @@ data class DiscoverDetailLeftBean(
                             val tagRecType: String,
                             val tagStatus: String,
                             val top: Int,
-                            val type: String)
+                            val type: String
+                    )
 
                     data class Cover(
                             val blurred: String?,
                             val detail: String,
                             val feed: String?,
                             val homepage: String,
-                            val sharing: Any)
+                            val sharing: Any
+                    )
 
                     data class WebUrl(
                             val forWeibo: String,
-                            val raw: String)
+                            val raw: String
+                    )
 
                     data class PlayInfo(
                             val bitRate: Int,
@@ -183,12 +196,14 @@ data class DiscoverDetailLeftBean(
                             val url: String,
                             val urlList: List<Url>,
                             val videoId: Int,
-                            val width: Int) {
+                            val width: Int
+                    ) {
 
                         data class Url(
                                 val name: String,
                                 val size: Int,
-                                val url: String)
+                                val url: String
+                        )
 
                     }
 
@@ -208,7 +223,8 @@ data class DiscoverDetailLeftBean(
                     val tagId: Int,
                     val tagName: Any,
                     val time: Long,
-                    val topShow: Boolean)
+                    val topShow: Boolean
+            )
 
         }
 

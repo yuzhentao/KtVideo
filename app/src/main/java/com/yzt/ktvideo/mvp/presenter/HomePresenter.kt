@@ -28,46 +28,46 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
         context?.let {
             model.loadData(it, true, "")
         }
-                ?.subscribe(object : Observer<HomeBean> {
-                    override fun onComplete() {
+            ?.subscribe(object : Observer<HomeBean> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: HomeBean) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: HomeBean) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
     override fun loadMore(date: String?) {
         context?.let {
             model.loadData(it, false, date)
         }
-                ?.subscribe(object : Observer<HomeBean> {
-                    override fun onComplete() {
+            ?.subscribe(object : Observer<HomeBean> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: HomeBean) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: HomeBean) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
 }

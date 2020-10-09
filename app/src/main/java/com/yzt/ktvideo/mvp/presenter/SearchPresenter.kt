@@ -27,34 +27,34 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
 
     override fun load(key: String) {
         context?.let {
-            model.loadData(context!!, key)
+            model.loadData(it, key)
         }
-                ?.flatMap { t ->
-                    val beans: MutableList<SearchBean.Item.Data.Content> = mutableListOf()
-                    for (item in t.itemList) {
-                        item.data?.content?.data?.playUrl?.let {
-                            beans.add(item.data.content)
-                        }
+            ?.flatMap { t ->
+                val beans: MutableList<SearchBean.Item.Data.Content> = mutableListOf()
+                for (item in t.itemList) {
+                    item.data?.content?.data?.playUrl?.let {
+                        beans.add(item.data.content)
                     }
-                    Observable.just(beans)
                 }
-                ?.subscribe(object : Observer<MutableList<SearchBean.Item.Data.Content>> {
-                    override fun onComplete() {
+                Observable.just(beans)
+            }
+            ?.subscribe(object : Observer<MutableList<SearchBean.Item.Data.Content>> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: MutableList<SearchBean.Item.Data.Content>) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: MutableList<SearchBean.Item.Data.Content>) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
 }

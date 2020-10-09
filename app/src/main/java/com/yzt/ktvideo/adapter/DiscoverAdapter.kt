@@ -16,7 +16,7 @@ class DiscoverAdapter(data: MutableList<DiscoverBean.Item.Data>?) :
     override fun convert(holder: BaseViewHolder, item: DiscoverBean.Item.Data) {
         val iv = holder.getView<AppCompatImageView>(R.id.iv)
         item.image?.let {
-            ImageUtil.show(context, iv, item.image)
+            ImageUtil.show(context, iv, it)
         }
         iv.setColorFilter(context.color(R.color.black_25))
         holder.getView<AppCompatTextView>(R.id.tv).text = item.title

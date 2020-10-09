@@ -30,7 +30,7 @@ class WatchAdapter(data: MutableList<VideoBean>?) :
         }
         val img: String? = item.feed
         img?.let {
-            ImageUtil.show(context, holder.getView<AppCompatImageView>(R.id.iv), img)
+            ImageUtil.show(context, holder.getView<AppCompatImageView>(R.id.iv), it)
         }
         val title: String? = item.title
         holder.getView<AppCompatTextView>(R.id.tv_top).text = title

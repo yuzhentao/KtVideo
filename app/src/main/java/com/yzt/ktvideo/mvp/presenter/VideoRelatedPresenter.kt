@@ -29,7 +29,7 @@ class VideoRelatedPresenter(context: Context?, view: VideoRelatedContract.View) 
     override fun load(id: String) {
         context?.let {
             model
-                .loadData(context!!, id)
+                .loadData(it, id)
         }
             ?.flatMap { t ->
                 val beans: MutableList<VideoRelatedBean.Item.Data> = mutableListOf()

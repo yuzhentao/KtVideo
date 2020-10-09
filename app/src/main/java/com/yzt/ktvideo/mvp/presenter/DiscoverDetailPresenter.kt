@@ -7,7 +7,8 @@ import com.yzt.ktvideo.mvp.model.DiscoverDetailModel
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) : DiscoverDetailContract.Presenter {
+class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) :
+    DiscoverDetailContract.Presenter {
 
     private var context: Context? = null
     private var view: DiscoverDetailContract.View? = null
@@ -26,25 +27,25 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
 
     override fun load(id: String) {
         context?.let {
-            model.loadData(context!!, id)
+            model.loadData(it, id)
         }
-                ?.subscribe(object : Observer<DiscoverDetailBean> {
-                    override fun onComplete() {
+            ?.subscribe(object : Observer<DiscoverDetailBean> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: DiscoverDetailBean) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: DiscoverDetailBean) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
 }

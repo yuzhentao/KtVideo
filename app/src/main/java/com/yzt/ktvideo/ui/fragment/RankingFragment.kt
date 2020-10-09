@@ -43,12 +43,12 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             strategies = mutableListOf()
             fragments = mutableListOf()
 
-            for (item in beans) {
-                item.name?.let {
-                    titles.add(item.name)
+            for (item in it) {
+                item.name?.let { itt ->
+                    titles.add(itt)
                 }
-                item.apiUrl?.let {
-                    strategies.add(item.apiUrl.substring(item.apiUrl.lastIndexOf("=") + 1))
+                item.apiUrl?.let { itt ->
+                    strategies.add(itt.substring(itt.lastIndexOf("=") + 1))
                 }
             }
             val weekFragment = RankingSubFragment()
@@ -76,9 +76,9 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             tl.setupWithViewPager(vp)
             tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    tab?.let {
-                        if (tab.position < fragments.size) {
-                            (fragments[tab.position] as RankingSubFragment).scrollToTop()
+                    tab?.let { itt ->
+                        if (itt.position < fragments.size) {
+                            (fragments[itt.position] as RankingSubFragment).scrollToTop()
                         }
                     }
                 }

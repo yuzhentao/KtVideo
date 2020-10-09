@@ -36,7 +36,7 @@ class App : MultiDexApplication() {
                 .schemaVersion(0)//版本号
                 .build()
         config?.let {
-            Realm.setDefaultConfiguration(config)
+            Realm.setDefaultConfiguration(it)
         }
     }
 

@@ -73,25 +73,25 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     override fun setData(beans: MutableList<SearchBean.Item.Data.Content>) {
         beans.forEach {
             val data = it.data
-            data?.let {
+            data?.let { itt ->
                 this.beans.add(
                     VideoBean(
-                        data.id,
-                        data.cover?.feed,
-                        data.title,
-                        data.description,
-                        data.duration,
-                        data.playUrl,
-                        data.category,
-                        data.cover?.blurred,
-                        data.consumption?.collectionCount,
-                        data.consumption?.shareCount,
-                        data.consumption?.replyCount
+                        itt.id,
+                        itt.cover?.feed,
+                        itt.title,
+                        itt.description,
+                        itt.duration,
+                        itt.playUrl,
+                        itt.category,
+                        itt.cover?.blurred,
+                        itt.consumption?.collectionCount,
+                        itt.consumption?.shareCount,
+                        itt.consumption?.replyCount
                     )
                 )
             }
         }
-        adapter.setNewData(this.beans)
+        adapter.setList(this.beans)
     }
 
     private fun initView() {
@@ -109,7 +109,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
                 val bundle = Bundle()
-                bundle.putParcelable("data", bean)
+                bundle.putParcelable("data", it)
                 intent.putExtra("bundle", bundle)
                 intent.putExtra("showCache", !noKey!!)
                 startActivity(intent)

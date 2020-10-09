@@ -35,12 +35,12 @@ class RankingSubFragment : BaseFragment() {
 
     override fun initView() {
         arguments?.getString("strategy")?.let {
-            viewModel.load(context, arguments!!.getString("strategy")!!)
+            viewModel.load(context, it)
             viewModel.liveData.observe(
                 this,
                 Observer<MutableList<RankingSubBean.Item.Data.Content.DataX>> { beans ->
-                    beans?.let {
-                        adapter.setNewData(beans)
+                    beans?.let { itt ->
+                        adapter.setList(itt)
                         adapter.addFooterView(
                             FooterUtil.getFooter(
                                 context!!,
@@ -59,19 +59,19 @@ class RankingSubFragment : BaseFragment() {
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: RankingSubBean.Item.Data.Content.DataX? =
                 adapter.data[position] as RankingSubBean.Item.Data.Content.DataX
-            bean?.let {
+            bean?.let { itt ->
                 val intent = Intent(context, VideoDetailActivity::class.java)
-                val id = bean.id
-                val img = bean.cover?.feed
-                val title = bean.title
-                val desc = bean.description
-                val duration = bean.duration
-                val playUrl = bean.playUrl
-                val category = bean.category
-                val blurred = bean.cover?.blurred
-                val collect = bean.consumption?.collectionCount
-                val share = bean.consumption?.shareCount
-                val reply = bean.consumption?.replyCount
+                val id = itt.id
+                val img = itt.cover?.feed
+                val title = itt.title
+                val desc = itt.description
+                val duration = itt.duration
+                val playUrl = itt.playUrl
+                val category = itt.category
+                val blurred = itt.cover?.blurred
+                val collect = itt.consumption?.collectionCount
+                val share = itt.consumption?.shareCount
+                val reply = itt.consumption?.replyCount
                 val time = System.currentTimeMillis()
                 val videoBean = VideoBean(
                     id,
@@ -98,7 +98,7 @@ class RankingSubFragment : BaseFragment() {
     }
 
     override fun onFragmentVisibleChange(b: Boolean) {
-        
+
     }
 
     fun scrollToTop() {

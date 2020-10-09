@@ -85,7 +85,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         Aria.download(this).register()
         val bundle = intent.getBundleExtra("bundle")
         bundle?.let {
-            bean = bundle.getParcelable("data")
+            bean = it.getParcelable("data")
         }
         initView()
         prepareVideo()
@@ -103,15 +103,13 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
 
     override fun onDestroy() {
         dbManager.close()
-        coverDisposable.let {
-            if (!coverDisposable!!.isDisposed) {
-                coverDisposable!!.dispose()
+        coverDisposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
             }
         }
         GSYVideoManager.releaseAllVideos()
-        orientationUtils.let {
-            orientationUtils.releaseListener()
-        }
+        orientationUtils.releaseListener()
         super.onDestroy()
     }
 
@@ -127,17 +125,13 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                 if (vp.isIfCurrentIsFullscreen) {
                     GSYVideoManager.backFromWindowFull(context)
                 }
-                orientationUtils.let {
-                    orientationUtils.isEnable = true
-                }
+                orientationUtils.isEnable = true
             }
         }
     }
 
     override fun onBackPressed() {
-        orientationUtils.let {
-            orientationUtils.backToProtVideo()
-        }
+        orientationUtils.backToProtVideo()
         if (GSYVideoManager.backFromWindowFull(context)) {
             return
         }
@@ -146,19 +140,19 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
 
     override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
         beans?.let {
-            adapter.setList(beans)
+            adapter.setList(it)
             adapter.addFooterView(FooterUtil.getFooter(context, context.color(R.color.white)))
         }
     }
 
     private fun initView() {
         bean?.let {
-            bean!!.id?.let {
-                presenter.load(bean!!.id.toString())
-                bean!!.savePath =
-                    Environment.getExternalStorageDirectory().absolutePath + File.separator + KT_VIDEO + File.separator + "download_${bean!!.id}.mp4"
+            it.id?.let { itt ->
+                presenter.load(itt.toString())
+                it.savePath =
+                    Environment.getExternalStorageDirectory().absolutePath + File.separator + KT_VIDEO + File.separator + "download_${itt}.mp4"
             }
-            val blurred = bean!!.blurred
+            val blurred = it.blurred
             if (blurred.isNullOrEmpty()) {
                 iv_bg.setImageResource(R.color.app_black)
             } else {
@@ -167,7 +161,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             rv.adapter = adapter
             val header = View.inflate(context, R.layout.item_video_related_header, null)
-            playUrl = bean!!.playUrl
+            playUrl = it.playUrl
             val tvTitle = header.findViewById<AppCompatTextView>(R.id.tv_title)
             val tvDesc = header.findViewById<AppCompatTextView>(R.id.tv_desc)
             val tvTime = header.findViewById<AppCompatTextView>(R.id.tv_time)
@@ -175,16 +169,16 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             val tvShare = header.findViewById<AppCompatTextView>(R.id.tv_share)
             val tvReply = header.findViewById<AppCompatTextView>(R.id.tv_reply)
             val llDownload = header.findViewById<LinearLayout>(R.id.ll_download)
-            tvTitle.text = bean!!.title
+            tvTitle.text = it.title
             tvTitle.typeface =
                 Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
-            tvDesc.text = bean!!.description
+            tvDesc.text = it.description
             tvDesc.movementMethod = ScrollingMovementMethod.getInstance()
-            val category = bean!!.category
-            val duration = bean!!.duration
+            val category = it.category
+            val duration = it.duration
             val minute = duration?.div(60)
-            val second = minute?.times(60)?.let {
-                duration.minus(it)
+            val second = minute?.times(60)?.let { itt ->
+                duration.minus(itt)
             }
             val realMinute: String
             val realSecond: String
@@ -200,17 +194,17 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             }
             val time = "发布于 $category / $realMinute:$realSecond"
             tvTime.text = time
-            tvFavorite.text = bean!!.collect.toString()
-            tvShare.text = bean!!.share.toString()
-            tvReply.text = bean!!.reply.toString()
+            tvFavorite.text = it.collect.toString()
+            tvShare.text = it.share.toString()
+            tvReply.text = it.reply.toString()
             llDownload.visibility =
                 if (intent.getBooleanExtra("showCache", true)) View.VISIBLE else View.GONE
             llDownload.setOnClickListener {
-                playUrl?.let {
-                    if (dbManager.find(playUrl!!) == null) {
+                playUrl?.let { itt ->
+                    if (dbManager.find(itt) == null) {
                         cache()
                     } else {
-                        dbBean = dbManager.find(playUrl!!)
+                        dbBean = dbManager.find(itt)
                         when (dbBean!!.downloadState) {
                             DownloadState.NORMAL.name -> {
                                 cache()
@@ -223,39 +217,39 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                     }
                 }
             }
-            playUrl?.let {
-                if (dbManager.find(playUrl!!) == null) {
-                    dbManager.insert(bean!!)
+            playUrl?.let { itt ->
+                if (dbManager.find(itt) == null) {
+                    dbManager.insert(it)
                 }
             }
             adapter.addHeaderView(header)
             adapter.setOnItemClickListener { adapter, _, position ->
-                    val bean: VideoRelatedBean.Item.Data? =
-                        adapter.data[position] as VideoRelatedBean.Item.Data
-                    bean?.let {
-                        val intent = Intent(context, VideoDetailActivity::class.java)
-                        val videoBean = VideoBean(
-                            bean.id,
-                            bean.cover?.feed,
-                            bean.title,
-                            bean.description,
-                            bean.duration,
-                            bean.playUrl,
-                            bean.category,
-                            bean.cover?.blurred,
-                            bean.consumption?.collectionCount,
-                            bean.consumption?.shareCount,
-                            bean.consumption?.replyCount,
-                            System.currentTimeMillis()
-                        )
-                        val bundle = Bundle()
-                        bundle.putParcelable("data", videoBean)
-                        intent.putExtra("bundle", bundle)
-                        intent.putExtra("showCache", true)
-                        startActivity(intent)
-                        finish()
-                    }
+                val bean: VideoRelatedBean.Item.Data? =
+                    adapter.data[position] as VideoRelatedBean.Item.Data
+                bean?.let { itt ->
+                    val intent = Intent(context, VideoDetailActivity::class.java)
+                    val videoBean = VideoBean(
+                        itt.id,
+                        itt.cover?.feed,
+                        itt.title,
+                        itt.description,
+                        itt.duration,
+                        itt.playUrl,
+                        itt.category,
+                        itt.cover?.blurred,
+                        itt.consumption?.collectionCount,
+                        itt.consumption?.shareCount,
+                        itt.consumption?.replyCount,
+                        System.currentTimeMillis()
+                    )
+                    val bundle = Bundle()
+                    bundle.putParcelable("data", videoBean)
+                    intent.putExtra("bundle", bundle)
+                    intent.putExtra("showCache", true)
+                    startActivity(intent)
+                    finish()
                 }
+            }
             adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
         }
     }
@@ -267,7 +261,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         bean?.savePath?.let {
             Aria.download(this)
                 .load(playUrl!!)
-                .setFilePath(bean!!.savePath!!)
+                .setFilePath(it)
                 .start()
         }
     }
@@ -278,7 +272,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             vp.setUp(uri, false, null, null)
         } else {
             bean?.playUrl?.let {
-                vp.setUp(bean!!.playUrl, false, null, null)
+                vp.setUp(it, false, null, null)
             }
         }
         ivCover = ImageView(context)
@@ -303,9 +297,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         vp.setVideoAllCallBack(object : VideoListener() {
             override fun onQuitFullscreen(url: String?, vararg objects: Any?) {
                 super.onQuitFullscreen(url, *objects)
-                orientationUtils.let {
-                    orientationUtils.backToProtVideo()
-                }
+                orientationUtils.backToProtVideo()
             }
 
             override fun onPrepared(url: String?, vararg objects: Any?) {
@@ -331,7 +323,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                 val cacheFile = GlideApp
                     .with(context)
                     .downloadOnly()
-                    .load(bean!!.feed)
+                    .load(it)
                     .submit()
                     .get()
                 val path: String? = cacheFile.absolutePath
@@ -364,10 +356,10 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadStart(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                Timber.tag("缓存").e("开始>>>${bean!!.title}")
+                Timber.tag("缓存").e("开始>>>${it.title}")
                 shortToast(getString(R.string.cache_start))
-                bean!!.downloadState = DownloadState.DOWNLOADING.name
-                dbManager.update(bean!!)
+                it.downloadState = DownloadState.DOWNLOADING.name
+                dbManager.update(it)
             }
         }
     }
@@ -376,9 +368,9 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadProgress(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                Timber.tag("缓存").e("进度>>>${task.percent}>>>${bean!!.title}")
-                bean!!.downloadProgress = task.percent
-                dbManager.update(bean!!)
+                Timber.tag("缓存").e("进度>>>${task.percent}>>>${it.title}")
+                it.downloadProgress = task.percent
+                dbManager.update(it)
             }
         }
     }
@@ -387,11 +379,11 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadFail(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                Timber.tag("缓存").e("失败>>>${bean!!.title}")
+                Timber.tag("缓存").e("失败>>>${it.title}")
                 shortToast(getString(R.string.cache_fail))
-                bean!!.downloadState = DownloadState.ERROR.name
-                bean!!.downloadProgress = 0
-                dbManager.update(bean!!)
+                it.downloadState = DownloadState.ERROR.name
+                it.downloadProgress = 0
+                dbManager.update(it)
             }
         }
     }
@@ -400,11 +392,11 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadComplete(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                Timber.tag("缓存").e("完成>>>${bean!!.title}")
+                Timber.tag("缓存").e("完成>>>${it.title}")
                 shortToast(getString(R.string.cache_complete))
-                bean!!.downloadState = DownloadState.COMPLETE.name
-                bean!!.downloadProgress = 100
-                dbManager.update(bean!!)
+                it.downloadState = DownloadState.COMPLETE.name
+                it.downloadProgress = 100
+                dbManager.update(it)
             }
         }
     }

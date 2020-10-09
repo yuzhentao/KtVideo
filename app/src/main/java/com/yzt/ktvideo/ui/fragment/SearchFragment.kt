@@ -134,21 +134,21 @@ class SearchFragment : DialogFragment(),
             tv_hot.typeface =
                 Typeface.createFromAsset(activity.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
             dialog?.setOnKeyListener(this)
-            val layoutManager = FlexboxLayoutManager(context)
+            val layoutManager = FlexboxLayoutManager(it)
             layoutManager.flexDirection = FlexDirection.ROW//主轴排列方式
             layoutManager.flexWrap = FlexWrap.WRAP//是否换行
             rv.layoutManager = layoutManager
             rv.adapter = adapter
             rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
             adapter.setOnItemClickListener { adapter, _, position ->
-                    val bean: String? = adapter.data[position] as String
-                    bean?.let {
-                        KeyBoardUtil.closeKeyboard(context, et)
-                        val intent = Intent(context, WatchActivity::class.java)
-                        intent.putExtra("key", bean)
-                        context?.startActivity(intent)
-                    }
+                val bean: String? = adapter.data[position] as String
+                bean?.let { itt ->
+                    KeyBoardUtil.closeKeyboard(it, et)
+                    val intent = Intent(it, WatchActivity::class.java)
+                    intent.putExtra("key", itt)
+                    it.startActivity(intent)
                 }
+            }
         }
     }
 

@@ -78,17 +78,17 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             val bean: HomeBean.Issue.Item? = adapter.data[position] as HomeBean.Issue.Item
             bean?.let {
                 val intent = Intent(context, VideoDetailActivity::class.java)
-                val id = bean.data?.id
-                val img = bean.data?.cover?.feed
-                val title = bean.data?.title
-                val duration = bean.data?.duration
-                val desc = bean.data?.description
-                val playUrl = bean.data?.playUrl
-                val category = bean.data?.category
-                val blurred = bean.data?.cover?.blurred
-                val collect = bean.data?.consumption?.collectionCount
-                val share = bean.data?.consumption?.shareCount
-                val reply = bean.data?.consumption?.replyCount
+                val id = it.data?.id
+                val img = it.data?.cover?.feed
+                val title = it.data?.title
+                val duration = it.data?.duration
+                val desc = it.data?.description
+                val playUrl = it.data?.playUrl
+                val category = it.data?.category
+                val blurred = it.data?.cover?.blurred
+                val collect = it.data?.consumption?.collectionCount
+                val share = it.data?.consumption?.shareCount
+                val reply = it.data?.consumption?.replyCount
                 val time = System.currentTimeMillis()
                 val videoBean = VideoBean(
                     id,

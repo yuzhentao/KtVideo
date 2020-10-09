@@ -28,36 +28,36 @@ class RankingPresenter(context: Context?, view: RankingContract.View) : RankingC
     override fun load() {
         context?.let {
             model
-                    .loadData(context!!)
+                .loadData(it)
         }
-                ?.flatMap { t ->
-                    val beans: MutableList<RankingBean.TabInfo.Tab> = mutableListOf()
-                    t.tabInfo.tabList?.let {
-                        for (item in t.tabInfo.tabList) {
-                            item.apiUrl?.let {
-                                beans.add(item)
-                            }
+            ?.flatMap { t ->
+                val beans: MutableList<RankingBean.TabInfo.Tab> = mutableListOf()
+                t.tabInfo.tabList?.let {
+                    for (item in it) {
+                        item.apiUrl?.let {
+                            beans.add(item)
                         }
-                        Observable.just(beans)
                     }
+                    Observable.just(beans)
                 }
-                ?.subscribe(object : Observer<MutableList<RankingBean.TabInfo.Tab>> {
-                    override fun onComplete() {
+            }
+            ?.subscribe(object : Observer<MutableList<RankingBean.TabInfo.Tab>> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: MutableList<RankingBean.TabInfo.Tab>) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: MutableList<RankingBean.TabInfo.Tab>) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
 }

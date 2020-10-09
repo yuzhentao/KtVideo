@@ -45,14 +45,14 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
         val btnProgress = holder.getView<ProgressButton>(R.id.btn_progress)
         val img: String? = item.feed
         img?.let {
-            ImageUtil.show(context, holder.getView<AppCompatImageView>(R.id.iv), img)
+            ImageUtil.show(context, holder.getView<AppCompatImageView>(R.id.iv), it)
         }
         val title: String? = item.title
         holder.getView<AppCompatTextView>(R.id.tv_top).text = title
         if (item.playUrl != null) {
             dbBean = dbManager.find(item.playUrl!!)
             dbBean?.let {
-                when (dbBean!!.downloadState) {
+                when (it.downloadState) {
                     DownloadState.DOWNLOADING.name -> {
                         btnProgress.setImageRes(R.drawable.selector_pause)
                     }
@@ -77,7 +77,7 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
         btnProgress.setOnClickListener {
             dbBean = dbManager.find(item.playUrl!!)
             dbBean?.let {
-                when (dbBean!!.downloadState) {
+                when (it.downloadState) {
                     DownloadState.DOWNLOADING.name -> {
                         Timber.tag("缓存").e("暂停>>>${item.title}")
                         Aria.download(this).load(item.playUrl!!).stop()

@@ -41,7 +41,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
             val bean: DiscoverBean.Item.Data? = adapter.data[position] as DiscoverBean.Item.Data
             bean?.let {
                 val intent = Intent(context, DiscoverDetailActivity::class.java)
-                intent.putExtra("id", bean.id.toString())
+                intent.putExtra("id", it.id.toString())
                 context?.startActivity(intent)
             }
         }

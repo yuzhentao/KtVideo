@@ -26,24 +26,25 @@ class SplashPresenter(context: Context, view: SplashContract.View) : SplashContr
 
     override fun load() {
         context?.let {
-            model.loadData(context!!)
-        }?.subscribe(object : Observer<SplashBean> {
-            override fun onComplete() {
+            model.loadData(it)
+        }
+            ?.subscribe(object : Observer<SplashBean> {
+                override fun onComplete() {
 
-            }
+                }
 
-            override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-            }
+                }
 
-            override fun onNext(t: SplashBean) {
-                view?.setData(t)
-            }
+                override fun onNext(t: SplashBean) {
+                    view?.setData(t)
+                }
 
-            override fun onError(e: Throwable) {
-                view?.setData(null)
-            }
-        })
+                override fun onError(e: Throwable) {
+                    view?.setData(null)
+                }
+            })
     }
 
 }

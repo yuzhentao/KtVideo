@@ -14,36 +14,36 @@ class VideoDbManager : DbManager<VideoBean> {
 
     override fun insert(data: VideoBean) {
         realm?.let {
-            realm!!.beginTransaction()
-            realm!!.copyToRealm(data)
-            realm!!.commitTransaction()
+            it.beginTransaction()
+            it.copyToRealm(data)
+            it.commitTransaction()
             Timber.tag("记录").e(">>>${data.title}")
         }
     }
 
     override fun delete(data: VideoBean) {
         data.playUrl?.let {
-            val bean = find(data.playUrl!!)
-            realm?.let {
-                realm!!.beginTransaction()
+            val bean = find(it)
+            realm?.let { itt ->
+                itt.beginTransaction()
                 bean!!.deleteFromRealm()
-                realm!!.commitTransaction()
+                itt.commitTransaction()
             }
         }
     }
 
     override fun update(data: VideoBean) {
         realm?.let {
-            realm!!.beginTransaction()
-            realm!!.copyToRealmOrUpdate(data)
-            realm!!.commitTransaction()
+            it.beginTransaction()
+            it.copyToRealmOrUpdate(data)
+            it.commitTransaction()
         }
     }
 
     override fun close() {
         realm?.let {
-            if (!realm!!.isClosed) {
-                realm!!.close()
+            if (!it.isClosed) {
+                it.close()
             }
         }
     }
@@ -58,7 +58,8 @@ class VideoDbManager : DbManager<VideoBean> {
 
     override fun findAll(): MutableList<VideoBean>? {
         return if (realm != null) {
-            val beans: RealmResults<VideoBean> = realm!!.where(VideoBean::class.java).findAllAsync().sort("time", Sort.DESCENDING)
+            val beans: RealmResults<VideoBean> =
+                realm!!.where(VideoBean::class.java).findAllAsync().sort("time", Sort.DESCENDING)
             return realm!!.copyFromRealm(beans)
         } else {
             null
@@ -67,7 +68,9 @@ class VideoDbManager : DbManager<VideoBean> {
 
     fun findCache(): MutableList<VideoBean>? {
         return if (realm != null) {
-            val beans: RealmResults<VideoBean> = realm!!.where(VideoBean::class.java).notEqualTo("downloadState", DownloadState.NORMAL.name).findAllAsync().sort("time", Sort.DESCENDING)
+            val beans: RealmResults<VideoBean> = realm!!.where(VideoBean::class.java)
+                .notEqualTo("downloadState", DownloadState.NORMAL.name).findAllAsync()
+                .sort("time", Sort.DESCENDING)
             return realm!!.copyFromRealm(beans)
         } else {
             null

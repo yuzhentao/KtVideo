@@ -6,7 +6,8 @@ import com.yzt.ktvideo.mvp.model.HotSearchModel
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class HotSearchPresenter(context: Context, view: HotSearchContract.View) : HotSearchContract.Presenter {
+class HotSearchPresenter(context: Context, view: HotSearchContract.View) :
+    HotSearchContract.Presenter {
 
     private var context: Context? = null
     private var view: HotSearchContract.View? = null
@@ -25,25 +26,25 @@ class HotSearchPresenter(context: Context, view: HotSearchContract.View) : HotSe
 
     override fun load() {
         context?.let {
-            model.loadData(context!!)
+            model.loadData(it)
         }
-                ?.subscribe(object : Observer<MutableList<String>> {
-                    override fun onComplete() {
+            ?.subscribe(object : Observer<MutableList<String>> {
+                override fun onComplete() {
 
-                    }
+                }
 
-                    override fun onSubscribe(d: Disposable) {
+                override fun onSubscribe(d: Disposable) {
 
-                    }
+                }
 
-                    override fun onNext(t: MutableList<String>) {
-                        view?.setData(t)
-                    }
+                override fun onNext(t: MutableList<String>) {
+                    view?.setData(t)
+                }
 
-                    override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-                    }
-                })
+                }
+            })
     }
 
 }

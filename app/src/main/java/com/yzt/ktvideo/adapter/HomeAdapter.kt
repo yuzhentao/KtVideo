@@ -16,7 +16,7 @@ class HomeAdapter(data: MutableList<HomeBean.Issue.Item>?) :
     override fun convert(holder: BaseViewHolder, item: HomeBean.Issue.Item) {
         val img = item.data?.cover?.feed
         img?.let {
-            ImageUtil.show(context, holder.getView<AppCompatImageView>(R.id.iv_photo), img)
+            ImageUtil.show(context, holder.getView<AppCompatImageView>(R.id.iv_photo), it)
         }
         val icon = item.data?.author?.icon
         if (icon == null) {
@@ -31,8 +31,8 @@ class HomeAdapter(data: MutableList<HomeBean.Issue.Item>?) :
         val category = item.data?.category
         val duration = item.data?.duration
         duration?.let {
-            val minute = duration.div(60)
-            val second = duration.minus((minute.times(60)))
+            val minute = it.div(60)
+            val second = it.minus((minute.times(60)))
             val realMinute: String
             val realSecond: String
             realMinute = if (minute < 10) {

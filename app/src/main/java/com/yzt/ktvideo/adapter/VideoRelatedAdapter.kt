@@ -31,7 +31,7 @@ class VideoRelatedAdapter(data: MutableList<VideoRelatedBean.Item.Data>?) :
             ImageUtil.showRoundedCorners(
                 context,
                 holder.getView<AppCompatImageView>(R.id.iv),
-                img,
+                it,
                 R.dimen.x6
             )
         }

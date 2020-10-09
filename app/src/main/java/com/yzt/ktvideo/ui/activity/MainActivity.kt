@@ -88,16 +88,13 @@ class MainActivity : BaseActivity(), View.OnClickListener {
      */
     override fun onPause() {
         super.onPause()
-        toast?.let {
-            //这里表示toast不为null时才会去执行函数体
-            toast!!.cancel()
-        }
+        toast?.cancel()
     }
 
     override fun onDestroy() {
         permissionsDisposable?.let {
-            if (!permissionsDisposable!!.isDisposed) {
-                permissionsDisposable!!.dispose()
+            if (!it.isDisposed) {
+                it.dispose()
             }
         }
         super.onDestroy()

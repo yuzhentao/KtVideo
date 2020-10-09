@@ -20,7 +20,7 @@ class RankingSubAdapter(data: MutableList<RankingSubBean.Item.Data.Content.DataX
         val iv = holder.getView<AppCompatImageView>(R.id.iv)
         val img = item.cover?.feed
         img?.let {
-            ImageUtil.show(context, iv, img)
+            ImageUtil.show(context, iv, it)
         }
         iv.setColorFilter(context.color(R.color.black_25))
         val title = item.title
