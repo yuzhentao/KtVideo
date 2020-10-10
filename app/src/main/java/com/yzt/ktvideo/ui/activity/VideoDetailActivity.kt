@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Environment
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageView
@@ -31,7 +30,6 @@ import com.yzt.ktvideo.db.VideoDbManager
 import com.yzt.ktvideo.extension.color
 import com.yzt.ktvideo.extension.ioMain
 import com.yzt.ktvideo.extension.shortToast
-import com.yzt.ktvideo.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
 import com.yzt.ktvideo.mvp.presenter.VideoRelatedPresenter
 import com.yzt.ktvideo.util.*
@@ -151,7 +149,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             it.id?.let { itt ->
                 presenter.load(itt.toString())
                 it.savePath =
-                    Environment.getExternalStorageDirectory().absolutePath + File.separator + KT_VIDEO + File.separator + "download_${itt}.mp4"
+                    getExternalFilesDir(null)!!.absolutePath + File.separator + "download_${itt}.mp4"
             }
             val blurred = it.blurred
             if (blurred.isNullOrEmpty()) {
