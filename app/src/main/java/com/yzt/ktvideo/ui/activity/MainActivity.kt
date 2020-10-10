@@ -12,6 +12,10 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
+import androidx.work.Constraints
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -22,9 +26,12 @@ import com.yzt.ktvideo.extension.color
 import com.yzt.ktvideo.extension.newIntent
 import com.yzt.ktvideo.extension.shortToast
 import com.yzt.ktvideo.interfaces.OnRvScrollListener
+import com.yzt.ktvideo.key.Constant
 import com.yzt.ktvideo.ui.fragment.*
 import com.yzt.ktvideo.util.ClickUtil
 import com.yzt.ktvideo.util.DimenUtil
+import com.yzt.ktvideo.util.SPUtils
+import com.yzt.ktvideo.worker.DownloadSplashWorker
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -234,7 +241,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             .subscribe { permission ->
                 when {
                     permission.granted -> {
-
+                        downloadSplash()
                     }
                     permission.shouldShowRequestPermissionRationale -> {
 
@@ -244,6 +251,25 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                     }
                 }
             }
+    }
+
+    private fun downloadSplash() {
+        val url = SPUtils.getInstance(context, Constant.KT_VIDEO).getString(SPLASH_URL)
+        require(url.isNotEmpty()) {
+            return
+        }
+
+        val constraints = Constraints.Builder()
+            .setRequiresStorageNotLow(false)//内存不足时不执行
+            .setRequiresBatteryNotLow(false)//电量低时不执行
+            .build()
+        val request = OneTimeWorkRequest.Builder(DownloadSplashWorker::class.java)
+            .setInputData(Data.Builder().putString(SPLASH_URL, url).build())
+            .setConstraints(constraints)
+            .build()
+        WorkManager
+            .getInstance(context)
+            .enqueue(request)
     }
 
     private fun initView() {

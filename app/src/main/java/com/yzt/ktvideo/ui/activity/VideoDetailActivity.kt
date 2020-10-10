@@ -18,7 +18,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
-import com.arialyy.aria.core.download.DownloadTask
+import com.arialyy.aria.core.task.DownloadTask
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
@@ -70,6 +70,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     private var dbBean: VideoBean? = null
 
     private var playUrl: String? = null
+    private var downloadId: Long = 0L
     private var isPlay: Boolean = false
     private var isPause: Boolean = false
 
@@ -259,10 +260,11 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
      */
     private fun cache() {
         bean?.savePath?.let {
-            Aria.download(this)
+            downloadId = Aria
+                .download(this)
                 .load(playUrl!!)
                 .setFilePath(it)
-                .start()
+                .create()
         }
     }
 
@@ -358,6 +360,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             bean?.let {
                 Timber.tag("缓存").e("开始>>>${it.title}")
                 shortToast(getString(R.string.cache_start))
+                it.downloadId = downloadId
                 it.downloadState = DownloadState.DOWNLOADING.name
                 dbManager.update(it)
             }

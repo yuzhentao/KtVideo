@@ -6,16 +6,12 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
-import androidx.work.Constraints
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.ktvideo.R
+import com.yzt.ktvideo.base.BaseActivity
 import com.yzt.ktvideo.bean.SplashBean
 import com.yzt.ktvideo.extension.ioMain
 import com.yzt.ktvideo.extension.newIntent
@@ -24,7 +20,6 @@ import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter
 import com.yzt.ktvideo.util.ImageUtil
 import com.yzt.ktvideo.util.SPUtils
-import com.yzt.ktvideo.worker.DownloadSplashWorker
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Observer
@@ -36,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
  */
 const val SPLASH_URL = "splash_url"
 
-class SplashActivity : AppCompatActivity(), SplashContract.View {
+class SplashActivity : BaseActivity(), SplashContract.View {
 
     private var context: Context = this
 
@@ -85,7 +80,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
                     if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
                         ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
                         if (bean.startPage.imageUrl != url) {
-                            downloadSplash(bean.startPage.imageUrl)
+                            SPUtils.getInstance(context, KT_VIDEO).put(SPLASH_URL, bean.startPage.imageUrl)
                         }
                     } else {
                         if (url.isNotEmpty()) {
@@ -129,21 +124,6 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         alphaAnimLogo.duration = 2000
         alphaAnimLogo.interpolator = FastOutSlowInInterpolator()
         alphaAnimLogo.start()
-    }
-
-    private fun downloadSplash(url: String) {
-        SPUtils.getInstance(context, KT_VIDEO).put(SPLASH_URL, url)
-        val constraints = Constraints.Builder()
-            .setRequiresStorageNotLow(false)//内存不足时不执行
-            .setRequiresBatteryNotLow(false)//电量低时不执行
-            .build()
-        val request = OneTimeWorkRequest.Builder(DownloadSplashWorker::class.java)
-            .setInputData(Data.Builder().putString(SPLASH_URL, url).build())
-            .setConstraints(constraints)
-            .build()
-        WorkManager
-            .getInstance(context)
-            .enqueue(request)
     }
 
 }

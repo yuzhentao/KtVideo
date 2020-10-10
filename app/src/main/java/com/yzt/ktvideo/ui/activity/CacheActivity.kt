@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
-import com.arialyy.aria.core.download.DownloadTask
+import com.arialyy.aria.core.task.DownloadTask
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.ktvideo.R

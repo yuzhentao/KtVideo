@@ -25,6 +25,7 @@ open class VideoBean(
     var savePath: String? = ""
 ) : Parcelable, RealmModel {
 
+    var downloadId: Long? = 0L
     var downloadState: String? = DownloadState.NORMAL.name
     var downloadProgress: Int? = 0
 
@@ -43,6 +44,7 @@ open class VideoBean(
         parcel.readLong(),
         parcel.readString()
     ) {
+        downloadId = parcel.readValue(Long::class.java.classLoader) as? Long
         downloadState = parcel.readString()
         downloadProgress = parcel.readValue(Int::class.java.classLoader) as? Int
     }
@@ -61,6 +63,7 @@ open class VideoBean(
         parcel.writeValue(reply)
         parcel.writeLong(time)
         parcel.writeString(savePath)
+        parcel.writeValue(downloadId)
         parcel.writeString(downloadState)
         parcel.writeValue(downloadProgress)
     }
@@ -78,5 +81,58 @@ open class VideoBean(
             return arrayOfNulls(size)
         }
     }
+
+//    constructor(parcel: Parcel) : this(
+//        parcel.readValue(Int::class.java.classLoader) as? Int,
+//        parcel.readString(),
+//        parcel.readString(),
+//        parcel.readString(),
+//        parcel.readValue(Int::class.java.classLoader) as? Int,
+//        parcel.readString(),
+//        parcel.readString(),
+//        parcel.readString(),
+//        parcel.readValue(Int::class.java.classLoader) as? Int,
+//        parcel.readValue(Int::class.java.classLoader) as? Int,
+//        parcel.readValue(Int::class.java.classLoader) as? Int,
+//        parcel.readLong(),
+//        parcel.readString()
+//    ) {
+//        downloadId = parcel.readLong()
+//        downloadState = parcel.readString()
+//        downloadProgress = parcel.readValue(Int::class.java.classLoader) as? Int
+//    }
+//
+//    override fun writeToParcel(parcel: Parcel, flags: Int) {
+//        parcel.writeValue(id)
+//        parcel.writeString(feed)
+//        parcel.writeString(title)
+//        parcel.writeString(description)
+//        parcel.writeValue(duration)
+//        parcel.writeString(playUrl)
+//        parcel.writeString(category)
+//        parcel.writeString(blurred)
+//        parcel.writeValue(collect)
+//        parcel.writeValue(share)
+//        parcel.writeValue(reply)
+//        parcel.writeLong(time)
+//        parcel.writeString(savePath)
+//        parcel.writeLong(downloadId)
+//        parcel.writeString(downloadState)
+//        parcel.writeValue(downloadProgress)
+//    }
+//
+//    override fun describeContents(): Int {
+//        return 0
+//    }
+//
+//    companion object CREATOR : Parcelable.Creator<VideoBean> {
+//        override fun createFromParcel(parcel: Parcel): VideoBean {
+//            return VideoBean(parcel)
+//        }
+//
+//        override fun newArray(size: Int): Array<VideoBean?> {
+//            return arrayOfNulls(size)
+//        }
+//    }
 
 }
