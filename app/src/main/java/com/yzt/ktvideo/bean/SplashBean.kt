@@ -7,9 +7,9 @@ package com.yzt.ktvideo.bean
 data class SplashBean(val startPage: StartPage?) {
 
     data class StartPage(
-            val actionUrl: String,
-            val imageUrl: String?,
-            val version: String
+        val actionUrl: String,
+        val imageUrl: String?,
+        val version: String
     )
 
 }

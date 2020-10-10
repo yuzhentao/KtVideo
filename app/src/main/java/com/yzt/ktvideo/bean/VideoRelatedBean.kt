@@ -5,7 +5,6 @@ package com.yzt.ktvideo.bean
  * http://baobab.kaiyanapp.com/api/v4/video/related?id=165941&udid=49f77cac078741309bee11c5376c233224d8f2d3&vc=524&deviceModel=SM-G9500
  */
 data class VideoRelatedBean(
-
     val adExist: Boolean,
     val count: Int,
     val itemList: List<Item>?,

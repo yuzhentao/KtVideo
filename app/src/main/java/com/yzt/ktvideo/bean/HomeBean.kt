@@ -9,7 +9,8 @@ data class HomeBean(
         val issueList: List<Issue>?,
         val newestIssueType: String,
         val nextPageUrl: String,
-        val nextPublishTime: Long) {
+        val nextPublishTime: Long
+) {
 
     data class Issue(
             val count: Int,
@@ -17,14 +18,16 @@ data class HomeBean(
             val itemList: List<Item>?,
             val publishTime: Long,
             val releaseTime: Long,
-            val type: String) {
+            val type: String
+    ) {
 
         data class Item(
                 val data: Data?,
                 val adIndex: Int,
                 val id: Int,
                 val tag: Any,
-                val type: String) {
+                val type: String
+        ) {
 
             data class Data(
                     val ad: Boolean,
@@ -70,7 +73,8 @@ data class HomeBean(
                     val type: String,
                     val waterMarks: Any,
                     val webAdTrack: Any,
-                    val webUrl: WebUrl) {
+                    val webUrl: WebUrl
+            ) {
 
                 data class PlayInfo(
                         val height: Int,
@@ -78,12 +82,14 @@ data class HomeBean(
                         val type: String,
                         val url: String,
                         val urlList: List<Url>,
-                        val width: Int) {
+                        val width: Int
+                ) {
 
                     data class Url(
                             val name: String,
                             val size: Int,
-                            val url: String)
+                            val url: String
+                    )
 
                 }
 
@@ -98,21 +104,25 @@ data class HomeBean(
                         val headerImage: String,
                         val id: Int,
                         val name: String,
-                        val tagRecType: String)
+                        val tagRecType: String
+                )
 
                 data class Provider(
                         val alias: String,
                         val icon: String,
-                        val name: String)
+                        val name: String
+                )
 
                 data class WebUrl(
                         val forWeibo: String,
-                        val raw: String)
+                        val raw: String
+                )
 
                 data class Consumption(
                         val collectionCount: Int,
                         val replyCount: Int,
-                        val shareCount: Int)
+                        val shareCount: Int
+                )
 
                 data class Author(
                         val adTrack: Any,
@@ -128,17 +138,20 @@ data class HomeBean(
                         val name: String,
                         val recSort: Int,
                         val shield: Shield,
-                        val videoNum: Int) {
+                        val videoNum: Int
+                ) {
 
                     data class Shield(
                             val itemId: Int,
                             val itemType: String,
-                            val shielded: Boolean)
+                            val shielded: Boolean
+                    )
 
                     data class Follow(
                             val followed: Boolean,
                             val itemId: Int,
-                            val itemType: String)
+                            val itemType: String
+                    )
 
                 }
 
@@ -147,7 +160,8 @@ data class HomeBean(
                         val detail: String,
                         val feed: String?,
                         val homepage: String,
-                        val sharing: Any)
+                        val sharing: Any
+                )
 
             }
 

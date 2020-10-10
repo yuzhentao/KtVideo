@@ -9,20 +9,23 @@ data class SearchBean(
         val count: Int,
         val itemList: List<Item>,
         val nextPageUrl: String,
-        val total: Int) {
+        val total: Int
+) {
 
     data class Item(
             val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
-            val type: String) {
+            val type: String
+    ) {
 
         data class Data(
                 val adTrack: Any,
                 val content: Content?,
                 val dataType: String,
-                val header: Header) {
+                val header: Header
+        ) {
 
             data class Header(
                     val actionUrl: String,
@@ -40,14 +43,16 @@ data class SearchBean(
                     val subTitleFont: Any,
                     val textAlign: String,
                     val time: Long,
-                    val title: String)
+                    val title: String
+            )
 
             data class Content(
                     val data: Data?,
                     val adIndex: Int,
                     val id: Int,
                     val tag: Any,
-                    val type: String) {
+                    val type: String
+            ) {
 
                 data class Data(
                         val ad: Boolean,
@@ -93,28 +98,33 @@ data class SearchBean(
                         val type: String,
                         val waterMarks: Any,
                         val webAdTrack: Any,
-                        val webUrl: WebUrl) {
+                        val webUrl: WebUrl
+                ) {
 
                     data class Consumption(
                             val collectionCount: Int,
                             val replyCount: Int,
-                            val shareCount: Int)
+                            val shareCount: Int
+                    )
 
                     data class Cover(
                             val blurred: String,
                             val detail: String,
                             val feed: String?,
                             val homepage: Any,
-                            val sharing: Any)
+                            val sharing: Any
+                    )
 
                     data class Provider(
                             val alias: String,
                             val icon: String,
-                            val name: String)
+                            val name: String
+                    )
 
                     data class WebUrl(
                             val forWeibo: String,
-                            val raw: String)
+                            val raw: String
+                    )
 
                     data class Tag(
                             val actionUrl: String,
@@ -127,7 +137,8 @@ data class SearchBean(
                             val headerImage: String,
                             val id: Int,
                             val name: String,
-                            val tagRecType: String)
+                            val tagRecType: String
+                    )
 
                     data class PlayInfo(
                             val height: Int,
@@ -135,12 +146,14 @@ data class SearchBean(
                             val type: String,
                             val url: String,
                             val urlList: List<Url>,
-                            val width: Int) {
+                            val width: Int
+                    ) {
 
                         data class Url(
                                 val name: String,
                                 val size: Int,
-                                val url: String)
+                                val url: String
+                        )
 
                     }
 
@@ -158,17 +171,20 @@ data class SearchBean(
                             val name: String,
                             val recSort: Int,
                             val shield: Shield,
-                            val videoNum: Int) {
+                            val videoNum: Int
+                    ) {
 
                         data class Shield(
                                 val itemId: Int,
                                 val itemType: String,
-                                val shielded: Boolean)
+                                val shielded: Boolean
+                        )
 
                         data class Follow(
                                 val followed: Boolean,
                                 val itemId: Int,
-                                val itemType: String)
+                                val itemType: String
+                        )
 
                     }
 

@@ -5,7 +5,6 @@ package com.yzt.ktvideo.bean
  * http://baobab.kaiyanapp.com/api/v1/tag/videos?id=16&udid=49f77cac078741309bee11c5376c233224d8f2d3&vc=524&deviceModel=SM-G9500
  */
 data class DiscoverDetailLeftBean(
-
         val adExist: Boolean,
         val count: Int,
         val itemList: List<Item>,

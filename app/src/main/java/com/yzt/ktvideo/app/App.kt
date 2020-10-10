@@ -32,9 +32,9 @@ class App : MultiDexApplication() {
     private fun initRealm() {
         Realm.init(this)
         val config: RealmConfiguration? = RealmConfiguration.Builder()
-                .name("ktvideo.realm")//文件名
-                .schemaVersion(0)//版本号
-                .build()
+            .name("ktvideo.realm")//文件名
+            .schemaVersion(0)//版本号
+            .build()
         config?.let {
             Realm.setDefaultConfiguration(it)
         }

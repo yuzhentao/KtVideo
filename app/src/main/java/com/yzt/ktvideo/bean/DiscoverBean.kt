@@ -9,14 +9,16 @@ data class DiscoverBean(
         val count: Int,
         val itemList: List<Item>,
         val nextPageUrl: Any,
-        val total: Int) {
+        val total: Int
+) {
 
     data class Item(
             val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
-            val type: String) {
+            val type: String
+    ) {
 
         data class Data(
                 val actionUrl: String,
@@ -26,7 +28,8 @@ data class DiscoverBean(
                 val id: Int,
                 val image: String?,
                 val shade: Boolean,
-                val title: String?)
+                val title: String?
+        )
 
     }
 

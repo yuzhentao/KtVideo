@@ -9,38 +9,40 @@ import io.realm.annotations.RealmClass
 
 @RealmClass
 open class VideoBean(
-        @PrimaryKey
-        var id: Int? = 0,
-        var feed: String? = "",
-        var title: String? = "",
-        var description: String? = "",
-        var duration: Int? = 0,
-        var playUrl: String? = "",
-        var category: String? = "",
-        var blurred: String? = "",
-        var collect: Int? = 0,
-        var share: Int? = 0,
-        var reply: Int? = 0,
-        var time: Long = 0L,
-        var savePath: String? = "") : Parcelable, RealmModel {
+    @PrimaryKey
+    var id: Int? = 0,
+    var feed: String? = "",
+    var title: String? = "",
+    var description: String? = "",
+    var duration: Int? = 0,
+    var playUrl: String? = "",
+    var category: String? = "",
+    var blurred: String? = "",
+    var collect: Int? = 0,
+    var share: Int? = 0,
+    var reply: Int? = 0,
+    var time: Long = 0L,
+    var savePath: String? = ""
+) : Parcelable, RealmModel {
 
     var downloadState: String? = DownloadState.NORMAL.name
     var downloadProgress: Int? = 0
 
     constructor(parcel: Parcel) : this(
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readLong(),
-            parcel.readString()) {
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readLong(),
+        parcel.readString()
+    ) {
         downloadState = parcel.readString()
         downloadProgress = parcel.readValue(Int::class.java.classLoader) as? Int
     }

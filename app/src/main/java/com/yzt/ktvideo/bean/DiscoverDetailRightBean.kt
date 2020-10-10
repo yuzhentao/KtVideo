@@ -5,32 +5,35 @@ package com.yzt.ktvideo.bean
  * http://baobab.kaiyanapp.com/api/v6/tag/dynamics?id=16&udid=49f77cac078741309bee11c5376c233224d8f2d3&vc=524&deviceModel=SM-G9500
  */
 data class DiscoverDetailRightBean(
-
         val adExist: Boolean,
         val count: Int,
         val itemList: List<Item>,
         val nextPageUrl: String,
-        val total: Int) {
+        val total: Int
+) {
 
     data class Item(
             val data: Data?,
             val adIndex: Int,
             val id: Int,
             val tag: Any,
-            val type: String) {
+            val type: String
+    ) {
 
         data class Data(
                 val adTrack: Any,
                 val content: Content?,
                 val dataType: String,
-                val header: Header) {
+                val header: Header
+        ) {
 
             data class Content(
                     val data: Data?,
                     val adIndex: Int,
                     val id: Int,
                     val tag: Any,
-                    val type: String) {
+                    val type: String
+            ) {
 
                 data class Data(
                         val addWatermark: Boolean,
@@ -68,7 +71,8 @@ data class DiscoverDetailRightBean(
                         val width: Int,
                         val playUrl: String?,
                         val duration: Int,
-                        var isExpand: Boolean) {//是否扩展
+                        var isExpand: Boolean
+                ) {//是否扩展
 
                     data class Tag(
                             val actionUrl: String,
@@ -90,20 +94,23 @@ data class DiscoverDetailRightBean(
                             val tagRecType: String,
                             val tagStatus: String,
                             val top: Int,
-                            val type: String)
+                            val type: String
+                    )
 
                     data class Cover(
                             val blurred: String?,
                             val detail: String,
                             val feed: String?,
                             val homepage: Any,
-                            val sharing: Any)
+                            val sharing: Any
+                    )
 
                     data class Consumption(
                             val collectionCount: Int,
                             val playCount: Int,
                             val replyCount: Int,
-                            val shareCount: Int)
+                            val shareCount: Int
+                    )
 
                     data class Owner(
                             val actionUrl: String,
@@ -132,7 +139,8 @@ data class DiscoverDetailRightBean(
                             val uploadStatus: String,
                             val userMedalBeanList: Any,
                             val userType: String,
-                            val username: String)
+                            val username: String
+                    )
 
                 }
 
@@ -150,7 +158,8 @@ data class DiscoverDetailRightBean(
                     val tagId: Int,
                     val tagName: Any,
                     val time: Long,
-                    val topShow: Boolean)
+                    val topShow: Boolean
+            )
 
         }
 
