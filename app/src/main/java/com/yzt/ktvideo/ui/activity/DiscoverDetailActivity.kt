@@ -13,6 +13,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
+import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.RankingAdapter
 import com.yzt.ktvideo.bean.DiscoverDetailBean
@@ -21,7 +22,6 @@ import com.yzt.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yzt.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yzt.ktvideo.ui.fragment.DiscoverRightFragment
-import com.yzt.ktvideo.util.ClickUtil
 import com.yzt.ktvideo.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs

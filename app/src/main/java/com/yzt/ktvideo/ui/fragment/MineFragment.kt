@@ -3,9 +3,9 @@ package com.yzt.ktvideo.ui.fragment
 import android.content.Intent
 import android.graphics.Typeface
 import android.view.View
+import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.ui.activity.*
-import com.yzt.ktvideo.util.ClickUtil
 import com.yzt.transitionhelper.TransitionsHelper
 import kotlinx.android.synthetic.main.fragment_mine.*
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.WatchAdapter
 import com.yzt.ktvideo.bean.SearchBean
@@ -16,7 +17,6 @@ import com.yzt.ktvideo.db.VideoDbManager
 import com.yzt.ktvideo.extension.color
 import com.yzt.ktvideo.mvp.contract.SearchContract
 import com.yzt.ktvideo.mvp.presenter.SearchPresenter
-import com.yzt.ktvideo.util.ClickUtil
 import com.yzt.ktvideo.util.FooterUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 

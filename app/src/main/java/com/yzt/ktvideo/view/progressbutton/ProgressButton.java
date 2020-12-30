@@ -4,14 +4,15 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.yzt.common.util.ColorUtil;
 import com.yzt.ktvideo.R;
-import com.yzt.ktvideo.util.ColorUtil;
 import com.yzt.ktvideo.util.ThemeUtils;
 
 public class ProgressButton extends FrameLayout /*implements ProgressView.OnCompletedListener*/ {

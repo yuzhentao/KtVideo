@@ -1,11 +1,11 @@
 package com.yzt.ktvideo.mvp.model
 
 import android.content.Context
+import com.yzt.common.util.AppUtil
 import com.yzt.ktvideo.bean.DiscoverBean
 import com.yzt.ktvideo.extension.ioMain
 import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
-import com.yzt.ktvideo.util.AppUtil
 import io.reactivex.Observable
 
 class DiscoverModel {

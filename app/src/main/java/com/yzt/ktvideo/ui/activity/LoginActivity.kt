@@ -14,12 +14,12 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.base.BaseActivity
 import com.yzt.ktvideo.extension.color
 import com.yzt.ktvideo.extension.dimensionPixelOffset
 import com.yzt.ktvideo.extension.drawable
-import com.yzt.ktvideo.util.ClickUtil
 import com.yzt.ktvideo.util.DimenUtil
 import com.yzt.transitionhelper.TransitionsHelper
 import com.yzt.transitionhelper.bean.InfoBean

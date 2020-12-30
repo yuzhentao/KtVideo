@@ -16,7 +16,7 @@ import com.yzt.ktvideo.extension.shortToast
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.ktvideo.util.DownloadState
 import com.yzt.ktvideo.util.ImageUtil
-import com.yzt.ktvideo.util.ViewUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.view.progressbutton.ProgressButton
 import timber.log.Timber
 

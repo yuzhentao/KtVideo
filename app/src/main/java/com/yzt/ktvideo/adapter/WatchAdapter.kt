@@ -8,7 +8,7 @@ import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.VideoBean
 import com.yzt.ktvideo.extension.dimensionPixelOffset
 import com.yzt.ktvideo.util.ImageUtil
-import com.yzt.ktvideo.util.ViewUtil
+import com.yzt.common.util.ViewUtil
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -21,7 +21,7 @@ import com.yzt.ktvideo.bean.DiscoverDetailLeftBean
 import com.yzt.ktvideo.extension.color
 import com.yzt.ktvideo.extension.dimensionPixelOffset
 import com.yzt.ktvideo.util.ImageUtil
-import com.yzt.ktvideo.util.ViewUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.view.expandtextview.ExpandLayout
 
 class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) :

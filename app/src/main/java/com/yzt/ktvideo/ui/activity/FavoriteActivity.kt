@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
-import com.yzt.ktvideo.util.ClickUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 
 /**

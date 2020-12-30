@@ -12,15 +12,15 @@ import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.task.DownloadTask
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.util.ClickUtil
+import com.yzt.common.util.FileUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.CacheAdapter
 import com.yzt.ktvideo.bean.VideoBean
 import com.yzt.ktvideo.db.VideoDbManager
 import com.yzt.ktvideo.extension.color
 import com.yzt.ktvideo.extension.shortToast
-import com.yzt.ktvideo.util.ClickUtil
 import com.yzt.ktvideo.util.DownloadState
-import com.yzt.ktvideo.util.FileUtil
 import com.yzt.ktvideo.util.FooterUtil
 import com.yzt.ktvideo.view.EasySwipeMenuLayout
 import kotlinx.android.synthetic.main.activity_cache.*

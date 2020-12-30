@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.os.Build
 import android.text.TextUtils

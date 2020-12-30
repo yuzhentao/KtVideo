@@ -1,9 +1,8 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.content.Context
 import android.content.SharedPreferences
 import java.util.*
-
 
 /**
  * Created by lvruheng on 2017/7/11.
@@ -196,7 +195,7 @@ class SPUtils private constructor(context: Context,spName: String) {
 
     companion object {
 
-        private val sSPMap = HashMap<String,SPUtils>()
+        private val sSPMap = HashMap<String, SPUtils>()
 
         /**
          * 获取SP实例

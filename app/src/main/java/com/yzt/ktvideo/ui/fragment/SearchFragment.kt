@@ -11,14 +11,14 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HotSearchAdapter
 import com.yzt.ktvideo.mvp.contract.HotSearchContract
 import com.yzt.ktvideo.mvp.presenter.HotSearchPresenter
 import com.yzt.ktvideo.ui.activity.WatchActivity
 import com.yzt.ktvideo.util.CircularRevealAnim
-import com.yzt.ktvideo.util.ClickUtil
-import com.yzt.ktvideo.util.KeyBoardUtil
+import com.yzt.common.util.KeyBoardUtil
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : DialogFragment(),
