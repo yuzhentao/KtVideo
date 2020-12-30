@@ -1,3 +1,8 @@
 rootProject.name = "KtVideo"
 include ':app'
+include ':common'
+include ':home'
+include ':discover'
+include ':ranking'
+include ':mine'
 include ':transitionhelper'
