@@ -45,4 +45,9 @@ ext {
             "arouterCompiler": 'com.alibaba:arouter-compiler:1.5.1',
     ]
 
+    otherDependencies = [
+            "arouterApi"     : 'com.alibaba:arouter-api:1.5.1',
+            "arouterCompiler": 'com.alibaba:arouter-compiler:1.5.1',
+    ]
+
 }
