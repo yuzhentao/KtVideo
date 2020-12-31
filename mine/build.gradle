@@ -1,12 +1,19 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
+if (isNeedMine.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
+        if (isNeedMine.toBoolean()) {
+            applicationId rootProject.ext.android["applicationMineId"]
+        }
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -38,5 +45,7 @@ dependencies {
     implementation rootProject.ext.dependencies["ktx"]
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.otherDependencies["arouter_api"]
+    kapt rootProject.ext.otherDependencies["arouter_compiler"]
     implementation project(':common')
 }

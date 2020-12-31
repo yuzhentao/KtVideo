@@ -7,17 +7,17 @@ ext {
     isNeedMine = false
 
     android = [
-            compileSdkVersion: 30,
-            buildToolsVersion: "30.0.2",
-            minSdkVersion    : 23,
-            targetSdkVersion : 30,
-            versionCode      : 3,
-            versionName      : "1.0.2",
-            applicationId    : "com.yzt.ktvideo",
-            application1Id   : "com.yzt.home",
-            application2Id   : "com.yzt.discover",
-            application3Id   : "com.yzt.ranking",
-            application4Id   : "com.yzt.mine",
+            compileSdkVersion    : 30,
+            buildToolsVersion    : "30.0.2",
+            minSdkVersion        : 23,
+            targetSdkVersion     : 30,
+            versionCode          : 3,
+            versionName          : "1.0.2",
+            applicationId        : "com.yzt.ktvideo",
+            applicationHomeId    : "com.yzt.home",
+            applicationDiscoverId: "com.yzt.discover",
+            applicationRankingId : "com.yzt.ranking",
+            applicationMineId    : "com.yzt.mine",
     ]
 
     version = [

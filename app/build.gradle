@@ -1,8 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'realm-android'
+}
 
 static def getCurrentTime() {
     return new Date().format("yyyy-MM-dd")
@@ -87,4 +89,16 @@ dependencies {
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
     implementation project(path: ':transitionhelper')
     implementation project(':common')
+    if (!isNeedHome.toBoolean()) {
+        implementation project(':home')
+    }
+    if (!isNeedDiscover.toBoolean()) {
+        implementation project(':discover')
+    }
+    if (!isNeedRanking.toBoolean()) {
+        implementation project(':ranking')
+    }
+    if (!isNeedMine.toBoolean()) {
+        implementation project(':mine')
+    }
 }
