@@ -63,30 +63,28 @@ dependencies {
     implementation rootProject.ext.dependencies["lifecycle_viewmodel_ktx"]
     implementation rootProject.ext.dependencies["lifecycle_extensions"]
     implementation rootProject.ext.dependencies["material"]
-    implementation 'com.google.android:flexbox:1.1.1'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
-    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    kapt 'com.jakewharton:butterknife-compiler:10.2.1'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation 'com.arialyy.aria:core:3.8.14'
-    kapt 'com.arialyy.aria:compiler:3.8.14'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
-    implementation 'com.shuyu:gsyVideoPlayer-java:7.1.2'
-    implementation 'com.shuyu:gsyVideoPlayer-ex_so:7.1.2'
-    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
-    implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'
-    implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
-    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation rootProject.ext.dependencies["flexbox"]
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.otherDependencies["rxjava2"]
+    implementation rootProject.ext.otherDependencies["rxjava2_rxandroid"]
+    implementation rootProject.ext.otherDependencies["retrofit2"]
+    implementation rootProject.ext.otherDependencies["retrofit2_converter_gson"]
+    implementation rootProject.ext.otherDependencies["retrofit2_adapter_rxjava2"]
+    implementation rootProject.ext.otherDependencies["retrofit2_logging_interceptor"]
+    implementation rootProject.ext.otherDependencies["timber"]
+    implementation rootProject.ext.otherDependencies["glide"]
+    kapt rootProject.ext.otherDependencies["glide_compiler"]
+    implementation rootProject.ext.otherDependencies["aria"]
+    kapt rootProject.ext.otherDependencies["aria_compiler"]
+    implementation rootProject.ext.otherDependencies["base_recycler_view_adapter_helper"]
+    implementation rootProject.ext.otherDependencies["gsy_video_player_java"]
+    implementation rootProject.ext.otherDependencies["gsy_video_player_ex_so"]
+    implementation rootProject.ext.otherDependencies["immersionbar"]
+    implementation rootProject.ext.otherDependencies["immersionbar_ktx"]
+    implementation rootProject.ext.otherDependencies["immersionbar_components"]
+    implementation rootProject.ext.otherDependencies["rxpermissions"]
+    implementation rootProject.ext.otherDependencies["arouter_api"]
+    kapt rootProject.ext.otherDependencies["arouter_compiler"]
     implementation project(path: ':transitionhelper')
     implementation project(':common')
-    implementation rootProject.ext.otherDependencies["arouterApi"]
-    kapt rootProject.ext.otherDependencies["arouterCompiler"]
 }

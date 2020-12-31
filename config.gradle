@@ -38,16 +38,31 @@ ext {
             "lifecycle_viewmodel_ktx": "androidx.lifecycle:lifecycle-viewmodel-ktx:${version['lifecycle_version']}",
             "lifecycle_extensions"   : "androidx.lifecycle:lifecycle-extensions:${version['lifecycle_version']}",
             "material"               : 'com.google.android.material:material:1.2.1',
+            "flexbox"                : 'com.google.android:flexbox:1.1.1',
+            "gson"                   : 'com.google.code.gson:gson:2.8.6',
     ]
 
     otherDependencies = [
-            "arouterApi"     : 'com.alibaba:arouter-api:1.5.1',
-            "arouterCompiler": 'com.alibaba:arouter-compiler:1.5.1',
-    ]
-
-    otherDependencies = [
-            "arouterApi"     : 'com.alibaba:arouter-api:1.5.1',
-            "arouterCompiler": 'com.alibaba:arouter-compiler:1.5.1',
+            "rxjava2"                          : 'io.reactivex.rxjava2:rxjava:2.2.20',
+            "rxjava2_rxandroid"                : 'io.reactivex.rxjava2:rxandroid:2.1.1',
+            "retrofit2"                        : 'com.squareup.retrofit2:retrofit:2.9.0',
+            "retrofit2_converter_gson"         : 'com.squareup.retrofit2:converter-gson:2.9.0',
+            "retrofit2_adapter_rxjava2"        : 'com.squareup.retrofit2:adapter-rxjava2:2.9.0',
+            "retrofit2_logging_interceptor"    : 'com.squareup.okhttp3:logging-interceptor:4.2.2',
+            "timber"                           : 'com.jakewharton.timber:timber:4.7.1',
+            "glide"                            : 'com.github.bumptech.glide:glide:4.11.0',
+            "glide_compiler"                   : 'com.github.bumptech.glide:compiler:4.11.0',
+            "aria"                             : 'com.arialyy.aria:core:3.8.15',
+            "aria_compiler"                    : 'com.arialyy.aria:compiler:3.8.15',
+            "base_recycler_view_adapter_helper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6',
+            "gsy_video_player_java"            : 'com.shuyu:gsyVideoPlayer-java:8.0.0',
+            "gsy_video_player_ex_so"           : 'com.shuyu:gsyVideoPlayer-ex_so:8.0.0',
+            "immersionbar"                     : 'com.gyf.immersionbar:immersionbar:3.0.0',
+            "immersionbar_ktx"                 : 'com.gyf.immersionbar:immersionbar-ktx:3.0.0',
+            "immersionbar_components"          : 'com.gyf.immersionbar:immersionbar-components:3.0.0',
+            "rxpermissions"                    : 'com.github.tbruyelle:rxpermissions:0.10.2',
+            "arouter_api"                      : 'com.alibaba:arouter-api:1.5.1',
+            "arouter_compiler"                 : 'com.alibaba:arouter-compiler:1.5.1',
     ]
 
 }

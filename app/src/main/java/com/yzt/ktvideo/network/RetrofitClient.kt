@@ -2,11 +2,11 @@ package com.yzt.ktvideo.network
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.io.File
@@ -35,19 +35,19 @@ class RetrofitClient private constructor(context: Context, baseUrl: String) {
             Timber.e(e, "Could not create http cache")
         }
         okHttpClient = OkHttpClient.Builder()
-                .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .cache(cache)
-                .addInterceptor(CacheInterceptor(context))
-                .addNetworkInterceptor(CacheInterceptor(context))
-                .connectTimeout(defaultTimeout, TimeUnit.SECONDS)
-                .writeTimeout(defaultTimeout, TimeUnit.SECONDS)
-                .build()
+            .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .cache(cache)
+            .addInterceptor(CacheInterceptor(context))
+            .addNetworkInterceptor(CacheInterceptor(context))
+            .connectTimeout(defaultTimeout, TimeUnit.SECONDS)
+            .writeTimeout(defaultTimeout, TimeUnit.SECONDS)
+            .build()
         retrofit = Retrofit.Builder()
-                .client(okHttpClient!!)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(url)
-                .build()
+            .client(okHttpClient!!)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .baseUrl(url)
+            .build()
     }
 
     companion object {
