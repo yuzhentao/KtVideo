@@ -4,7 +4,6 @@ if (isNeedDiscover.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -38,12 +37,26 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
+    sourceSets {
+        main {
+            if (isNeedDiscover.toBoolean()) {
+                manifest.srcFile 'src/main/buildApp/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/buildModule/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation rootProject.ext.dependencies["ktx"]
     implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["constraint_layout"]
+    implementation rootProject.ext.dependencies["recycler_view"]
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.otherDependencies["arouter_api"]
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
