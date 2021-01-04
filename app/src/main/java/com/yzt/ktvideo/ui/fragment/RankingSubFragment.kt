@@ -9,8 +9,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.RankingSubAdapter
 import com.yzt.ktvideo.bean.RankingSubBean
-import com.yzt.ktvideo.bean.VideoBean
-import com.yzt.ktvideo.extension.color
+import com.yzt.common.bean.VideoBean
+import com.yzt.common.extension.color
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.ktvideo.util.FooterUtil
 import com.yzt.ktvideo.viewmodel.RankingSubViewModel

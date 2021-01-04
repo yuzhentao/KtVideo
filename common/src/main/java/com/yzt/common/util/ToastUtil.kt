@@ -1,15 +1,15 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.os.Build
 import android.os.Handler
 import android.os.Message
-import androidx.annotation.StringRes
-import androidx.appcompat.widget.AppCompatTextView
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.app.App
+import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatTextView
+import com.yzt.common.R
+import com.yzt.common.base.App
 import java.lang.reflect.Field
 
 object ToastUtil {

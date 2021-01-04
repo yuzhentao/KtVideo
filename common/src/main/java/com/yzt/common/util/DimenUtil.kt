@@ -1,10 +1,10 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.content.Context
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.WindowManager
-import com.yzt.ktvideo.app.App
+import com.yzt.common.base.App
 
 object DimenUtil {
 

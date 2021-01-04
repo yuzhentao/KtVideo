@@ -17,10 +17,10 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.base.BaseActivity
-import com.yzt.ktvideo.extension.color
-import com.yzt.ktvideo.extension.dimensionPixelOffset
-import com.yzt.ktvideo.extension.drawable
-import com.yzt.ktvideo.util.DimenUtil
+import com.yzt.common.extension.color
+import com.yzt.common.extension.dimensionPixelOffset
+import com.yzt.common.extension.drawable
+import com.yzt.common.util.DimenUtil
 import com.yzt.transitionhelper.TransitionsHelper
 import com.yzt.transitionhelper.bean.InfoBean
 import com.yzt.transitionhelper.method.ColorShowMethod

@@ -12,9 +12,9 @@ import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.WatchAdapter
 import com.yzt.ktvideo.bean.SearchBean
-import com.yzt.ktvideo.bean.VideoBean
-import com.yzt.ktvideo.db.VideoDbManager
-import com.yzt.ktvideo.extension.color
+import com.yzt.common.bean.VideoBean
+import com.yzt.common.db.VideoDbManager
+import com.yzt.common.extension.color
 import com.yzt.ktvideo.mvp.contract.SearchContract
 import com.yzt.ktvideo.mvp.presenter.SearchPresenter
 import com.yzt.ktvideo.util.FooterUtil

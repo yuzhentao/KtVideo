@@ -18,8 +18,8 @@ import com.shuyu.gsyvideoplayer.utils.CommonUtil
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.DiscoverDetailLeftBean
-import com.yzt.ktvideo.extension.color
-import com.yzt.ktvideo.extension.dimensionPixelOffset
+import com.yzt.common.extension.color
+import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.ktvideo.util.ImageUtil
 import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.view.expandtextview.ExpandLayout

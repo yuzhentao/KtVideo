@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.yzt.ktvideo.R
-import com.yzt.ktvideo.util.DimenUtil
-import com.yzt.ktvideo.extension.color
+import com.yzt.common.util.DimenUtil
+import com.yzt.common.extension.color
 import kotlinx.android.synthetic.main.layout_expand_view.view.*
 
 class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {

@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
+import com.yzt.common.util.State;
 import com.yzt.ktvideo.R;
-import com.yzt.ktvideo.util.State;
 
 import java.util.ArrayList;
 

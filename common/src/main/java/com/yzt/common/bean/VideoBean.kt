@@ -1,8 +1,8 @@
-package com.yzt.ktvideo.bean
+package com.yzt.common.bean
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.yzt.ktvideo.util.DownloadState
+import com.yzt.common.util.DownloadState
 import io.realm.RealmModel
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass

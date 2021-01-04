@@ -12,19 +12,19 @@ import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.task.DownloadTask
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.bean.VideoBean
+import com.yzt.common.db.VideoDbManager
+import com.yzt.common.extension.color
+import com.yzt.common.extension.shortToast
 import com.yzt.common.util.ClickUtil
+import com.yzt.common.util.DownloadState
 import com.yzt.common.util.FileUtil
+import com.yzt.common.util.TimberUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.CacheAdapter
-import com.yzt.ktvideo.bean.VideoBean
-import com.yzt.ktvideo.db.VideoDbManager
-import com.yzt.ktvideo.extension.color
-import com.yzt.ktvideo.extension.shortToast
-import com.yzt.ktvideo.util.DownloadState
 import com.yzt.ktvideo.util.FooterUtil
 import com.yzt.ktvideo.view.EasySwipeMenuLayout
 import kotlinx.android.synthetic.main.activity_cache.*
-import timber.log.Timber
 
 /**
  * 我的缓存
@@ -160,7 +160,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             for (index in adapter.data.indices) {
                 val bean = adapter.data[index]
                 if (task.key == bean.playUrl) {
-                    Timber.tag("缓存").e("进度>>>${task.percent}>>>${bean.title}")
+                    TimberUtil.e("缓存", "进度>>>${task.percent}>>>${bean.title}")
                     bean.downloadProgress = task.percent
                     dbManager.update(bean)
                     adapter.notifyItemChanged(index, 1)
@@ -175,7 +175,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             for (index in adapter.data.indices) {
                 val bean = adapter.data[index]
                 if (task.key == bean.playUrl) {
-                    Timber.tag("缓存").e("失败>>>${bean.title}")
+                    TimberUtil.e("缓存", "失败>>>${bean.title}")
                     shortToast(getString(R.string.cache_fail))
                     bean.downloadState = DownloadState.ERROR.name
                     bean.downloadProgress = 0
@@ -192,7 +192,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             for (index in adapter.data.indices) {
                 val bean = adapter.data[index]
                 if (task.key == bean.playUrl) {
-                    Timber.tag("缓存").e("完成>>>${bean.title}")
+                    TimberUtil.e("缓存", "完成>>>${bean.title}")
                     shortToast(getString(R.string.cache_complete))
                     bean.downloadState = DownloadState.COMPLETE.name
                     bean.downloadProgress = 100

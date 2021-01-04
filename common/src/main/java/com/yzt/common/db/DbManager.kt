@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.db
+package com.yzt.common.db
 
 interface DbManager<T> {
 

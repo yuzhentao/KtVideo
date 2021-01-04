@@ -1,11 +1,11 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
-import com.yzt.ktvideo.app.App
+import com.yzt.common.base.App
 
 /**
  * 网络工具

@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.extension
+package com.yzt.common.extension
 
 import android.app.Activity
 import android.content.Context
@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.annotation.DimenRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.app.App
+import com.yzt.common.R
+import com.yzt.common.base.App
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.DiscoverAdapter
 import com.yzt.ktvideo.bean.DiscoverBean
-import com.yzt.ktvideo.extension.color
+import com.yzt.common.extension.color
 import com.yzt.ktvideo.interfaces.OnRvScrollListener
 import com.yzt.ktvideo.mvp.contract.DiscoverContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverPresenter

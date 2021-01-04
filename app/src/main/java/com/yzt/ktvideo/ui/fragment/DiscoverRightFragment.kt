@@ -8,13 +8,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.DiscoverDetailRightAdapter
 import com.yzt.ktvideo.bean.DiscoverDetailRightBean
-import com.yzt.ktvideo.bean.VideoBean
-import com.yzt.ktvideo.extension.color
+import com.yzt.common.bean.VideoBean
+import com.yzt.common.extension.color
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailRightContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailRightPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import com.yzt.ktvideo.util.DimenUtil
+import com.yzt.common.util.DimenUtil
 import com.yzt.ktvideo.util.FooterUtil
 import com.yzt.ktvideo.util.ScrollCalculatorHelper
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*

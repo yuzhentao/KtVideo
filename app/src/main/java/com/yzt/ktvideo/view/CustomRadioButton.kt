@@ -5,7 +5,7 @@ import android.content.res.TypedArray
 import androidx.appcompat.widget.AppCompatRadioButton
 import android.util.AttributeSet
 import com.yzt.ktvideo.R
-import com.yzt.ktvideo.extension.dimensionPixelOffset
+import com.yzt.common.extension.dimensionPixelOffset
 
 class CustomRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : AppCompatRadioButton(context, attrs, defStyleAttr) {
 

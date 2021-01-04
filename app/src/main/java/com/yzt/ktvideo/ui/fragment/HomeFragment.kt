@@ -8,9 +8,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HomeAdapter
 import com.yzt.ktvideo.bean.HomeBean
-import com.yzt.ktvideo.bean.VideoBean
-import com.yzt.ktvideo.extension.color
-import com.yzt.ktvideo.extension.dimensionPixelOffset
+import com.yzt.common.bean.VideoBean
+import com.yzt.common.extension.color
+import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.ktvideo.interfaces.OnRvScrollListener
 import com.yzt.ktvideo.mvp.contract.HomeContract
 import com.yzt.ktvideo.mvp.presenter.HomePresenter

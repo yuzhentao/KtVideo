@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.network
 
 import android.content.Context
-import com.yzt.ktvideo.util.NetworkUtil
+import com.yzt.common.util.NetworkUtil
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response

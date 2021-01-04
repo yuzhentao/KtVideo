@@ -13,8 +13,8 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.base.BaseActivity
 import com.yzt.ktvideo.bean.SplashBean
-import com.yzt.ktvideo.extension.ioMain
-import com.yzt.ktvideo.extension.newIntent
+import com.yzt.common.extension.ioMain
+import com.yzt.common.extension.newIntent
 import com.yzt.ktvideo.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter

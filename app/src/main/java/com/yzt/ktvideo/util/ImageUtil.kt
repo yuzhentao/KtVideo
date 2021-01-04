@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.yzt.ktvideo.R
-import com.yzt.ktvideo.extension.dimensionPixelOffset
+import com.yzt.common.extension.dimensionPixelOffset
 
 object ImageUtil {
 
