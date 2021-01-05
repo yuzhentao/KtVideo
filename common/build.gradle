@@ -69,4 +69,5 @@ dependencies {
     api rootProject.ext.otherDependencies["gsy_video_player_ex_so"]
     api rootProject.ext.otherDependencies["arouter_api"]
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
+    api project(':transitionhelper')
 }

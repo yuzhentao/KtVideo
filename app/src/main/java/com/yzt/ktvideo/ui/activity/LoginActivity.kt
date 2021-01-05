@@ -68,11 +68,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         initData()
     }
 
-    override fun onDestroy() {
-        TransitionsHelper.unbind(this)
-        super.onDestroy()
-    }
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_top -> {

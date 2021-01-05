@@ -61,7 +61,6 @@ dependencies {
     kapt rootProject.ext.otherDependencies["aria_compiler"]
     implementation rootProject.ext.otherDependencies["arouter_api"]
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
-    implementation project(':transitionhelper')
     implementation project(':common')
     if (!isNeedHome.toBoolean()) {
         implementation project(':home')
