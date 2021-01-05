@@ -18,7 +18,6 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
-import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.bindView
 import com.yzt.common.extension.color
@@ -63,9 +62,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     private var changeBgHome: Boolean = false
     private var changeBgDiscover: Boolean = false
 
-    private val rxPermissions: RxPermissions by lazy {
-        RxPermissions(activity)
-    }
     private var permissionsDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,8 +142,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_home, 1000)) {
                     tb.setBackgroundColor(
                         if (changeBgHome) {
-                            context.color(R.color.white_50)
-                        } else context.color(R.color.white)
+                            color(R.color.white_50)
+                        } else color(R.color.white)
                     )
                     tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                     tvTitle.text = getToday()
@@ -170,8 +166,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_discover, 1000)) {
                     tb.setBackgroundColor(
                         if (changeBgDiscover) {
-                            context.color(R.color.white_50)
-                        } else context.color(R.color.white)
+                            color(R.color.white_50)
+                        } else color(R.color.white)
                     )
                     tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                     tvTitle.setText(R.string.discover)
@@ -192,7 +188,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_ranking -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_ranking, 1000)) {
-                    tb.setBackgroundColor(context.color(R.color.white))
+                    tb.setBackgroundColor(color(R.color.white))
                     tb.elevation = 0F
                     tvTitle.setText(R.string.ranking)
                     tvTitle.visibility = View.VISIBLE
@@ -212,7 +208,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_mine -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_mine, 1000)) {
-                    tb.setBackgroundColor(context.color(R.color.white))
+                    tb.setBackgroundColor(color(R.color.white))
                     tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
                     tvTitle.visibility = View.GONE
                     ivSearch.setImageResource(R.drawable.ic_settings_black)
@@ -237,7 +233,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     private fun requestPermissions() {
         permissionsDisposable = rxPermissions
-            .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .requestEachCombined(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE
+            )
             .subscribe { permission ->
                 when {
                     permission.granted -> {
@@ -328,10 +327,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 tb.setBackgroundColor(
                     if (totalDy < 0) {
                         this@MainActivity.changeBgHome = true
-                        context.color(R.color.white_50)
+                        color(R.color.white_50)
                     } else {
                         this@MainActivity.changeBgHome = false
-                        context.color(R.color.white)
+                        color(R.color.white)
                     }
                 )
             }
@@ -341,10 +340,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 tb.setBackgroundColor(
                     if (totalDy < 0) {
                         this@MainActivity.changeBgDiscover = true
-                        context.color(R.color.white_50)
+                        color(R.color.white_50)
                     } else {
                         this@MainActivity.changeBgDiscover = false
-                        context.color(R.color.white)
+                        color(R.color.white)
                     }
                 )
             }

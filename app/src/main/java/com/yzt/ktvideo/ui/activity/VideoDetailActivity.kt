@@ -28,7 +28,6 @@ import com.yzt.common.extension.color
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.shortToast
 import com.yzt.common.util.DownloadState
-import com.yzt.common.util.TimberUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.VideoRelatedAdapter
 import com.yzt.ktvideo.bean.VideoRelatedBean
@@ -42,6 +41,7 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_video_detail.*
+import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
 
@@ -144,7 +144,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
         beans?.let {
             adapter.setList(it)
-            adapter.addFooterView(FooterUtil.getFooter(context, context.color(R.color.white)))
+            adapter.addFooterView(FooterUtil.getFooter(context, color(R.color.white)))
         }
     }
 
@@ -360,7 +360,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadStart(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                TimberUtil.e("缓存", "开始>>>${it.title}")
+                Timber.tag("缓存").e("开始>>>${it.title}")
                 shortToast(getString(R.string.cache_start))
                 it.downloadId = downloadId
                 it.downloadState = DownloadState.DOWNLOADING.name
@@ -373,7 +373,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadProgress(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                TimberUtil.e("缓存", "进度>>>${task.percent}>>>${it.title}")
+                Timber.tag("缓存").e("进度>>>${task.percent}>>>${it.title}")
                 it.downloadProgress = task.percent
                 dbManager.update(it)
             }
@@ -384,7 +384,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadFail(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                TimberUtil.e("缓存", "失败>>>${it.title}")
+                Timber.tag("缓存").e("失败>>>${it.title}")
                 shortToast(getString(R.string.cache_fail))
                 it.downloadState = DownloadState.ERROR.name
                 it.downloadProgress = 0
@@ -397,7 +397,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     fun onDownloadComplete(task: DownloadTask) {
         if (task.key == playUrl) {
             bean?.let {
-                TimberUtil.e("缓存", "完成>>>${it.title}")
+                Timber.tag("缓存").e("完成>>>${it.title}")
                 shortToast(getString(R.string.cache_complete))
                 it.downloadState = DownloadState.COMPLETE.name
                 it.downloadProgress = 100

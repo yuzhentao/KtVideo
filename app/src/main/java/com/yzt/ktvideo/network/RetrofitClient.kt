@@ -2,13 +2,13 @@ package com.yzt.ktvideo.network
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.yzt.common.util.TimberUtil
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -32,7 +32,7 @@ class RetrofitClient private constructor(context: Context, baseUrl: String) {
                 cache = Cache(httpCacheDirectory!!, 10 * 1024 * 1024)
             }
         } catch (e: Exception) {
-            TimberUtil.e(e, "Could not create http cache")
+            Timber.e(e, "Could not create http cache")
         }
         okHttpClient = OkHttpClient.Builder()
             .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

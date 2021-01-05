@@ -2,11 +2,11 @@ package com.yzt.common.db
 
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.util.DownloadState
-import com.yzt.common.util.TimberUtil
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
 import io.realm.kotlin.deleteFromRealm
+import timber.log.Timber
 
 class VideoDbManager : DbManager<VideoBean> {
 
@@ -17,7 +17,7 @@ class VideoDbManager : DbManager<VideoBean> {
             it.beginTransaction()
             it.copyToRealm(data)
             it.commitTransaction()
-            TimberUtil.e("记录",">>>${data.title}")
+            Timber.tag("记录").e(">>>${data.title}")
         }
     }
 

@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.arialyy.aria.core.Aria
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.yzt.common.util.TimberUtil
 import com.yzt.ktvideo.R
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.db.VideoDbManager
@@ -19,6 +18,7 @@ import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.ktvideo.util.ImageUtil
 import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.view.progressbutton.ProgressButton
+import timber.log.Timber
 
 class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDbManager) :
     BaseQuickAdapter<VideoBean, BaseViewHolder>(R.layout.item_cache, data) {
@@ -79,14 +79,14 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
             dbBean?.let {
                 when (it.downloadState) {
                     DownloadState.DOWNLOADING.name -> {
-                        TimberUtil.e("缓存", "暂停>>>${item.title}")
+                        Timber.tag("缓存").e("暂停>>>${item.title}")
                         Aria.download(this).load(item.downloadId!!).stop()
                         item.downloadState = DownloadState.PAUSE.name
                         dbManager.update(item)
                         notifyItemChanged(position, 1)
                     }
                     DownloadState.PAUSE.name -> {
-                        TimberUtil.e("缓存", "恢复>>>${item.title}")
+                        Timber.tag("缓存").e("恢复>>>${item.title}")
                         Aria.download(this).load(item.downloadId!!).resume()
                         item.downloadState = DownloadState.DOWNLOADING.name
                         dbManager.update(item)
