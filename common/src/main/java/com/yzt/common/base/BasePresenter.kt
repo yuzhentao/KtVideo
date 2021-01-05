@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.base
+package com.yzt.common.base
 
 interface BasePresenter {
 

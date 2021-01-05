@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.mvp.contract
 
-import com.yzt.ktvideo.base.BasePresenter
-import com.yzt.ktvideo.base.BaseView
+import com.yzt.common.base.BasePresenter
+import com.yzt.common.base.BaseView
 import com.yzt.ktvideo.bean.SearchBean
 
 interface SearchContract {

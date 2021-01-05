@@ -14,17 +14,16 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.common.util.ClickUtil
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.base.BaseActivity
+import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.drawable
+import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
+import com.yzt.ktvideo.R
 import com.yzt.transitionhelper.TransitionsHelper
 import com.yzt.transitionhelper.bean.InfoBean
 import com.yzt.transitionhelper.method.ColorShowMethod
-import kotlinx.android.synthetic.main.activity_cache.iv_top
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -67,6 +66,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             .show()
         initView()
         initData()
+    }
+
+    override fun onDestroy() {
+        TransitionsHelper.unbind(this)
+        super.onDestroy()
     }
 
     override fun onClick(v: View?) {
