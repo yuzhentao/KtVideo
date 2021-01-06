@@ -1,10 +1,10 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.content.Context
 import android.graphics.Typeface
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
-import com.yzt.ktvideo.R
+import com.yzt.common.R
 
 object FooterUtil {
 

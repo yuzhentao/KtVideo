@@ -21,7 +21,7 @@ import com.yzt.common.util.DownloadState
 import com.yzt.common.util.FileUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.CacheAdapter
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.view.EasySwipeMenuLayout
 import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber

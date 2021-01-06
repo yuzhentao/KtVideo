@@ -17,7 +17,7 @@ import com.yzt.ktvideo.adapter.HotSearchAdapter
 import com.yzt.ktvideo.mvp.contract.HotSearchContract
 import com.yzt.ktvideo.mvp.presenter.HotSearchPresenter
 import com.yzt.ktvideo.ui.activity.WatchActivity
-import com.yzt.ktvideo.util.CircularRevealAnim
+import com.yzt.common.util.CircularRevealAnim
 import com.yzt.common.util.KeyBoardUtil
 import kotlinx.android.synthetic.main.fragment_search.*
 

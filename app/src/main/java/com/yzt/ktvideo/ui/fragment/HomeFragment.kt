@@ -15,7 +15,7 @@ import com.yzt.ktvideo.interfaces.OnRvScrollListener
 import com.yzt.ktvideo.mvp.contract.HomeContract
 import com.yzt.ktvideo.mvp.presenter.HomePresenter
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.regex.Pattern
 

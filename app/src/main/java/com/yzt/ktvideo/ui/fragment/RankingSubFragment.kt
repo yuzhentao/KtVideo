@@ -12,7 +12,7 @@ import com.yzt.ktvideo.bean.RankingSubBean
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.extension.color
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.viewmodel.RankingSubViewModel
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 

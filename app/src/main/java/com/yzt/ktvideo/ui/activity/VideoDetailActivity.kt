@@ -33,7 +33,7 @@ import com.yzt.ktvideo.adapter.VideoRelatedAdapter
 import com.yzt.ktvideo.bean.VideoRelatedBean
 import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
 import com.yzt.ktvideo.mvp.presenter.VideoRelatedPresenter
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.util.GlideApp
 import com.yzt.ktvideo.util.ImageUtil
 import com.yzt.ktvideo.util.VideoListener

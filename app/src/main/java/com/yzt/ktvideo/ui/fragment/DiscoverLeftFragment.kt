@@ -15,7 +15,7 @@ import com.yzt.ktvideo.mvp.presenter.DiscoverDetailLeftPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.common.util.DimenUtil
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.util.ScrollCalculatorHelper
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 

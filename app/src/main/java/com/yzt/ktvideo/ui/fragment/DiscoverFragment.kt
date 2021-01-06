@@ -12,7 +12,7 @@ import com.yzt.ktvideo.interfaces.OnRvScrollListener
 import com.yzt.ktvideo.mvp.contract.DiscoverContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**

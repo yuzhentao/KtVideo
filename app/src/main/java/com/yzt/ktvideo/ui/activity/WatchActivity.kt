@@ -17,7 +17,7 @@ import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.ktvideo.mvp.contract.SearchContract
 import com.yzt.ktvideo.mvp.presenter.SearchPresenter
-import com.yzt.ktvideo.util.FooterUtil
+import com.yzt.common.util.FooterUtil
 import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
