@@ -1,5 +1,6 @@
 package com.yzt.mine
 
+import android.view.View
 import com.yzt.common.base.BaseFragment
 
 /**
@@ -7,5 +8,24 @@ import com.yzt.common.base.BaseFragment
  */
 class MineFragment : BaseFragment() {
 
+    override fun getLayoutId(): Int? {
+        return null
+    }
+
+    override fun getLayoutView(): View? {
+        return null
+    }
+
+    override fun init() {
+
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun initData() {
+
+    }
 
 }

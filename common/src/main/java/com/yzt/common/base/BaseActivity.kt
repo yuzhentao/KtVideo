@@ -62,6 +62,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
         }
         super.onDestroy()
+        context = null
+        activity = null
+        compositeDisposable = null
     }
 
     open fun setOnLifecycleListener(lifecycleListener: LifecycleListener?) {
