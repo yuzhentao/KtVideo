@@ -2,7 +2,6 @@ package com.yzt.ktvideo.ui.activity
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -21,6 +20,7 @@ import com.yzt.common.extension.drawable
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.ktvideo.R
+import com.yzt.ktvideo.databinding.ActivityLoginBinding
 import com.yzt.transitionhelper.TransitionsHelper
 import com.yzt.transitionhelper.bean.InfoBean
 import com.yzt.transitionhelper.method.ColorShowMethod
@@ -31,11 +31,18 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
-    private var context: Context = this
-    private var activity: LoginActivity = this
+    private var binding: ActivityLoginBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
@@ -44,7 +51,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_login)
         TransitionsHelper.build(this)
             .setShowMethod(object : ColorShowMethod(R.color.purple, R.color.pink) {
                 override fun loadPlaceholder(bean: InfoBean<*>, placeholder: ImageView) {
@@ -62,10 +68,41 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                 }
             })
-            .setExposeColor(context.color(R.color.pink))
+            .setExposeColor(color(R.color.pink))
             .show()
-        initView()
-        initData()
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        binding?.ivTop!!.setOnClickListener(this)
+        val drawableUser = drawable(R.drawable.ic_login_user)
+        drawableUser!!.setBounds(
+            0,
+            0,
+            DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat()),
+            DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat())
+        )
+        binding?.etUser!!.setCompoundDrawables(drawableUser, null, null, null)
+        binding?.etUser!!.compoundDrawablePadding = dimensionPixelOffset(R.dimen.x5)
+        val drawablePassword = drawable(R.drawable.ic_login_password)
+        drawablePassword!!.setBounds(
+            0,
+            0,
+            DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat()),
+            DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat())
+        )
+        binding?.etPassword!!.setCompoundDrawables(drawablePassword, null, null, null)
+        binding?.etPassword!!.compoundDrawablePadding = dimensionPixelOffset(R.dimen.x5)
+        val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+        val spannableString = SpannableString(getString(R.string.login_protocol))
+        val colorSpan = ForegroundColorSpan(color(R.color.white))
+        spannableString.setSpan(colorSpan, 11, getString(R.string.login_protocol).length, flags)
+        val styleSpan = StyleSpan(Typeface.BOLD)
+        spannableString.setSpan(styleSpan, 11, getString(R.string.login_protocol).length, flags)
+        tv_bottom.text = spannableString
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+
     }
 
     override fun onClick(v: View?) {
@@ -76,39 +113,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         }
-    }
-
-    private fun initView() {
-        iv_top.setOnClickListener(this)
-        val drawableUser = context.drawable(R.drawable.ic_login_user)
-        drawableUser!!.setBounds(
-            0,
-            0,
-            DimenUtil.px2dp(context, context.dimensionPixelOffset(R.dimen.x40).toFloat()),
-            DimenUtil.px2dp(context, context.dimensionPixelOffset(R.dimen.x40).toFloat())
-        )
-        et_user.setCompoundDrawables(drawableUser, null, null, null)
-        et_user.compoundDrawablePadding = context.dimensionPixelOffset(R.dimen.x5)
-        val drawablePassword = context.drawable(R.drawable.ic_login_password)
-        drawablePassword!!.setBounds(
-            0,
-            0,
-            DimenUtil.px2dp(context, context.dimensionPixelOffset(R.dimen.x40).toFloat()),
-            DimenUtil.px2dp(context, context.dimensionPixelOffset(R.dimen.x40).toFloat())
-        )
-        et_password.setCompoundDrawables(drawablePassword, null, null, null)
-        et_password.compoundDrawablePadding = context.dimensionPixelOffset(R.dimen.x5)
-        val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-        val spannableString = SpannableString(getString(R.string.login_protocol))
-        val colorSpan = ForegroundColorSpan(color(R.color.white))
-        spannableString.setSpan(colorSpan, 11, getString(R.string.login_protocol).length, flags)
-        val styleSpan = StyleSpan(Typeface.BOLD)
-        spannableString.setSpan(styleSpan, 11, getString(R.string.login_protocol).length, flags)
-        tv_bottom.text = spannableString
-    }
-
-    private fun initData() {
-
     }
 
 }

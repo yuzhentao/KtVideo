@@ -1,17 +1,12 @@
 package com.yzt.ktvideo.ui.activity
 
 import android.Manifest
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.appcompat.widget.Toolbar
 import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -19,7 +14,6 @@ import androidx.work.WorkManager
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
-import com.yzt.common.extension.bindView
 import com.yzt.common.extension.color
 import com.yzt.common.extension.newIntent
 import com.yzt.common.extension.shortToast
@@ -27,6 +21,7 @@ import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
+import com.yzt.ktvideo.databinding.ActivityMainBinding
 import com.yzt.ktvideo.interfaces.OnRvScrollListener
 import com.yzt.ktvideo.key.Constant
 import com.yzt.ktvideo.ui.fragment.*
@@ -40,16 +35,15 @@ import java.util.*
  */
 class MainActivity : BaseActivity(), View.OnClickListener {
 
-    private var context: Context = this
-    private var activity: MainActivity = this
+    private var binding: ActivityMainBinding? = null
 
-    private val tb by bindView<Toolbar>(R.id.tb)
-    private val tvTitle by bindView<AppCompatTextView>(R.id.tv_title)
-    private val ivSearch by bindView<AppCompatImageView>(R.id.iv_search)
-    private val rbHome by bindView<RadioButton>(R.id.rb_home)
-    private val rbDiscover by bindView<RadioButton>(R.id.rb_discover)
-    private val rbRanking by bindView<RadioButton>(R.id.rb_ranking)
-    private val rbMine by bindView<RadioButton>(R.id.rb_mine)
+//    private val tb by bindView<Toolbar>(R.id.tb)
+//    private val tvTitle by bindView<AppCompatTextView>(R.id.tv_title)
+//    private val ivSearch by bindView<AppCompatImageView>(R.id.iv_search)
+//    private val rbHome by bindView<RadioButton>(R.id.rb_home)
+//    private val rbDiscover by bindView<RadioButton>(R.id.rb_discover)
+//    private val rbRanking by bindView<RadioButton>(R.id.rb_ranking)
+//    private val rbMine by bindView<RadioButton>(R.id.rb_mine)
 
     private var homeFragment: HomeFragment? = null
     private var discoverFragment: DiscoverFragment? = null
@@ -64,8 +58,16 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var permissionsDisposable: Disposable? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
@@ -74,10 +76,27 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_main)
         requestPermissions()
-        initView()
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        tb.setOnClickListener(this)
+        binding?.tvTitle!!.text = getToday()
+        binding?.tvTitle!!.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
+        binding?.tvTitle!!.visibility = View.VISIBLE
+        binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
+        binding?.ivSearch!!.setOnClickListener(this)
+        binding?.rbHome!!.isSelected = true
+        binding?.rbHome!!.setOnClickListener(this)
+        binding?.rbDiscover!!.setOnClickListener(this)
+        binding?.rbRanking!!.setOnClickListener(this)
+        binding?.rbMine!!.setOnClickListener(this)
+        fab.setOnClickListener(this)
         initFragment(savedInstanceState)
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+
     }
 
     /**
@@ -130,7 +149,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.iv_search -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_search, 1000)) {
-                    if (rbMine.isChecked) {//设置
+                    if (binding?.rbMine!!.isChecked) {//设置
                         newIntent<SettingActivity>(false)
                     } else {//搜索
                         searchFragment = SearchFragment()
@@ -145,14 +164,14 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                             color(R.color.white_50)
                         } else color(R.color.white)
                     )
-                    tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
-                    tvTitle.text = getToday()
-                    tvTitle.visibility = View.VISIBLE
-                    ivSearch.setImageResource(R.drawable.ic_search_black)
-                    rbHome.isSelected = true
-                    rbDiscover.isSelected = false
-                    rbRanking.isSelected = false
-                    rbMine.isSelected = false
+                    tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding?.tvTitle!!.text = getToday()
+                    binding?.tvTitle!!.visibility = View.VISIBLE
+                    binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
+                    binding?.rbHome!!.isSelected = true
+                    binding?.rbDiscover!!.isSelected = false
+                    binding?.rbRanking!!.isSelected = false
+                    binding?.rbMine!!.isSelected = false
                     supportFragmentManager
                         .beginTransaction()
                         .show(homeFragment!!)
@@ -169,14 +188,14 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                             color(R.color.white_50)
                         } else color(R.color.white)
                     )
-                    tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
-                    tvTitle.setText(R.string.discover)
-                    tvTitle.visibility = View.VISIBLE
-                    ivSearch.setImageResource(R.drawable.ic_search_black)
-                    rbHome.isSelected = false
-                    rbDiscover.isSelected = true
-                    rbRanking.isSelected = false
-                    rbMine.isSelected = false
+                    tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding?.tvTitle!!.setText(R.string.discover)
+                    binding?.tvTitle!!.visibility = View.VISIBLE
+                    binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
+                    binding?.rbHome!!.isSelected = false
+                    binding?.rbDiscover!!.isSelected = true
+                    binding?.rbRanking!!.isSelected = false
+                    binding?.rbMine!!.isSelected = false
                     supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -190,13 +209,13 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_ranking, 1000)) {
                     tb.setBackgroundColor(color(R.color.white))
                     tb.elevation = 0F
-                    tvTitle.setText(R.string.ranking)
-                    tvTitle.visibility = View.VISIBLE
-                    ivSearch.setImageResource(R.drawable.ic_search_black)
-                    rbHome.isSelected = false
-                    rbDiscover.isSelected = false
-                    rbRanking.isSelected = true
-                    rbMine.isSelected = false
+                    binding?.tvTitle!!.setText(R.string.ranking)
+                    binding?.tvTitle!!.visibility = View.VISIBLE
+                    binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
+                    binding?.rbHome!!.isSelected = false
+                    binding?.rbDiscover!!.isSelected = false
+                    binding?.rbRanking!!.isSelected = true
+                    binding?.rbMine!!.isSelected = false
                     supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -209,13 +228,13 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             R.id.rb_mine -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_mine, 1000)) {
                     tb.setBackgroundColor(color(R.color.white))
-                    tb.elevation = DimenUtil.dp2px(context, 4).toFloat()
-                    tvTitle.visibility = View.GONE
-                    ivSearch.setImageResource(R.drawable.ic_settings_black)
-                    rbHome.isSelected = false
-                    rbDiscover.isSelected = false
-                    rbRanking.isSelected = false
-                    rbMine.isSelected = true
+                    tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding?.tvTitle!!.visibility = View.GONE
+                    binding?.ivSearch!!.setImageResource(R.drawable.ic_settings_black)
+                    binding?.rbHome!!.isSelected = false
+                    binding?.rbDiscover!!.isSelected = false
+                    binding?.rbRanking!!.isSelected = false
+                    binding?.rbMine!!.isSelected = true
                     supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -253,7 +272,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun downloadSplash() {
-        val url = SPUtils.getInstance(context, Constant.KT_VIDEO).getString(SPLASH_URL)
+        val url = SPUtils.getInstance(context!!, Constant.KT_VIDEO).getString(SPLASH_URL)
         require(url.isNotEmpty()) {
             return
         }
@@ -267,23 +286,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             .setConstraints(constraints)
             .build()
         WorkManager
-            .getInstance(context)
+            .getInstance(context!!)
             .enqueue(request)
-    }
-
-    private fun initView() {
-        tb.setOnClickListener(this)
-        tvTitle.text = getToday()
-        tvTitle.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
-        tvTitle.visibility = View.VISIBLE
-        ivSearch.setImageResource(R.drawable.ic_search_black)
-        ivSearch.setOnClickListener(this)
-        rbHome.isSelected = true
-        rbHome.setOnClickListener(this)
-        rbDiscover.setOnClickListener(this)
-        rbRanking.setOnClickListener(this)
-        rbMine.setOnClickListener(this)
-        fab.setOnClickListener(this)
     }
 
     private fun initFragment(savedInstanceState: Bundle?) {

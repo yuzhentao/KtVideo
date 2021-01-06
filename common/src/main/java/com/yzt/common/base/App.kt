@@ -10,7 +10,10 @@ import timber.log.Timber
 class App : MultiDexApplication() {
 
     companion object {
+
+        @JvmStatic
         var app: App? = null
+
     }
 
     override fun onCreate() {

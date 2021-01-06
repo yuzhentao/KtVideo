@@ -3,9 +3,9 @@ package com.yzt.ktvideo.ui.activity
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.View
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
@@ -16,6 +16,7 @@ import com.yzt.common.extension.newIntent
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.SplashBean
+import com.yzt.ktvideo.databinding.ActivitySplashBinding
 import com.yzt.ktvideo.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter
@@ -24,7 +25,6 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * 闪屏页
@@ -33,37 +33,47 @@ const val SPLASH_URL = "splash_url"
 
 class SplashActivity : BaseActivity(), SplashContract.View {
 
-    private var context: Context = this
+    private var binding: ActivitySplashBinding? = null
 
     private val presenter: SplashPresenter by lazy {
-        SplashPresenter(context, this)
+        SplashPresenter(context!!, this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             hideBar(BarHide.FLAG_HIDE_BAR)
         }
-        setContentView(R.layout.activity_splash)
-        initView()
         Aria.get(this).downloadConfig.threadNum = 5
         Aria.get(this).downloadConfig.maxTaskNum = 5
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        presenter.load()
+        val font: Typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
+        binding?.tvIntroEn!!.typeface = font
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+
     }
 
     override fun setData(bean: SplashBean?) {
         anim(bean)
     }
 
-    private fun initView() {
-        presenter.load()
-        val font: Typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
-        tv_intro_en.typeface = font
-    }
-
     private fun anim(bean: SplashBean?) {
         Observable
             .create(ObservableOnSubscribe<String> { emitter ->
-                val url = SPUtils.getInstance(context, KT_VIDEO).getString(SPLASH_URL)
+                val url = SPUtils.getInstance(context!!, KT_VIDEO).getString(SPLASH_URL)
                 emitter.onNext(url)
             })
             .ioMain()
@@ -78,15 +88,16 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
                 override fun onNext(url: String) {
                     if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
-                        ImageUtil.show(context, iv_bg, bean.startPage.imageUrl)
+                        ImageUtil.show(context!!, binding?.ivBg, bean.startPage.imageUrl)
                         if (bean.startPage.imageUrl != url) {
-                            SPUtils.getInstance(context, KT_VIDEO).put(SPLASH_URL, bean.startPage.imageUrl)
+                            SPUtils.getInstance(context!!, KT_VIDEO)
+                                .put(SPLASH_URL, bean.startPage.imageUrl)
                         }
                     } else {
                         if (url.isNotEmpty()) {
-                            ImageUtil.show(context, iv_bg, url)
+                            ImageUtil.show(context!!, binding?.ivBg, url)
                         } else {
-                            iv_bg.setImageResource(R.drawable.bg_splash)
+                            binding?.ivBg!!.setImageResource(R.drawable.bg_splash)
                         }
                     }
                 }
@@ -95,9 +106,9 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
                 }
             })
-        val alphaAnimBg = ObjectAnimator.ofFloat(iv_bg, "alpha", 0.1F, 1.0F)
-        val scaleAnimXBg = ObjectAnimator.ofFloat(iv_bg, "scaleX", 1.0F, 1.2F)
-        val scaleAnimYBg = ObjectAnimator.ofFloat(iv_bg, "scaleY", 1.0F, 1.2F)
+        val alphaAnimBg = ObjectAnimator.ofFloat(binding?.ivBg, "alpha", 0.1F, 1.0F)
+        val scaleAnimXBg = ObjectAnimator.ofFloat(binding?.ivBg, "scaleX", 1.0F, 1.2F)
+        val scaleAnimYBg = ObjectAnimator.ofFloat(binding?.ivBg, "scaleY", 1.0F, 1.2F)
         val animSetBg = AnimatorSet()
         animSetBg.play(alphaAnimBg).with(scaleAnimXBg).with(scaleAnimYBg)
         animSetBg.duration = 2000
@@ -120,7 +131,7 @@ class SplashActivity : BaseActivity(), SplashContract.View {
             }
         })
         animSetBg.start()
-        val alphaAnimLogo = ObjectAnimator.ofFloat(iv_logo, "alpha", 0.1F, 1.0F)
+        val alphaAnimLogo = ObjectAnimator.ofFloat(binding?.ivLogo, "alpha", 0.1F, 1.0F)
         alphaAnimLogo.duration = 2000
         alphaAnimLogo.interpolator = FastOutSlowInInterpolator()
         alphaAnimLogo.start()
