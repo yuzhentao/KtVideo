@@ -53,7 +53,7 @@ abstract class BaseFragment : Fragment() {
             }
             return rootView
         }
-        getLayoutView()?.let {
+        getLayoutView(inflater)?.let {
             if (rootView == null) {
                 rootView = it
             }
@@ -117,7 +117,7 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract fun getLayoutId(): Int?
 
-    protected abstract fun getLayoutView(): View?
+    protected abstract fun getLayoutView(inflater: LayoutInflater): View?
 
     protected abstract fun init()
 
