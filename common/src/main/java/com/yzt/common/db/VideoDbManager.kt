@@ -1,7 +1,7 @@
 package com.yzt.common.db
 
-import com.yzt.common.bean.VideoBean
-import com.yzt.common.util.DownloadState
+import com.yzt.bean.DownloadState
+import com.yzt.bean.VideoBean
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort

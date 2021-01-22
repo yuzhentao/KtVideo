@@ -4,11 +4,11 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.yzt.ktvideo.R
-import com.yzt.common.bean.VideoBean
+import com.yzt.bean.VideoBean
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
+import com.yzt.ktvideo.R
 import java.text.SimpleDateFormat
 import java.util.*
 

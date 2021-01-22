@@ -7,16 +7,16 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.arialyy.aria.core.Aria
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.yzt.ktvideo.R
-import com.yzt.common.bean.VideoBean
+import com.yzt.bean.DownloadState
+import com.yzt.bean.VideoBean
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.shortToast
-import com.yzt.common.util.DownloadState
-import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
+import com.yzt.ktvideo.R
+import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.ktvideo.view.progressbutton.ProgressButton
 import timber.log.Timber
 

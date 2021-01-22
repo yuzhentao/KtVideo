@@ -1,4 +1,4 @@
-package com.yzt.common.util
+package com.yzt.bean
 
 enum class DownloadState {
 

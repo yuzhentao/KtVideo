@@ -6,13 +6,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.yzt.bean.RankingSubBean
+import com.yzt.bean.VideoBean
+import com.yzt.common.extension.color
+import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.RankingSubAdapter
-import com.yzt.bean.RankingSubBean
-import com.yzt.common.bean.VideoBean
-import com.yzt.common.extension.color
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.viewmodel.RankingSubViewModel
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 

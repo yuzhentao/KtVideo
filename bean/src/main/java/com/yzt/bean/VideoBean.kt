@@ -1,8 +1,7 @@
-package com.yzt.common.bean
+package com.yzt.bean
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.yzt.common.util.DownloadState
 import io.realm.RealmModel
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass

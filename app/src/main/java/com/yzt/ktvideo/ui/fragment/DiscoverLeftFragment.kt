@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.bean.DiscoverDetailLeftBean
-import com.yzt.common.bean.VideoBean
+import com.yzt.bean.VideoBean
 import com.yzt.common.extension.color
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
