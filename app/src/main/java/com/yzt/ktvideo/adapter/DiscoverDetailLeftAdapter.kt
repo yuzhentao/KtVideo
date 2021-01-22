@@ -16,12 +16,12 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.google.android.flexbox.FlexboxLayout
 import com.shuyu.gsyvideoplayer.utils.CommonUtil
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.bean.DiscoverDetailLeftBean
+import com.yzt.bean.DiscoverDetailLeftBean
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
+import com.yzt.ktvideo.R
 import com.yzt.ktvideo.view.expandtextview.ExpandLayout
 
 class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) :
@@ -114,12 +114,12 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
             if (dataBean.consumption?.collectionCount == null) {
                 tvFavorite.text = "0"
             } else {
-                tvFavorite.text = dataBean.consumption.collectionCount.toString()
+                tvFavorite.text = dataBean.consumption!!.collectionCount.toString()
             }
             if (dataBean.consumption?.replyCount == null) {
                 tvReply.text = "0"
             } else {
-                tvReply.text = dataBean.consumption.replyCount.toString()
+                tvReply.text = dataBean.consumption!!.replyCount.toString()
             }
             if (position == itemCount - 1) {
                 vLine.visibility = View.GONE

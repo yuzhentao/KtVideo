@@ -1,9 +1,9 @@
-package com.yzt.ktvideo.util
+package com.yzt.common.util
 
 import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
-import com.yzt.ktvideo.R
+import com.yzt.common.R
 
 object ThemeUtils {
 

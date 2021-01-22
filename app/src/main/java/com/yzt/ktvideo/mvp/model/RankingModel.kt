@@ -2,7 +2,7 @@ package com.yzt.ktvideo.mvp.model
 
 import android.content.Context
 import com.yzt.common.util.AppUtil
-import com.yzt.ktvideo.bean.RankingBean
+import com.yzt.bean.RankingBean
 import com.yzt.common.extension.ioMain
 import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient

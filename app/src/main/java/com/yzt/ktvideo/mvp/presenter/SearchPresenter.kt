@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yzt.ktvideo.bean.SearchBean
+import com.yzt.bean.SearchBean
 import com.yzt.ktvideo.mvp.contract.SearchContract
 import com.yzt.ktvideo.mvp.model.SearchModel
 import io.reactivex.Observable
@@ -33,7 +33,7 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
                 val beans: MutableList<SearchBean.Item.Data.Content> = mutableListOf()
                 for (item in t.itemList) {
                     item.data?.content?.data?.playUrl?.let {
-                        beans.add(item.data.content)
+                        beans.add(item.data!!.content!!)
                     }
                 }
                 Observable.just(beans)

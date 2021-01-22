@@ -9,11 +9,11 @@ import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.DiscoverAdapter
-import com.yzt.ktvideo.bean.DiscoverBean
+import com.yzt.bean.DiscoverBean
 import com.yzt.ktvideo.mvp.contract.DiscoverContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_discover.*
 
 /**
  * 发现

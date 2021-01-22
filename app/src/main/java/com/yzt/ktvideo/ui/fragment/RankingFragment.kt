@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.RankingAdapter
-import com.yzt.ktvideo.bean.RankingBean
+import com.yzt.bean.RankingBean
 import com.yzt.ktvideo.mvp.contract.RankingContract
 import com.yzt.ktvideo.mvp.presenter.RankingPresenter
 import kotlinx.android.synthetic.main.fragment_ranking.*

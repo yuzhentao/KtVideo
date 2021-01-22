@@ -5,10 +5,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.bean.DiscoverBean
+import com.yzt.bean.DiscoverBean
 import com.yzt.common.extension.color
 import com.yzt.common.util.ImageUtil
+import com.yzt.ktvideo.R
 
 class DiscoverAdapter(data: MutableList<DiscoverBean.Item.Data>?) :
     BaseQuickAdapter<DiscoverBean.Item.Data, BaseViewHolder>(R.layout.item_discover, data) {

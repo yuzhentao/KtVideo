@@ -17,9 +17,11 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.newIntent
 import com.yzt.common.extension.shortToast
+import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.SPUtils
+import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityMainBinding
 import com.yzt.ktvideo.key.Constant

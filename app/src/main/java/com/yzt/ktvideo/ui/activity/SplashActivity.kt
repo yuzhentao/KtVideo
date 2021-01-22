@@ -10,17 +10,17 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.bean.SplashBean
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.newIntent
+import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
-import com.yzt.ktvideo.bean.SplashBean
 import com.yzt.ktvideo.databinding.ActivitySplashBinding
 import com.yzt.ktvideo.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter
-import com.yzt.common.util.ImageUtil
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Observer
@@ -87,11 +87,11 @@ class SplashActivity : BaseActivity(), SplashContract.View {
                 }
 
                 override fun onNext(url: String) {
-                    if (bean?.startPage != null && !bean.startPage.imageUrl.isNullOrEmpty()) {
-                        ImageUtil.show(context!!, binding?.ivBg, bean.startPage.imageUrl)
-                        if (bean.startPage.imageUrl != url) {
+                    if (bean?.startPage != null && !bean.startPage!!.imageUrl.isNullOrEmpty()) {
+                        ImageUtil.show(context!!, binding?.ivBg, bean.startPage!!.imageUrl!!)
+                        if (bean.startPage!!.imageUrl != url) {
                             SPUtils.getInstance(context!!, KT_VIDEO)
-                                .put(SPLASH_URL, bean.startPage.imageUrl)
+                                .put(SPLASH_URL, bean.startPage!!.imageUrl!!)
                         }
                     } else {
                         if (url.isNotEmpty()) {

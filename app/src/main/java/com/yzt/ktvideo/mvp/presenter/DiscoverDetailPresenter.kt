@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yzt.ktvideo.bean.DiscoverDetailBean
+import com.yzt.bean.DiscoverDetailBean
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yzt.ktvideo.mvp.model.DiscoverDetailModel
 import io.reactivex.Observer

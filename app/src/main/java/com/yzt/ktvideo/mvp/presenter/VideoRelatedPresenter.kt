@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yzt.ktvideo.bean.VideoRelatedBean
+import com.yzt.bean.VideoRelatedBean
 import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
 import com.yzt.ktvideo.mvp.model.VideoRelatedModel
 import io.reactivex.Observable
@@ -35,7 +35,7 @@ class VideoRelatedPresenter(context: Context?, view: VideoRelatedContract.View) 
                 val beans: MutableList<VideoRelatedBean.Item.Data> = mutableListOf()
                 for (item in t.itemList!!) {
                     item.data?.playUrl?.let {
-                        beans.add(item.data)
+                        beans.add(item.data!!)
                     }
                 }
                 Observable.just(beans)

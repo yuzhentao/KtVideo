@@ -12,8 +12,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yzt.common.util.ColorUtil;
+import com.yzt.common.util.ThemeUtils;
 import com.yzt.ktvideo.R;
-import com.yzt.ktvideo.util.ThemeUtils;
 
 public class ProgressButton extends FrameLayout /*implements ProgressView.OnCompletedListener*/ {
 

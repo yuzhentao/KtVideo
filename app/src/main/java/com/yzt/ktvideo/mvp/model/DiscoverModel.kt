@@ -2,7 +2,7 @@ package com.yzt.ktvideo.mvp.model
 
 import android.content.Context
 import com.yzt.common.util.AppUtil
-import com.yzt.ktvideo.bean.DiscoverBean
+import com.yzt.bean.DiscoverBean
 import com.yzt.common.extension.ioMain
 import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient

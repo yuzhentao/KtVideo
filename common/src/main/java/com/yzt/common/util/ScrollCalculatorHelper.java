@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.util;
+package com.yzt.common.util;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,9 +8,7 @@ import android.os.Handler;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shuyu.gsyvideoplayer.video.base.GSYBaseVideoPlayer;
-import com.yzt.common.util.NetworkUtil;
-import com.yzt.common.util.ToastUtil;
-import com.yzt.ktvideo.R;
+import com.yzt.common.R;
 
 import java.util.Objects;
 

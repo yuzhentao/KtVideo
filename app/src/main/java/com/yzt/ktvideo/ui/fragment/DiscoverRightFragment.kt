@@ -5,18 +5,18 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.DiscoverDetailRightAdapter
-import com.yzt.ktvideo.bean.DiscoverDetailRightBean
+import com.yzt.bean.DiscoverDetailRightBean
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.extension.color
+import com.yzt.common.util.DimenUtil
+import com.yzt.common.util.FooterUtil
+import com.yzt.common.util.ScrollCalculatorHelper
+import com.yzt.ktvideo.R
+import com.yzt.ktvideo.adapter.DiscoverDetailRightAdapter
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailRightContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailRightPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import com.yzt.common.util.DimenUtil
-import com.yzt.common.util.FooterUtil
-import com.yzt.ktvideo.util.ScrollCalculatorHelper
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
 /**

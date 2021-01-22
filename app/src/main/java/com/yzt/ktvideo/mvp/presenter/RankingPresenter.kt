@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yzt.ktvideo.bean.RankingBean
+import com.yzt.bean.RankingBean
 import com.yzt.ktvideo.mvp.contract.RankingContract
 import com.yzt.ktvideo.mvp.model.RankingModel
 import io.reactivex.Observable

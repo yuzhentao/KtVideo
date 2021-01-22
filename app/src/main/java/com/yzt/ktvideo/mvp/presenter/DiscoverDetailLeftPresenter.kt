@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yzt.ktvideo.bean.DiscoverDetailLeftBean
+import com.yzt.bean.DiscoverDetailLeftBean
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailLeftContract
 import com.yzt.ktvideo.mvp.model.DiscoverDetailLeftModel
 import io.reactivex.Observable
@@ -34,7 +34,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
                 val beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content> = mutableListOf()
                 for (item in t.itemList) {
                     item.data?.content?.data?.playUrl?.let {
-                        beans.add(item.data.content)
+                        beans.add(item.data!!.content!!)
                     }
                 }
                 Observable.just(beans)

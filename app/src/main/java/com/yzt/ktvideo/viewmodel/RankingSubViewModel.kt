@@ -3,7 +3,7 @@ package com.yzt.ktvideo.viewmodel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yzt.ktvideo.bean.RankingSubBean
+import com.yzt.bean.RankingSubBean
 import com.yzt.ktvideo.repository.RankingSubRepository
 import io.reactivex.Observable
 import io.reactivex.Observer

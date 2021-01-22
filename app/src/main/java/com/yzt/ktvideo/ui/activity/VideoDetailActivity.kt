@@ -28,15 +28,14 @@ import com.yzt.common.extension.color
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.shortToast
 import com.yzt.common.util.DownloadState
+import com.yzt.common.util.FooterUtil
+import com.yzt.common.util.ImageUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.VideoRelatedAdapter
-import com.yzt.ktvideo.bean.VideoRelatedBean
+import com.yzt.bean.VideoRelatedBean
 import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
 import com.yzt.ktvideo.mvp.presenter.VideoRelatedPresenter
-import com.yzt.common.util.FooterUtil
-import com.yzt.ktvideo.util.GlideApp
-import com.yzt.common.util.ImageUtil
-import com.yzt.ktvideo.util.VideoListener
+import com.yzt.common.util.VideoListener
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -324,8 +323,8 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     private fun setCover() {
         bean?.feed?.let {
             val observable: Observable<Bitmap> = Observable.create { emitter ->
-                val cacheFile = GlideApp
-                    .with(context)
+                val cacheFile = ImageUtil
+                    .get(context)
                     .downloadOnly()
                     .load(it)
                     .submit()

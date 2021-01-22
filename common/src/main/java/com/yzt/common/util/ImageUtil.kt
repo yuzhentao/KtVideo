@@ -13,6 +13,11 @@ import com.yzt.common.extension.dimensionPixelOffset
 
 object ImageUtil {
 
+    fun get(context: Context): GlideRequests {
+        return GlideApp
+            .with(context)
+    }
+
     fun show(context: Context, imageView: ImageView?, url: String) {
         requireNotNull(imageView) { "Argument Error" }
         val drawable: Drawable? = when ((Math.random() * 4).toInt()) {

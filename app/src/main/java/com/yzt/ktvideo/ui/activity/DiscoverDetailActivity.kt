@@ -16,7 +16,7 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.RankingAdapter
-import com.yzt.ktvideo.bean.DiscoverDetailBean
+import com.yzt.bean.DiscoverDetailBean
 import com.yzt.common.extension.color
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailPresenter

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.RankingSubAdapter
-import com.yzt.ktvideo.bean.RankingSubBean
+import com.yzt.bean.RankingSubBean
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.extension.color
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
