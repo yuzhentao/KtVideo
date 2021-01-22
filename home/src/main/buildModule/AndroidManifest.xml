@@ -3,7 +3,7 @@
     package="com.yzt.home">
 
     <application>
-        <activity android:name="com.yzt.home.HomeActivity" />
+        <activity android:name="com.yzt.home.activity.HomeActivity" />
     </application>
 
 </manifest>

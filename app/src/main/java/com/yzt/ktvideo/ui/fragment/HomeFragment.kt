@@ -5,17 +5,17 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.HomeAdapter
-import com.yzt.ktvideo.bean.HomeBean
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
-import com.yzt.ktvideo.interfaces.OnRvScrollListener
+import com.yzt.common.listener.OnRvScrollListener
+import com.yzt.common.util.FooterUtil
+import com.yzt.ktvideo.R
+import com.yzt.ktvideo.adapter.HomeAdapter
+import com.yzt.ktvideo.bean.HomeBean
 import com.yzt.ktvideo.mvp.contract.HomeContract
 import com.yzt.ktvideo.mvp.presenter.HomePresenter
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import com.yzt.common.util.FooterUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.regex.Pattern
 

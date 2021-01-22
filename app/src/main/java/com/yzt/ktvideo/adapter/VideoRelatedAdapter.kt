@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.VideoRelatedBean
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 
 class VideoRelatedAdapter(data: MutableList<VideoRelatedBean.Item.Data>?) :
     BaseQuickAdapter<VideoRelatedBean.Item.Data, BaseViewHolder>(

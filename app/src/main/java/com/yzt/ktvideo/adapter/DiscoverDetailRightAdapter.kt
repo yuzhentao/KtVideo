@@ -20,7 +20,7 @@ import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.DiscoverDetailRightBean
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.view.expandtextview.ExpandLayout
 

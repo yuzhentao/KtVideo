@@ -22,7 +22,6 @@ import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityMainBinding
-import com.yzt.ktvideo.interfaces.OnRvScrollListener
 import com.yzt.ktvideo.key.Constant
 import com.yzt.ktvideo.ui.fragment.*
 import com.yzt.ktvideo.worker.DownloadSplashWorker

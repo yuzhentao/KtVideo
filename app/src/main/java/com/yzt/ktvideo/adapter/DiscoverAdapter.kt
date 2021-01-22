@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.DiscoverBean
 import com.yzt.common.extension.color
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 
 class DiscoverAdapter(data: MutableList<DiscoverBean.Item.Data>?) :
     BaseQuickAdapter<DiscoverBean.Item.Data, BaseViewHolder>(R.layout.item_discover, data) {

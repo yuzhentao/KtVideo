@@ -20,7 +20,7 @@ import com.yzt.ktvideo.databinding.ActivitySplashBinding
 import com.yzt.ktvideo.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Observer

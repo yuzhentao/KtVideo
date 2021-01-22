@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.RankingSubBean
 import com.yzt.common.extension.color
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 
 class RankingSubAdapter(data: MutableList<RankingSubBean.Item.Data.Content.DataX>?) :
     BaseQuickAdapter<RankingSubBean.Item.Data.Content.DataX, BaseViewHolder>(

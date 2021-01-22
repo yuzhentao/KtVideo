@@ -1,3 +1,4 @@
+include ':bean'
 rootProject.name = "KtVideo"
 include ':app'
 include ':common'

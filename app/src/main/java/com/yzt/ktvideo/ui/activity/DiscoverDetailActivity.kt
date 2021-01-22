@@ -22,7 +22,7 @@ import com.yzt.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yzt.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yzt.ktvideo.ui.fragment.DiscoverRightFragment
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs
 

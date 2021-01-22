@@ -67,7 +67,10 @@ dependencies {
     api rootProject.ext.otherDependencies["base_recycler_view_adapter_helper"]
     api rootProject.ext.otherDependencies["gsy_video_player_java"]
     api rootProject.ext.otherDependencies["gsy_video_player_ex_so"]
+    api rootProject.ext.otherDependencies["glide"]
+    kapt rootProject.ext.otherDependencies["glide_compiler"]
     api rootProject.ext.otherDependencies["arouter_api"]
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
+    api project(':bean')
     api project(':transitionhelper')
 }

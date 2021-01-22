@@ -35,7 +35,7 @@ import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
 import com.yzt.ktvideo.mvp.presenter.VideoRelatedPresenter
 import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.util.GlideApp
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 import com.yzt.ktvideo.util.VideoListener
 import io.reactivex.Observable
 import io.reactivex.Observer

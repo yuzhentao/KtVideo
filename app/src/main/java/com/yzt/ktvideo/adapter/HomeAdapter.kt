@@ -6,9 +6,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.yzt.common.util.ImageUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.bean.HomeBean
-import com.yzt.ktvideo.util.ImageUtil
 
 class HomeAdapter(data: MutableList<HomeBean.Issue.Item>?) :
     BaseQuickAdapter<HomeBean.Issue.Item, BaseViewHolder>(R.layout.item_home, data) {

@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.ktvideo.R
 import com.yzt.common.bean.VideoBean
 import com.yzt.common.extension.dimensionPixelOffset
-import com.yzt.ktvideo.util.ImageUtil
+import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
 import java.text.SimpleDateFormat
 import java.util.*
