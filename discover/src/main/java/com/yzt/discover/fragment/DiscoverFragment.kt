@@ -1,24 +1,27 @@
-package com.yzt.ktvideo.ui.fragment
+package com.yzt.discover.fragment
 
-import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.yzt.bean.DiscoverBean
+import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.FooterUtil
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.DiscoverAdapter
-import com.yzt.bean.DiscoverBean
-import com.yzt.ktvideo.mvp.contract.DiscoverContract
-import com.yzt.ktvideo.mvp.presenter.DiscoverPresenter
-import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
-import kotlinx.android.synthetic.main.fragment_discover.*
+import com.yzt.discover.R
+import com.yzt.discover.adapter.DiscoverAdapter
+import com.yzt.discover.databinding.FragmentDiscoverBinding
+import com.yzt.discover.mvp.contract.DiscoverContract
+import com.yzt.discover.mvp.presenter.DiscoverPresenter
 
 /**
- * 发现
+ * @author yzt 2020/12/31
  */
 class DiscoverFragment : BaseFragment(), DiscoverContract.View {
+
+    private var binding: FragmentDiscoverBinding? = null
 
     private val adapter: DiscoverAdapter by lazy {
         DiscoverAdapter(null)
@@ -29,24 +32,33 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     private var onRvScrollListener: OnRvScrollListener? = null
 
-    override fun getLayoutResources(): Int {
-        return R.layout.fragment_discover
+    override fun getLayoutId(): Int? {
+        return null
+    }
+
+    override fun getLayoutView(inflater: LayoutInflater): View? {
+        binding = FragmentDiscoverBinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun init() {
+
     }
 
     override fun initView() {
         presenter.load()
-        rv.layoutManager = GridLayoutManager(context, 2)
-        rv.adapter = adapter
+        binding!!.rv.layoutManager = GridLayoutManager(context, 2)
+        binding!!.rv.adapter = adapter
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: DiscoverBean.Item.Data? = adapter.data[position] as DiscoverBean.Item.Data
             bean?.let {
-                val intent = Intent(context, DiscoverDetailActivity::class.java)
-                intent.putExtra("id", it.id.toString())
-                context?.startActivity(intent)
+//                val intent = Intent(context, DiscoverDetailActivity::class.java)
+//                intent.putExtra("id", it.id.toString())
+//                context?.startActivity(intent)
             }
         }
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
-        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding!!.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             private var totalDy = 0
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -57,7 +69,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         })
     }
 
-    override fun onFragmentVisibleChange(b: Boolean) {
+    override fun initData() {
 
     }
 
@@ -67,7 +79,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
     }
 
     fun scrollToTop() {
-        rv.smoothScrollToPosition(0)
+        binding!!.rv.smoothScrollToPosition(0)
     }
 
     fun setOnRvScrollListener(onRvScrollListener: OnRvScrollListener) {

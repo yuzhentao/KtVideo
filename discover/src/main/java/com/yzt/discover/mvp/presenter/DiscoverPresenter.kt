@@ -1,9 +1,9 @@
-package com.yzt.ktvideo.mvp.presenter
+package com.yzt.discover.mvp.presenter
 
 import android.content.Context
 import com.yzt.bean.DiscoverBean
-import com.yzt.ktvideo.mvp.contract.DiscoverContract
-import com.yzt.ktvideo.mvp.model.DiscoverModel
+import com.yzt.discover.mvp.contract.DiscoverContract
+import com.yzt.discover.mvp.model.DiscoverModel
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

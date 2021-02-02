@@ -1,4 +1,4 @@
-package com.yzt.discover
+package com.yzt.discover.activity
 
 import android.os.Bundle
 import android.view.View

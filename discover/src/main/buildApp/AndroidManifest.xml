@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name="com.yzt.discover.DiscoverActivity">
+        <activity android:name="com.yzt.discover.activity.DiscoverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

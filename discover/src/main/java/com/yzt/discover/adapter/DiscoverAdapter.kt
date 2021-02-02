@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.adapter
+package com.yzt.discover.adapter
 
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatImageView
@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.bean.DiscoverBean
 import com.yzt.common.extension.color
 import com.yzt.common.util.ImageUtil
-import com.yzt.ktvideo.R
+import com.yzt.discover.R
 
 class DiscoverAdapter(data: MutableList<DiscoverBean.Item.Data>?) :
     BaseQuickAdapter<DiscoverBean.Item.Data, BaseViewHolder>(R.layout.item_discover, data) {

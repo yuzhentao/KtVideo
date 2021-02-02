@@ -3,7 +3,7 @@
     package="com.yzt.discover">
 
     <application>
-        <activity android:name="com.yzt.discover.DiscoverActivity" />
+        <activity android:name="com.yzt.discover.activity.DiscoverActivity" />
     </application>
 
 </manifest>
