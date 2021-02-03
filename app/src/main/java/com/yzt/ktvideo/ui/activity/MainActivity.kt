@@ -17,6 +17,7 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.newIntent
 import com.yzt.common.extension.shortToast
+import com.yzt.common.key.Constant
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
@@ -25,13 +26,11 @@ import com.yzt.discover.fragment.DiscoverFragment
 import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityMainBinding
-import com.yzt.common.key.Constant
 import com.yzt.ktvideo.ui.fragment.*
 import com.yzt.ktvideo.worker.DownloadSplashWorker
 import com.yzt.mine.fragment.MineFragment
 import com.yzt.ranking.fragment.RankingFragment
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 /**
@@ -40,14 +39,6 @@ import java.util.*
 class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var binding: ActivityMainBinding? = null
-
-//    private val tb by bindView<Toolbar>(R.id.tb)
-//    private val tvTitle by bindView<AppCompatTextView>(R.id.tv_title)
-//    private val ivSearch by bindView<AppCompatImageView>(R.id.iv_search)
-//    private val rbHome by bindView<RadioButton>(R.id.rb_home)
-//    private val rbDiscover by bindView<RadioButton>(R.id.rb_discover)
-//    private val rbRanking by bindView<RadioButton>(R.id.rb_ranking)
-//    private val rbMine by bindView<RadioButton>(R.id.rb_mine)
 
     private var homeFragment: HomeFragment? = null
     private var discoverFragment: DiscoverFragment? = null
@@ -84,7 +75,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        tb.setOnClickListener(this)
+        binding?.tb!!.setOnClickListener(this)
         binding?.tvTitle!!.text = getToday()
         binding?.tvTitle!!.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
         binding?.tvTitle!!.visibility = View.VISIBLE
@@ -95,7 +86,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         binding?.rbDiscover!!.setOnClickListener(this)
         binding?.rbRanking!!.setOnClickListener(this)
         binding?.rbMine!!.setOnClickListener(this)
-        fab.setOnClickListener(this)
+        binding?.fab!!.setOnClickListener(this)
         initFragment(savedInstanceState)
     }
 
@@ -141,7 +132,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.tb -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.tb, 1000)) {
-                    when (rg_bottom.checkedRadioButtonId) {
+                    when (binding?.rgBottom!!.checkedRadioButtonId) {
                         R.id.rb_home -> {
                             homeFragment?.scrollToTop()
                         }
@@ -163,12 +154,12 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_home -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_home, 1000)) {
-                    tb.setBackgroundColor(
+                    binding?.tb!!.setBackgroundColor(
                         if (changeBgHome) {
                             color(R.color.white_50)
                         } else color(R.color.white)
                     )
-                    tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding?.tb!!.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
                     binding?.tvTitle!!.text = getToday()
                     binding?.tvTitle!!.visibility = View.VISIBLE
                     binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
@@ -187,12 +178,12 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_discover -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_discover, 1000)) {
-                    tb.setBackgroundColor(
+                    binding?.tb!!.setBackgroundColor(
                         if (changeBgDiscover) {
                             color(R.color.white_50)
                         } else color(R.color.white)
                     )
-                    tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding?.tb!!.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
                     binding?.tvTitle!!.setText(R.string.discover)
                     binding?.tvTitle!!.visibility = View.VISIBLE
                     binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
@@ -211,8 +202,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_ranking -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_ranking, 1000)) {
-                    tb.setBackgroundColor(color(R.color.white))
-                    tb.elevation = 0F
+                    binding?.tb!!.setBackgroundColor(color(R.color.white))
+                    binding?.tb!!.elevation = 0F
                     binding?.tvTitle!!.setText(R.string.ranking)
                     binding?.tvTitle!!.visibility = View.VISIBLE
                     binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
@@ -231,8 +222,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_mine -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_mine, 1000)) {
-                    tb.setBackgroundColor(color(R.color.white))
-                    tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding?.tb!!.setBackgroundColor(color(R.color.white))
+                    binding?.tb!!.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
                     binding?.tvTitle!!.visibility = View.GONE
                     binding?.ivSearch!!.setImageResource(R.drawable.ic_settings_black)
                     binding?.rbHome!!.isSelected = false
@@ -332,7 +323,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             .commit()
         homeFragment?.setOnRvScrollListener(object : OnRvScrollListener {
             override fun onRvScroll(totalDy: Int) {
-                tb.setBackgroundColor(
+                binding?.tb!!.setBackgroundColor(
                     if (totalDy < 0) {
                         this@MainActivity.changeBgHome = true
                         color(R.color.white_50)
@@ -345,7 +336,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         })
         discoverFragment?.setOnRvScrollListener(object : OnRvScrollListener {
             override fun onRvScroll(totalDy: Int) {
-                tb.setBackgroundColor(
+                binding?.tb!!.setBackgroundColor(
                     if (totalDy < 0) {
                         this@MainActivity.changeBgDiscover = true
                         color(R.color.white_50)
