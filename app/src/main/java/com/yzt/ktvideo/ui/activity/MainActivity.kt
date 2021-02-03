@@ -25,7 +25,7 @@ import com.yzt.discover.fragment.DiscoverFragment
 import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityMainBinding
-import com.yzt.ktvideo.key.Constant
+import com.yzt.common.key.Constant
 import com.yzt.ktvideo.ui.fragment.*
 import com.yzt.ktvideo.worker.DownloadSplashWorker
 import com.yzt.mine.fragment.MineFragment

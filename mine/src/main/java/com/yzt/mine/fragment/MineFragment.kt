@@ -3,7 +3,9 @@ package com.yzt.mine.fragment
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
+import com.alibaba.android.arouter.launcher.ARouter
 import com.yzt.common.base.BaseFragment
+import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.mine.R
 import com.yzt.mine.databinding.FragmentMineBinding
@@ -63,29 +65,29 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 //                    )
                 }
             }
-            R.id.ll_favorite -> {
+            R.id.ll_favorite -> {//收藏
                 if (!ClickUtil.isFastDoubleClick(R.id.ll_favorite, 1000)) {
-//                    startActivity(Intent(activity, FavoriteActivity::class.java))
+                    ARouter.getInstance().build(Constant.PATH_FAVORITE).navigation()
                 }
             }
-            R.id.ll_comment -> {
+            R.id.ll_comment -> {//评论
                 if (!ClickUtil.isFastDoubleClick(R.id.ll_comment, 1000)) {
-//                    startActivity(Intent(activity, CommentActivity::class.java))
+                    ARouter.getInstance().build(Constant.PATH_COMMENT).navigation()
                 }
             }
-            R.id.tv_cache -> {
+            R.id.tv_cache -> {//我的缓存
                 if (!ClickUtil.isFastDoubleClick(R.id.tv_cache, 1000)) {
-//                    startActivity(Intent(activity, CacheActivity::class.java))
+                    ARouter.getInstance().build(Constant.PATH_CACHE).navigation()
                 }
             }
-            R.id.tv_watch -> {
+            R.id.tv_watch -> {//观看记录
                 if (!ClickUtil.isFastDoubleClick(R.id.tv_watch, 1000)) {
-//                    startActivity(Intent(activity, WatchActivity::class.java))
+                    ARouter.getInstance().build(Constant.PATH_WATCH).navigation()
                 }
             }
-            R.id.tv_feedback -> {
+            R.id.tv_feedback -> {//意见反馈
                 if (!ClickUtil.isFastDoubleClick(R.id.tv_feedback, 1000)) {
-//                    startActivity(Intent(activity, FeedbackActivity::class.java))
+                    ARouter.getInstance().build(Constant.PATH_FEEDBACK).navigation()
                 }
             }
         }

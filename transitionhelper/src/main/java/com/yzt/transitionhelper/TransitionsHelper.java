@@ -89,7 +89,6 @@ public class TransitionsHelper {
         startEngine(activity, null, intent, view, load, false, -1, null, false, null);
     }
 
-
     public static void startActivity(final Activity activity, final Class<?> cls, final View view) {
         startActivity(activity, cls, view, null);
     }
@@ -140,6 +139,62 @@ public class TransitionsHelper {
         }
         if (intent == null) {
             intent = new Intent(activity, cls);
+        }
+        if (view == null) {
+            throw new IllegalArgumentException("You cannot start a load on a null View");
+        }
+        final Intent finalIntent = intent;
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                InfoBean<Object> bean = new InfoBean<>();
+                //get statusBar height
+                view.getWindowVisibleDisplayFrame(bean.originRect);
+                bean.statusBarHeight = bean.originRect.top;
+                //get Origin View's rect
+                view.getGlobalVisibleRect(bean.originRect);
+                bean.originWidth = view.getWidth();
+                bean.originHeight = view.getHeight();
+                if (load == null) {
+                    bean.bitmap = createBitmap(view, bean.originWidth, bean.originHeight, false);
+                } else {
+                    if (load instanceof Integer || load instanceof String) {
+                        bean.setLoad(load);
+                    } else {
+                        bean.bitmap = createBitmap(view, bean.originWidth, bean.originHeight, false);
+                    }
+                }
+                finalIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                sInfoMap.put(finalIntent.getComponent().getClassName(), bean);
+                if (!isForResult) {
+                    activity.startActivity(finalIntent);
+                } else {
+                    if (!isFragment) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            activity.startActivityForResult(finalIntent, requestCode, options);
+                        } else {
+                            activity.startActivityForResult(finalIntent, requestCode);
+                        }
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            fragment.startActivityForResult(finalIntent, requestCode, options);
+                        } else {
+                            fragment.startActivityForResult(finalIntent, requestCode);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private static void startEngine_ARouter(final Activity activity, final String path, Intent intent, final View view, final Object load,
+                                    final boolean isForResult, final int requestCode, final Bundle options,
+                                    final boolean isFragment, final Fragment fragment) {
+        if (activity == null) {
+            throw new IllegalArgumentException("You cannot start with a null activity");
+        }
+        if (intent == null) {
+            intent = new Intent();
         }
         if (view == null) {
             throw new IllegalArgumentException("You cannot start a load on a null View");

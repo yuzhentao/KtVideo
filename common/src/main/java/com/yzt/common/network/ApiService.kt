@@ -1,7 +1,7 @@
 package com.yzt.ktvideo.network
 
 import com.yzt.bean.*
-import com.yzt.ktvideo.key.Constant
+import com.yzt.common.key.Constant
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

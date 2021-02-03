@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import kotlinx.android.synthetic.main.activity_cache.*
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_cache.*
 /**
  * 评论
  */
+@Route(path = Constant.PATH_COMMENT)
 class CommentActivity : AppCompatActivity(), View.OnClickListener {
 
     private var context: Context = this

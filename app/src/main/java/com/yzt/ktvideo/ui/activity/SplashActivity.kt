@@ -18,7 +18,7 @@ import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivitySplashBinding
-import com.yzt.ktvideo.key.Constant.KT_VIDEO
+import com.yzt.common.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter
 import io.reactivex.Observable

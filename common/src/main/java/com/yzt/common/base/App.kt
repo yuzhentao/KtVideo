@@ -3,6 +3,7 @@ package com.yzt.common.base
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.alibaba.android.arouter.launcher.ARouter
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import timber.log.Timber
@@ -19,6 +20,7 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         app = this
+        initARouter()
         initTimber()
         initRealm()
     }
@@ -26,6 +28,11 @@ class App : MultiDexApplication() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(app)
+    }
+
+    private fun initARouter() {
+        ARouter.openLog()
+        ARouter.init(app)
     }
 
     private fun initTimber() {
