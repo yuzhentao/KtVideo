@@ -1,10 +1,10 @@
-package com.yzt.ktvideo.viewmodel
+package com.yzt.ranking.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yzt.bean.RankingSubBean
-import com.yzt.ktvideo.repository.RankingSubRepository
+import com.yzt.ranking.repository.RankingSubRepository
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

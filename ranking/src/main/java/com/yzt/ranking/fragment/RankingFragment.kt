@@ -1,21 +1,27 @@
-package com.yzt.ktvideo.ui.fragment
+package com.yzt.ranking.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.RankingAdapter
 import com.yzt.bean.RankingBean
-import com.yzt.ktvideo.mvp.contract.RankingContract
-import com.yzt.ktvideo.mvp.presenter.RankingPresenter
-import kotlinx.android.synthetic.main.fragment_ranking.*
+import com.yzt.common.base.BaseFragment
+import com.yzt.ranking.R
+import com.yzt.ranking.adapter.RankingAdapter
+import com.yzt.ranking.databinding.FragmentRankingBinding
+import com.yzt.ranking.mvp.contract.RankingContract
+import com.yzt.ranking.mvp.presenter.RankingPresenter
 
 /**
- * 热门
+ * 排行
+ *
+ * @author yzt 2020/12/31
  */
 class RankingFragment : BaseFragment(), RankingContract.View {
+
+    private var binding: FragmentRankingBinding? = null
 
     private lateinit var titles: MutableList<String>
     private lateinit var strategies: MutableList<String>
@@ -25,15 +31,24 @@ class RankingFragment : BaseFragment(), RankingContract.View {
         RankingPresenter(context, this)
     }
 
-    override fun getLayoutResources(): Int {
-        return R.layout.fragment_ranking
+    override fun getLayoutId(): Int? {
+        return null
+    }
+
+    override fun getLayoutView(inflater: LayoutInflater): View? {
+        binding = FragmentRankingBinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun init() {
+
     }
 
     override fun initView() {
         presenter.load()
     }
 
-    override fun onFragmentVisibleChange(b: Boolean) {
+    override fun initData() {
 
     }
 
@@ -67,14 +82,14 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             fragments.add(monthFragment)
             fragments.add(allFragment)
 
-            vp.adapter = RankingAdapter(
+            binding!!.vp.adapter = RankingAdapter(
                 fragmentManager!!,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
                 fragments,
                 titles
             )
-            tl.setupWithViewPager(vp)
-            tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            binding!!.tl.setupWithViewPager(binding!!.vp)
+            binding!!.tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                     tab?.let { itt ->
                         if (itt.position < fragments.size) {
@@ -92,7 +107,7 @@ class RankingFragment : BaseFragment(), RankingContract.View {
                 }
             })
             for (i in titles.indices) {
-                val tab = tl.getTabAt(i) ?: continue
+                val tab = binding!!.tl.getTabAt(i) ?: continue
 
                 tab.setCustomView(R.layout.layout_tab)
                 if (tab.customView == null) {

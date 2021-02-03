@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.adapter
+package com.yzt.ranking.adapter
 
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatImageView
@@ -6,9 +6,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.bean.RankingSubBean
-import com.yzt.ktvideo.R
 import com.yzt.common.extension.color
 import com.yzt.common.util.ImageUtil
+import com.yzt.ranking.R
 
 class RankingSubAdapter(data: MutableList<RankingSubBean.Item.Data.Content.DataX>?) :
     BaseQuickAdapter<RankingSubBean.Item.Data.Content.DataX, BaseViewHolder>(

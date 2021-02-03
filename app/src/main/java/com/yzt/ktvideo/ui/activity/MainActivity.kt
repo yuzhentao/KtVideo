@@ -28,6 +28,7 @@ import com.yzt.ktvideo.databinding.ActivityMainBinding
 import com.yzt.ktvideo.key.Constant
 import com.yzt.ktvideo.ui.fragment.*
 import com.yzt.ktvideo.worker.DownloadSplashWorker
+import com.yzt.ranking.fragment.RankingFragment
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*

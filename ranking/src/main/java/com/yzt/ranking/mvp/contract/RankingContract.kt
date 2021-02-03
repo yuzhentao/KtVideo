@@ -1,8 +1,8 @@
-package com.yzt.ktvideo.mvp.contract
+package com.yzt.ranking.mvp.contract
 
+import com.yzt.bean.RankingBean
 import com.yzt.common.base.BasePresenter
 import com.yzt.common.base.BaseView
-import com.yzt.bean.RankingBean
 
 interface RankingContract {
 

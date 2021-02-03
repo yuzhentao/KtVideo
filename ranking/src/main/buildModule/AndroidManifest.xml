@@ -3,7 +3,7 @@
     package="com.yzt.ranking">
 
     <application>
-        <activity android:name="com.yzt.ranking.RankingActivity" />
+        <activity android:name="com.yzt.ranking.activity.RankingActivity" />
     </application>
 
 </manifest>

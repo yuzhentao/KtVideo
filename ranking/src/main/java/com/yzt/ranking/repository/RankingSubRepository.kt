@@ -1,9 +1,9 @@
-package com.yzt.ktvideo.repository
+package com.yzt.ranking.repository
 
 import android.content.Context
+import com.yzt.bean.RankingSubBean
 import com.yzt.common.extension.ioMain
 import com.yzt.common.util.AppUtil
-import com.yzt.bean.RankingSubBean
 import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable

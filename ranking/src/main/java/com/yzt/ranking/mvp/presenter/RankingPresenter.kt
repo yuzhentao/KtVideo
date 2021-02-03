@@ -1,9 +1,9 @@
-package com.yzt.ktvideo.mvp.presenter
+package com.yzt.ranking.mvp.presenter
 
 import android.content.Context
 import com.yzt.bean.RankingBean
-import com.yzt.ktvideo.mvp.contract.RankingContract
-import com.yzt.ktvideo.mvp.model.RankingModel
+import com.yzt.ranking.mvp.contract.RankingContract
+import com.yzt.ranking.mvp.model.RankingModel
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

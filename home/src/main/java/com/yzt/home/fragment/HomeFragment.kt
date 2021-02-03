@@ -19,6 +19,8 @@ import com.yzt.home.mvp.presenter.HomePresenter
 import java.util.regex.Pattern
 
 /**
+ * 首页
+ *
  * @author yzt 2020/12/31
  */
 class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
@@ -61,12 +63,14 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             context!!.dimensionPixelOffset(R.dimen.x40),
             context!!.dimensionPixelOffset(R.dimen.x80)
         )
-        binding!!.rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding!!.rv.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding!!.rv.adapter = adapter
         binding!!.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                val layoutManager: LinearLayoutManager = binding!!.rv.layoutManager as LinearLayoutManager
+                val layoutManager: LinearLayoutManager =
+                    binding!!.rv.layoutManager as LinearLayoutManager
                 val lastPosition = layoutManager.findLastVisibleItemPosition()
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastPosition == beans.size - 1) {
                     if (date != null) {

@@ -1,4 +1,4 @@
-package com.yzt.ranking
+package com.yzt.ranking.activity
 
 import android.os.Bundle
 import android.view.View

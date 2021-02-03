@@ -17,6 +17,8 @@ import com.yzt.discover.mvp.contract.DiscoverContract
 import com.yzt.discover.mvp.presenter.DiscoverPresenter
 
 /**
+ * 发现
+ *
  * @author yzt 2020/12/31
  */
 class DiscoverFragment : BaseFragment(), DiscoverContract.View {
