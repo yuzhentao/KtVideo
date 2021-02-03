@@ -1,4 +1,4 @@
-package com.yzt.mine
+package com.yzt.mine.activity
 
 import android.os.Bundle
 import android.view.View

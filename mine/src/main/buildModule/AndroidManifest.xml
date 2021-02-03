@@ -3,7 +3,7 @@
     package="com.yzt.mine">
 
     <application>
-        <activity android:name="com.yzt.mine.MineActivity" />
+        <activity android:name="com.yzt.mine.activity.MineActivity" />
     </application>
 
 </manifest>
