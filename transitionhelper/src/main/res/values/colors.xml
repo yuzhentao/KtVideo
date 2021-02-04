@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="transitionhelper_showmethod_start_color">#FFFFFF</color>
-    <color name="transitionhelper_showmethod_end_color">#009688</color>
-
-</resources>

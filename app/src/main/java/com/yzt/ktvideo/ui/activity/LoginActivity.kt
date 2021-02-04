@@ -1,7 +1,5 @@
 package com.yzt.ktvideo.ui.activity
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -9,8 +7,6 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
-import android.view.animation.AccelerateInterpolator
-import android.widget.ImageView
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
@@ -21,9 +17,6 @@ import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityLoginBinding
-import com.yzt.transitionhelper.TransitionsHelper
-import com.yzt.transitionhelper.bean.InfoBean
-import com.yzt.transitionhelper.method.ColorShowMethod
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -51,25 +44,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        TransitionsHelper.build(this)
-            .setShowMethod(object : ColorShowMethod(R.color.purple, R.color.pink) {
-                override fun loadPlaceholder(bean: InfoBean<*>, placeholder: ImageView) {
-                    val set = AnimatorSet()
-                    set.playTogether(
-                        ObjectAnimator.ofFloat(placeholder, "rotation", 0F, 180F),
-                        ObjectAnimator.ofFloat(placeholder, "scaleX", 1F, 0F),
-                        ObjectAnimator.ofFloat(placeholder, "scaleY", 1F, 0F)
-                    )
-                    set.interpolator = AccelerateInterpolator()
-                    set.setDuration((showDuration / 4 * 5).toLong()).start()
-                }
-
-                override fun loadTargetView(bean: InfoBean<*>, targetView: View) {
-
-                }
-            })
-            .setExposeColor(color(R.color.pink))
-            .show()
     }
 
     override fun initView(savedInstanceState: Bundle?) {

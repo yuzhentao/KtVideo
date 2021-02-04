@@ -58,11 +58,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                         1000
                     ) || !ClickUtil.isFastDoubleClick(R.id.tv_login, 1000)
                 ) {
-//                    TransitionsHelper.startActivity(
-//                        activity,
-//                        LoginActivity::class.java,
-//                        iv_avatar
-//                    )
+
                 }
             }
             R.id.ll_favorite -> {//收藏

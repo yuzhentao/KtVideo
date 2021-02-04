@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yzt.common.listener.LifecycleListener
 import com.yzt.common.receiver.NetworkReceiver
-import com.yzt.transitionhelper.TransitionsHelper
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -51,7 +50,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        TransitionsHelper.unbind(this)
         if (lifecycleListener != null) {
             lifecycleListener!!.onDestroy()
             lifecycleListener = null
