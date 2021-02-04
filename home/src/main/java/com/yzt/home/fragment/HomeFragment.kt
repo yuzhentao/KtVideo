@@ -5,10 +5,13 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.alibaba.android.arouter.launcher.ARouter
 import com.yzt.bean.HomeBean
+import com.yzt.bean.VideoBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
+import com.yzt.common.key.Constant
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.FooterUtil
 import com.yzt.home.R
@@ -92,37 +95,43 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             val bean: HomeBean.Issue.Item? = adapter.data[position] as HomeBean.Issue.Item
             bean?.let {
 //                val intent = Intent(context, VideoDetailActivity::class.java)
-//                val id = it.data?.id
-//                val img = it.data?.cover?.feed
-//                val title = it.data?.title
-//                val duration = it.data?.duration
-//                val desc = it.data?.description
-//                val playUrl = it.data?.playUrl
-//                val category = it.data?.category
-//                val blurred = it.data?.cover?.blurred
-//                val collect = it.data?.consumption?.collectionCount
-//                val share = it.data?.consumption?.shareCount
-//                val reply = it.data?.consumption?.replyCount
-//                val time = System.currentTimeMillis()
-//                val videoBean = VideoBean(
-//                    id,
-//                    img,
-//                    title,
-//                    desc,
-//                    duration,
-//                    playUrl,
-//                    category,
-//                    blurred,
-//                    collect,
-//                    share,
-//                    reply,
-//                    time
-//                )
+                val id = it.data?.id
+                val img = it.data?.cover?.feed
+                val title = it.data?.title
+                val duration = it.data?.duration
+                val desc = it.data?.description
+                val playUrl = it.data?.playUrl
+                val category = it.data?.category
+                val blurred = it.data?.cover?.blurred
+                val collect = it.data?.consumption?.collectionCount
+                val share = it.data?.consumption?.shareCount
+                val reply = it.data?.consumption?.replyCount
+                val time = System.currentTimeMillis()
+                val videoBean = VideoBean(
+                    id,
+                    img,
+                    title,
+                    desc,
+                    duration,
+                    playUrl,
+                    category,
+                    blurred,
+                    collect,
+                    share,
+                    reply,
+                    time
+                )
 //                val bundle = Bundle()
 //                bundle.putParcelable("data", videoBean)
 //                intent.putExtra("bundle", bundle)
 //                intent.putExtra("showCache", true)
 //                startActivity(intent)
+                ARouter
+                    .getInstance()
+                    .build(Constant.PATH_VIDEO_DETAIL)
+                    .withObject("bean", videoBean)
+                    .withBoolean("showCache", true)
+                    .navigation()
             }
         }
     }

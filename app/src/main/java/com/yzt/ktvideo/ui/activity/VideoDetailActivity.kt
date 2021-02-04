@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.task.DownloadTask
@@ -29,6 +30,7 @@ import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.shortToast
+import com.yzt.common.key.Constant
 import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.VideoListener
@@ -47,10 +49,14 @@ import java.io.FileInputStream
 /**
  * 视频详情
  */
+@Route(path = Constant.PATH_VIDEO_DETAIL)
 class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
 
     private var context: Context = this
     private var activity: VideoDetailActivity = this
+
+//    @Autowired
+//    var bean: VideoBean? = null
 
     private var bean: VideoBean? = null
 
@@ -85,10 +91,11 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         }
         setContentView(R.layout.activity_video_detail)
         Aria.download(this).register()
-        val bundle = intent.getBundleExtra("bundle")
-        bundle?.let {
-            bean = it.getParcelable("data")
-        }
+//        val bundle = intent.getBundleExtra("bundle")
+//        bundle?.let {
+//            bean = it.getParcelable("data")
+//        }
+        Timber.e(bean?.toString())
         initView()
         prepareVideo()
     }
