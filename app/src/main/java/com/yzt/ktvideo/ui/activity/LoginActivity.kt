@@ -7,12 +7,14 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.drawable
+import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.ktvideo.R
@@ -22,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 /**
  * 登录
  */
+@Route(path = Constant.PATH_LOGIN)
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private var binding: ActivityLoginBinding? = null
