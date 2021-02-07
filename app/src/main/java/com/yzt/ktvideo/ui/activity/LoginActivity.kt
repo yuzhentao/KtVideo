@@ -8,7 +8,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.gyf.immersionbar.BarHide
+import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
@@ -17,6 +17,7 @@ import com.yzt.common.extension.drawable
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
@@ -40,16 +41,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     override fun init(savedInstanceState: Bundle?) {
         immersionBar {
-            statusBarColor(R.color.white)
+            statusBarColor(R.color.transparent)
             statusBarDarkFont(true)
-            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
-            navigationBarColor(R.color.black)
-            navigationBarDarkIcon(true)
-            fitsSystemWindows(true)
         }
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        ViewUtil.setMargins(binding?.ivTop!!, 0, ImmersionBar.getStatusBarHeight(this), 0, 0)
         binding?.ivTop!!.setOnClickListener(this)
         val drawableUser = drawable(R.drawable.ic_login_user)
         drawableUser!!.setBounds(
