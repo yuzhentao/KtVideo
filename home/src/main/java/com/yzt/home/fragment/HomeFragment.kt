@@ -94,7 +94,6 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: HomeBean.Issue.Item? = adapter.data[position] as HomeBean.Issue.Item
             bean?.let {
-//                val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = it.data?.id
                 val img = it.data?.cover?.feed
                 val title = it.data?.title
@@ -121,15 +120,10 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                     reply,
                     time
                 )
-//                val bundle = Bundle()
-//                bundle.putParcelable("data", videoBean)
-//                intent.putExtra("bundle", bundle)
-//                intent.putExtra("showCache", true)
-//                startActivity(intent)
                 ARouter
                     .getInstance()
                     .build(Constant.PATH_VIDEO_DETAIL)
-                    .withObject("bean", videoBean)
+                    .withParcelable("bean", videoBean)
                     .withBoolean("showCache", true)
                     .navigation()
             }

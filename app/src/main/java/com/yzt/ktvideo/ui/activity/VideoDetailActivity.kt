@@ -1,7 +1,6 @@
 package com.yzt.ktvideo.ui.activity
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
@@ -15,7 +14,9 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.task.DownloadTask
@@ -55,10 +56,13 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     private var context: Context = this
     private var activity: VideoDetailActivity = this
 
-//    @Autowired
-//    var bean: VideoBean? = null
+    @Autowired
+    @JvmField
+    var bean: VideoBean? = null
 
-    private var bean: VideoBean? = null
+    @Autowired
+    @JvmField
+    var showCache: Boolean = false
 
     private lateinit var ivCover: ImageView//封面
     private var coverDisposable: Disposable? = null
@@ -90,12 +94,8 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             fitsSystemWindows(true)
         }
         setContentView(R.layout.activity_video_detail)
+        ARouter.getInstance().inject(this)
         Aria.download(this).register()
-//        val bundle = intent.getBundleExtra("bundle")
-//        bundle?.let {
-//            bean = it.getParcelable("data")
-//        }
-        Timber.e(bean?.toString())
         initView()
         prepareVideo()
     }
@@ -206,8 +206,10 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             tvFavorite.text = it.collect.toString()
             tvShare.text = it.share.toString()
             tvReply.text = it.reply.toString()
+//            llDownload.visibility =
+//                if (intent.getBooleanExtra("showCache", true)) View.VISIBLE else View.GONE
             llDownload.visibility =
-                if (intent.getBooleanExtra("showCache", true)) View.VISIBLE else View.GONE
+                if (showCache) View.VISIBLE else View.GONE
             llDownload.setOnClickListener {
                 playUrl?.let { itt ->
                     if (dbManager.find(itt) == null) {
@@ -236,7 +238,6 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                 val bean: VideoRelatedBean.Item.Data? =
                     adapter.data[position] as VideoRelatedBean.Item.Data
                 bean?.let { itt ->
-                    val intent = Intent(context, VideoDetailActivity::class.java)
                     val videoBean = VideoBean(
                         itt.id,
                         itt.cover?.feed,
@@ -251,11 +252,12 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                         itt.consumption?.replyCount,
                         System.currentTimeMillis()
                     )
-                    val bundle = Bundle()
-                    bundle.putParcelable("data", videoBean)
-                    intent.putExtra("bundle", bundle)
-                    intent.putExtra("showCache", true)
-                    startActivity(intent)
+                    ARouter
+                        .getInstance()
+                        .build(Constant.PATH_VIDEO_DETAIL)
+                        .withParcelable("bean", videoBean)
+                        .withBoolean("showCache", true)
+                        .navigation()
                     finish()
                 }
             }
