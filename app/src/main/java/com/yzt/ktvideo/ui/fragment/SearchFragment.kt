@@ -2,23 +2,23 @@ package com.yzt.ktvideo.ui.fragment
 
 import android.app.Activity
 import android.content.DialogInterface
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.key.Constant
+import com.yzt.common.util.CircularRevealAnim
 import com.yzt.common.util.ClickUtil
+import com.yzt.common.util.KeyBoardUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HotSearchAdapter
 import com.yzt.ktvideo.mvp.contract.HotSearchContract
 import com.yzt.ktvideo.mvp.presenter.HotSearchPresenter
-import com.yzt.ktvideo.ui.activity.WatchActivity
-import com.yzt.common.util.CircularRevealAnim
-import com.yzt.common.util.KeyBoardUtil
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : DialogFragment(),
@@ -144,9 +144,11 @@ class SearchFragment : DialogFragment(),
                 val bean: String? = adapter.data[position] as String
                 bean?.let { itt ->
                     KeyBoardUtil.closeKeyboard(it, et)
-                    val intent = Intent(it, WatchActivity::class.java)
-                    intent.putExtra("key", itt)
-                    it.startActivity(intent)
+                    ARouter
+                        .getInstance()
+                        .build(Constant.PATH_WATCH)
+                        .withString("key", itt)
+                        .navigation()
                 }
             }
         }
@@ -171,9 +173,11 @@ class SearchFragment : DialogFragment(),
         val key = et.text.toString()
         if (key.isNotEmpty()) {
             KeyBoardUtil.closeKeyboard(context, et)
-            val intent = Intent(context, WatchActivity::class.java)
-            intent.putExtra("key", key)
-            context?.startActivity(intent)
+            ARouter
+                .getInstance()
+                .build(Constant.PATH_WATCH)
+                .withString("key", key)
+                .navigation()
         }
     }
 

@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.bean.DiscoverBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
+import com.yzt.common.key.Constant
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.FooterUtil
 import com.yzt.discover.R
@@ -54,9 +56,11 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: DiscoverBean.Item.Data? = adapter.data[position] as DiscoverBean.Item.Data
             bean?.let {
-//                val intent = Intent(context, DiscoverDetailActivity::class.java)
-//                intent.putExtra("id", it.id.toString())
-//                context?.startActivity(intent)
+                ARouter
+                    .getInstance()
+                    .build(Constant.PATH_DISCOVER_DETAIL)
+                    .withString("id", it.id.toString())
+                    .navigation()
             }
         }
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)

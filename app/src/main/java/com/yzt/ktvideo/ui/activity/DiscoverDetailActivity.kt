@@ -9,26 +9,29 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.FragmentPagerAdapter
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
-import com.yzt.common.util.ClickUtil
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.RankingAdapter
 import com.yzt.bean.DiscoverDetailBean
 import com.yzt.common.extension.color
+import com.yzt.common.key.Constant
+import com.yzt.common.util.ClickUtil
+import com.yzt.common.util.ImageUtil
+import com.yzt.ktvideo.R
+import com.yzt.ktvideo.adapter.RankingAdapter
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailPresenter
 import com.yzt.ktvideo.ui.fragment.DiscoverLeftFragment
 import com.yzt.ktvideo.ui.fragment.DiscoverRightFragment
-import com.yzt.common.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_discover_detail.*
 import kotlin.math.abs
 
 /**
  * 发现详情
  */
+@Route(path = Constant.PATH_DISCOVER_DETAIL)
 class DiscoverDetailActivity : AppCompatActivity(), View.OnClickListener,
     DiscoverDetailContract.View {
 

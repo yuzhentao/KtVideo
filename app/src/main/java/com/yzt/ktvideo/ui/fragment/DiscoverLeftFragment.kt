@@ -45,7 +45,6 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
         val playBottom = DimenUtil.getHeightInPx() / 2 + DimenUtil.getHeightInPx() / 4
         scrollCalculatorHelper =
             ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
-
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.layoutManager = layoutManager
         rv.adapter = adapter
