@@ -64,6 +64,10 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     @JvmField
     var showCache: Boolean = false
 
+    @Autowired
+    @JvmField
+    var autoPlay: Boolean = false
+
     private lateinit var ivCover: ImageView//封面
     private var coverDisposable: Disposable? = null
 
@@ -206,8 +210,6 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             tvFavorite.text = it.collect.toString()
             tvShare.text = it.share.toString()
             tvReply.text = it.reply.toString()
-//            llDownload.visibility =
-//                if (intent.getBooleanExtra("showCache", true)) View.VISIBLE else View.GONE
             llDownload.visibility =
                 if (showCache) View.VISIBLE else View.GONE
             llDownload.setOnClickListener {
@@ -324,7 +326,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         vp.backButton.setOnClickListener {
             onBackPressed()
         }
-        if (intent.getBooleanExtra("autoPlay", false)) {
+        if (autoPlay) {
             vp.startPlayLogic()
         }
     }

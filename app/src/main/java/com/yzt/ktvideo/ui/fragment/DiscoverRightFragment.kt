@@ -1,13 +1,13 @@
 package com.yzt.ktvideo.ui.fragment
 
-import android.content.Intent
-import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.bean.DiscoverDetailRightBean
 import com.yzt.bean.VideoBean
 import com.yzt.common.extension.color
+import com.yzt.common.key.Constant
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ScrollCalculatorHelper
@@ -16,7 +16,6 @@ import com.yzt.ktvideo.adapter.DiscoverDetailRightAdapter
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailRightContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailRightPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
-import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import kotlinx.android.synthetic.main.fragment_ranking_sub.*
 
 /**
@@ -77,7 +76,6 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
             val bean: DiscoverDetailRightBean.Item.Data.Content? =
                 adapter.data[position] as DiscoverDetailRightBean.Item.Data.Content
             bean?.let {
-                val intent = Intent(context, VideoDetailActivity::class.java)
                 val id = it.data?.id
                 val img = it.data?.cover?.feed
                 val title = activity.category//都为""，使用大类别
@@ -104,11 +102,12 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
                     reply,
                     time
                 )
-                val bundle = Bundle()
-                bundle.putParcelable("data", videoBean)
-                intent.putExtra("bundle", bundle)
-                intent.putExtra("showCache", true)
-                activity.startActivity(intent)
+                ARouter
+                    .getInstance()
+                    .build(Constant.PATH_VIDEO_DETAIL)
+                    .withParcelable("bean", videoBean)
+                    .withBoolean("showCache", true)
+                    .navigation()
             }
         }
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)

@@ -1,12 +1,12 @@
 package com.yzt.ktvideo.ui.activity
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.bean.SearchBean
@@ -110,12 +110,12 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter.data[position] as VideoBean
             bean?.let {
-                val intent = Intent(context, VideoDetailActivity::class.java)
-                val bundle = Bundle()
-                bundle.putParcelable("data", it)
-                intent.putExtra("bundle", bundle)
-                intent.putExtra("showCache", !noKey!!)
-                startActivity(intent)
+                ARouter
+                    .getInstance()
+                    .build(Constant.PATH_VIDEO_DETAIL)
+                    .withParcelable("bean", it)
+                    .withBoolean("showCache", !noKey!!)
+                    .navigation()
             }
         }
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)

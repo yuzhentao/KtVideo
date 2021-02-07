@@ -1,9 +1,8 @@
 package com.yzt.ktvideo.adapter
 
-import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.arialyy.aria.core.Aria
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -13,10 +12,10 @@ import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.shortToast
+import com.yzt.common.key.Constant
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
-import com.yzt.ktvideo.ui.activity.VideoDetailActivity
 import com.yzt.ktvideo.view.progressbutton.ProgressButton
 import timber.log.Timber
 
@@ -93,13 +92,13 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
                         notifyItemChanged(position, 1)
                     }
                     DownloadState.COMPLETE.name -> {
-                        val intent = Intent(context, VideoDetailActivity::class.java)
-                        val bundle = Bundle()
-                        bundle.putParcelable("data", item)
-                        intent.putExtra("bundle", bundle)
-                        intent.putExtra("showCache", false)
-                        intent.putExtra("autoPlay", true)
-                        context.startActivity(intent)
+                        ARouter
+                            .getInstance()
+                            .build(Constant.PATH_VIDEO_DETAIL)
+                            .withParcelable("bean", item)
+                            .withBoolean("showCache", false)
+                            .withBoolean("autoPlay", true)
+                            .navigation()
                     }
                     else -> {
                         context.shortToast(context.getString(R.string.cache_fail))
