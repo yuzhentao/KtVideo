@@ -1,11 +1,14 @@
 package com.yzt.ktvideo.ui.fragment
 
+import android.view.LayoutInflater
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.bean.DiscoverDetailRightBean
 import com.yzt.bean.VideoBean
+import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
 import com.yzt.common.util.DimenUtil
@@ -13,6 +16,7 @@ import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ScrollCalculatorHelper
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.DiscoverDetailRightAdapter
+import com.yzt.ktvideo.databinding.FragmentDiscoverRightBinding
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailRightContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailRightPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
@@ -23,7 +27,9 @@ import kotlinx.android.synthetic.main.fragment_ranking_sub.*
  */
 class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
-    private lateinit var activity: DiscoverDetailActivity
+    private lateinit var discoverDetailActivity: DiscoverDetailActivity
+
+    private var binding: FragmentDiscoverRightBinding? = null
 
     private val adapter: DiscoverDetailRightAdapter by lazy {
         DiscoverDetailRightAdapter(null)
@@ -35,9 +41,18 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
     private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
 
-    override fun getLayoutResources(): Int {
-        activity = getActivity() as DiscoverDetailActivity
-        return R.layout.fragment_discover_right
+    override fun getLayoutId(): Int? {
+        return null
+    }
+
+    override fun getLayoutView(inflater: LayoutInflater): View? {
+        discoverDetailActivity = getActivity() as DiscoverDetailActivity
+        binding = FragmentDiscoverRightBinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun init() {
+
     }
 
     override fun initView() {
@@ -56,7 +71,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
                 super.onScrolled(recyclerView, dx, dy)
                 firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                if (!activity.isFull) {
+                if (!discoverDetailActivity.isFull) {
                     scrollCalculatorHelper.onScroll(
                         recyclerView,
                         firstVisibleItem!!,
@@ -77,11 +92,11 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
             bean?.let {
                 val id = it.data?.id
                 val img = it.data?.cover?.feed
-                val title = activity.category//都为""，使用大类别
+                val title = discoverDetailActivity.category//都为""，使用大类别
                 val desc = it.data?.description
                 val duration = it.data?.duration
                 val playUrl = it.data?.playUrl
-                val category = activity.category//没有分类字段，使用大类别
+                val category = discoverDetailActivity.category//没有分类字段，使用大类别
                 val blurred = it.data?.cover?.blurred
                 val collect = it.data?.consumption?.collectionCount
                 val share = it.data?.consumption?.shareCount
@@ -117,7 +132,7 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
         }
     }
 
-    override fun onFragmentVisibleChange(b: Boolean) {
+    override fun initData() {
 
     }
 

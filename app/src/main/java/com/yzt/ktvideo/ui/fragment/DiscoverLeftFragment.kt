@@ -1,11 +1,14 @@
 package com.yzt.ktvideo.ui.fragment
 
+import android.view.LayoutInflater
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yzt.bean.DiscoverDetailLeftBean
 import com.yzt.bean.VideoBean
+import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
 import com.yzt.common.util.DimenUtil
@@ -13,6 +16,7 @@ import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ScrollCalculatorHelper
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.DiscoverDetailLeftAdapter
+import com.yzt.ktvideo.databinding.FragmentDiscoverLeftBinding
 import com.yzt.ktvideo.mvp.contract.DiscoverDetailLeftContract
 import com.yzt.ktvideo.mvp.presenter.DiscoverDetailLeftPresenter
 import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
@@ -23,7 +27,9 @@ import kotlinx.android.synthetic.main.fragment_ranking_sub.*
  */
 class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 
-    private lateinit var activity: DiscoverDetailActivity
+    private lateinit var discoverDetailActivity: DiscoverDetailActivity
+
+    private var binding: FragmentDiscoverLeftBinding? = null
 
     private val adapter: DiscoverDetailLeftAdapter by lazy {
         DiscoverDetailLeftAdapter(null)
@@ -35,9 +41,18 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 
     private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
 
-    override fun getLayoutResources(): Int {
-        activity = getActivity() as DiscoverDetailActivity
-        return R.layout.fragment_discover_left
+    override fun getLayoutId(): Int? {
+        return null
+    }
+
+    override fun getLayoutView(inflater: LayoutInflater): View? {
+        discoverDetailActivity = getActivity() as DiscoverDetailActivity
+        binding = FragmentDiscoverLeftBinding.inflate(inflater)
+        return binding?.root
+    }
+
+    override fun init() {
+
     }
 
     override fun initView() {
@@ -56,7 +71,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
                 super.onScrolled(recyclerView, dx, dy)
                 firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                if (!activity.isFull) {
+                if (!discoverDetailActivity.isFull) {
                     scrollCalculatorHelper.onScroll(
                         recyclerView,
                         firstVisibleItem!!,
@@ -117,7 +132,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
         }
     }
 
-    override fun onFragmentVisibleChange(b: Boolean) {
+    override fun initData() {
 
     }
 
