@@ -1,14 +1,14 @@
-package com.yzt.ktvideo.mvp.contract
+package com.yzt.discover.mvp.contract
 
-import com.yzt.bean.DiscoverDetailBean
+import com.yzt.bean.DiscoverDetailRightBean
 import com.yzt.common.base.BasePresenter
 import com.yzt.common.base.BaseView
 
-interface DiscoverDetailContract {
+interface DiscoverDetailRightContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setData(bean: DiscoverDetailBean?)
+        fun setData(beans: MutableList<DiscoverDetailRightBean.Item.Data.Content>?)
 
     }
 

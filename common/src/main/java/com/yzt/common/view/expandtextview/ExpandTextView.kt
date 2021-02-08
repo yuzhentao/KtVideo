@@ -1,12 +1,12 @@
-package com.yzt.ktvideo.view.expandtextview
+package com.yzt.common.view.expandtextview
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
-import androidx.appcompat.widget.AppCompatTextView
 import android.text.Layout
 import android.text.StaticLayout
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
 
 class ExpandTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : AppCompatTextView(context, attrs, defStyleAttr) {
 

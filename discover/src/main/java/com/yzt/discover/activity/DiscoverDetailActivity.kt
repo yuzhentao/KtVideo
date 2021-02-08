@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.ui.activity
+package com.yzt.discover.activity
 
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -18,13 +18,13 @@ import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.ImageUtil
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.RankingAdapter
-import com.yzt.ktvideo.databinding.ActivityDiscoverDetailBinding
-import com.yzt.ktvideo.mvp.contract.DiscoverDetailContract
-import com.yzt.ktvideo.mvp.presenter.DiscoverDetailPresenter
-import com.yzt.ktvideo.ui.fragment.DiscoverLeftFragment
-import com.yzt.ktvideo.ui.fragment.DiscoverRightFragment
+import com.yzt.discover.R
+import com.yzt.discover.adapter.DiscoverPagerAdapter
+import com.yzt.discover.databinding.ActivityDiscoverDetailBinding
+import com.yzt.discover.fragment.DiscoverLeftFragment
+import com.yzt.discover.fragment.DiscoverRightFragment
+import com.yzt.discover.mvp.contract.DiscoverDetailContract
+import com.yzt.discover.mvp.presenter.DiscoverDetailPresenter
 import kotlin.math.abs
 
 /**
@@ -207,7 +207,7 @@ class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
                     titles.add(name)
                 }
             }
-            binding!!.vp.adapter = RankingAdapter(
+            binding!!.vp.adapter = DiscoverPagerAdapter(
                 supportFragmentManager,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
                 fragments,

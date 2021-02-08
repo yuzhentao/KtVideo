@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.ui.fragment
+package com.yzt.discover.fragment
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +14,12 @@ import com.yzt.common.key.Constant
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ScrollCalculatorHelper
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.adapter.DiscoverDetailLeftAdapter
-import com.yzt.ktvideo.databinding.FragmentDiscoverLeftBinding
-import com.yzt.ktvideo.mvp.contract.DiscoverDetailLeftContract
-import com.yzt.ktvideo.mvp.presenter.DiscoverDetailLeftPresenter
-import com.yzt.ktvideo.ui.activity.DiscoverDetailActivity
-import kotlinx.android.synthetic.main.fragment_ranking_sub.*
+import com.yzt.discover.R
+import com.yzt.discover.activity.DiscoverDetailActivity
+import com.yzt.discover.adapter.DiscoverDetailLeftAdapter
+import com.yzt.discover.databinding.FragmentDiscoverLeftBinding
+import com.yzt.discover.mvp.contract.DiscoverDetailLeftContract
+import com.yzt.discover.mvp.presenter.DiscoverDetailLeftPresenter
 
 /**
  * 发现详情-推荐
@@ -61,9 +60,9 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
         scrollCalculatorHelper =
             ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv.layoutManager = layoutManager
-        rv.adapter = adapter
-        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding!!.rv.layoutManager = layoutManager
+        binding!!.rv.adapter = adapter
+        binding!!.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var firstVisibleItem: Int? = 0
             var lastVisibleItem: Int? = 0
 
@@ -142,7 +141,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
     }
 
     fun scrollToTop() {
-        rv.smoothScrollToPosition(0)
+        binding!!.rv.smoothScrollToPosition(0)
     }
 
 }

@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yzt.discover">
 
-    <application>
+    <application android:screenOrientation="portrait">
         <activity android:name="com.yzt.discover.activity.DiscoverActivity" />
+        <activity android:name="com.yzt.discover.activity.DiscoverDetailActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.adapter
+package com.yzt.discover.adapter
 
 import android.graphics.Typeface
 import android.text.SpannableString
@@ -21,8 +21,8 @@ import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
-import com.yzt.ktvideo.R
-import com.yzt.ktvideo.view.expandtextview.ExpandLayout
+import com.yzt.common.view.expandtextview.ExpandLayout
+import com.yzt.discover.R
 
 class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) :
     BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(
