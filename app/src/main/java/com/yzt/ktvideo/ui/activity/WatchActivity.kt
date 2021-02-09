@@ -1,9 +1,7 @@
 package com.yzt.ktvideo.ui.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -11,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.bean.SearchBean
 import com.yzt.bean.VideoBean
+import com.yzt.common.base.BaseActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
@@ -18,9 +17,9 @@ import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.WatchAdapter
+import com.yzt.ktvideo.databinding.ActivityWatchBinding
 import com.yzt.ktvideo.mvp.contract.SearchContract
 import com.yzt.ktvideo.mvp.presenter.SearchPresenter
-import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
  * 观看记录
@@ -28,9 +27,9 @@ import kotlinx.android.synthetic.main.activity_cache.*
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_WATCH)
-class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.View {
+class WatchActivity : BaseActivity(), View.OnClickListener, SearchContract.View {
 
-    private var context: Context = this
+    private var binding: ActivityWatchBinding? = null
 
     private lateinit var beans: MutableList<VideoBean>
     private val adapter: WatchAdapter by lazy {
@@ -38,7 +37,7 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
     }
 
     private val presenter: SearchPresenter by lazy {
-        SearchPresenter(context, this)
+        SearchPresenter(context!!, this)
     }
     private val dbManager: VideoDbManager by lazy {
         VideoDbManager()
@@ -46,8 +45,16 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
 
     private var noKey: Boolean? = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivityWatchBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
@@ -55,9 +62,58 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_watch)
-        initView()
-        initData()
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        noKey = intent.getStringExtra("key").isNullOrEmpty()
+        if (noKey!!) {
+            binding!!.tvTop.text = getString(R.string.mine_watch)
+        } else {
+            binding!!.tvTop.text = intent.getStringExtra("key")
+        }
+        binding!!.ivTop.setOnClickListener(this)
+        binding!!.rv.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding!!.rv.adapter = adapter
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val bean: VideoBean? = adapter.data[position] as VideoBean?
+            bean?.let {
+                ARouter
+                    .getInstance()
+                    .build(Constant.PATH_VIDEO_DETAIL)
+                    .withParcelable("bean", it)
+                    .withBoolean("showCache", !noKey!!)
+                    .navigation()
+            }
+        }
+        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        beans = mutableListOf()
+        if (noKey!!) {
+            dbManager.findAll()?.let {
+                beans.addAll(it)
+                if (beans.size > 0) {
+                    binding!!.rv.visibility = View.VISIBLE
+                    binding!!.tvHint.visibility = View.GONE
+                } else {
+                    binding!!.rv.visibility = View.GONE
+                    binding!!.tvHint.visibility = View.VISIBLE
+                }
+                adapter.setList(beans)
+                adapter.addFooterView(
+                    FooterUtil.getFooter(
+                        context!!,
+                        color(R.color.app_black)
+                    )
+                )
+            }
+        } else {
+            intent.getStringExtra("key")?.let {
+                presenter.load(it)
+            }
+        }
     }
 
     override fun onDestroy() {
@@ -97,57 +153,6 @@ class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.
             }
         }
         adapter.setList(this.beans)
-    }
-
-    private fun initView() {
-        noKey = intent.getStringExtra("key").isNullOrEmpty()
-        if (noKey!!) {
-            tv_top.text = getString(R.string.mine_watch)
-        } else {
-            tv_top.text = intent.getStringExtra("key")
-        }
-        iv_top.setOnClickListener(this)
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv.adapter = adapter
-        adapter.setOnItemClickListener { adapter, _, position ->
-            val bean: VideoBean? = adapter.data[position] as VideoBean
-            bean?.let {
-                ARouter
-                    .getInstance()
-                    .build(Constant.PATH_VIDEO_DETAIL)
-                    .withParcelable("bean", it)
-                    .withBoolean("showCache", !noKey!!)
-                    .navigation()
-            }
-        }
-        adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
-    }
-
-    private fun initData() {
-        beans = mutableListOf()
-        if (noKey!!) {
-            dbManager.findAll()?.let {
-                beans.addAll(it)
-                if (beans.size > 0) {
-                    rv.visibility = View.VISIBLE
-                    tv_hint.visibility = View.GONE
-                } else {
-                    rv.visibility = View.GONE
-                    tv_hint.visibility = View.VISIBLE
-                }
-                adapter.setList(beans)
-                adapter.addFooterView(
-                    FooterUtil.getFooter(
-                        context,
-                        context.color(R.color.app_black)
-                    )
-                )
-            }
-        } else {
-            intent.getStringExtra("key")?.let {
-                presenter.load(it)
-            }
-        }
     }
 
 }

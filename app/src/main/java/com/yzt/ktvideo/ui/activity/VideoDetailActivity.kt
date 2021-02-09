@@ -1,6 +1,5 @@
 package com.yzt.ktvideo.ui.activity
 
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
@@ -11,7 +10,6 @@ import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
@@ -27,6 +25,7 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.yzt.bean.DownloadState
 import com.yzt.bean.VideoBean
 import com.yzt.bean.VideoRelatedBean
+import com.yzt.common.base.BaseActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.ioMain
@@ -37,12 +36,12 @@ import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.VideoListener
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.VideoRelatedAdapter
+import com.yzt.ktvideo.databinding.ActivityVideoDetailBinding
 import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
 import com.yzt.ktvideo.mvp.presenter.VideoRelatedPresenter
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_video_detail.*
 import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
@@ -53,10 +52,9 @@ import java.io.FileInputStream
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_VIDEO_DETAIL)
-class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
+class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
 
-    private var context: Context = this
-    private var activity: VideoDetailActivity = this
+    private var binding: ActivityVideoDetailBinding? = null
 
     @Autowired
     @JvmField
@@ -91,76 +89,27 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     private var isPlay: Boolean = false
     private var isPause: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivityVideoDetailBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
             navigationBarColor(R.color.black)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_video_detail)
         ARouter.getInstance().inject(this)
         Aria.download(this).register()
-        initView()
-        prepareVideo()
     }
 
-    override fun onPause() {
-        super.onPause()
-        isPause = true
-    }
-
-    override fun onResume() {
-        super.onResume()
-        isPause = false
-    }
-
-    override fun onDestroy() {
-        dbManager.close()
-        coverDisposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
-            }
-        }
-        GSYVideoManager.releaseAllVideos()
-        orientationUtils.releaseListener()
-        super.onDestroy()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        if (isPlay && !isPause) {
-            if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
-                if (!vp.isIfCurrentIsFullscreen) {
-                    vp.startWindowFullscreen(context, true, true)
-                }
-            } else {
-                //新版本isIfCurrentIsFullscreen的标志位内部提前设置了，所以不会和手动点击冲突
-                if (vp.isIfCurrentIsFullscreen) {
-                    GSYVideoManager.backFromWindowFull(context)
-                }
-                orientationUtils.isEnable = true
-            }
-        }
-    }
-
-    override fun onBackPressed() {
-        orientationUtils.backToProtVideo()
-        if (GSYVideoManager.backFromWindowFull(context)) {
-            return
-        }
-        super.onBackPressed()
-    }
-
-    override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
-        beans?.let {
-            adapter.setList(it)
-            adapter.addFooterView(FooterUtil.getFooter(context, color(R.color.white)))
-        }
-    }
-
-    private fun initView() {
+    override fun initView(savedInstanceState: Bundle?) {
         bean?.let {
             it.id?.let { itt ->
                 presenter.load(itt.toString())
@@ -169,12 +118,13 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             }
             val blurred = it.blurred
             if (blurred.isNullOrEmpty()) {
-                iv_bg.setImageResource(R.color.app_black)
+                binding!!.ivBg.setImageResource(R.color.app_black)
             } else {
-                ImageUtil.showHigh(context, iv_bg, blurred)
+                ImageUtil.showHigh(context!!, binding!!.ivBg, blurred)
             }
-            rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            rv.adapter = adapter
+            binding!!.rv.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding!!.rv.adapter = adapter
             val header = View.inflate(context, R.layout.item_video_related_header, null)
             playUrl = it.playUrl
             val tvTitle = header.findViewById<AppCompatTextView>(R.id.tv_title)
@@ -267,6 +217,64 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         }
     }
 
+    override fun initData(savedInstanceState: Bundle?) {
+        prepareVideo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isPause = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isPause = false
+    }
+
+    override fun onDestroy() {
+        dbManager.close()
+        coverDisposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
+        GSYVideoManager.releaseAllVideos()
+        orientationUtils.releaseListener()
+        super.onDestroy()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (isPlay && !isPause) {
+            if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
+                if (!binding!!.vp.isIfCurrentIsFullscreen) {
+                    binding!!.vp.startWindowFullscreen(context, true, true)
+                }
+            } else {
+                //新版本isIfCurrentIsFullscreen的标志位内部提前设置了，所以不会和手动点击冲突
+                if (binding!!.vp.isIfCurrentIsFullscreen) {
+                    GSYVideoManager.backFromWindowFull(context)
+                }
+                orientationUtils.isEnable = true
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        orientationUtils.backToProtVideo()
+        if (GSYVideoManager.backFromWindowFull(context)) {
+            return
+        }
+        super.onBackPressed()
+    }
+
+    override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
+        beans?.let {
+            adapter.setList(it)
+            adapter.addFooterView(FooterUtil.getFooter(context!!, color(R.color.white)))
+        }
+    }
+
     /**
      * 缓存
      */
@@ -283,32 +291,32 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
     private fun prepareVideo() {
         val uri = intent.getStringExtra("loac©lFile")
         if (uri != null) {
-            vp.setUp(uri, false, null, null)
+            binding!!.vp.setUp(uri, false, null, null)
         } else {
             bean?.playUrl?.let {
-                vp.setUp(it, false, null, null)
+                binding!!.vp.setUp(it, false, null, null)
             }
         }
         ivCover = ImageView(context)
         ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
         setCover()
-        vp.titleTextView.visibility = View.GONE
-        vp.backButton.visibility = View.VISIBLE
-        orientationUtils = OrientationUtils(activity, vp)
-        vp.setIsTouchWiget(true)
-        vp.isRotateViewAuto = false
-        vp.isLockLand = false
-        vp.isShowFullAnimation = false
-        vp.isNeedLockFull = true
-        vp.fullscreenButton.setOnClickListener {
+        binding!!.vp.titleTextView.visibility = View.GONE
+        binding!!.vp.backButton.visibility = View.VISIBLE
+        orientationUtils = OrientationUtils(activity, binding!!.vp)
+        binding!!.vp.setIsTouchWiget(true)
+        binding!!.vp.isRotateViewAuto = false
+        binding!!.vp.isLockLand = false
+        binding!!.vp.isShowFullAnimation = false
+        binding!!.vp.isNeedLockFull = true
+        binding!!.vp.fullscreenButton.setOnClickListener {
             orientationUtils.resolveByClick()//直接横屏
-            vp.startWindowFullscreen(
+            binding!!.vp.startWindowFullscreen(
                 context,
                 true,
                 true
             )//第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
         }
-        vp.setVideoAllCallBack(object : VideoListener() {
+        binding!!.vp.setVideoAllCallBack(object : VideoListener() {
             override fun onQuitFullscreen(url: String?, vararg objects: Any?) {
                 super.onQuitFullscreen(url, *objects)
                 orientationUtils.backToProtVideo()
@@ -320,14 +328,14 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
                 isPlay = true
             }
         })
-        vp.setLockClickListener { _, lock ->
+        binding!!.vp.setLockClickListener { _, lock ->
             orientationUtils.isEnable = !lock//配合下方的onConfigurationChanged
         }
-        vp.backButton.setOnClickListener {
+        binding!!.vp.backButton.setOnClickListener {
             onBackPressed()
         }
         if (autoPlay) {
-            vp.startPlayLogic()
+            binding!!.vp.startPlayLogic()
         }
     }
 
@@ -335,13 +343,13 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
         bean?.feed?.let {
             val observable: Observable<Bitmap> = Observable.create { emitter ->
                 val cacheFile = ImageUtil
-                    .get(context)
+                    .get(context!!)
                     .downloadOnly()
                     .load(it)
                     .submit()
                     .get()
                 val path: String? = cacheFile.absolutePath
-                val inputStream: FileInputStream? = FileInputStream(path)
+                val inputStream = FileInputStream(path)
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 emitter.onNext(bitmap)
             }
@@ -356,7 +364,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
 
                 override fun onNext(bitmap: Bitmap) {
                     ivCover.setImageBitmap(bitmap)
-                    vp.thumbImageView = ivCover
+                    binding!!.vp.thumbImageView = ivCover
                 }
 
                 override fun onError(e: Throwable) {

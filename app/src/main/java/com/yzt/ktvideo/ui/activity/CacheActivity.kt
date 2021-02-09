@@ -1,10 +1,8 @@
 package com.yzt.ktvideo.ui.activity
 
-import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -16,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.bean.DownloadState
 import com.yzt.bean.VideoBean
+import com.yzt.common.base.BaseActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.shortToast
@@ -25,8 +24,8 @@ import com.yzt.common.util.FileUtil
 import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.CacheAdapter
+import com.yzt.ktvideo.databinding.ActivityCacheBinding
 import com.yzt.ktvideo.view.EasySwipeMenuLayout
-import kotlinx.android.synthetic.main.activity_cache.*
 import timber.log.Timber
 
 /**
@@ -35,9 +34,9 @@ import timber.log.Timber
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_CACHE)
-class CacheActivity : AppCompatActivity(), View.OnClickListener {
+class CacheActivity : BaseActivity(), View.OnClickListener {
 
-    private var context: Context = this
+    private var binding: ActivityCacheBinding? = null
 
     private var beans: MutableList<VideoBean> = mutableListOf()
     private val adapter: CacheAdapter by lazy {
@@ -48,8 +47,16 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         VideoDbManager()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivityCacheBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
@@ -57,37 +64,19 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_cache)
         Aria.download(this).register()
-        initView()
-        initData()
     }
 
-    override fun onDestroy() {
-        dbManager.close()
-        super.onDestroy()
-    }
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.iv_top -> {
-                if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
-                    onBackPressed()
-                }
-            }
-        }
-    }
-
-    private fun initView() {
-        tv_top.text = getString(R.string.mine_cache)
-        iv_top.setOnClickListener(this)
-        rv.layoutManager = LinearLayoutManager(
+    override fun initView(savedInstanceState: Bundle?) {
+        binding!!.tvTop.text = getString(R.string.mine_cache)
+        binding!!.ivTop.setOnClickListener(this)
+        binding!!.rv.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
             false
         )
-        (rv.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-        rv.adapter = adapter
+        (binding!!.rv.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+        binding!!.rv.adapter = adapter
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: VideoBean? = adapter.data[position] as VideoBean?
             bean?.let {
@@ -104,9 +93,9 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             bean?.let {
                 when (view.id) {
                     R.id.tv_delete -> {
-                        val builder = AlertDialog.Builder(context)
-                        builder.setMessage(context.resources.getString(R.string.delete_tip))
-                        builder.setPositiveButton(context.resources.getString(R.string.yes)) { dialog, _ ->
+                        val builder = AlertDialog.Builder(context!!)
+                        builder.setMessage(context!!.resources.getString(R.string.delete_tip))
+                        builder.setPositiveButton(context!!.resources.getString(R.string.yes)) { dialog, _ ->
                             dialog.dismiss()
                             if (FileUtil.deleteFile(it.savePath)) {
                                 adapter.removeAt(position)
@@ -116,11 +105,11 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                                 dbManager.update(it)
                             }
                             if (adapter.data.size == 0) {
-                                rv.visibility = View.GONE
-                                tv_hint.visibility = View.VISIBLE
+                                binding!!.rv.visibility = View.GONE
+                                binding!!.tvHint.visibility = View.VISIBLE
                             }
                         }
-                        builder.setNegativeButton(context.resources.getString(R.string.no)) { dialog, _ ->
+                        builder.setNegativeButton(context!!.resources.getString(R.string.no)) { dialog, _ ->
                             dialog.dismiss()
                             val swipe = adapter.getViewByPosition(
                                 position,
@@ -136,7 +125,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
     }
 
-    private fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         dbManager.findCache()?.let {
             it.forEach { bean ->
                 if ((FileUtil.isFileExist(bean.savePath)
@@ -150,14 +139,29 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             if (beans.size > 0) {
-                rv.visibility = View.VISIBLE
-                tv_hint.visibility = View.GONE
+                binding!!.rv.visibility = View.VISIBLE
+                binding!!.tvHint.visibility = View.GONE
             } else {
-                rv.visibility = View.GONE
-                tv_hint.visibility = View.VISIBLE
+                binding!!.rv.visibility = View.GONE
+                binding!!.tvHint.visibility = View.VISIBLE
             }
             adapter.setList(beans)
-            adapter.addFooterView(FooterUtil.getFooter(context, color(R.color.app_black)))
+            adapter.addFooterView(FooterUtil.getFooter(context!!, color(R.color.app_black)))
+        }
+    }
+
+    override fun onDestroy() {
+        dbManager.close()
+        super.onDestroy()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.iv_top -> {
+                if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
+                    onBackPressed()
+                }
+            }
         }
     }
 

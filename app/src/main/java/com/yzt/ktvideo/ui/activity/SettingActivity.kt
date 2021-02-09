@@ -1,26 +1,32 @@
 package com.yzt.ktvideo.ui.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.base.BaseActivity
 import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
-import kotlinx.android.synthetic.main.activity_cache.*
+import com.yzt.ktvideo.databinding.ActivitySettingBinding
 
 /**
  * 设置
  *
  * @author yzt 2021/2/9
  */
-class SettingActivity : AppCompatActivity(), View.OnClickListener {
+class SettingActivity : BaseActivity(), View.OnClickListener {
 
-    private var context: Context = this
-    private var activity: SettingActivity = this
+    private var binding: ActivitySettingBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
@@ -28,9 +34,15 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_setting)
-        initView()
-        initData()
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        binding!!.tvTop.text = getString(R.string.mine_setting)
+        binding!!.ivTop.setOnClickListener(this)
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+
     }
 
     override fun onClick(v: View?) {
@@ -41,15 +53,6 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
-    }
-
-    private fun initView() {
-        tv_top.text = getString(R.string.mine_setting)
-        iv_top.setOnClickListener(this)
-    }
-
-    private fun initData() {
-
     }
 
 }
