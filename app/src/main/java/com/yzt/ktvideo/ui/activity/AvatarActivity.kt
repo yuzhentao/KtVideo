@@ -6,6 +6,8 @@ import com.yzt.ktvideo.R
 
 /**
  * 头像
+ *
+ * @author yzt 2021/2/9
  */
 class AvatarActivity : AppCompatActivity() {
 

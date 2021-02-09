@@ -19,7 +19,7 @@ import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.discover.R
-import com.yzt.discover.adapter.DiscoverPagerAdapter
+import com.yzt.discover.adapter.DiscoverDetailPagerAdapter
 import com.yzt.discover.databinding.ActivityDiscoverDetailBinding
 import com.yzt.discover.fragment.DiscoverLeftFragment
 import com.yzt.discover.fragment.DiscoverRightFragment
@@ -29,6 +29,8 @@ import kotlin.math.abs
 
 /**
  * 发现详情
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_DISCOVER_DETAIL)
 class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
@@ -207,7 +209,7 @@ class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
                     titles.add(name)
                 }
             }
-            binding!!.vp.adapter = DiscoverPagerAdapter(
+            binding!!.vp.adapter = DiscoverDetailPagerAdapter(
                 supportFragmentManager,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
                 fragments,

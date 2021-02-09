@@ -14,11 +14,11 @@ import com.yzt.bean.SplashBean
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.newIntent
+import com.yzt.common.key.Constant.KT_VIDEO
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivitySplashBinding
-import com.yzt.common.key.Constant.KT_VIDEO
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.presenter.SplashPresenter
 import io.reactivex.Observable
@@ -27,7 +27,9 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 /**
- * 闪屏页
+ * 闪屏
+ *
+ * @author yzt 2021/2/9
  */
 const val SPLASH_URL = "splash_url"
 

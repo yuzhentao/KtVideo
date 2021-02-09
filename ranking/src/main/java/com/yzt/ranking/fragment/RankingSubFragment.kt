@@ -19,7 +19,9 @@ import com.yzt.ranking.databinding.FragmentRankingSubBinding
 import com.yzt.ranking.viewmodel.RankingSubViewModel
 
 /**
- * 排行
+ * 排行-子Fragment
+ *
+ * @author yzt 2021/2/9
  */
 class RankingSubFragment : BaseFragment() {
 

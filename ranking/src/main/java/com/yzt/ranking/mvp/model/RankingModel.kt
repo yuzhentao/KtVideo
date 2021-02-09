@@ -8,6 +8,11 @@ import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
+/**
+ * 排行
+ *
+ * @author yzt 2021/2/9
+ */
 class RankingModel {
 
     fun loadData(context: Context): Observable<RankingBean>? {

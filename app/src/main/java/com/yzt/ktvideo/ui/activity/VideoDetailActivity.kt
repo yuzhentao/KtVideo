@@ -49,6 +49,8 @@ import java.io.FileInputStream
 
 /**
  * 视频详情
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_VIDEO_DETAIL)
 class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {

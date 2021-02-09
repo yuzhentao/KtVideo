@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
  * 设置
+ *
+ * @author yzt 2021/2/9
  */
 class SettingActivity : AppCompatActivity(), View.OnClickListener {
 

@@ -8,6 +8,11 @@ import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
+/**
+ * 发现详情
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverDetailModel {
 
     fun loadData(context: Context, id: String): Observable<DiscoverDetailBean>? {

@@ -12,6 +12,8 @@ import com.yzt.mine.databinding.ActivityCommentBinding
 
 /**
  * 评论
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_COMMENT)
 class CommentActivity : BaseActivity(), View.OnClickListener {

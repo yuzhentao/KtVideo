@@ -10,6 +10,11 @@ import com.yzt.bean.HomeBean
 import com.yzt.common.util.ImageUtil
 import com.yzt.home.R
 
+/**
+ * 首页
+ *
+ * @author yzt 2021/2/9
+ */
 class HomeAdapter(data: MutableList<HomeBean.Issue.Item>?) :
     BaseQuickAdapter<HomeBean.Issue.Item, BaseViewHolder>(R.layout.item_home, data) {
 

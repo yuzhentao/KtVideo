@@ -21,6 +21,11 @@ import com.yzt.ktvideo.mvp.contract.HotSearchContract
 import com.yzt.ktvideo.mvp.presenter.HotSearchPresenter
 import kotlinx.android.synthetic.main.fragment_search.*
 
+/**
+ * 搜索
+ *
+ * @author yzt 2021/2/9
+ */
 class SearchFragment : DialogFragment(),
     View.OnClickListener,
     ViewTreeObserver.OnPreDrawListener,

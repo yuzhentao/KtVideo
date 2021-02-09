@@ -23,6 +23,8 @@ import com.yzt.discover.mvp.presenter.DiscoverDetailRightPresenter
 
 /**
  * 发现详情-广场
+ *
+ * @author yzt 2021/2/9
  */
 class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 

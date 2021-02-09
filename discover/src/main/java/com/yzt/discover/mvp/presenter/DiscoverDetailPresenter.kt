@@ -7,6 +7,11 @@ import com.yzt.discover.mvp.model.DiscoverDetailModel
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 发现详情
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) :
     DiscoverDetailContract.Presenter {
 

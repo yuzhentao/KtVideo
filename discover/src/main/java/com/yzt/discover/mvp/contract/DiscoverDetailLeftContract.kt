@@ -4,6 +4,11 @@ import com.yzt.bean.DiscoverDetailLeftBean
 import com.yzt.common.base.BasePresenter
 import com.yzt.common.base.BaseView
 
+/**
+ * 发现详情-推荐
+ *
+ * @author yzt 2021/2/9
+ */
 interface DiscoverDetailLeftContract {
 
     interface View : BaseView<Presenter> {

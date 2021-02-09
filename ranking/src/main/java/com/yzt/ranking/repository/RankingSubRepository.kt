@@ -8,6 +8,11 @@ import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
+/**
+ * 排行-子Fragment
+ *
+ * @author yzt 2021/2/9
+ */
 object RankingSubRepository {
 
     fun loadData(context: Context, strategy: String): Observable<RankingSubBean>? {

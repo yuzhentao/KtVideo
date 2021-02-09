@@ -12,6 +12,11 @@ import com.yzt.ktvideo.R
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * 观看记录
+ *
+ * @author yzt 2021/2/9
+ */
 class WatchAdapter(data: MutableList<VideoBean>?) :
     BaseQuickAdapter<VideoBean, BaseViewHolder>(R.layout.item_watch, data) {
 

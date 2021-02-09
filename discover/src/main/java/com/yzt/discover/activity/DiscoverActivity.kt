@@ -6,6 +6,8 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.discover.databinding.ActivityDiscoverBinding
 
 /**
+ * 发现
+ *
  * @author yzt 2020/12/31
  */
 class DiscoverActivity : BaseActivity() {

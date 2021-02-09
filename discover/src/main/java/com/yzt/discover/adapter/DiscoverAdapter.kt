@@ -10,6 +10,11 @@ import com.yzt.common.extension.color
 import com.yzt.common.util.ImageUtil
 import com.yzt.discover.R
 
+/**
+ * 发现
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverAdapter(data: MutableList<DiscoverBean.Item.Data>?) :
     BaseQuickAdapter<DiscoverBean.Item.Data, BaseViewHolder>(R.layout.item_discover, data) {
 

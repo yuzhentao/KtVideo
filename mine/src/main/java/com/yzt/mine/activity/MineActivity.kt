@@ -6,6 +6,8 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.mine.databinding.ActivityMineBinding
 
 /**
+ * 我的
+ *
  * @author yzt 2020/12/31
  */
 class MineActivity : BaseActivity() {

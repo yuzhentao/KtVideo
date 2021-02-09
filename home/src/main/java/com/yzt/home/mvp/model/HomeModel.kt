@@ -7,6 +7,11 @@ import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
+/**
+ * 首页
+ *
+ * @author yzt 2021/2/9
+ */
 class HomeModel {
 
     fun loadData(context: Context, isFirst: Boolean, date: String?): Observable<HomeBean>? {

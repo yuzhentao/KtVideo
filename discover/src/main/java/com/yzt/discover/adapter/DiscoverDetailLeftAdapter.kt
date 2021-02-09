@@ -24,6 +24,11 @@ import com.yzt.common.util.ViewUtil
 import com.yzt.common.view.expandtextview.ExpandLayout
 import com.yzt.discover.R
 
+/**
+ * 发现详情-推荐
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) :
     BaseQuickAdapter<DiscoverDetailLeftBean.Item.Data.Content, BaseViewHolder>(
         R.layout.item_discover_detail,

@@ -24,6 +24,8 @@ import kotlinx.android.synthetic.main.activity_cache.*
 
 /**
  * 观看记录
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_WATCH)
 class WatchActivity : AppCompatActivity(), View.OnClickListener, SearchContract.View {

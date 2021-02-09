@@ -9,6 +9,11 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 排行-子Fragment
+ *
+ * @author yzt 2021/2/9
+ */
 class RankingSubViewModel : ViewModel() {
 
     val liveData: MutableLiveData<MutableList<RankingSubBean.Item.Data.Content.DataX>> by lazy {

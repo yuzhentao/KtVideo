@@ -7,6 +7,11 @@ import com.yzt.home.mvp.model.HomeModel
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 首页
+ *
+ * @author yzt 2021/2/9
+ */
 class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.Presenter {
 
     private var context: Context? = null

@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.yzt.bean.RankingBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.ranking.R
-import com.yzt.ranking.adapter.RankingAdapter
+import com.yzt.ranking.adapter.RankingPagerAdapter
 import com.yzt.ranking.databinding.FragmentRankingBinding
 import com.yzt.ranking.mvp.contract.RankingContract
 import com.yzt.ranking.mvp.presenter.RankingPresenter
@@ -82,7 +82,7 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             fragments.add(monthFragment)
             fragments.add(allFragment)
 
-            binding!!.vp.adapter = RankingAdapter(
+            binding!!.vp.adapter = RankingPagerAdapter(
                 fragmentManager!!,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
                 fragments,

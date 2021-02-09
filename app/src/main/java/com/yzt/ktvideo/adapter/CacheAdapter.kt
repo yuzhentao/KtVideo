@@ -19,6 +19,11 @@ import com.yzt.ktvideo.R
 import com.yzt.ktvideo.view.progressbutton.ProgressButton
 import timber.log.Timber
 
+/**
+ * 我的缓存
+ *
+ * @author yzt 2021/2/9
+ */
 class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDbManager) :
     BaseQuickAdapter<VideoBean, BaseViewHolder>(R.layout.item_cache, data) {
 

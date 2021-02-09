@@ -10,6 +10,11 @@ import com.yzt.bean.VideoRelatedBean
 import com.yzt.common.util.ImageUtil
 import com.yzt.ktvideo.R
 
+/**
+ * 视频详情-相关推荐
+ *
+ * @author yzt 2021/2/9
+ */
 class VideoRelatedAdapter(data: MutableList<VideoRelatedBean.Item.Data>?) :
     BaseQuickAdapter<VideoRelatedBean.Item.Data, BaseViewHolder>(
         R.layout.item_video_related, data

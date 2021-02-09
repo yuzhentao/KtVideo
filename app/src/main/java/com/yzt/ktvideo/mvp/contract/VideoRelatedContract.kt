@@ -1,9 +1,14 @@
 package com.yzt.ktvideo.mvp.contract
 
+import com.yzt.bean.VideoRelatedBean
 import com.yzt.common.base.BasePresenter
 import com.yzt.common.base.BaseView
-import com.yzt.bean.VideoRelatedBean
 
+/**
+ * 视频详情-相关推荐
+ *
+ * @author yzt 2021/2/9
+ */
 interface VideoRelatedContract {
 
     interface View : BaseView<Presenter> {

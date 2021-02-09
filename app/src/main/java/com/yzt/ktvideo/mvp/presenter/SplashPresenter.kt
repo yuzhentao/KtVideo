@@ -7,6 +7,11 @@ import com.yzt.ktvideo.mvp.model.SplashModel
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 闪屏
+ *
+ * @author yzt 2021/2/9
+ */
 class SplashPresenter(context: Context, view: SplashContract.View) : SplashContract.Presenter {
 
     private var context: Context? = null

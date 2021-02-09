@@ -8,6 +8,11 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 发现
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverPresenter(context: Context?, view: DiscoverContract.View) :
     DiscoverContract.Presenter {
 

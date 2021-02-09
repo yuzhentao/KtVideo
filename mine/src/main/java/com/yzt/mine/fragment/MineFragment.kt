@@ -11,6 +11,8 @@ import com.yzt.mine.R
 import com.yzt.mine.databinding.FragmentMineBinding
 
 /**
+ * 我的
+ *
  * @author yzt 2020/12/31
  */
 class MineFragment : BaseFragment(), View.OnClickListener {

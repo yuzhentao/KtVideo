@@ -1,13 +1,18 @@
 package com.yzt.ktvideo.mvp.model
 
 import android.content.Context
-import com.yzt.common.util.AppUtil
 import com.yzt.bean.SplashBean
 import com.yzt.common.extension.ioMain
+import com.yzt.common.util.AppUtil
 import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
+/**
+ * 闪屏
+ *
+ * @author yzt 2021/2/9
+ */
 class SplashModel {
 
     fun loadData(context: Context): Observable<SplashBean>? {

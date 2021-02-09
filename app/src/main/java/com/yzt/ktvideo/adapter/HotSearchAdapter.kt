@@ -5,6 +5,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yzt.ktvideo.R
 
+/**
+ * 热门搜索词
+ *
+ * @author yzt 2021/2/9
+ */
 class HotSearchAdapter(data: MutableList<String>?) :
     BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_search, data) {
 

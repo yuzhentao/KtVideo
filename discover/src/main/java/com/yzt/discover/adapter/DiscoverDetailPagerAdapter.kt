@@ -1,10 +1,15 @@
-package com.yzt.ranking.adapter
+package com.yzt.discover.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class RankingAdapter(
+/**
+ * 发现详情-分页
+ *
+ * @author yzt 2021/2/9
+ */
+class DiscoverDetailPagerAdapter(
     fm: FragmentManager,
     behavior: Int,
     var beans: MutableList<Fragment>,

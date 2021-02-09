@@ -34,7 +34,9 @@ import io.reactivex.disposables.Disposable
 import java.util.*
 
 /**
- * 主类
+ * 入口
+ *
+ * @author yzt 2021/2/9
  */
 class MainActivity : BaseActivity(), View.OnClickListener {
 

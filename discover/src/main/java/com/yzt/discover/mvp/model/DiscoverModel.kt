@@ -8,6 +8,11 @@ import com.yzt.ktvideo.network.ApiService
 import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
+/**
+ * 发现
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverModel {
 
     fun loadData(context: Context): Observable<DiscoverBean>? {

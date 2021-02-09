@@ -6,6 +6,11 @@ import com.yzt.ktvideo.mvp.model.HotSearchModel
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 热门搜索词
+ *
+ * @author yzt 2021/2/9
+ */
 class HotSearchPresenter(context: Context, view: HotSearchContract.View) :
     HotSearchContract.Presenter {
 

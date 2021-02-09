@@ -12,6 +12,8 @@ import com.yzt.mine.databinding.ActivityFeedbackBinding
 
 /**
  * 意见反馈
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_FEEDBACK)
 class FeedbackActivity : BaseActivity(), View.OnClickListener {

@@ -8,6 +8,11 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 视频详情-相关推荐
+ *
+ * @author yzt 2021/2/9
+ */
 class VideoRelatedPresenter(context: Context?, view: VideoRelatedContract.View) :
     VideoRelatedContract.Presenter {
 

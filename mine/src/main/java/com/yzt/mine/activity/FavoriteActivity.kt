@@ -12,6 +12,8 @@ import com.yzt.mine.databinding.ActivityFavoriteBinding
 
 /**
  * 收藏
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_FAVORITE)
 class FavoriteActivity : BaseActivity(), View.OnClickListener {

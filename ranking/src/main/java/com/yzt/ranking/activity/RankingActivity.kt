@@ -6,6 +6,8 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.ranking.databinding.ActivityRankingBinding
 
 /**
+ * 排行
+ *
  * @author yzt 2020/12/31
  */
 class RankingActivity : BaseActivity() {

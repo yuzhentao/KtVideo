@@ -24,6 +24,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * 登录
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_LOGIN)
 class LoginActivity : BaseActivity(), View.OnClickListener {

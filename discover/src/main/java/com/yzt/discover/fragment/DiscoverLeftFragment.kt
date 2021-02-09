@@ -23,6 +23,8 @@ import com.yzt.discover.mvp.presenter.DiscoverDetailLeftPresenter
 
 /**
  * 发现详情-推荐
+ *
+ * @author yzt 2021/2/9
  */
 class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 

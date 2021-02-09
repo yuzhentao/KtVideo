@@ -8,6 +8,11 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
+/**
+ * 发现详情-广场
+ *
+ * @author yzt 2021/2/9
+ */
 class DiscoverDetailRightPresenter(context: Context, view: DiscoverDetailRightContract.View) :
     DiscoverDetailRightContract.Presenter {
 

@@ -6,6 +6,8 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.home.databinding.ActivityHomeBinding
 
 /**
+ * 首页
+ *
  * @author yzt 2020/12/31
  */
 class HomeActivity : BaseActivity() {
