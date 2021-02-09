@@ -82,14 +82,14 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
                         Aria.download(this).load(item.downloadId!!).stop()
                         item.downloadState = DownloadState.PAUSE.name
                         dbManager.update(item)
-                        notifyItemChanged(position, 1)
+                        notifyItemChanged(position)
                     }
                     DownloadState.PAUSE.name -> {
                         Timber.tag("缓存").e("恢复>>>${item.title}")
                         Aria.download(this).load(item.downloadId!!).resume()
                         item.downloadState = DownloadState.DOWNLOADING.name
                         dbManager.update(item)
-                        notifyItemChanged(position, 1)
+                        notifyItemChanged(position)
                     }
                     DownloadState.COMPLETE.name -> {
                         ARouter
