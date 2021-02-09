@@ -4,6 +4,9 @@
 
     <application>
         <activity android:name="com.yzt.mine.activity.MineActivity" />
+        <activity android:name="com.yzt.mine.activity.FavoriteActivity" />
+        <activity android:name="com.yzt.mine.activity.CommentActivity" />
+        <activity android:name="com.yzt.mine.activity.FeedbackActivity" />
     </application>
 
 </manifest>

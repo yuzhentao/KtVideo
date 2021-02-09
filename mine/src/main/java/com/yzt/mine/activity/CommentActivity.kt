@@ -1,27 +1,33 @@
-package com.yzt.ktvideo.ui.activity
+package com.yzt.mine.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yzt.common.base.BaseActivity
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
-import com.yzt.ktvideo.R
-import kotlinx.android.synthetic.main.activity_cache.*
+import com.yzt.mine.R
+import com.yzt.mine.databinding.ActivityCommentBinding
 
 /**
  * 评论
  */
 @Route(path = Constant.PATH_COMMENT)
-class CommentActivity : AppCompatActivity(), View.OnClickListener {
+class CommentActivity : BaseActivity(), View.OnClickListener {
 
-    private var context: Context = this
-    private var activity: CommentActivity = this
+    private var binding: ActivityCommentBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setLayoutId(): Int? {
+        return null
+    }
+
+    override fun setLayoutView(): View? {
+        binding = ActivityCommentBinding.inflate(layoutInflater)
+        return binding?.root
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
@@ -29,9 +35,15 @@ class CommentActivity : AppCompatActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
-        setContentView(R.layout.activity_comment)
-        initView()
-        initData()
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        binding!!.tvTop.text = getString(R.string.mine_comment)
+        binding!!.ivTop.setOnClickListener(this)
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+
     }
 
     override fun onClick(v: View?) {
@@ -42,15 +54,6 @@ class CommentActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
-    }
-
-    private fun initView() {
-        tv_top.text = getString(R.string.mine_comment)
-        iv_top.setOnClickListener(this)
-    }
-
-    private fun initData() {
-
     }
 
 }
