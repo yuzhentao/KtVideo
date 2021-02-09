@@ -193,14 +193,12 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             val second = minute?.times(60)?.let { itt ->
                 duration.minus(itt)
             }
-            val realMinute: String
-            val realSecond: String
-            realMinute = if (minute!! < 10) {
+            val realMinute: String = if (minute!! < 10) {
                 "0$minute"
             } else {
                 minute.toString()
             }
-            realSecond = if (second!! < 10) {
+            val realSecond: String = if (second!! < 10) {
                 "0$second"
             } else {
                 second.toString()
@@ -238,7 +236,7 @@ class VideoDetailActivity : AppCompatActivity(), VideoRelatedContract.View {
             adapter.addHeaderView(header)
             adapter.setOnItemClickListener { adapter, _, position ->
                 val bean: VideoRelatedBean.Item.Data? =
-                    adapter.data[position] as VideoRelatedBean.Item.Data
+                    adapter.data[position] as VideoRelatedBean.Item.Data?
                 bean?.let { itt ->
                     val videoBean = VideoBean(
                         itt.id,
