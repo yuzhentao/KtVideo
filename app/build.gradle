@@ -55,11 +55,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation rootProject.ext.otherDependencies["glide"]
     kapt rootProject.ext.otherDependencies["glide_compiler"]
-    implementation rootProject.ext.otherDependencies["aria"]
     kapt rootProject.ext.otherDependencies["aria_compiler"]
-    implementation rootProject.ext.otherDependencies["arouter_api"]
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
     implementation project(':common')
     if (!isNeedHome.toBoolean()) {

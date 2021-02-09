@@ -68,6 +68,8 @@ dependencies {
     api rootProject.ext.otherDependencies["gsy_video_player_ex_so"]
     api rootProject.ext.otherDependencies["glide"]
     kapt rootProject.ext.otherDependencies["glide_compiler"]
+    api rootProject.ext.otherDependencies["aria"]
+    kapt rootProject.ext.otherDependencies["aria_compiler"]
     api rootProject.ext.otherDependencies["arouter_api"]
     kapt rootProject.ext.otherDependencies["arouter_compiler"]
     api project(':bean')
