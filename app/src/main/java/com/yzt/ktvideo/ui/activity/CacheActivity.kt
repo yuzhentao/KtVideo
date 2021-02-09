@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.arialyy.annotations.Download
@@ -30,6 +31,8 @@ import timber.log.Timber
 
 /**
  * 我的缓存
+ *
+ * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_CACHE)
 class CacheActivity : AppCompatActivity(), View.OnClickListener {
@@ -83,9 +86,10 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             LinearLayoutManager.VERTICAL,
             false
         )
+        (rv.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         rv.adapter = adapter
         adapter.setOnItemClickListener { adapter, _, position ->
-            val bean: VideoBean? = adapter.data[position] as VideoBean
+            val bean: VideoBean? = adapter.data[position] as VideoBean?
             bean?.let {
                 ARouter
                     .getInstance()
@@ -96,7 +100,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         adapter.setOnItemChildClickListener { adapter, view, position ->
-            val bean: VideoBean? = adapter.data[position] as VideoBean
+            val bean: VideoBean? = adapter.data[position] as VideoBean?
             bean?.let {
                 when (view.id) {
                     R.id.tv_delete -> {
@@ -166,7 +170,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                     Timber.tag("缓存").e("进度>>>${task.percent}>>>${bean.title}")
                     bean.downloadProgress = task.percent
                     dbManager.update(bean)
-                    adapter.notifyItemChanged(index, 1)
+                    adapter.notifyItemChanged(index)
                 }
             }
         }
@@ -183,7 +187,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                     bean.downloadState = DownloadState.ERROR.name
                     bean.downloadProgress = 0
                     dbManager.update(bean)
-                    adapter.notifyItemChanged(index, 1)
+                    adapter.notifyItemChanged(index)
                 }
             }
         }
@@ -200,7 +204,7 @@ class CacheActivity : AppCompatActivity(), View.OnClickListener {
                     bean.downloadState = DownloadState.COMPLETE.name
                     bean.downloadProgress = 100
                     dbManager.update(bean)
-                    adapter.notifyItemChanged(index, 1)
+                    adapter.notifyItemChanged(index)
                 }
             }
         }
