@@ -44,19 +44,10 @@
             android:name=".ui.activity.AvatarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.FavoriteActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.CommentActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.CacheActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.WatchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.FeedbackActivity"
             android:screenOrientation="portrait" />
 
         <provider
