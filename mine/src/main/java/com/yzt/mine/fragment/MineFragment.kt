@@ -34,12 +34,19 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     override fun initView() {
         binding!!.ivAvatar.setOnClickListener(this)
+        binding!!.ivAvatar.setOnLongClickListener { true }
         binding!!.tvLogin.setOnClickListener(this)
+        binding!!.tvLogin.setOnLongClickListener { true }
         binding!!.llFavorite.setOnClickListener(this)
+        binding!!.llFavorite.setOnLongClickListener { true }
         binding!!.llComment.setOnClickListener(this)
+        binding!!.llComment.setOnLongClickListener { true }
         binding!!.tvCache.setOnClickListener(this)
+        binding!!.tvCache.setOnLongClickListener { true }
         binding!!.tvWatch.setOnClickListener(this)
+        binding!!.tvWatch.setOnLongClickListener { true }
         binding!!.tvFeedback.setOnClickListener(this)
+        binding!!.tvFeedback.setOnLongClickListener { true }
         binding!!.tvCache.typeface =
             Typeface.createFromAsset(context?.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
         binding!!.tvWatch.typeface =

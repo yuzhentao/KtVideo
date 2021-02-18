@@ -78,6 +78,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     override fun initView(savedInstanceState: Bundle?) {
         binding?.tb!!.setOnClickListener(this)
+        binding?.tb!!.setOnLongClickListener { true }
         binding?.tvTitle!!.text = getToday()
         binding?.tvTitle!!.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
         binding?.tvTitle!!.visibility = View.VISIBLE
@@ -85,10 +86,15 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         binding?.ivSearch!!.setOnClickListener(this)
         binding?.rbHome!!.isSelected = true
         binding?.rbHome!!.setOnClickListener(this)
+        binding?.rbHome!!.setOnLongClickListener { true }
         binding?.rbDiscover!!.setOnClickListener(this)
+        binding?.rbDiscover!!.setOnLongClickListener { true }
         binding?.rbRanking!!.setOnClickListener(this)
+        binding?.rbRanking!!.setOnLongClickListener { true }
         binding?.rbMine!!.setOnClickListener(this)
+        binding?.rbMine!!.setOnLongClickListener { true }
         binding?.fab!!.setOnClickListener(this)
+        binding?.fab!!.setOnLongClickListener { true }
         initFragment(savedInstanceState)
     }
 

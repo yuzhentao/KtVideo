@@ -72,6 +72,7 @@ class WatchActivity : BaseActivity(), View.OnClickListener, SearchContract.View 
             binding!!.tvTop.text = intent.getStringExtra("key")
         }
         binding!!.ivTop.setOnClickListener(this)
+        binding!!.ivTop.setOnLongClickListener { true }
         binding!!.rv.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding!!.rv.adapter = adapter

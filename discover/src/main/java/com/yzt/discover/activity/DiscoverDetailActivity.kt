@@ -76,7 +76,9 @@ class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
         }
 
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.ivBack.setOnLongClickListener { true }
         binding!!.ivTop.setOnClickListener(this)
+        binding!!.ivTop.setOnLongClickListener { true }
         binding!!.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
             when {
                 i == 0 -> {//展开
@@ -104,6 +106,7 @@ class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
         binding!!.tvFollow.typeface =
             Typeface.createFromAsset(assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
         binding!!.tvFollow.setOnClickListener(this)
+        binding!!.tvFollow.setOnLongClickListener { true }
 
         val leftFragment = DiscoverLeftFragment()
         val leftBundle = Bundle()

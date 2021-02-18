@@ -70,6 +70,7 @@ class CacheActivity : BaseActivity(), View.OnClickListener {
     override fun initView(savedInstanceState: Bundle?) {
         binding!!.tvTop.text = getString(R.string.mine_cache)
         binding!!.ivTop.setOnClickListener(this)
+        binding!!.ivTop.setOnLongClickListener { true }
         binding!!.rv.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,

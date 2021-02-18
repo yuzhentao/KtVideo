@@ -133,7 +133,9 @@ class SearchFragment : DialogFragment(),
             presenter.load()
             circularRevealAnim.setAnimListener(this)
             iv_back.setOnClickListener(this)
+            iv_back.setOnLongClickListener { true }
             iv_search.setOnClickListener(this)
+            iv_search.setOnLongClickListener { true }
             iv_search.viewTreeObserver.addOnPreDrawListener(this)
             et.requestFocus()
             tv_hot.typeface =

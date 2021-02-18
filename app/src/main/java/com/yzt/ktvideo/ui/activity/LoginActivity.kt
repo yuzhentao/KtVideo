@@ -51,6 +51,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun initView(savedInstanceState: Bundle?) {
         ViewUtil.setMargins(binding?.ivTop!!, 0, ImmersionBar.getStatusBarHeight(this), 0, 0)
         binding?.ivTop!!.setOnClickListener(this)
+        binding?.ivTop!!.setOnLongClickListener { true }
         val drawableUser = drawable(R.drawable.ic_login_user)
         drawableUser!!.setBounds(
             0,

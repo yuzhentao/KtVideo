@@ -180,6 +180,7 @@ class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
                     }
                 }
             }
+            llDownload.setOnLongClickListener { true }
             playUrl?.let { itt ->
                 if (dbManager.find(itt) == null) {
                     dbManager.insert(it)
