@@ -58,21 +58,19 @@ class WatchActivity : BaseActivity(), View.OnClickListener, SearchContract.View 
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
-            navigationBarColor(R.color.white_50)
-            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        binding!!.ivTop.setOnClickListener(this)
+        binding!!.ivTop.setOnLongClickListener { true }
         noKey = intent.getStringExtra("key").isNullOrEmpty()
         if (noKey!!) {
             binding!!.tvTop.text = getString(R.string.mine_watch)
         } else {
             binding!!.tvTop.text = intent.getStringExtra("key")
         }
-        binding!!.ivTop.setOnClickListener(this)
-        binding!!.ivTop.setOnLongClickListener { true }
         binding!!.rv.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding!!.rv.adapter = adapter

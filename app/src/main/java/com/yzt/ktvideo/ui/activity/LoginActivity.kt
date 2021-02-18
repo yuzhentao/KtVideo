@@ -44,14 +44,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun init(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.transparent)
-            statusBarDarkFont(true)
         }
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        ViewUtil.setMargins(binding?.ivTop!!, 0, ImmersionBar.getStatusBarHeight(this), 0, 0)
-        binding?.ivTop!!.setOnClickListener(this)
-        binding?.ivTop!!.setOnLongClickListener { true }
+        ViewUtil.setMargins(binding!!.ivTop, 0, ImmersionBar.getStatusBarHeight(this), 0, 0)
+        binding!!.ivTop.setOnClickListener(this)
+        binding!!.ivTop.setOnLongClickListener { true }
         val drawableUser = drawable(R.drawable.ic_login_user)
         drawableUser!!.setBounds(
             0,
@@ -59,8 +58,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat()),
             DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat())
         )
-        binding?.etUser!!.setCompoundDrawables(drawableUser, null, null, null)
-        binding?.etUser!!.compoundDrawablePadding = dimensionPixelOffset(R.dimen.x5)
+        binding!!.etUser.setCompoundDrawables(drawableUser, null, null, null)
+        binding!!.etUser.compoundDrawablePadding = dimensionPixelOffset(R.dimen.x5)
         val drawablePassword = drawable(R.drawable.ic_login_password)
         drawablePassword!!.setBounds(
             0,
@@ -68,8 +67,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat()),
             DimenUtil.px2dp(context!!, dimensionPixelOffset(R.dimen.x40).toFloat())
         )
-        binding?.etPassword!!.setCompoundDrawables(drawablePassword, null, null, null)
-        binding?.etPassword!!.compoundDrawablePadding = dimensionPixelOffset(R.dimen.x5)
+        binding!!.etPassword.setCompoundDrawables(drawablePassword, null, null, null)
+        binding!!.etPassword.compoundDrawablePadding = dimensionPixelOffset(R.dimen.x5)
         val flags = Spanned.SPAN_INCLUSIVE_EXCLUSIVE
         val spannableString = SpannableString(getString(R.string.login_protocol))
         val colorSpan = ForegroundColorSpan(color(R.color.white))

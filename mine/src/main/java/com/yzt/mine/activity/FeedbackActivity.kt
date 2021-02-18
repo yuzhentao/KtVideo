@@ -3,10 +3,12 @@ package com.yzt.mine.activity
 import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.mine.R
 import com.yzt.mine.databinding.ActivityFeedbackBinding
 
@@ -33,16 +35,14 @@ class FeedbackActivity : BaseActivity(), View.OnClickListener {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
-            navigationBarColor(R.color.white_50)
-            navigationBarDarkIcon(true)
-            fitsSystemWindows(true)
         }
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        binding!!.tvTop.text = getString(R.string.mine_feedback)
+        ViewUtil.setMargins(binding!!.tb, 0, ImmersionBar.getStatusBarHeight(this), 0, 0)
         binding!!.ivTop.setOnClickListener(this)
         binding!!.ivTop.setOnLongClickListener { true }
+        binding!!.tvTop.text = getString(R.string.mine_feedback)
     }
 
     override fun initData(savedInstanceState: Bundle?) {

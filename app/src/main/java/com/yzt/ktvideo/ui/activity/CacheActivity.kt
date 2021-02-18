@@ -60,17 +60,15 @@ class CacheActivity : BaseActivity(), View.OnClickListener {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
-            navigationBarColor(R.color.white_50)
-            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         Aria.download(this).register()
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        binding!!.tvTop.text = getString(R.string.mine_cache)
         binding!!.ivTop.setOnClickListener(this)
         binding!!.ivTop.setOnLongClickListener { true }
+        binding!!.tvTop.text = getString(R.string.mine_cache)
         binding!!.rv.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
