@@ -23,6 +23,7 @@
     <string name="mine_cache">我的缓存</string>
     <string name="mine_watch">观看记录</string>
     <string name="mine_feedback">意见反馈</string>
+    <string name="mine_avatar">头像</string>
     <string name="cache_no">暂无内容</string>
     <string name="cache_start">缓存开始</string>
     <string name="cache_fail">缓存失败</string>

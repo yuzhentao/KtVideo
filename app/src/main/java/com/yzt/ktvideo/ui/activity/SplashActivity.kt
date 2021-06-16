@@ -61,7 +61,7 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     override fun initView(savedInstanceState: Bundle?) {
         presenter.load()
         val font: Typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
-        binding?.tvIntroEn!!.typeface = font
+        binding!!.tvIntroEn.typeface = font
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -90,16 +90,16 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
                 override fun onNext(url: String) {
                     if (bean?.startPage != null && !bean.startPage!!.imageUrl.isNullOrEmpty()) {
-                        ImageUtil.show(context!!, binding?.ivBg, bean.startPage!!.imageUrl!!)
+                        ImageUtil.show(context!!, binding!!.ivBg, bean.startPage!!.imageUrl!!)
                         if (bean.startPage!!.imageUrl != url) {
                             SPUtils.getInstance(context!!, KT_VIDEO)
                                 .put(SPLASH_URL, bean.startPage!!.imageUrl!!)
                         }
                     } else {
                         if (url.isNotEmpty()) {
-                            ImageUtil.show(context!!, binding?.ivBg, url)
+                            ImageUtil.show(context!!, binding!!.ivBg, url)
                         } else {
-                            binding?.ivBg!!.setImageResource(R.drawable.bg_splash)
+                            binding!!.ivBg.setImageResource(R.drawable.bg_splash)
                         }
                     }
                 }
@@ -108,9 +108,9 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
                 }
             })
-        val alphaAnimBg = ObjectAnimator.ofFloat(binding?.ivBg, "alpha", 0.1F, 1.0F)
-        val scaleAnimXBg = ObjectAnimator.ofFloat(binding?.ivBg, "scaleX", 1.0F, 1.2F)
-        val scaleAnimYBg = ObjectAnimator.ofFloat(binding?.ivBg, "scaleY", 1.0F, 1.2F)
+        val alphaAnimBg = ObjectAnimator.ofFloat(binding!!.ivBg, "alpha", 0.1F, 1.0F)
+        val scaleAnimXBg = ObjectAnimator.ofFloat(binding!!.ivBg, "scaleX", 1.0F, 1.2F)
+        val scaleAnimYBg = ObjectAnimator.ofFloat(binding!!.ivBg, "scaleY", 1.0F, 1.2F)
         val animSetBg = AnimatorSet()
         animSetBg.play(alphaAnimBg).with(scaleAnimXBg).with(scaleAnimYBg)
         animSetBg.duration = 2000
@@ -133,7 +133,7 @@ class SplashActivity : BaseActivity(), SplashContract.View {
             }
         })
         animSetBg.start()
-        val alphaAnimLogo = ObjectAnimator.ofFloat(binding?.ivLogo, "alpha", 0.1F, 1.0F)
+        val alphaAnimLogo = ObjectAnimator.ofFloat(binding!!.ivLogo, "alpha", 0.1F, 1.0F)
         alphaAnimLogo.duration = 2000
         alphaAnimLogo.interpolator = FastOutSlowInInterpolator()
         alphaAnimLogo.start()

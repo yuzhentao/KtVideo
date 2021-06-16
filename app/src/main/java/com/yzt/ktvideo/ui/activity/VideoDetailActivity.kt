@@ -100,9 +100,7 @@ class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
 
     override fun init(savedInstanceState: Bundle?) {
         immersionBar {
-            statusBarColor(R.color.white)
-            statusBarDarkFont(true)
-            navigationBarColor(R.color.black)
+            statusBarColor(R.color.black)
             fitsSystemWindows(true)
         }
         ARouter.getInstance().inject(this)
@@ -180,6 +178,7 @@ class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
                     }
                 }
             }
+            llDownload.setOnLongClickListener { true }
             playUrl?.let { itt ->
                 if (dbManager.find(itt) == null) {
                     dbManager.insert(it)

@@ -11,7 +11,7 @@ import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.gyf.immersionbar.BarHide
+import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
@@ -22,6 +22,7 @@ import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.SPUtils
+import com.yzt.common.util.ViewUtil
 import com.yzt.discover.fragment.DiscoverFragment
 import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R
@@ -68,27 +69,30 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
-            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
-            navigationBarColor(R.color.black)
-            navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
         requestPermissions()
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        binding?.tb!!.setOnClickListener(this)
-        binding?.tvTitle!!.text = getToday()
-        binding?.tvTitle!!.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
-        binding?.tvTitle!!.visibility = View.VISIBLE
-        binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
-        binding?.ivSearch!!.setOnClickListener(this)
-        binding?.rbHome!!.isSelected = true
-        binding?.rbHome!!.setOnClickListener(this)
-        binding?.rbDiscover!!.setOnClickListener(this)
-        binding?.rbRanking!!.setOnClickListener(this)
-        binding?.rbMine!!.setOnClickListener(this)
-        binding?.fab!!.setOnClickListener(this)
+        binding!!.tb.setOnClickListener(this)
+        binding!!.tb.setOnLongClickListener { true }
+        binding!!.tvTitle.text = getToday()
+        binding!!.tvTitle.typeface = Typeface.createFromAsset(assets, "fonts/Lobster-1.4.otf")
+        binding!!.tvTitle.visibility = View.VISIBLE
+        binding!!.ivSearch.setImageResource(R.drawable.ic_search_black)
+        binding!!.ivSearch.setOnClickListener(this)
+        binding!!.rbHome.isSelected = true
+        binding!!.rbHome.setOnClickListener(this)
+        binding!!.rbHome.setOnLongClickListener { true }
+        binding!!.rbDiscover.setOnClickListener(this)
+        binding!!.rbDiscover.setOnLongClickListener { true }
+        binding!!.rbRanking.setOnClickListener(this)
+        binding!!.rbRanking.setOnLongClickListener { true }
+        binding!!.rbMine.setOnClickListener(this)
+        binding!!.rbMine.setOnLongClickListener { true }
+        binding!!.fab.setOnClickListener(this)
+        binding!!.fab.setOnLongClickListener { true }
         initFragment(savedInstanceState)
     }
 
@@ -134,7 +138,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.tb -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.tb, 1000)) {
-                    when (binding?.rgBottom!!.checkedRadioButtonId) {
+                    when (binding!!.rgBottom.checkedRadioButtonId) {
                         R.id.rb_home -> {
                             homeFragment?.scrollToTop()
                         }
@@ -146,7 +150,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.iv_search -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_search, 1000)) {
-                    if (binding?.rbMine!!.isChecked) {//设置
+                    if (binding!!.rbMine.isChecked) {//设置
                         newIntent<SettingActivity>(false)
                     } else {//搜索
                         searchFragment = SearchFragment()
@@ -156,19 +160,19 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_home -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_home, 1000)) {
-                    binding?.tb!!.setBackgroundColor(
+                    binding!!.tb.setBackgroundColor(
                         if (changeBgHome) {
                             color(R.color.white_50)
                         } else color(R.color.white)
                     )
-                    binding?.tb!!.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
-                    binding?.tvTitle!!.text = getToday()
-                    binding?.tvTitle!!.visibility = View.VISIBLE
-                    binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
-                    binding?.rbHome!!.isSelected = true
-                    binding?.rbDiscover!!.isSelected = false
-                    binding?.rbRanking!!.isSelected = false
-                    binding?.rbMine!!.isSelected = false
+                    binding!!.tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding!!.tvTitle.text = getToday()
+                    binding!!.tvTitle.visibility = View.VISIBLE
+                    binding!!.ivSearch.setImageResource(R.drawable.ic_search_black)
+                    binding!!.rbHome.isSelected = true
+                    binding!!.rbDiscover.isSelected = false
+                    binding!!.rbRanking.isSelected = false
+                    binding!!.rbMine.isSelected = false
                     supportFragmentManager
                         .beginTransaction()
                         .show(homeFragment!!)
@@ -180,19 +184,19 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_discover -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_discover, 1000)) {
-                    binding?.tb!!.setBackgroundColor(
+                    binding!!.tb.setBackgroundColor(
                         if (changeBgDiscover) {
                             color(R.color.white_50)
                         } else color(R.color.white)
                     )
-                    binding?.tb!!.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
-                    binding?.tvTitle!!.setText(R.string.discover)
-                    binding?.tvTitle!!.visibility = View.VISIBLE
-                    binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
-                    binding?.rbHome!!.isSelected = false
-                    binding?.rbDiscover!!.isSelected = true
-                    binding?.rbRanking!!.isSelected = false
-                    binding?.rbMine!!.isSelected = false
+                    binding!!.tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding!!.tvTitle.setText(R.string.discover)
+                    binding!!.tvTitle.visibility = View.VISIBLE
+                    binding!!.ivSearch.setImageResource(R.drawable.ic_search_black)
+                    binding!!.rbHome.isSelected = false
+                    binding!!.rbDiscover.isSelected = true
+                    binding!!.rbRanking.isSelected = false
+                    binding!!.rbMine.isSelected = false
                     supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -204,15 +208,15 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_ranking -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_ranking, 1000)) {
-                    binding?.tb!!.setBackgroundColor(color(R.color.white))
-                    binding?.tb!!.elevation = 0F
-                    binding?.tvTitle!!.setText(R.string.ranking)
-                    binding?.tvTitle!!.visibility = View.VISIBLE
-                    binding?.ivSearch!!.setImageResource(R.drawable.ic_search_black)
-                    binding?.rbHome!!.isSelected = false
-                    binding?.rbDiscover!!.isSelected = false
-                    binding?.rbRanking!!.isSelected = true
-                    binding?.rbMine!!.isSelected = false
+                    binding!!.tb.setBackgroundColor(color(R.color.white))
+                    binding!!.tb.elevation = 0F
+                    binding!!.tvTitle.setText(R.string.ranking)
+                    binding!!.tvTitle.visibility = View.VISIBLE
+                    binding!!.ivSearch.setImageResource(R.drawable.ic_search_black)
+                    binding!!.rbHome.isSelected = false
+                    binding!!.rbDiscover.isSelected = false
+                    binding!!.rbRanking.isSelected = true
+                    binding!!.rbMine.isSelected = false
                     supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -224,14 +228,14 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rb_mine -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.rb_mine, 1000)) {
-                    binding?.tb!!.setBackgroundColor(color(R.color.white))
-                    binding?.tb!!.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
-                    binding?.tvTitle!!.visibility = View.GONE
-                    binding?.ivSearch!!.setImageResource(R.drawable.ic_settings_black)
-                    binding?.rbHome!!.isSelected = false
-                    binding?.rbDiscover!!.isSelected = false
-                    binding?.rbRanking!!.isSelected = false
-                    binding?.rbMine!!.isSelected = true
+                    binding!!.tb.setBackgroundColor(color(R.color.white))
+                    binding!!.tb.elevation = DimenUtil.dp2px(context!!, 4).toFloat()
+                    binding!!.tvTitle.visibility = View.GONE
+                    binding!!.ivSearch.setImageResource(R.drawable.ic_settings_black)
+                    binding!!.rbHome.isSelected = false
+                    binding!!.rbDiscover.isSelected = false
+                    binding!!.rbRanking.isSelected = false
+                    binding!!.rbMine.isSelected = true
                     supportFragmentManager
                         .beginTransaction()
                         .hide(homeFragment!!)
@@ -325,7 +329,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             .commit()
         homeFragment?.setOnRvScrollListener(object : OnRvScrollListener {
             override fun onRvScroll(totalDy: Int) {
-                binding?.tb!!.setBackgroundColor(
+                binding!!.tb.setBackgroundColor(
                     if (totalDy < 0) {
                         this@MainActivity.changeBgHome = true
                         color(R.color.white_50)
@@ -338,7 +342,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         })
         discoverFragment?.setOnRvScrollListener(object : OnRvScrollListener {
             override fun onRvScroll(totalDy: Int) {
-                binding?.tb!!.setBackgroundColor(
+                binding!!.tb.setBackgroundColor(
                     if (totalDy < 0) {
                         this@MainActivity.changeBgDiscover = true
                         color(R.color.white_50)

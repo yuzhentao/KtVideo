@@ -42,6 +42,7 @@ class CommentActivity : BaseActivity(), View.OnClickListener {
     override fun initView(savedInstanceState: Bundle?) {
         binding!!.tvTop.text = getString(R.string.mine_comment)
         binding!!.ivTop.setOnClickListener(this)
+        binding!!.ivTop.setOnLongClickListener { true }
     }
 
     override fun initData(savedInstanceState: Bundle?) {

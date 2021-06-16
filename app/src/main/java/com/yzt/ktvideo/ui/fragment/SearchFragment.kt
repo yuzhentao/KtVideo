@@ -71,8 +71,6 @@ class SearchFragment : DialogFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         immersionBar {
-            statusBarColor(R.color.white)
-            statusBarDarkFont(true)
             fitsSystemWindows(true)
         }
         initView()
@@ -133,7 +131,9 @@ class SearchFragment : DialogFragment(),
             presenter.load()
             circularRevealAnim.setAnimListener(this)
             iv_back.setOnClickListener(this)
+            iv_back.setOnLongClickListener { true }
             iv_search.setOnClickListener(this)
+            iv_search.setOnLongClickListener { true }
             iv_search.viewTreeObserver.addOnPreDrawListener(this)
             et.requestFocus()
             tv_hot.typeface =
@@ -146,7 +146,7 @@ class SearchFragment : DialogFragment(),
             rv.adapter = adapter
             rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
             adapter.setOnItemClickListener { adapter, _, position ->
-                val bean: String? = adapter.data[position] as String
+                val bean: String? = adapter.data[position] as String?
                 bean?.let { itt ->
                     KeyBoardUtil.closeKeyboard(it, et)
                     ARouter
