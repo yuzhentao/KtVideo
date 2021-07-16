@@ -3,9 +3,9 @@ package com.yzt.ktvideo.mvp.model
 import android.content.Context
 import com.yzt.bean.VideoRelatedBean
 import com.yzt.common.extension.ioMain
+import com.yzt.common.network.ApiService
+import com.yzt.common.network.RetrofitClient
 import com.yzt.common.util.AppUtil
-import com.yzt.ktvideo.network.ApiService
-import com.yzt.ktvideo.network.RetrofitClient
 import io.reactivex.Observable
 
 /**

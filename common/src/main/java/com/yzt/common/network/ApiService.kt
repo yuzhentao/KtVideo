@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.network
+package com.yzt.common.network
 
 import com.yzt.bean.*
 import com.yzt.common.key.Constant

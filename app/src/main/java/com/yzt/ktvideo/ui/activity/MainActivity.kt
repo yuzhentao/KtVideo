@@ -11,7 +11,6 @@ import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.color
@@ -22,7 +21,6 @@ import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.SPUtils
-import com.yzt.common.util.ViewUtil
 import com.yzt.discover.fragment.DiscoverFragment
 import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R

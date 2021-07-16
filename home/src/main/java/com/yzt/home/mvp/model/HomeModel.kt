@@ -3,8 +3,8 @@ package com.yzt.home.mvp.model
 import android.content.Context
 import com.yzt.bean.HomeBean
 import com.yzt.common.extension.ioMain
-import com.yzt.ktvideo.network.ApiService
-import com.yzt.ktvideo.network.RetrofitClient
+import com.yzt.common.network.ApiService
+import com.yzt.common.network.RetrofitClient
 import io.reactivex.Observable
 
 /**
