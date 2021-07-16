@@ -1,4 +1,4 @@
-package com.yzt.ktvideo.network
+package com.yzt.common.network
 
 import android.content.Context
 
