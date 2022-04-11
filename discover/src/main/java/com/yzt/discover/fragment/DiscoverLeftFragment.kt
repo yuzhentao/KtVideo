@@ -37,7 +37,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
     }
 
     private val presenter: DiscoverDetailLeftPresenter by lazy {
-        DiscoverDetailLeftPresenter(context!!, this)
+        DiscoverDetailLeftPresenter(requireContext(), this)
     }
 
     private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
@@ -57,8 +57,8 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
     }
 
     override fun initView() {
-        val playTop = DimenUtil.getHeightInPx() / 2 - DimenUtil.getHeightInPx() / 4
-        val playBottom = DimenUtil.getHeightInPx() / 2 + DimenUtil.getHeightInPx() / 4
+        val playTop = DimenUtil.getHeightInPx(requireContext()) / 2 - DimenUtil.getHeightInPx(requireContext()) / 4
+        val playBottom = DimenUtil.getHeightInPx(requireContext()) / 2 + DimenUtil.getHeightInPx(requireContext()) / 4
         scrollCalculatorHelper =
             ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -139,7 +139,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
 
     override fun setData(beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) {
         adapter.setList(beans)
-        adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
+        adapter.addFooterView(FooterUtil.getFooter(requireContext(), requireContext().color(R.color.app_black)))
     }
 
     fun scrollToTop() {

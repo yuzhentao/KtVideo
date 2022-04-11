@@ -1,10 +1,14 @@
 package com.yzt.common.util
 
 import android.content.Context
+import android.os.Build
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.Display
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import com.yzt.common.base.App
+
 
 object DimenUtil {
 
@@ -16,22 +20,20 @@ object DimenUtil {
         return App.app!!.resources.displayMetrics.heightPixels.toFloat()
     }
 
-    fun getWidthInPx(): Float {
+    fun getWidthInPx(context: Context): Float {
         val dm = DisplayMetrics()
-        val wm: WindowManager? = App.app!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        return if (wm != null) {
-            wm.defaultDisplay.getRealMetrics(dm)
+        return if (getDisplay(context) != null) {
+            getDisplay(context)?.getRealMetrics(dm)
             dm.widthPixels.toFloat()
         } else {
             0F
         }
     }
 
-    fun getHeightInPx(): Float {
+    fun getHeightInPx(context: Context): Float {
         val dm = DisplayMetrics()
-        val wm: WindowManager? = App.app!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        return if (wm != null) {
-            wm.defaultDisplay.getRealMetrics(dm)
+        return if (getDisplay(context) != null) {
+            getDisplay(context)?.getRealMetrics(dm)
             dm.heightPixels.toFloat()
         } else {
             0F
@@ -90,6 +92,25 @@ object DimenUtil {
             sp.toFloat(),
             context.resources.displayMetrics
         ).toInt()
+    }
+
+    private fun getDisplay(context: Context): Display? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            getDisplayR(context)
+        } else {
+            getDisplayL()
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    private fun getDisplayR(context: Context): Display? {
+        return context.display
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private fun getDisplayL(): Display? {
+        val wm = App.app!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager?
+        return wm?.defaultDisplay
     }
 
 }

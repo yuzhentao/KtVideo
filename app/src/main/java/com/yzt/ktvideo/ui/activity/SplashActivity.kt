@@ -15,6 +15,7 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.newIntent
 import com.yzt.common.key.Constant.KT_VIDEO
+import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
