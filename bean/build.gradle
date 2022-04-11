@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'realm-android'
 }
@@ -29,8 +28,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api rootProject.ext.dependencies["ktx"]
-    api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["material"]
+    api 'androidx.core:core-ktx:1.7.0'
+    api 'androidx.appcompat:appcompat:1.4.1'
+    api 'com.google.android.material:material:1.5.0'
 }

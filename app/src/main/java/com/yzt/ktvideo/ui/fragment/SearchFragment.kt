@@ -17,9 +17,9 @@ import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.KeyBoardUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HotSearchAdapter
+import com.yzt.ktvideo.databinding.FragmentSearchBinding
 import com.yzt.ktvideo.mvp.contract.HotSearchContract
 import com.yzt.ktvideo.mvp.presenter.HotSearchPresenter
-import kotlinx.android.synthetic.main.fragment_search.*
 
 /**
  * 搜索
@@ -32,6 +32,8 @@ class SearchFragment : DialogFragment(),
     DialogInterface.OnKeyListener,
     CircularRevealAnim.AnimListener,
     HotSearchContract.View {
+
+    private var binding: FragmentSearchBinding? = null
 
     val simpleName: String by lazy {
         this::class.java.simpleName
@@ -46,7 +48,7 @@ class SearchFragment : DialogFragment(),
     }
 
     private val presenter: HotSearchPresenter by lazy {
-        HotSearchPresenter(context!!, this)
+        HotSearchPresenter(requireContext(), this)
     }
 
     private val circularRevealAnim: CircularRevealAnim by lazy {
@@ -64,8 +66,8 @@ class SearchFragment : DialogFragment(),
         savedInstanceState: Bundle?
     ): View? {
         activity = requireActivity()
-        rootView = inflater.inflate(R.layout.fragment_search, container, false)
-        return rootView
+        binding = FragmentSearchBinding.inflate(inflater)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,8 +99,8 @@ class SearchFragment : DialogFragment(),
     }
 
     override fun onPreDraw(): Boolean {
-        iv_search.viewTreeObserver.removeOnPreDrawListener(this)
-        circularRevealAnim.show(iv_search, rootView)
+        binding!!.ivSearch.viewTreeObserver.removeOnPreDrawListener(this)
+        circularRevealAnim.show(binding!!.ivSearch, rootView)
         return true
     }
 
@@ -112,13 +114,13 @@ class SearchFragment : DialogFragment(),
     }
 
     override fun onHideAnimationEnd() {
-        et.setText("")
+        binding!!.et.setText("")
         dismiss()
     }
 
     override fun onShowAnimationEnd() {
         if (isVisible) {
-            KeyBoardUtil.openKeyboard(context, et)
+            KeyBoardUtil.openKeyboard(context, binding!!.et)
         }
     }
 
@@ -130,25 +132,25 @@ class SearchFragment : DialogFragment(),
         context?.let {
             presenter.load()
             circularRevealAnim.setAnimListener(this)
-            iv_back.setOnClickListener(this)
-            iv_back.setOnLongClickListener { true }
-            iv_search.setOnClickListener(this)
-            iv_search.setOnLongClickListener { true }
-            iv_search.viewTreeObserver.addOnPreDrawListener(this)
-            et.requestFocus()
-            tv_hot.typeface =
+            binding!!.ivBack.setOnClickListener(this)
+            binding!!.ivBack.setOnLongClickListener { true }
+            binding!!.ivSearch.setOnClickListener(this)
+            binding!!.ivSearch.setOnLongClickListener { true }
+            binding!!.ivSearch.viewTreeObserver.addOnPreDrawListener(this)
+            binding!!.et.requestFocus()
+            binding!!.tvHot.typeface =
                 Typeface.createFromAsset(activity.assets, "fonts/FZLanTingHeiS-DB1-GB-Regular.TTF")
             dialog?.setOnKeyListener(this)
             val layoutManager = FlexboxLayoutManager(it)
             layoutManager.flexDirection = FlexDirection.ROW//主轴排列方式
             layoutManager.flexWrap = FlexWrap.WRAP//是否换行
-            rv.layoutManager = layoutManager
-            rv.adapter = adapter
-            rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+            binding!!.rv.layoutManager = layoutManager
+            binding!!.rv.adapter = adapter
+            binding!!.rv.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
             adapter.setOnItemClickListener { adapter, _, position ->
                 val bean: String? = adapter.data[position] as String?
                 bean?.let { itt ->
-                    KeyBoardUtil.closeKeyboard(it, et)
+                    KeyBoardUtil.closeKeyboard(it, binding!!.et)
                     ARouter
                         .getInstance()
                         .build(Constant.PATH_WATCH)
@@ -170,14 +172,14 @@ class SearchFragment : DialogFragment(),
     }
 
     private fun hideAnim() {
-        KeyBoardUtil.closeKeyboard(context, et)
-        circularRevealAnim.hide(iv_search, rootView)
+        KeyBoardUtil.closeKeyboard(context, binding!!.et)
+        circularRevealAnim.hide(binding!!.ivSearch, rootView)
     }
 
     private fun search() {
-        val key = et.text.toString()
+        val key = binding!!.et.text.toString()
         if (key.isNotEmpty()) {
-            KeyBoardUtil.closeKeyboard(context, et)
+            KeyBoardUtil.closeKeyboard(context, binding!!.et)
             ARouter
                 .getInstance()
                 .build(Constant.PATH_WATCH)

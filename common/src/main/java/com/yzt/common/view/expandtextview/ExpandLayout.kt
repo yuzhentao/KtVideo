@@ -7,12 +7,20 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatTextView
 import com.yzt.common.R
 import com.yzt.common.extension.color
 import com.yzt.common.util.DimenUtil
-import kotlinx.android.synthetic.main.layout_expand_view.view.*
 
-class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+class ExpandLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
+
+    private var llExpandView: LinearLayout? = null
+    private var etvContent: ExpandTextView? = null
+    private var tvTip: AppCompatTextView? = null
 
     private var listener: OnExpandListener? = null
 
@@ -31,72 +39,92 @@ class ExpandLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     init {
         initAttrs(context, attrs)
         orientation = VERTICAL
-        LayoutInflater.from(context).inflate(R.layout.layout_expand_view, this)
-//        etv_content.textSize = DimenUtil.px2sp(context, contentTextSize).toFloat()
-        etv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX, contentTextSize)
-        etv_content.setTextColor(contentTextColor)
-        etv_content.setMaxLineCount(maxCollapsedLines)
-        etv_content.setEllipsizeText(ellipsizeText)
-//        tv_tip.textSize = DimenUtil.px2sp(context, expandCollapseTextSize).toFloat()
-        tv_tip.setTextSize(TypedValue.COMPLEX_UNIT_PX, expandCollapseTextSize)
-        tv_tip.setTextColor(expandCollapseTextColor)
-        tv_tip.gravity = when (expandCollapseTextGravity) {
+        val view = LayoutInflater.from(context).inflate(R.layout.layout_expand_view, this)
+        etvContent = view.findViewById(R.id.etv_content)
+        tvTip = view.findViewById(R.id.tv_tip)
+//        etvContent!!.textSize = DimenUtil.px2sp(context, contentTextSize).toFloat()
+        etvContent!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, contentTextSize)
+        etvContent!!.setTextColor(contentTextColor)
+        etvContent!!.setMaxLineCount(maxCollapsedLines)
+        etvContent!!.setEllipsizeText(ellipsizeText)
+//        tvTip!!.textSize = DimenUtil.px2sp(context, expandCollapseTextSize).toFloat()
+        tvTip!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, expandCollapseTextSize)
+        tvTip!!.setTextColor(expandCollapseTextColor)
+        tvTip!!.gravity = when (expandCollapseTextGravity) {
             0 -> Gravity.START
             1 -> Gravity.CENTER
             2 -> Gravity.END
             else -> Gravity.START
         }
-        tv_tip.post {
-            val lp = tv_tip.layoutParams as LayoutParams
+        tvTip!!.post {
+            val lp = tvTip!!.layoutParams as LayoutParams
 //            lp.topMargin = expandCollapseTextMarginTop.toInt()
-            lp.topMargin = -tv_tip.height
+            lp.topMargin = -tvTip!!.height
             lp.gravity = when (expandCollapseTextLayoutGravity) {
                 0 -> Gravity.START
                 1 -> Gravity.CENTER
                 2 -> Gravity.END
                 else -> Gravity.START
             }
-            tv_tip.layoutParams = lp
-            etv_content.requestLayout()
-            tv_tip.requestLayout()
+            tvTip!!.layoutParams = lp
+            etvContent!!.requestLayout()
+            tvTip!!.requestLayout()
         }
     }
 
     private fun initAttrs(context: Context, attrs: AttributeSet?) {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.ExpandLayout)
-        contentTextSize = ta.getDimension(R.styleable.ExpandLayout_contentTextSize, DimenUtil.sp2px(context, 18F).toFloat())
-        contentTextColor = ta.getColor(R.styleable.ExpandLayout_contentTextColor, context.color(R.color.app_black))
+        contentTextSize = ta.getDimension(
+            R.styleable.ExpandLayout_contentTextSize,
+            DimenUtil.sp2px(context, 18F).toFloat()
+        )
+        contentTextColor =
+            ta.getColor(R.styleable.ExpandLayout_contentTextColor, context.color(R.color.app_black))
         maxCollapsedLines = ta.getInt(R.styleable.ExpandLayout_maxCollapsedLines, 3)
-        ellipsizeText = if (ta.getString(R.styleable.ExpandLayout_ellipsizeText).isNullOrEmpty()) "..." else ta.getString(R.styleable.ExpandLayout_ellipsizeText)!!
-        expandText = if (ta.getString(R.styleable.ExpandLayout_expandText).isNullOrEmpty()) "更多" else ta.getString(R.styleable.ExpandLayout_expandText)!!
-        collapseText = if (ta.getString(R.styleable.ExpandLayout_collapseText).isNullOrEmpty()) "" else ta.getString(R.styleable.ExpandLayout_collapseText)!!
-        expandCollapseTextSize = ta.getDimension(R.styleable.ExpandLayout_expandCollapseTextSize, DimenUtil.sp2px(context, 18F).toFloat())
-        expandCollapseTextColor = ta.getColor(R.styleable.ExpandLayout_expandCollapseTextColor, context.color(R.color.app_pink))
+        ellipsizeText = if (ta.getString(R.styleable.ExpandLayout_ellipsizeText)
+                .isNullOrEmpty()
+        ) "..." else ta.getString(R.styleable.ExpandLayout_ellipsizeText)!!
+        expandText = if (ta.getString(R.styleable.ExpandLayout_expandText)
+                .isNullOrEmpty()
+        ) "更多" else ta.getString(R.styleable.ExpandLayout_expandText)!!
+        collapseText = if (ta.getString(R.styleable.ExpandLayout_collapseText)
+                .isNullOrEmpty()
+        ) "" else ta.getString(R.styleable.ExpandLayout_collapseText)!!
+        expandCollapseTextSize = ta.getDimension(
+            R.styleable.ExpandLayout_expandCollapseTextSize,
+            DimenUtil.sp2px(context, 18F).toFloat()
+        )
+        expandCollapseTextColor = ta.getColor(
+            R.styleable.ExpandLayout_expandCollapseTextColor,
+            context.color(R.color.app_pink)
+        )
         expandCollapseTextGravity = ta.getInt(R.styleable.ExpandLayout_expandCollapseTextGravity, 0)
-        expandCollapseTextLayoutGravity = ta.getInt(R.styleable.ExpandLayout_expandCollapseTextLayoutGravity, 0)
-        expandCollapseTextMarginTop = ta.getDimension(R.styleable.ExpandLayout_expandCollapseTextMarginTop, 0f)
+        expandCollapseTextLayoutGravity =
+            ta.getInt(R.styleable.ExpandLayout_expandCollapseTextLayoutGravity, 0)
+        expandCollapseTextMarginTop =
+            ta.getDimension(R.styleable.ExpandLayout_expandCollapseTextMarginTop, 0f)
         ta.recycle()
     }
 
     fun setText(text: String, expand: Boolean, listener: OnExpandListener) {
         this.listener = listener
-        ll_expand_view.setOnClickListener {
+        llExpandView!!.setOnClickListener {
             this.listener?.expandChange()
         }
-        etv_content.setChanged(expand)
-        etv_content.setText(text, expand, object : ExpandTextView.Callback {
+        etvContent!!.setChanged(expand)
+        etvContent!!.setText(text, expand, object : ExpandTextView.Callback {
             override fun onExpand() {
-                tv_tip.visibility = View.VISIBLE
-                tv_tip.text = collapseText
+                tvTip!!.visibility = View.VISIBLE
+                tvTip!!.text = collapseText
             }
 
             override fun onCollapse() {
-                tv_tip.visibility = View.VISIBLE
-                tv_tip.text = expandText
+                tvTip!!.visibility = View.VISIBLE
+                tvTip!!.text = expandText
             }
 
             override fun onLoss() {
-                tv_tip.visibility = View.GONE
+                tvTip!!.visibility = View.GONE
             }
         })
     }

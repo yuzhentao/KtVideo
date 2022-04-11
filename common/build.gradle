@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -33,41 +32,40 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api rootProject.ext.dependencies["ktx"]
-    api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["legacy_support_v4"]
-    api rootProject.ext.dependencies["constraint_layout"]
-    api rootProject.ext.dependencies["recycler_view"]
-    api rootProject.ext.dependencies["multidex"]
-    api rootProject.ext.dependencies["work_runtime_ktx"]
-    api rootProject.ext.dependencies["work_rajava2"]
-    api rootProject.ext.dependencies["lifecycle_livedata_ktx"]
-    api rootProject.ext.dependencies["lifecycle_viewmodel_ktx"]
-    api rootProject.ext.dependencies["lifecycle_extensions"]
-    api rootProject.ext.dependencies["material"]
-    api rootProject.ext.dependencies["flexbox"]
-    api rootProject.ext.dependencies["gson"]
-    api rootProject.ext.dependencies["material"]
-    api rootProject.ext.otherDependencies["rxjava2"]
-    api rootProject.ext.otherDependencies["rxjava2_rxandroid"]
-    api rootProject.ext.otherDependencies["retrofit2"]
-    api rootProject.ext.otherDependencies["retrofit2_converter_gson"]
-    api rootProject.ext.otherDependencies["retrofit2_adapter_rxjava2"]
-    api rootProject.ext.otherDependencies["retrofit2_logging_interceptor"]
-    api rootProject.ext.otherDependencies["timber"]
-    api rootProject.ext.otherDependencies["immersionbar"]
-    api rootProject.ext.otherDependencies["immersionbar_ktx"]
-    api rootProject.ext.otherDependencies["immersionbar_components"]
-    api rootProject.ext.otherDependencies["rxpermissions"]
-    api rootProject.ext.otherDependencies["base_recycler_view_adapter_helper"]
-    api rootProject.ext.otherDependencies["gsy_video_player_java"]
-    api rootProject.ext.otherDependencies["gsy_video_player_ex_so"]
-    api rootProject.ext.otherDependencies["glide"]
-    kapt rootProject.ext.otherDependencies["glide_compiler"]
-    api rootProject.ext.otherDependencies["aria"]
-    kapt rootProject.ext.otherDependencies["aria_compiler"]
-    api rootProject.ext.otherDependencies["arouter_api"]
-    kapt rootProject.ext.otherDependencies["arouter_compiler"]
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    api 'androidx.core:core-ktx:1.7.0'
+    api 'androidx.appcompat:appcompat:1.4.1'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.constraintlayout:constraintlayout:2.1.3'
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+    api 'androidx.multidex:multidex:2.0.1'
+    api 'androidx.work:work-runtime-ktx:2.7.1'
+    api 'androidx.work:work-rxjava2:2.7.1'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    api 'com.google.android.material:material:1.5.0'
+    api 'com.google.android.flexbox:flexbox:3.0.0'
+    api 'com.google.code.gson:gson:2.9.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.21'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.9.2'
+    api 'com.jakewharton.timber:timber:5.0.1'
+    api 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+    api 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+    api 'com.geyifeng.immersionbar:immersionbar-components:3.2.2'
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+    api 'com.shuyu:gsyVideoPlayer-java:8.0.0'
+    api 'com.shuyu:gsyVideoPlayer-ex_so:8.0.0'
+    api 'com.github.bumptech.glide:glide:4.13.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.0'
+    api 'com.arialyy.aria:core:3.8.15'
+    kapt 'com.arialyy.aria:compiler:3.8.15'
+    api 'com.alibaba:arouter-api:1.5.2'
+    kapt 'com.alibaba:arouter-compiler:1.5.2'
     api project(':bean')
 }

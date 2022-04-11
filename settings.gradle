@@ -1,4 +1,3 @@
-include ':bean'
 rootProject.name = "KtVideo"
 include ':app'
 include ':common'
@@ -6,3 +5,4 @@ include ':home'
 include ':discover'
 include ':ranking'
 include ':mine'
+include ':bean'

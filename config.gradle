@@ -7,62 +7,16 @@ ext {
     isNeedMine = false
 
     android = [
-            compileSdkVersion    : 30,
-            buildToolsVersion    : "30.0.2",
+            compileSdkVersion    : 31,
             minSdkVersion        : 23,
-            targetSdkVersion     : 30,
-            versionCode          : 3,
-            versionName          : "1.1.0",
+            targetSdkVersion     : 31,
+            versionCode          : 4,
+            versionName          : "1.1.1",
             applicationId        : "com.yzt.ktvideo",
             applicationHomeId    : "com.yzt.home",
             applicationDiscoverId: "com.yzt.discover",
             applicationRankingId : "com.yzt.ranking",
             applicationMineId    : "com.yzt.mine",
-    ]
-
-    version = [
-            work_version     : "2.4.0",
-            lifecycle_version: "2.2.0"
-    ]
-
-    dependencies = [
-            "ktx"                    : "androidx.core:core-ktx:1.3.2",
-            "appcompat"              : 'androidx.appcompat:appcompat:1.2.0',
-            "legacy_support_v4"      : 'androidx.legacy:legacy-support-v4:1.0.0',
-            "constraint_layout"      : 'androidx.constraintlayout:constraintlayout:2.0.4',
-            "recycler_view"          : 'androidx.recyclerview:recyclerview:1.1.0',
-            "multidex"               : 'androidx.multidex:multidex:2.0.1',
-            "work_runtime_ktx"       : "androidx.work:work-runtime-ktx:${version['work_version']}",
-            "work_rajava2"           : "androidx.work:work-rxjava2:${version['work_version']}",
-            "lifecycle_livedata_ktx" : "androidx.lifecycle:lifecycle-livedata-ktx:${version['lifecycle_version']}",
-            "lifecycle_viewmodel_ktx": "androidx.lifecycle:lifecycle-viewmodel-ktx:${version['lifecycle_version']}",
-            "lifecycle_extensions"   : "androidx.lifecycle:lifecycle-extensions:${version['lifecycle_version']}",
-            "material"               : 'com.google.android.material:material:1.2.1',
-            "flexbox"                : 'com.google.android:flexbox:1.1.1',
-            "gson"                   : 'com.google.code.gson:gson:2.8.6',
-    ]
-
-    otherDependencies = [
-            "rxjava2"                          : 'io.reactivex.rxjava2:rxjava:2.2.20',
-            "rxjava2_rxandroid"                : 'io.reactivex.rxjava2:rxandroid:2.1.1',
-            "retrofit2"                        : 'com.squareup.retrofit2:retrofit:2.9.0',
-            "retrofit2_converter_gson"         : 'com.squareup.retrofit2:converter-gson:2.9.0',
-            "retrofit2_adapter_rxjava2"        : 'com.squareup.retrofit2:adapter-rxjava2:2.9.0',
-            "retrofit2_logging_interceptor"    : 'com.squareup.okhttp3:logging-interceptor:4.2.2',
-            "timber"                           : 'com.jakewharton.timber:timber:4.7.1',
-            "glide"                            : 'com.github.bumptech.glide:glide:4.11.0',
-            "glide_compiler"                   : 'com.github.bumptech.glide:compiler:4.11.0',
-            "aria"                             : 'com.arialyy.aria:core:3.8.15',
-            "aria_compiler"                    : 'com.arialyy.aria:compiler:3.8.15',
-            "base_recycler_view_adapter_helper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6',
-            "gsy_video_player_java"            : 'com.shuyu:gsyVideoPlayer-java:8.0.0',
-            "gsy_video_player_ex_so"           : 'com.shuyu:gsyVideoPlayer-ex_so:8.0.0',
-            "immersionbar"                     : 'com.gyf.immersionbar:immersionbar:3.0.0',
-            "immersionbar_ktx"                 : 'com.gyf.immersionbar:immersionbar-ktx:3.0.0',
-            "immersionbar_components"          : 'com.gyf.immersionbar:immersionbar-components:3.0.0',
-            "rxpermissions"                    : 'com.github.tbruyelle:rxpermissions:0.10.2',
-            "arouter_api"                      : 'com.alibaba:arouter-api:1.5.1',
-            "arouter_compiler"                 : 'com.alibaba:arouter-compiler:1.5.1',
     ]
 
 }

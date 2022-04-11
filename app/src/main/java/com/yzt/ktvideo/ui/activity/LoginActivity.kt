@@ -20,7 +20,6 @@ import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityLoginBinding
-import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * 登录
@@ -75,7 +74,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         spannableString.setSpan(colorSpan, 11, getString(R.string.login_protocol).length, flags)
         val styleSpan = StyleSpan(Typeface.BOLD)
         spannableString.setSpan(styleSpan, 11, getString(R.string.login_protocol).length, flags)
-        tv_bottom.text = spannableString
+        binding!!.tvBottom.text = spannableString
     }
 
     override fun initData(savedInstanceState: Bundle?) {

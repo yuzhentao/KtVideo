@@ -3,7 +3,7 @@ package com.yzt.ranking.fragment
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -32,7 +32,7 @@ class RankingSubFragment : BaseFragment() {
     }
 
     private val viewModel: RankingSubViewModel by lazy {
-        ViewModelProviders.of(this).get(RankingSubViewModel::class.java)
+        ViewModelProvider(this).get(RankingSubViewModel::class.java)
     }
 
     override fun getLayoutId(): Int? {
@@ -58,8 +58,8 @@ class RankingSubFragment : BaseFragment() {
                         adapter.setList(itt)
                         adapter.addFooterView(
                             FooterUtil.getFooter(
-                                context!!,
-                                context!!.color(R.color.app_black)
+                                requireContext(),
+                                requireContext().color(R.color.app_black)
                             )
                         )
                     }
