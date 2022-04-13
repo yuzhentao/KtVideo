@@ -18,7 +18,7 @@ class VideoRelatedModel {
     fun loadData(context: Context, id: String?): Observable<VideoRelatedBean>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getVideoRelatedData(id!!, AppUtil.getOSModel())!!.ioMain()
+        return apiService?.getVideoRelatedData(id!!, AppUtil.getOSModel())?.ioMain()
     }
 
 }

@@ -54,7 +54,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
         binding!!.rv.layoutManager = GridLayoutManager(context, 2)
         binding!!.rv.adapter = adapter
         adapter.setOnItemClickListener { adapter, _, position ->
-            val bean: DiscoverBean.Item.Data? = adapter.data[position] as DiscoverBean.Item.Data
+            val bean: DiscoverBean.Item.Data? = adapter.data[position] as DiscoverBean.Item.Data?
             bean?.let {
                 ARouter
                     .getInstance()
@@ -81,7 +81,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     override fun setData(beans: MutableList<DiscoverBean.Item.Data>) {
         adapter.setList(beans)
-        adapter.addFooterView(FooterUtil.getFooter(context!!, context!!.color(R.color.app_black)))
+        adapter.addFooterView(FooterUtil.getFooter(requireContext(), requireContext().color(R.color.app_black)))
     }
 
     fun scrollToTop() {

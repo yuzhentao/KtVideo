@@ -45,14 +45,12 @@ class WatchAdapter(data: MutableList<VideoBean>?) :
         val second = minute?.times(60)?.let {
             duration.minus(it)
         }
-        val realMinute: String
-        val realSecond: String
-        realMinute = if (minute!! < 10) {
+        val realMinute: String = if (minute!! < 10) {
             "0$minute"
         } else {
             minute.toString()
         }
-        realSecond = if (second!! < 10) {
+        val realSecond: String = if (second!! < 10) {
             "0$second"
         } else {
             second.toString()

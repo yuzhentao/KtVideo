@@ -17,7 +17,7 @@ class HotSearchModel {
     fun loadData(context: Context): Observable<MutableList<String>>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getHotSearch(AppUtil.getOSModel())!!.ioMain()
+        return apiService?.getHotSearch(AppUtil.getOSModel())?.ioMain()
     }
 
 }

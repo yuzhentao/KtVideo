@@ -83,7 +83,7 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             fragments.add(allFragment)
 
             binding!!.vp.adapter = RankingPagerAdapter(
-                fragmentManager!!,
+                requireFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
                 fragments,
                 titles

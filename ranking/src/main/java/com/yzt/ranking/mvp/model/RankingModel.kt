@@ -3,9 +3,9 @@ package com.yzt.ranking.mvp.model
 import android.content.Context
 import com.yzt.bean.RankingBean
 import com.yzt.common.extension.ioMain
-import com.yzt.common.util.AppUtil
 import com.yzt.common.network.ApiService
 import com.yzt.common.network.RetrofitClient
+import com.yzt.common.util.AppUtil
 import io.reactivex.Observable
 
 /**
@@ -18,7 +18,7 @@ class RankingModel {
     fun loadData(context: Context): Observable<RankingBean>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getRankingData(AppUtil.getOSModel())!!.ioMain()
+        return apiService?.getRankingData(AppUtil.getOSModel())?.ioMain()
     }
 
 }

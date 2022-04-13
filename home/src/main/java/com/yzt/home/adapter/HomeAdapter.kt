@@ -38,14 +38,12 @@ class HomeAdapter(data: MutableList<HomeBean.Issue.Item>?) :
         duration?.let {
             val minute = it.div(60)
             val second = it.minus((minute.times(60)))
-            val realMinute: String
-            val realSecond: String
-            realMinute = if (minute < 10) {
+            val realMinute: String = if (minute < 10) {
                 "0$minute"
             } else {
                 minute.toString()
             }
-            realSecond = if (second < 10) {
+            val realSecond: String = if (second < 10) {
                 "0$second"
             } else {
                 second.toString()

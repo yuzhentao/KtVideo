@@ -18,7 +18,7 @@ class HomeModel {
         val apiService = RetrofitClient.getInstance(context, ApiService.BASE_URL).create(ApiService::class.java)
         return when (isFirst) {
             true -> apiService?.getHomeData()!!.ioMain()
-            false -> apiService?.getHomeMoreData(date.toString())!!.ioMain()
+            false -> apiService?.getHomeMoreData(date.toString())?.ioMain()
         }
     }
 

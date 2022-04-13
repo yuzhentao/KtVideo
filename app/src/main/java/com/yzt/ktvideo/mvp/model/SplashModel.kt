@@ -18,7 +18,7 @@ class SplashModel {
     fun loadData(context: Context): Observable<SplashBean>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getSplashData(AppUtil.getOSModel())!!.ioMain()
+        return apiService?.getSplashData(AppUtil.getOSModel())?.ioMain()
     }
 
 }

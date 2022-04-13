@@ -63,8 +63,8 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         binding!!.srl.setColorSchemeResources(R.color.app_pink)
         binding!!.srl.setProgressViewOffset(
             false,
-            context!!.dimensionPixelOffset(R.dimen.x40),
-            context!!.dimensionPixelOffset(R.dimen.x80)
+            requireContext().dimensionPixelOffset(R.dimen.x40),
+            requireContext().dimensionPixelOffset(R.dimen.x80)
         )
         binding!!.rv.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -92,7 +92,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             }
         })
         adapter.setOnItemClickListener { adapter, _, position ->
-            val bean: HomeBean.Issue.Item? = adapter.data[position] as HomeBean.Issue.Item
+            val bean: HomeBean.Issue.Item? = adapter.data[position] as HomeBean.Issue.Item?
             bean?.let {
                 val id = it.data?.id
                 val img = it.data?.cover?.feed
@@ -155,8 +155,8 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         } else if (adapter.data.size > 0) {
             adapter.addFooterView(
                 FooterUtil.getFooter(
-                    context!!,
-                    context!!.color(R.color.app_black)
+                    requireContext(),
+                    requireContext().color(R.color.app_black)
                 )
             )
         }

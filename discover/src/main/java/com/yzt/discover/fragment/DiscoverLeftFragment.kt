@@ -89,7 +89,7 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
         })
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: DiscoverDetailLeftBean.Item.Data.Content? =
-                adapter.data[position] as DiscoverDetailLeftBean.Item.Data.Content
+                adapter.data[position] as DiscoverDetailLeftBean.Item.Data.Content?
             bean?.let {
                 val id = it.data?.id
                 val img = it.data?.cover?.feed

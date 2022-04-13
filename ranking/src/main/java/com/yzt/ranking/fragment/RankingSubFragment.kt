@@ -73,7 +73,7 @@ class RankingSubFragment : BaseFragment() {
         binding!!.rv.adapter = adapter
         adapter.setOnItemClickListener { adapter, _, position ->
             val bean: RankingSubBean.Item.Data.Content.DataX? =
-                adapter.data[position] as RankingSubBean.Item.Data.Content.DataX
+                adapter.data[position] as RankingSubBean.Item.Data.Content.DataX?
             bean?.let { itt ->
                 val id = itt.id
                 val img = itt.cover?.feed
