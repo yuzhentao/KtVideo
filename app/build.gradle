@@ -53,9 +53,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.0'
     kapt 'com.arialyy.aria:compiler:3.8.15'
-    kapt 'com.alibaba:arouter-compiler:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.2'
     implementation project(':common')
     if (!isNeedHome.toBoolean()) {
         implementation project(':home')

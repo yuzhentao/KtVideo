@@ -51,6 +51,6 @@ android {
 }
 
 dependencies {
-    kapt 'com.alibaba:arouter-compiler:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.2'
     implementation project(':common')
 }
