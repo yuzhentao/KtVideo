@@ -15,8 +15,11 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name="com.yzt.discover.activity.DiscoverActivity">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
+        tools:replace="android:label">
+        <activity
+            android:name="com.yzt.discover.activity.DiscoverActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

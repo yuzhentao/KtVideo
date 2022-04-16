@@ -14,8 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_custom_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name="com.yzt.home.activity.HomeActivity">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
+        tools:replace="android:label">
+        <activity
+            android:name="com.yzt.home.activity.HomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
