@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yzt.bean.DiscoverDetailBean
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
@@ -33,7 +33,7 @@ import kotlin.math.abs
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_DISCOVER_DETAIL)
-class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
+class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
     DiscoverDetailContract.View {
 
     private var binding: ActivityDiscoverDetailBinding? = null
@@ -50,6 +50,10 @@ class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
     private var isChange: Boolean? = false
     var isFull: Boolean = false
 
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
+
     override fun setLayoutId(): Int? {
         return null
     }
@@ -59,7 +63,7 @@ class DiscoverDetailActivity : BaseActivity(), View.OnClickListener,
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)

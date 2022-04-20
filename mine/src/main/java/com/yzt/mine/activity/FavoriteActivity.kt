@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.mine.R
@@ -16,9 +16,13 @@ import com.yzt.mine.databinding.ActivityFavoriteBinding
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_FAVORITE)
-class FavoriteActivity : BaseActivity(), View.OnClickListener {
+class FavoriteActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityFavoriteBinding? = null
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
 
     override fun setLayoutId(): Int? {
         return null
@@ -29,7 +33,7 @@ class FavoriteActivity : BaseActivity(), View.OnClickListener {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)

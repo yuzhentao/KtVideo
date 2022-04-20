@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.bean.SearchBean
 import com.yzt.bean.VideoBean
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
@@ -27,7 +27,7 @@ import com.yzt.ktvideo.mvp.presenter.SearchPresenter
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_WATCH)
-class WatchActivity : BaseActivity(), View.OnClickListener, SearchContract.View {
+class WatchActivity : BaseAppCompatActivity(), View.OnClickListener, SearchContract.View {
 
     private var binding: ActivityWatchBinding? = null
 
@@ -45,6 +45,10 @@ class WatchActivity : BaseActivity(), View.OnClickListener, SearchContract.View 
 
     private var noKey: Boolean? = true
 
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
+
     override fun setLayoutId(): Int? {
         return null
     }
@@ -54,7 +58,7 @@ class WatchActivity : BaseActivity(), View.OnClickListener, SearchContract.View 
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)

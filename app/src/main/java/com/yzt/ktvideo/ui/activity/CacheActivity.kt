@@ -14,7 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.bean.DownloadState
 import com.yzt.bean.VideoBean
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.shortToast
@@ -34,7 +34,7 @@ import timber.log.Timber
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_CACHE)
-class CacheActivity : BaseActivity(), View.OnClickListener {
+class CacheActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityCacheBinding? = null
 
@@ -47,6 +47,10 @@ class CacheActivity : BaseActivity(), View.OnClickListener {
         VideoDbManager()
     }
 
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
+
     override fun setLayoutId(): Int? {
         return null
     }
@@ -56,7 +60,7 @@ class CacheActivity : BaseActivity(), View.OnClickListener {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)

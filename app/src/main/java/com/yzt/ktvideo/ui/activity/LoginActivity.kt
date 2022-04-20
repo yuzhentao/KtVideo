@@ -10,7 +10,7 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.drawable
@@ -27,9 +27,13 @@ import com.yzt.ktvideo.databinding.ActivityLoginBinding
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_LOGIN)
-class LoginActivity : BaseActivity(), View.OnClickListener {
+class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityLoginBinding? = null
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
 
     override fun setLayoutId(): Int? {
         return null
@@ -40,7 +44,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.transparent)
         }

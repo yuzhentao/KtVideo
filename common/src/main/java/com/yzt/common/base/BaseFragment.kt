@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
  */
 abstract class BaseFragment : Fragment() {
 
-    protected var activity: BaseActivity? = null
+    protected var appCompatActivity: BaseAppCompatActivity? = null
     protected var app: App? = null
 
     private var rootView: View? = null
@@ -68,7 +68,7 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         TAG = this.javaClass.simpleName
-        activity = getActivity() as BaseActivity?
+        appCompatActivity = getActivity() as BaseAppCompatActivity?
         init()
         initView()
     }
@@ -87,7 +87,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        activity = null
+        appCompatActivity = null
         app = null
     }
 
@@ -99,13 +99,13 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected open fun isActivityExist(): Boolean {
-        return activity != null && !activity!!.isFinishing
+        return appCompatActivity != null && !appCompatActivity!!.isFinishing
     }
 
     protected open fun hasPermissions(vararg permissions: String?): Boolean {
         for (permission in permissions) {
             if (ContextCompat.checkSelfPermission(
-                    context!!,
+                    requireContext(),
                     permission!!
                 ) != PackageManager.PERMISSION_GRANTED
             ) {

@@ -3,9 +3,11 @@ package com.yzt.ktvideo.ui.activity
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
@@ -15,7 +17,6 @@ import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.newIntent
 import com.yzt.common.key.Constant.KT_VIDEO
-import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
@@ -34,12 +35,17 @@ import io.reactivex.disposables.Disposable
  */
 const val SPLASH_URL = "splash_url"
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity(), SplashContract.View {
 
     private var binding: ActivitySplashBinding? = null
 
     private val presenter: SplashPresenter by lazy {
         SplashPresenter(context!!, this)
+    }
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+        installSplashScreen()
     }
 
     override fun setLayoutId(): Int? {
@@ -51,7 +57,7 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             hideBar(BarHide.FLAG_HIDE_BAR)
         }

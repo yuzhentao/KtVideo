@@ -2,7 +2,7 @@ package com.yzt.ranking.activity
 
 import android.os.Bundle
 import android.view.View
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.ranking.databinding.ActivityRankingBinding
 
 /**
@@ -10,9 +10,13 @@ import com.yzt.ranking.databinding.ActivityRankingBinding
  *
  * @author yzt 2020/12/31
  */
-class RankingActivity : BaseActivity() {
+class RankingActivity : BaseAppCompatActivity() {
 
     private var binding: ActivityRankingBinding? = null
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
 
     override fun setLayoutId(): Int? {
         return null
@@ -23,7 +27,7 @@ class RankingActivity : BaseActivity() {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
 
     }
 

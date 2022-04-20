@@ -3,7 +3,7 @@ package com.yzt.ktvideo.ui.activity
 import android.os.Bundle
 import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityAvatarBinding
@@ -13,9 +13,13 @@ import com.yzt.ktvideo.databinding.ActivityAvatarBinding
  *
  * @author yzt 2021/2/9
  */
-class AvatarActivity : BaseActivity(), View.OnClickListener {
+class AvatarActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityAvatarBinding? = null
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
 
     override fun setLayoutId(): Int? {
         return null
@@ -26,7 +30,7 @@ class AvatarActivity : BaseActivity(), View.OnClickListener {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)

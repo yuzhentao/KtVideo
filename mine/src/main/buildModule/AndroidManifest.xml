@@ -2,11 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yzt.mine">
 
-    <application>
+    <application
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+
         <activity android:name="com.yzt.mine.activity.MineActivity" />
         <activity android:name="com.yzt.mine.activity.FavoriteActivity" />
         <activity android:name="com.yzt.mine.activity.CommentActivity" />
         <activity android:name="com.yzt.mine.activity.FeedbackActivity" />
+
     </application>
 
 </manifest>

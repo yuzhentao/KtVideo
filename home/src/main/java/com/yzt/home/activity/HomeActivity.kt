@@ -2,7 +2,7 @@ package com.yzt.home.activity
 
 import android.os.Bundle
 import android.view.View
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.home.databinding.ActivityHomeBinding
 
 /**
@@ -10,9 +10,13 @@ import com.yzt.home.databinding.ActivityHomeBinding
  *
  * @author yzt 2020/12/31
  */
-class HomeActivity : BaseActivity() {
+class HomeActivity : BaseAppCompatActivity() {
 
     private var binding: ActivityHomeBinding? = null
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
 
     override fun setLayoutId(): Int? {
         return null
@@ -23,7 +27,7 @@ class HomeActivity : BaseActivity() {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
 
     }
 

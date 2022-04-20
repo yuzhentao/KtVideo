@@ -1,13 +1,14 @@
 package com.yzt.common.base
 
-import android.app.Activity
 import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yzt.common.listener.LifecycleListener
 import com.yzt.common.receiver.NetworkReceiver
 import io.reactivex.disposables.CompositeDisposable
@@ -15,10 +16,14 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  * @author yzt 2020/12/31
  */
-abstract class BaseActivity : Activity() {
+abstract class BaseAppCompatActivity : AppCompatActivity() {
 
     protected var context: Context? = null
-    protected var activity: BaseActivity? = null
+    protected var activity: BaseAppCompatActivity? = null
+
+    protected val rxPermissions: RxPermissions by lazy {
+        RxPermissions(this)
+    }
 
     private var networkReceiver: NetworkReceiver? = null
     private var lifecycleListener: LifecycleListener? = null
@@ -29,7 +34,7 @@ abstract class BaseActivity : Activity() {
         context = this
         activity = this
         compositeDisposable = CompositeDisposable()
-        initBeforeSetLayout(savedInstanceState)
+        initAfterSetLayout(savedInstanceState)
         setLayoutId()?.let {
             setContentView(it)
         }

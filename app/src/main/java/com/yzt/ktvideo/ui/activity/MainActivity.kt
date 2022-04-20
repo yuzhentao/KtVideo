@@ -12,7 +12,7 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.newIntent
 import com.yzt.common.extension.shortToast
@@ -37,7 +37,7 @@ import java.util.*
  *
  * @author yzt 2021/2/9
  */
-class MainActivity : BaseActivity(), View.OnClickListener {
+class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityMainBinding? = null
 
@@ -54,6 +54,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var permissionsDisposable: Disposable? = null
 
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
+
     override fun setLayoutId(): Int? {
         return null
     }
@@ -63,7 +67,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)

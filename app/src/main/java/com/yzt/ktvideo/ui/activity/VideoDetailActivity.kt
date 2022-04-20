@@ -25,7 +25,7 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.yzt.bean.DownloadState
 import com.yzt.bean.VideoBean
 import com.yzt.bean.VideoRelatedBean
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.ioMain
@@ -52,7 +52,7 @@ import java.io.FileInputStream
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_VIDEO_DETAIL)
-class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
+class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
 
     private var binding: ActivityVideoDetailBinding? = null
 
@@ -89,6 +89,10 @@ class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
     private var isPlay: Boolean = false
     private var isPause: Boolean = false
 
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
+
     override fun setLayoutId(): Int? {
         return null
     }
@@ -98,7 +102,7 @@ class VideoDetailActivity : BaseActivity(), VideoRelatedContract.View {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
             statusBarColor(R.color.black)
             fitsSystemWindows(true)

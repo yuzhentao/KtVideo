@@ -2,7 +2,7 @@ package com.yzt.mine.activity
 
 import android.os.Bundle
 import android.view.View
-import com.yzt.common.base.BaseActivity
+import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.mine.databinding.ActivityMineBinding
 
 /**
@@ -10,9 +10,13 @@ import com.yzt.mine.databinding.ActivityMineBinding
  *
  * @author yzt 2020/12/31
  */
-class MineActivity : BaseActivity() {
+class MineActivity : BaseAppCompatActivity() {
 
     private var binding: ActivityMineBinding? = null
+
+    override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
+
+    }
 
     override fun setLayoutId(): Int? {
         return null
@@ -23,7 +27,7 @@ class MineActivity : BaseActivity() {
         return binding?.root
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun initAfterSetLayout(savedInstanceState: Bundle?) {
 
     }
 
