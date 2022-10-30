@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.arialyy.aria.core.Aria
+import com.yzt.common.base.App
 import com.yzt.ktvideo.ui.activity.SPLASH_URL
 import java.io.File
 
@@ -20,7 +21,7 @@ class DownloadSplashWorker(context: Context, workerParameters: WorkerParameters)
         val url = inputData.getString(SPLASH_URL)
         if (!url.isNullOrEmpty()) {
             Aria
-                .download(this)
+                .download(App.app)
                 .load(url)
                 .setFilePath(context!!.getExternalFilesDir(null)!!.absolutePath + File.separator + "splash.png")
                 .create()

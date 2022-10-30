@@ -40,6 +40,7 @@ class ExpandLayout @JvmOverloads constructor(
         initAttrs(context, attrs)
         orientation = VERTICAL
         val view = LayoutInflater.from(context).inflate(R.layout.layout_expand_view, this)
+        llExpandView = view.findViewById(R.id.ll_expand_view)
         etvContent = view.findViewById(R.id.etv_content)
         tvTip = view.findViewById(R.id.tv_tip)
 //        etvContent!!.textSize = DimenUtil.px2sp(context, contentTextSize).toFloat()
