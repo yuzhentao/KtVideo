@@ -9,7 +9,6 @@ import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import com.yzt.common.base.App
 
-
 object DimenUtil {
 
     fun getWidthInPxHasNav(): Float {

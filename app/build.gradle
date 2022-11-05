@@ -54,7 +54,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
     kapt 'com.arialyy.aria:compiler:3.8.15'
     kapt 'com.alibaba:arouter-compiler:1.5.2'
