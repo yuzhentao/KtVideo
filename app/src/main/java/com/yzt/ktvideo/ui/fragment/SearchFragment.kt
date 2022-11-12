@@ -41,7 +41,7 @@ class SearchFragment : DialogFragment(),
 
     private lateinit var activity: Activity
 
-    private lateinit var rootView: View
+    private var rootView: View? = null
 
     private val adapter: HotSearchAdapter by lazy {
         HotSearchAdapter(null)
@@ -67,7 +67,8 @@ class SearchFragment : DialogFragment(),
     ): View? {
         activity = requireActivity()
         binding = FragmentSearchBinding.inflate(inflater)
-        return binding?.root
+        rootView = binding?.root
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -100,7 +101,9 @@ class SearchFragment : DialogFragment(),
 
     override fun onPreDraw(): Boolean {
         binding!!.ivSearch.viewTreeObserver.removeOnPreDrawListener(this)
-        circularRevealAnim.show(binding!!.ivSearch, rootView)
+        rootView?.let {
+            circularRevealAnim.show(binding!!.ivSearch, it)
+        }
         return true
     }
 
@@ -173,7 +176,9 @@ class SearchFragment : DialogFragment(),
 
     private fun hideAnim() {
         KeyBoardUtil.closeKeyboard(context, binding!!.et)
-        circularRevealAnim.hide(binding!!.ivSearch, rootView)
+        rootView?.let {
+            circularRevealAnim.hide(binding!!.ivSearch, it)
+        }
     }
 
     private fun search() {
