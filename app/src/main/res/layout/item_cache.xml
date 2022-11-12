@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x80"
+    android:layout_height="80dp"
     app:contentView="@id/cl"
     app:rightMenuView="@id/tv_delete">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
+        android:layout_height="80dp"
         android:foreground="?attr/selectableItemBackground"
         tools:ignore="UnusedAttribute">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv"
-            android:layout_width="@dimen/x140"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +29,12 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x10"
-            android:layout_marginEnd="@dimen/x5"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
             android:gravity="center_vertical"
             android:maxLines="2"
             android:textColor="@color/app_black"
-            android:textSize="@dimen/x14"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/iv"
             app:layout_constraintEnd_toStartOf="@id/btn_progress"
             app:layout_constraintStart_toEndOf="@id/iv"
@@ -44,9 +44,9 @@
 
         <com.yzt.ktvideo.view.progressbutton.ProgressButton
             android:id="@+id/btn_progress"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x30"
-            android:layout_marginEnd="@dimen/x5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -68,11 +68,11 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_delete"
         style="@style/TextStyle"
-        android:layout_width="@dimen/x80"
-        android:layout_height="@dimen/x80"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@color/app_pink"
         android:text="@string/delete"
         android:textColor="@color/white"
-        android:textSize="@dimen/x12" />
+        android:textSize="12dp" />
 
 </com.yzt.ktvideo.view.EasySwipeMenuLayout>

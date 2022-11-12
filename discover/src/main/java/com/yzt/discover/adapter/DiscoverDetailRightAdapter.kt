@@ -107,10 +107,10 @@ class DiscoverDetailRightAdapter(data: MutableList<DiscoverDetailRightBean.Item.
                         tv.visibility = View.VISIBLE
                         ViewUtil.setPaddings(
                             tv,
-                            context.dimensionPixelOffset(R.dimen.x4),
-                            context.dimensionPixelOffset(R.dimen.x2),
-                            context.dimensionPixelOffset(R.dimen.x4),
-                            context.dimensionPixelOffset(R.dimen.x2)
+                            context.dimensionPixelOffset(R.dimen.dp_4),
+                            context.dimensionPixelOffset(R.dimen.dp_2),
+                            context.dimensionPixelOffset(R.dimen.dp_4),
+                            context.dimensionPixelOffset(R.dimen.dp_2)
                         )
                         flexBox.addView(tv)
                     }

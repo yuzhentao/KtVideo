@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/x40">
+    android:paddingTop="40dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,8 +13,8 @@
         <LinearLayout
             android:id="@+id/ll_favorite"
             android:layout_width="0dp"
-            android:layout_height="@dimen/x30"
-            android:layout_marginTop="@dimen/x15"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="horizontal"
@@ -25,8 +25,8 @@
             tools:ignore="UnusedAttribute">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/x15"
-                android:layout_height="@dimen/x15"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_favorite_gray" />
 
@@ -34,17 +34,17 @@
                 style="@style/TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/x5"
-                android:maxWidth="@dimen/x100"
+                android:layout_marginStart="5dp"
+                android:maxWidth="100dp"
                 android:text="@string/mine_favorite"
                 android:textColor="@color/app_gray"
-                android:textSize="@dimen/x12" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_comment"
             android:layout_width="0dp"
-            android:layout_height="@dimen/x30"
+            android:layout_height="30dp"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="horizontal"
@@ -56,8 +56,8 @@
             tools:ignore="UnusedAttribute">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/x15"
-                android:layout_height="@dimen/x15"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_comment_gray" />
 
@@ -65,17 +65,17 @@
                 style="@style/TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/x5"
-                android:maxWidth="@dimen/x100"
+                android:layout_marginStart="5dp"
+                android:maxWidth="100dp"
                 android:text="@string/mine_comment"
                 android:textColor="@color/app_gray"
-                android:textSize="@dimen/x12" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <View
             android:id="@+id/v_line_1"
-            android:layout_width="@dimen/x1"
-            android:layout_height="@dimen/x20"
+            android:layout_width="1dp"
+            android:layout_height="20dp"
             android:background="@color/app_gray"
             app:layout_constraintBottom_toBottomOf="@id/ll_favorite"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,18 +85,18 @@
         <View
             android:id="@+id/v_line_2"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
-            android:layout_marginTop="@dimen/x5"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
             android:background="@color/app_gray"
             app:layout_constraintTop_toBottomOf="@id/ll_favorite" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="@dimen/x85"
-            android:layout_height="@dimen/x85"
-            android:layout_marginTop="@dimen/x10"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="10dp"
             android:alpha="0.8"
-            android:padding="@dimen/x10"
+            android:padding="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/selector_avatar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,12 +107,12 @@
             android:id="@+id/tv_login"
             style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x20"
-            android:layout_marginTop="@dimen/x20"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
             android:maxLines="2"
             android:text="@string/mine_login"
             android:textColor="@color/app_gray"
-            android:textSize="@dimen/x12"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
@@ -121,14 +121,14 @@
             android:id="@+id/tv_cache"
             style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x50"
-            android:layout_marginTop="@dimen/x40"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingStart="@dimen/x2"
-            android:paddingEnd="@dimen/x2"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
             android:text="@string/mine_cache"
             android:textColor="@color/app_gray"
-            android:textSize="@dimen/x12"
+            android:textSize="12dp"
             app:layout_constraintTop_toBottomOf="@id/v_line_2"
             tools:ignore="UnusedAttribute" />
 
@@ -136,13 +136,13 @@
             android:id="@+id/tv_watch"
             style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x50"
+            android:layout_height="50dp"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingStart="@dimen/x2"
-            android:paddingEnd="@dimen/x2"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
             android:text="@string/mine_watch"
             android:textColor="@color/app_gray"
-            android:textSize="@dimen/x12"
+            android:textSize="12dp"
             app:layout_constraintTop_toBottomOf="@id/tv_cache"
             tools:ignore="UnusedAttribute" />
 
@@ -150,13 +150,13 @@
             android:id="@+id/tv_feedback"
             style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x50"
+            android:layout_height="50dp"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingStart="@dimen/x2"
-            android:paddingEnd="@dimen/x2"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
             android:text="@string/mine_feedback"
             android:textColor="@color/app_gray"
-            android:textSize="@dimen/x12"
+            android:textSize="12dp"
             app:layout_constraintTop_toBottomOf="@id/tv_watch"
             tools:ignore="UnusedAttribute" />
     </androidx.constraintlayout.widget.ConstraintLayout>

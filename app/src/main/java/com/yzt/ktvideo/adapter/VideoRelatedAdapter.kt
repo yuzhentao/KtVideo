@@ -37,7 +37,7 @@ class VideoRelatedAdapter(data: MutableList<VideoRelatedBean.Item.Data>?) :
                 context,
                 holder.getView<AppCompatImageView>(R.id.iv),
                 it,
-                R.dimen.x6
+                R.dimen.dp_6
             )
         }
         val title = item.title

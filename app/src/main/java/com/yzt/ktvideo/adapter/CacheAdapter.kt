@@ -41,7 +41,7 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
                 0,
                 0,
                 0,
-                context.dimensionPixelOffset(R.dimen.x2)
+                context.dimensionPixelOffset(R.dimen.dp_2)
             )
         } else {
             ViewUtil.setMargins(holder.itemView, 0, 0, 0, 0)

@@ -8,9 +8,9 @@
         android:id="@+id/tv_footer"
         style="@style/TextStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="50dp"
         android:text="@string/end"
-        android:textSize="@dimen/x16"
+        android:textSize="16dp"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

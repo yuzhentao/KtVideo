@@ -2,10 +2,10 @@ package com.yzt.ktvideo.view
 
 import android.content.Context
 import android.content.res.TypedArray
-import androidx.appcompat.widget.AppCompatRadioButton
 import android.util.AttributeSet
-import com.yzt.ktvideo.R
+import androidx.appcompat.widget.AppCompatRadioButton
 import com.yzt.common.extension.dimensionPixelOffset
+import com.yzt.ktvideo.R
 
 class CustomRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : AppCompatRadioButton(context, attrs, defStyleAttr) {
 
@@ -15,9 +15,9 @@ class CustomRadioButton @JvmOverloads constructor(context: Context, attrs: Attri
     init {
         val ta: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomRadioButton)
         imgWidth = ta.getDimension(R.styleable.CustomRadioButton_rb_width,
-                context.dimensionPixelOffset(R.dimen.x20).toFloat())
+                context.dimensionPixelOffset(R.dimen.dp_20).toFloat())
         imgHeight = ta.getDimension(R.styleable.CustomRadioButton_rb_height,
-                context.dimensionPixelOffset(R.dimen.x20).toFloat())
+                context.dimensionPixelOffset(R.dimen.dp_20).toFloat())
         ta.recycle()
     }
 

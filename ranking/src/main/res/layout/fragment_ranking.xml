@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/x40">
+    android:paddingTop="40dp">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x36"
+        android:layout_height="36dp"
         android:background="@color/white"
         android:elevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/vp"

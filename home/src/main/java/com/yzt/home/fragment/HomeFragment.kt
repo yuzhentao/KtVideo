@@ -63,8 +63,8 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         binding!!.srl.setColorSchemeResources(R.color.app_pink)
         binding!!.srl.setProgressViewOffset(
             false,
-            requireContext().dimensionPixelOffset(R.dimen.x40),
-            requireContext().dimensionPixelOffset(R.dimen.x80)
+            requireContext().dimensionPixelOffset(R.dimen.dp_40),
+            requireContext().dimensionPixelOffset(R.dimen.dp_80)
         )
         binding!!.rv.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

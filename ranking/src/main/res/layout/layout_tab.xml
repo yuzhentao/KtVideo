@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/x32">
+    android:layout_height="32dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/x2"
-        android:paddingEnd="@dimen/x2"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
         android:textColor="@color/color_gray_black"
-        android:textSize="@dimen/x12"
+        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="测试测试测试" />
 
     <View
         android:id="@+id/v_line"
-        android:layout_width="@dimen/x8"
-        android:layout_height="@dimen/x3"
+        android:layout_width="8dp"
+        android:layout_height="3dp"
         android:background="@drawable/selector_tab_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

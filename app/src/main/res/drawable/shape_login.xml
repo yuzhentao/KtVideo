@@ -7,7 +7,7 @@
             android:color="@color/gray_line" />
 
     <size
-            android:width="@dimen/x40"
-            android:height="@dimen/x40" />
+            android:width="40dp"
+            android:height="40dp" />
 
 </shape>

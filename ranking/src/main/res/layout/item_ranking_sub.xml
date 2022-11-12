@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x200">
+    android:layout_height="200dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="@dimen/x16"
+        android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/tv_time"
         app:layout_constraintEnd_toEndOf="@id/iv"
         app:layout_constraintStart_toStartOf="@id/iv"
@@ -31,9 +31,9 @@
         style="@style/TextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x2"
+        android:layout_marginTop="2dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/x12"
+        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/iv"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="测试测试测试" />

@@ -15,8 +15,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_logo"
-        android:layout_width="@dimen/x150"
-        android:layout_height="@dimen/x56"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
         android:background="@drawable/img_logo_white"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,10 +29,10 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x15"
+        android:layout_marginBottom="15dp"
         android:text="@string/splash_intro_en"
         android:textColor="@color/white"
-        android:textSize="@dimen/x16"
+        android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/tv_intro_cn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -42,10 +42,10 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x50"
+        android:layout_marginBottom="50dp"
         android:text="@string/splash_intro_cn"
         android:textColor="@color/white"
-        android:textSize="@dimen/x14"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
