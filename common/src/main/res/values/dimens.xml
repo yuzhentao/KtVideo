@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="dp_2">2dp</dimen>
-    <dimen name="dp_4">4dp</dimen>
-    <dimen name="dp_5">5dp</dimen>
-    <dimen name="dp_6">6dp</dimen>
-    <dimen name="dp_20">20dp</dimen>
-    <dimen name="dp_40">40dp</dimen>
-    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_2">6dp</dimen>
+    <dimen name="dp_4">12dp</dimen>
+    <dimen name="dp_5">15dp</dimen>
+    <dimen name="dp_6">18dp</dimen>
+    <dimen name="dp_20">60dp</dimen>
+    <dimen name="dp_40">120dp</dimen>
+    <dimen name="dp_80">240dp</dimen>
 
 </resources>

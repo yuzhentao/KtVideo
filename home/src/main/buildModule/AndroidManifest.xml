@@ -10,11 +10,11 @@
 
         <meta-data
             android:name="design_width_in_dp"
-            android:value="360" />
+            android:value="1080" />
 
         <meta-data
             android:name="design_height_in_dp"
-            android:value="480" />
+            android:value="1920" />
 
     </application>
 
