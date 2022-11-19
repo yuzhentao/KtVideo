@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:background="@color/white"
         android:elevation="4dp"
         app:contentInsetStart="0dp"
@@ -21,8 +21,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_top"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="10dp"
                 android:scaleType="fitXY"

@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:background="@color/white"
         android:elevation="4dp"
         app:contentInsetStart="0dp"
@@ -22,8 +22,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:padding="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_back_gray"
@@ -35,7 +35,7 @@
                 android:id="@+id/et"
                 style="@style/TextStyle"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/search_hint"
@@ -50,8 +50,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_search"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:padding="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_search_gray"

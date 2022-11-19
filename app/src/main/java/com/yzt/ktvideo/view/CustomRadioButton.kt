@@ -15,9 +15,9 @@ class CustomRadioButton @JvmOverloads constructor(context: Context, attrs: Attri
     init {
         val ta: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomRadioButton)
         imgWidth = ta.getDimension(R.styleable.CustomRadioButton_rb_width,
-                context.dimensionPixelOffset(R.dimen.dp_20).toFloat())
+                context.dimensionPixelOffset(R.dimen.dp_24).toFloat())
         imgHeight = ta.getDimension(R.styleable.CustomRadioButton_rb_height,
-                context.dimensionPixelOffset(R.dimen.dp_20).toFloat())
+                context.dimensionPixelOffset(R.dimen.dp_24).toFloat())
         ta.recycle()
     }
 

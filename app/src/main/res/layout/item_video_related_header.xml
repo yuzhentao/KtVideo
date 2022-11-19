@@ -53,7 +53,7 @@
     <LinearLayout
         android:id="@+id/ll_favorite"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:foreground="?attr/selectableItemBackground"
@@ -85,7 +85,7 @@
     <LinearLayout
         android:id="@+id/ll_share"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
@@ -116,7 +116,7 @@
     <LinearLayout
         android:id="@+id/ll_reply"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
@@ -147,7 +147,7 @@
     <LinearLayout
         android:id="@+id/ll_download"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
