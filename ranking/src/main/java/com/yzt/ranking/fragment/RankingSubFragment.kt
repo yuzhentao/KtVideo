@@ -49,22 +49,6 @@ class RankingSubFragment : BaseFragment() {
     }
 
     override fun initView() {
-        arguments?.getString("strategy")?.let {
-            viewModel.load(context, it)
-            viewModel.liveData.observe(
-                this,
-                Observer<MutableList<RankingSubBean.Item.Data.Content.DataX>> { beans ->
-                    beans?.let { itt ->
-                        adapter.setList(itt)
-                        adapter.addFooterView(
-                            FooterUtil.getFooter(
-                                requireContext(),
-                                requireContext().color(R.color.app_black)
-                            )
-                        )
-                    }
-                })
-        }
         binding!!.rv.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
@@ -113,7 +97,26 @@ class RankingSubFragment : BaseFragment() {
     }
 
     override fun initData() {
+        arguments?.getString("strategy")?.let {
+            viewModel.load(context, it)
+            viewModel.liveData.observe(
+                this,
+                Observer<MutableList<RankingSubBean.Item.Data.Content.DataX>> { beans ->
+                    beans?.let { itt ->
+                        adapter.setList(itt)
+                        adapter.addFooterView(
+                            FooterUtil.getFooter(
+                                requireContext(),
+                                requireContext().color(R.color.app_black)
+                            )
+                        )
+                    }
+                })
+        }
+    }
 
+    override fun isLazyLoad(): Boolean {
+        return true
     }
 
     fun scrollToTop() {
