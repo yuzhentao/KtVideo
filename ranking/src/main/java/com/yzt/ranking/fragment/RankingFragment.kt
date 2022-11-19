@@ -6,8 +6,11 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
+import com.gyf.immersionbar.ImmersionBar
 import com.yzt.bean.RankingBean
 import com.yzt.common.base.BaseFragment
+import com.yzt.common.util.DimenUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.ranking.R
 import com.yzt.ranking.adapter.RankingPagerAdapter
 import com.yzt.ranking.databinding.FragmentRankingBinding
@@ -82,6 +85,13 @@ class RankingFragment : BaseFragment(), RankingContract.View {
             fragments.add(monthFragment)
             fragments.add(allFragment)
 
+            ViewUtil.setPaddings(
+                binding!!.container,
+                0,
+                ImmersionBar.getStatusBarHeight(this) + DimenUtil.dp2px(requireContext(), 48),
+                0,
+                0,
+            )
             binding!!.vp.adapter = RankingPagerAdapter(
                 requireFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,

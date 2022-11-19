@@ -4,9 +4,12 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ImmersionBar
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
+import com.yzt.common.util.DimenUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.mine.R
 import com.yzt.mine.databinding.FragmentMineBinding
 
@@ -33,6 +36,13 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun initView() {
+        ViewUtil.setPaddings(
+            binding!!.container,
+            0,
+            ImmersionBar.getStatusBarHeight(this) + DimenUtil.dp2px(requireContext(), 48),
+            0,
+            0,
+        )
         binding!!.ivAvatar.setOnClickListener(this)
         binding!!.ivAvatar.setOnLongClickListener { true }
         binding!!.tvLogin.setOnClickListener(this)

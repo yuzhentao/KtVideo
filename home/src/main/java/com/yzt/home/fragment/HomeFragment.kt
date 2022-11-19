@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ImmersionBar
 import com.yzt.bean.HomeBean
 import com.yzt.bean.VideoBean
 import com.yzt.common.base.BaseFragment
@@ -13,7 +14,9 @@ import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.key.Constant
 import com.yzt.common.listener.OnRvScrollListener
+import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.home.R
 import com.yzt.home.adapter.HomeAdapter
 import com.yzt.home.databinding.FragmentHomeBinding
@@ -65,6 +68,13 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
             false,
             requireContext().dimensionPixelOffset(R.dimen.dp_48),
             requireContext().dimensionPixelOffset(R.dimen.dp_96)
+        )
+        ViewUtil.setPaddings(
+            binding!!.rv,
+            0,
+            ImmersionBar.getStatusBarHeight(this) + DimenUtil.dp2px(requireContext(), 48),
+            0,
+            0,
         )
         binding!!.rv.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

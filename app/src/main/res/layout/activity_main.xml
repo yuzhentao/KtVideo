@@ -16,8 +16,9 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:background="@color/white_50"
+        android:minHeight="48dp"
         app:contentInsetStart="0dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:elevation="4dp">

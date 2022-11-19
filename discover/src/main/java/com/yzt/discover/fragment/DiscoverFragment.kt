@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.gyf.immersionbar.ImmersionBar
 import com.yzt.bean.DiscoverBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
 import com.yzt.common.listener.OnRvScrollListener
+import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
+import com.yzt.common.util.ViewUtil
 import com.yzt.discover.R
 import com.yzt.discover.adapter.DiscoverAdapter
 import com.yzt.discover.databinding.FragmentDiscoverBinding
@@ -51,6 +54,13 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
 
     override fun initView() {
         presenter.load()
+        ViewUtil.setPaddings(
+            binding!!.rv,
+            0,
+            ImmersionBar.getStatusBarHeight(this) + DimenUtil.dp2px(requireContext(), 48),
+            0,
+            0,
+        )
         binding!!.rv.layoutManager = GridLayoutManager(context, 2)
         binding!!.rv.adapter = adapter
         adapter.setOnItemClickListener { adapter, _, position ->
