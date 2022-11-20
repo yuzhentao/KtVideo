@@ -19,6 +19,7 @@ import com.arialyy.annotations.Download
 import com.arialyy.aria.core.Aria
 import com.arialyy.aria.core.task.DownloadTask
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
@@ -34,6 +35,7 @@ import com.yzt.common.key.Constant
 import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.VideoListener
+import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.VideoRelatedAdapter
 import com.yzt.ktvideo.databinding.ActivityVideoDetailBinding
@@ -104,14 +106,24 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
 
     override fun initAfterSetLayout(savedInstanceState: Bundle?) {
         immersionBar {
-            statusBarColor(R.color.black)
-            fitsSystemWindows(true)
+            transparentStatusBar()
+            statusBarDarkFont(true)
         }
         ARouter.getInstance().inject(this)
         Aria.download(this).register()
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        ViewUtil.setMargins(
+            binding!!.ivBack,
+            0,
+            ImmersionBar.getStatusBarHeight(this),
+            0,
+            0,
+        )
+        binding!!.ivBack.setOnClickListener {
+            onBackPressed()
+        }
         bean?.let {
             it.id?.let { itt ->
                 presenter.load(itt.toString())
@@ -304,7 +316,7 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
         ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
         setCover()
         binding!!.vp.titleTextView.visibility = View.GONE
-        binding!!.vp.backButton.visibility = View.VISIBLE
+        binding!!.vp.backButton.visibility = View.GONE
         orientationUtils = OrientationUtils(activity, binding!!.vp)
         binding!!.vp.setIsTouchWiget(true)
         binding!!.vp.isRotateViewAuto = false
