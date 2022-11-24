@@ -84,6 +84,11 @@ class SearchFragment : DialogFragment(),
         initDialog()
     }
 
+    override fun onDestroy() {
+        presenter.cancel()
+        super.onDestroy()
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> {

@@ -20,4 +20,10 @@ class HotSearchModel {
         return apiService?.getHotSearch(AppUtil.getOSModel())?.ioMain()
     }
 
+    suspend fun loadDataByCoroutine(context: Context): MutableList<String>? {
+        val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
+        val apiService = retrofitClient.create(ApiService::class.java)
+        return apiService?.getHotSearchByCoroutine(AppUtil.getOSModel())
+    }
+
 }

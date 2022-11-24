@@ -36,7 +36,10 @@ interface ApiService {
      * 视频相关推荐
      */
     @GET("v4/video/related")
-    fun getVideoRelatedData(@Query("id") id: String, @Query("deviceModel") deviceModel: String): Observable<VideoRelatedBean>?
+    fun getVideoRelatedData(
+        @Query("id") id: String,
+        @Query("deviceModel") deviceModel: String
+    ): Observable<VideoRelatedBean>?
 
     /**
      * 分类
@@ -48,19 +51,28 @@ interface ApiService {
      * 分类详情
      */
     @GET("v6/tag/index?${Constant.PARAMS}")
-    fun getDiscoverDetailData(@Query("id") id: String, @Query("deviceModel") deviceModel: String): Observable<DiscoverDetailBean>?
+    fun getDiscoverDetailData(
+        @Query("id") id: String,
+        @Query("deviceModel") deviceModel: String
+    ): Observable<DiscoverDetailBean>?
 
     /**
      * 分类详情-推荐
      */
     @GET("v1/tag/videos?${Constant.PARAMS}")
-    fun getDiscoverDetailLeftData(@Query("id") id: String, @Query("deviceModel") deviceModel: String): Observable<DiscoverDetailLeftBean>?
+    fun getDiscoverDetailLeftData(
+        @Query("id") id: String,
+        @Query("deviceModel") deviceModel: String
+    ): Observable<DiscoverDetailLeftBean>?
 
     /**
      * 分类详情-广场
      */
     @GET("v6/tag/dynamics?${Constant.PARAMS}")
-    fun getDiscoverDetailRightData(@Query("id") id: String, @Query("deviceModel") deviceModel: String): Observable<DiscoverDetailRightBean>?
+    fun getDiscoverDetailRightData(
+        @Query("id") id: String,
+        @Query("deviceModel") deviceModel: String
+    ): Observable<DiscoverDetailRightBean>?
 
     /**
      * 排行
@@ -72,7 +84,10 @@ interface ApiService {
      * 排行子页
      */
     @GET("v4/rankList/videos?${Constant.PARAMS}")
-    fun getRankingSubData(@Query("strategy") strategy: String, @Query("deviceModel") deviceModel: String): Observable<RankingSubBean>?
+    fun getRankingSubData(
+        @Query("strategy") strategy: String,
+        @Query("deviceModel") deviceModel: String
+    ): Observable<RankingSubBean>?
 
     /**
      * 热门搜索
@@ -81,9 +96,18 @@ interface ApiService {
     fun getHotSearch(@Query("deviceModel") deviceModel: String): Observable<MutableList<String>>?
 
     /**
+     * 热门搜索
+     */
+    @GET("v3/queries/hot?${Constant.PARAMS}")
+    suspend fun getHotSearchByCoroutine(@Query("deviceModel") deviceModel: String): MutableList<String>?
+
+    /**
      * 搜索
      */
     @GET("v3/search?${Constant.PARAMS}")
-    fun getSearch(@Query("query") key: String, @Query("deviceModel") deviceModel: String): Observable<SearchBean>?
+    fun getSearch(
+        @Query("query") key: String,
+        @Query("deviceModel") deviceModel: String
+    ): Observable<SearchBean>?
 
 }

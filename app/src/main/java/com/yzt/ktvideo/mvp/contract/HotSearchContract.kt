@@ -20,6 +20,8 @@ interface HotSearchContract {
 
         fun load()
 
+        fun cancel()
+
     }
 
 }
