@@ -80,6 +80,11 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     }
 
     private fun anim(bean: SplashBean?) {
+        require(bean != null) {
+            newIntent<MainActivity>(true)
+            return
+        }
+
         Observable
             .create(ObservableOnSubscribe<String> { emitter ->
                 val url = SPUtils.getInstance(context!!, KT_VIDEO).getString(SPLASH_URL)
@@ -96,7 +101,7 @@ class SplashActivity : BaseActivity(), SplashContract.View {
                 }
 
                 override fun onNext(url: String) {
-                    if (bean?.startPage != null && !bean.startPage!!.imageUrl.isNullOrEmpty()) {
+                    if (bean.startPage != null && !bean.startPage!!.imageUrl.isNullOrEmpty()) {
                         ImageUtil.show(context!!, binding!!.ivBg, bean.startPage!!.imageUrl!!)
                         if (bean.startPage!!.imageUrl != url) {
                             SPUtils.getInstance(context!!, KT_VIDEO)

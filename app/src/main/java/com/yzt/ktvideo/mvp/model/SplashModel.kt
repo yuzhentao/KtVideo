@@ -2,11 +2,9 @@ package com.yzt.ktvideo.mvp.model
 
 import android.content.Context
 import com.yzt.bean.SplashBean
-import com.yzt.common.extension.ioMain
 import com.yzt.common.network.ApiService
 import com.yzt.common.network.RetrofitClient
 import com.yzt.common.util.AppUtil
-import io.reactivex.Observable
 
 /**
  * 闪屏
@@ -15,10 +13,16 @@ import io.reactivex.Observable
  */
 class SplashModel {
 
-    fun loadData(context: Context): Observable<SplashBean>? {
+//    fun loadData(context: Context): Observable<SplashBean>? {
+//        val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
+//        val apiService = retrofitClient.create(ApiService::class.java)
+//        return apiService?.getSplashData(AppUtil.getOSModel())?.ioMain()
+//    }
+
+    suspend fun loadDataByCoroutine(context: Context): SplashBean? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getSplashData(AppUtil.getOSModel())?.ioMain()
+        return apiService?.getSplashDataByCoroutine(AppUtil.getOSModel())
     }
 
 }

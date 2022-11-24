@@ -1,11 +1,13 @@
 package com.yzt.ktvideo.mvp.presenter
 
 import android.content.Context
-import com.yzt.bean.SplashBean
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.model.SplashModel
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * 闪屏
@@ -20,6 +22,8 @@ class SplashPresenter(context: Context, view: SplashContract.View) : SplashContr
         SplashModel()
     }
 
+    private var job: Job? = null
+
     init {
         this.context = context
         this.view = view
@@ -30,26 +34,46 @@ class SplashPresenter(context: Context, view: SplashContract.View) : SplashContr
     }
 
     override fun load() {
+//        context?.let {
+//            model.loadData(it)
+//        }
+//            ?.subscribe(object : Observer<SplashBean> {
+//                override fun onComplete() {
+//
+//                }
+//
+//                override fun onSubscribe(d: Disposable) {
+//
+//                }
+//
+//                override fun onNext(t: SplashBean) {
+//                    view?.setData(t)
+//                }
+//
+//                override fun onError(e: Throwable) {
+//                    view?.setData(null)
+//                }
+//            })
         context?.let {
-            model.loadData(it)
-        }
-            ?.subscribe(object : Observer<SplashBean> {
-                override fun onComplete() {
-
-                }
-
-                override fun onSubscribe(d: Disposable) {
-
-                }
-
-                override fun onNext(t: SplashBean) {
-                    view?.setData(t)
-                }
-
-                override fun onError(e: Throwable) {
+            val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+                Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
+                view?.setData(null)
+            }
+            job = GlobalScope.launch(exceptionHandler) {
+                val data = model.loadDataByCoroutine(it)
+                if (data == null) {
+                    Timber.e("loadDataByCoroutine_失败>>>>>")
                     view?.setData(null)
+                } else {
+                    Timber.e("loadDataByCoroutine_成功>>>>>")
+                    view?.setData(data)
                 }
-            })
+            }
+        }
+    }
+
+    override fun cancel() {
+        job?.cancel()
     }
 
 }

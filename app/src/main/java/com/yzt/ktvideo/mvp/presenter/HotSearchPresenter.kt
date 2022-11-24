@@ -35,6 +35,26 @@ class HotSearchPresenter(context: Context, view: HotSearchContract.View) :
     }
 
     override fun load() {
+//        context?.let {
+//            model.loadData(it)
+//        }
+//            ?.subscribe(object : Observer<MutableList<String>> {
+//                override fun onComplete() {
+//
+//                }
+//
+//                override fun onSubscribe(d: Disposable) {
+//
+//                }
+//
+//                override fun onNext(t: MutableList<String>) {
+//                    view?.setData(t)
+//                }
+//
+//                override fun onError(e: Throwable) {
+//
+//                }
+//            })
         context?.let {
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")

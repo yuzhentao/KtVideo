@@ -21,6 +21,8 @@ interface SplashContract {
 
         fun load()
 
+        fun cancel()
+
     }
 
 }

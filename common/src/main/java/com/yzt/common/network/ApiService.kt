@@ -17,8 +17,14 @@ interface ApiService {
     /**
      * 闪屏页
      */
+//    @GET("v2/configs?${Constant.PARAMS}")
+//    fun getSplashData(@Query("deviceModel") deviceModel: String): Observable<SplashBean>?
+
+    /**
+     * 闪屏页
+     */
     @GET("v2/configs?${Constant.PARAMS}")
-    fun getSplashData(@Query("deviceModel") deviceModel: String): Observable<SplashBean>?
+    suspend fun getSplashDataByCoroutine(@Query("deviceModel") deviceModel: String): SplashBean?
 
     /**
      * 首页
@@ -92,8 +98,8 @@ interface ApiService {
     /**
      * 热门搜索
      */
-    @GET("v3/queries/hot?${Constant.PARAMS}")
-    fun getHotSearch(@Query("deviceModel") deviceModel: String): Observable<MutableList<String>>?
+//    @GET("v3/queries/hot?${Constant.PARAMS}")
+//    fun getHotSearch(@Query("deviceModel") deviceModel: String): Observable<MutableList<String>>?
 
     /**
      * 热门搜索
