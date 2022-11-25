@@ -1,11 +1,13 @@
 package com.yzt.home.mvp.presenter
 
 import android.content.Context
-import com.yzt.bean.HomeBean
 import com.yzt.home.mvp.contract.HomeContract
 import com.yzt.home.mvp.model.HomeModel
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * 首页
@@ -20,6 +22,8 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
         HomeModel()
     }
 
+    private var job: Job? = null
+
     init {
         this.context = context
         this.view = view
@@ -30,49 +34,81 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
     }
 
     override fun load() {
+//        context?.let {
+//            model.loadData(it, true, "")
+//        }
+//            ?.subscribe(object : Observer<HomeBean> {
+//                override fun onComplete() {
+//
+//                }
+//
+//                override fun onSubscribe(d: Disposable) {
+//
+//                }
+//
+//                override fun onNext(t: HomeBean) {
+//                    view?.setData(t)
+//                }
+//
+//                override fun onError(e: Throwable) {
+//
+//                }
+//            })
         context?.let {
-            model.loadData(it, true, "")
+            val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+                Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
+            }
+            job = GlobalScope.launch(exceptionHandler) {
+                val data = model.loadDataByCoroutine(it, true, "")
+                if (data == null) {
+                    Timber.e("loadDataByCoroutine_失败>>>>>")
+                } else {
+                    Timber.e("loadDataByCoroutine_成功>>>>>")
+                    view?.setData(data)
+                }
+            }
         }
-            ?.subscribe(object : Observer<HomeBean> {
-                override fun onComplete() {
-
-                }
-
-                override fun onSubscribe(d: Disposable) {
-
-                }
-
-                override fun onNext(t: HomeBean) {
-                    view?.setData(t)
-                }
-
-                override fun onError(e: Throwable) {
-
-                }
-            })
     }
 
     override fun loadMore(date: String?) {
+//        context?.let {
+//            model.loadData(it, false, date)
+//        }
+//            ?.subscribe(object : Observer<HomeBean> {
+//                override fun onComplete() {
+//
+//                }
+//
+//                override fun onSubscribe(d: Disposable) {
+//
+//                }
+//
+//                override fun onNext(t: HomeBean) {
+//                    view?.setData(t)
+//                }
+//
+//                override fun onError(e: Throwable) {
+//
+//                }
+//            })
         context?.let {
-            model.loadData(it, false, date)
+            val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+                Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
+            }
+            job = GlobalScope.launch(exceptionHandler) {
+                val data = model.loadDataByCoroutine(it, false, date)
+                if (data == null) {
+                    Timber.e("loadDataByCoroutine_失败>>>>>")
+                } else {
+                    Timber.e("loadDataByCoroutine_成功>>>>>")
+                    view?.setData(data)
+                }
+            }
         }
-            ?.subscribe(object : Observer<HomeBean> {
-                override fun onComplete() {
+    }
 
-                }
-
-                override fun onSubscribe(d: Disposable) {
-
-                }
-
-                override fun onNext(t: HomeBean) {
-                    view?.setData(t)
-                }
-
-                override fun onError(e: Throwable) {
-
-                }
-            })
+    override fun cancel() {
+        job?.cancel()
     }
 
 }

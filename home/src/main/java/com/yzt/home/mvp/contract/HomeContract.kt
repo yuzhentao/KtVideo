@@ -23,6 +23,8 @@ interface HomeContract {
 
         fun loadMore(date: String?)
 
+        fun cancel()
+
     }
 
 }

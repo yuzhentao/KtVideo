@@ -29,14 +29,26 @@ interface ApiService {
     /**
      * 首页
      */
+//    @GET("v2/feed?${Constant.PARAMS}")
+//    fun getHomeData(): Observable<HomeBean>?
+
+    /**
+     * 首页
+     */
     @GET("v2/feed?${Constant.PARAMS}")
-    fun getHomeData(): Observable<HomeBean>?
+    suspend fun getHomeDataByCoroutine(): HomeBean?
+
+    /**
+     * 首页更多
+     */
+//    @GET("v2/feed")
+//    fun getHomeMoreData(@Query("date") date: String): Observable<HomeBean>?
 
     /**
      * 首页更多
      */
     @GET("v2/feed")
-    fun getHomeMoreData(@Query("date") date: String): Observable<HomeBean>?
+    suspend fun getHomeMoreDataByCoroutine(@Query("date") date: String): HomeBean?
 
     /**
      * 视频相关推荐

@@ -144,6 +144,11 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
 
     }
 
+    override fun onDestroy() {
+        presenter.cancel()
+        super.onDestroy()
+    }
+
     override fun setData(bean: HomeBean) {
         val regEx = "[^0-9]"
         val p = Pattern.compile(regEx)
