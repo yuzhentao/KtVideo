@@ -31,6 +31,7 @@ class SearchPresenter(context: Context, view: SearchContract.View) : SearchContr
     }
 
     override fun load(key: String) {
+        // TODO: 此接口已不通
         context?.let {
             model.loadData(it, key)
         }
