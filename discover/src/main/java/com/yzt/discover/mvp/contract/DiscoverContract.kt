@@ -21,6 +21,8 @@ interface DiscoverContract {
 
         fun load()
 
+        fun cancel()
+
     }
 
 }

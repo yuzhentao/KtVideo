@@ -2,11 +2,9 @@ package com.yzt.discover.mvp.model
 
 import android.content.Context
 import com.yzt.bean.DiscoverDetailRightBean
-import com.yzt.common.extension.ioMain
 import com.yzt.common.network.ApiService
 import com.yzt.common.network.RetrofitClient
 import com.yzt.common.util.AppUtil
-import io.reactivex.Observable
 
 /**
  * 发现详情-广场
@@ -15,10 +13,16 @@ import io.reactivex.Observable
  */
 class DiscoverDetailRightModel {
 
-    fun loadData(context: Context, id: String): Observable<DiscoverDetailRightBean>? {
+//    fun loadData(context: Context, id: String): Observable<DiscoverDetailRightBean>? {
+//        val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
+//        val apiService = retrofitClient.create(ApiService::class.java)
+//        return apiService?.getDiscoverDetailRightData(id, AppUtil.getOSModel())?.ioMain()
+//    }
+
+    suspend fun loadDataByCoroutine(context: Context, id: String): DiscoverDetailRightBean? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getDiscoverDetailRightData(id, AppUtil.getOSModel())?.ioMain()
+        return apiService?.getDiscoverDetailRightDataByCoroutine(id, AppUtil.getOSModel())
     }
 
 }

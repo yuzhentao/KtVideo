@@ -21,6 +21,8 @@ interface DiscoverDetailLeftContract {
 
         fun load(id: String)
 
+        fun cancel()
+
     }
 
 }

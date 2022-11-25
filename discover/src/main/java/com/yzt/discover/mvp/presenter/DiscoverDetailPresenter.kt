@@ -1,11 +1,10 @@
 package com.yzt.discover.mvp.presenter
 
 import android.content.Context
-import com.yzt.bean.DiscoverDetailBean
 import com.yzt.discover.mvp.contract.DiscoverDetailContract
 import com.yzt.discover.mvp.model.DiscoverDetailModel
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.*
+import timber.log.Timber
 
 /**
  * 发现详情
@@ -21,6 +20,8 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
         DiscoverDetailModel()
     }
 
+    private var job: Job? = null
+
     init {
         this.context = context
         this.view = view
@@ -31,26 +32,46 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
     }
 
     override fun load(id: String) {
+//        context?.let {
+//            model.loadData(it, id)
+//        }
+//            ?.subscribe(object : Observer<DiscoverDetailBean> {
+//                override fun onComplete() {
+//
+//                }
+//
+//                override fun onSubscribe(d: Disposable) {
+//
+//                }
+//
+//                override fun onNext(t: DiscoverDetailBean) {
+//                    view?.setData(t)
+//                }
+//
+//                override fun onError(e: Throwable) {
+//
+//                }
+//            })
         context?.let {
-            model.loadData(it, id)
+            val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+                Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
+            }
+            job = GlobalScope.launch(exceptionHandler) {
+                val data = model.loadDataByCoroutine(it, id)
+                if (data == null) {
+                    Timber.e("loadDataByCoroutine_失败>>>>>")
+                } else {
+                    Timber.e("loadDataByCoroutine_成功>>>>>")
+                    withContext(Dispatchers.Main) {
+                        view?.setData(data)
+                    }
+                }
+            }
         }
-            ?.subscribe(object : Observer<DiscoverDetailBean> {
-                override fun onComplete() {
+    }
 
-                }
-
-                override fun onSubscribe(d: Disposable) {
-
-                }
-
-                override fun onNext(t: DiscoverDetailBean) {
-                    view?.setData(t)
-                }
-
-                override fun onError(e: Throwable) {
-
-                }
-            })
+    override fun cancel() {
+        job?.cancel()
     }
 
 }

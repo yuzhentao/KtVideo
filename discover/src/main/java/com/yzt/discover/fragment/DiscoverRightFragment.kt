@@ -137,6 +137,11 @@ class DiscoverRightFragment : BaseFragment(), DiscoverDetailRightContract.View {
 
     }
 
+    override fun onDestroy() {
+        presenter.cancel()
+        super.onDestroy()
+    }
+
     override fun setData(beans: MutableList<DiscoverDetailRightBean.Item.Data.Content>?) {
         adapter.setList(beans)
         adapter.addFooterView(FooterUtil.getFooter(requireContext(), requireContext().color(R.color.app_black)))

@@ -143,6 +143,7 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
 
     override fun onDestroy() {
         GSYVideoManager.releaseAllVideos()
+        presenter.cancel()
         super.onDestroy()
     }
 

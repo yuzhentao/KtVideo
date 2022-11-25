@@ -3,10 +3,7 @@ package com.yzt.home.mvp.presenter
 import android.content.Context
 import com.yzt.home.mvp.contract.HomeContract
 import com.yzt.home.mvp.model.HomeModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 /**
@@ -101,7 +98,9 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
                     Timber.e("loadDataByCoroutine_失败>>>>>")
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
-                    view?.setData(data)
+                    withContext(Dispatchers.Main) {
+                        view?.setData(data)
+                    }
                 }
             }
         }

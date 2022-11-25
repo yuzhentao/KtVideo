@@ -71,35 +71,68 @@ interface ApiService {
     /**
      * 分类
      */
+//    @GET("v4/categories/all?${Constant.PARAMS}")
+//    fun getDiscoverData(@Query("deviceModel") deviceModel: String): Observable<DiscoverBean>?
+
+    /**
+     * 分类
+     */
     @GET("v4/categories/all?${Constant.PARAMS}")
-    fun getDiscoverData(@Query("deviceModel") deviceModel: String): Observable<DiscoverBean>?
+    suspend fun getDiscoverDataByCoroutine(@Query("deviceModel") deviceModel: String): DiscoverBean?
+
+    /**
+     * 分类详情
+     */
+//    @GET("v6/tag/index?${Constant.PARAMS}")
+//    fun getDiscoverDetailData(
+//        @Query("id") id: String,
+//        @Query("deviceModel") deviceModel: String
+//    ): Observable<DiscoverDetailBean>?
 
     /**
      * 分类详情
      */
     @GET("v6/tag/index?${Constant.PARAMS}")
-    fun getDiscoverDetailData(
+    suspend fun getDiscoverDetailDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
-    ): Observable<DiscoverDetailBean>?
+    ): DiscoverDetailBean?
+
+    /**
+     * 分类详情-推荐
+     */
+//    @GET("v1/tag/videos?${Constant.PARAMS}")
+//    fun getDiscoverDetailLeftData(
+//        @Query("id") id: String,
+//        @Query("deviceModel") deviceModel: String
+//    ): Observable<DiscoverDetailLeftBean>?
 
     /**
      * 分类详情-推荐
      */
     @GET("v1/tag/videos?${Constant.PARAMS}")
-    fun getDiscoverDetailLeftData(
+    suspend fun getDiscoverDetailLeftDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
-    ): Observable<DiscoverDetailLeftBean>?
+    ): DiscoverDetailLeftBean?
+
+    /**
+     * 分类详情-广场
+     */
+//    @GET("v6/tag/dynamics?${Constant.PARAMS}")
+//    fun getDiscoverDetailRightData(
+//        @Query("id") id: String,
+//        @Query("deviceModel") deviceModel: String
+//    ): Observable<DiscoverDetailRightBean>?
 
     /**
      * 分类详情-广场
      */
     @GET("v6/tag/dynamics?${Constant.PARAMS}")
-    fun getDiscoverDetailRightData(
+    suspend fun getDiscoverDetailRightDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
-    ): Observable<DiscoverDetailRightBean>?
+    ): DiscoverDetailRightBean?
 
     /**
      * 排行
