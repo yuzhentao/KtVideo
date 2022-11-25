@@ -75,6 +75,11 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
     }
 
+    override fun onDestroy() {
+        presenter.cancel()
+        super.onDestroy()
+    }
+
     override fun setData(bean: SplashBean?) {
         anim(bean)
     }

@@ -41,11 +41,20 @@ interface ApiService {
     /**
      * 视频相关推荐
      */
+//    @GET("v4/video/related")
+//    fun getVideoRelatedData(
+//        @Query("id") id: String,
+//        @Query("deviceModel") deviceModel: String
+//    ): Observable<VideoRelatedBean>?
+
+    /**
+     * 视频相关推荐
+     */
     @GET("v4/video/related")
-    fun getVideoRelatedData(
+    suspend fun getVideoRelatedDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
-    ): Observable<VideoRelatedBean>?
+    ): VideoRelatedBean?
 
     /**
      * 分类

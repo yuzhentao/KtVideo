@@ -21,6 +21,8 @@ interface VideoRelatedContract {
 
         fun load(id: String)
 
+        fun cancel()
+
     }
 
 }

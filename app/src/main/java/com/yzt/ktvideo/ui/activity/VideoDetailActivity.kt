@@ -255,6 +255,7 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
         }
         GSYVideoManager.releaseAllVideos()
         orientationUtils.releaseListener()
+        presenter.cancel()
         super.onDestroy()
     }
 

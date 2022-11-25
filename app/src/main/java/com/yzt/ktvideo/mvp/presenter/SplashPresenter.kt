@@ -3,10 +3,7 @@ package com.yzt.ktvideo.mvp.presenter
 import android.content.Context
 import com.yzt.ktvideo.mvp.contract.SplashContract
 import com.yzt.ktvideo.mvp.model.SplashModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 /**
@@ -66,7 +63,9 @@ class SplashPresenter(context: Context, view: SplashContract.View) : SplashContr
                     view?.setData(null)
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
-                    view?.setData(data)
+                    withContext(Dispatchers.Main) {
+                        view?.setData(data)
+                    }
                 }
             }
         }
