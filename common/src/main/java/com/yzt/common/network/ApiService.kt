@@ -137,17 +137,32 @@ interface ApiService {
     /**
      * 排行
      */
+//    @GET("v4/rankList?${Constant.PARAMS}")
+//    fun getRankingData(@Query("deviceModel") deviceModel: String): Observable<RankingBean>?
+
+    /**
+     * 排行
+     */
     @GET("v4/rankList?${Constant.PARAMS}")
-    fun getRankingData(@Query("deviceModel") deviceModel: String): Observable<RankingBean>?
+    suspend fun getRankingDataByCoroutine(@Query("deviceModel") deviceModel: String): RankingBean?
+
+    /**
+     * 排行子页
+     */
+//    @GET("v4/rankList/videos?${Constant.PARAMS}")
+//    fun getRankingSubData(
+//        @Query("strategy") strategy: String,
+//        @Query("deviceModel") deviceModel: String
+//    ): Observable<RankingSubBean>?
 
     /**
      * 排行子页
      */
     @GET("v4/rankList/videos?${Constant.PARAMS}")
-    fun getRankingSubData(
+    suspend fun getRankingSubDataByCoroutine(
         @Query("strategy") strategy: String,
         @Query("deviceModel") deviceModel: String
-    ): Observable<RankingSubBean>?
+    ): RankingSubBean?
 
     /**
      * 热门搜索

@@ -21,6 +21,8 @@ interface RankingContract {
 
         fun load()
 
+        fun cancel()
+
     }
 
 }

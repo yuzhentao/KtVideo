@@ -55,6 +55,11 @@ class RankingFragment : BaseFragment(), RankingContract.View {
 
     }
 
+    override fun onDestroy() {
+        presenter.cancel()
+        super.onDestroy()
+    }
+
     override fun setData(beans: MutableList<RankingBean.TabInfo.Tab>?) {
         beans?.let {
             titles = mutableListOf()
