@@ -57,10 +57,33 @@ class RankingSubViewModel : ViewModel() {
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            viewModelScope.launch(exceptionHandler) {
-                val data = withContext(Dispatchers.IO) {
-                    RankingSubRepository.loadDataByCoroutine(context, strategy)
-                }
+
+            //方式一
+//            viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
+//                val data = withContext(Dispatchers.IO) {
+//                    RankingSubRepository.loadDataByCoroutine(context, strategy)
+//                }
+//                val beans: MutableList<RankingSubBean.Item.Data.Content.DataX> = mutableListOf()
+//                data?.let {
+//                    for (item in it.itemList) {
+//                        item.data?.content?.data?.let { bean ->
+//                            beans.add(bean)
+//                        }
+//                    }
+//                }
+//                if (beans.isEmpty()) {
+//                    Timber.e("loadDataByCoroutine_失败>>>>>")
+//                } else {
+//                    Timber.e("loadDataByCoroutine_成功>>>>>")
+//                    withContext(Dispatchers.Main) {
+//                        liveData.value = beans
+//                    }
+//                }
+//            }
+
+            //方式二
+            viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
+                val data = RankingSubRepository.loadDataByCoroutine(context, strategy)
                 val beans: MutableList<RankingSubBean.Item.Data.Content.DataX> = mutableListOf()
                 data?.let {
                     for (item in it.itemList) {
