@@ -1,37 +1,29 @@
-package com.yzt.ranking.mvp.presenter
+package com.yzt.ranking.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yzt.bean.RankingBean
-import com.yzt.ranking.mvp.contract.RankingContract
-import com.yzt.ranking.mvp.model.RankingModel
-import kotlinx.coroutines.*
+import com.yzt.ranking.repository.RankingRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
  * 排行
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/11/30
  */
-class RankingPresenter(context: Context?, view: RankingContract.View) : RankingContract.Presenter {
+class RankingViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: RankingContract.View? = null
-    private val model: RankingModel by lazy {
-        RankingModel()
+    val liveData: MutableLiveData<MutableList<RankingBean.TabInfo.Tab>> by lazy {
+        MutableLiveData<MutableList<RankingBean.TabInfo.Tab>>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load() {
+    fun load(context: Context?) {
 //        context?.let {
 //            model
 //                .loadData(it)
@@ -68,8 +60,8 @@ class RankingPresenter(context: Context?, view: RankingContract.View) : RankingC
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it)
+            viewModelScope.launch(exceptionHandler) {
+                val data = RankingRepository.loadDataByCoroutine(it)
                 val beans: MutableList<RankingBean.TabInfo.Tab> = mutableListOf()
                 data?.tabInfo?.tabList?.let {
                     for (item in it) {
@@ -83,15 +75,11 @@ class RankingPresenter(context: Context?, view: RankingContract.View) : RankingC
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
                     withContext(Dispatchers.Main) {
-                        view?.setData(beans)
+                        liveData.value = beans
                     }
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }

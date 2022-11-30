@@ -1,4 +1,4 @@
-package com.yzt.ranking.mvp.model
+package com.yzt.ranking.repository
 
 import android.content.Context
 import com.yzt.bean.RankingBean
@@ -9,11 +9,11 @@ import com.yzt.common.util.AppUtil
 /**
  * 排行
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/11/30
  */
-class RankingModel {
+object RankingRepository {
 
-//    fun loadData(context: Context): Observable<RankingBean>? {
+    //    fun loadData(context: Context): Observable<RankingBean>? {
 //        val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
 //        val apiService = retrofitClient.create(ApiService::class.java)
 //        return apiService?.getRankingData(AppUtil.getOSModel())?.ioMain()
