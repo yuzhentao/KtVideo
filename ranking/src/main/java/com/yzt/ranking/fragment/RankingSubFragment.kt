@@ -17,6 +17,7 @@ import com.yzt.ranking.R
 import com.yzt.ranking.adapter.RankingSubAdapter
 import com.yzt.ranking.databinding.FragmentRankingSubBinding
 import com.yzt.ranking.viewmodel.RankingSubViewModel
+import com.yzt.ranking.viewmodel.RankingSubViewModelFactory
 
 /**
  * 排行-子Fragment
@@ -32,7 +33,7 @@ class RankingSubFragment : BaseFragment() {
     }
 
     private val viewModel: RankingSubViewModel by lazy {
-        ViewModelProvider(this).get(RankingSubViewModel::class.java)
+        ViewModelProvider(this, RankingSubViewModelFactory())[RankingSubViewModel::class.java]
     }
 
     override fun getLayoutId(): Int? {
