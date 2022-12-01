@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -39,8 +40,8 @@ import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.VideoRelatedAdapter
 import com.yzt.ktvideo.databinding.ActivityVideoDetailBinding
-import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
-import com.yzt.ktvideo.mvp.presenter.VideoRelatedPresenter
+import com.yzt.ktvideo.viewmodel.VideoRelatedViewModel
+import com.yzt.ktvideo.viewmodel.VideoRelatedViewModelFactory
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -54,7 +55,7 @@ import java.io.FileInputStream
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_VIDEO_DETAIL)
-class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
+class VideoDetailActivity : BaseAppCompatActivity() {
 
     private var binding: ActivityVideoDetailBinding? = null
 
@@ -78,9 +79,11 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
     private val adapter: VideoRelatedAdapter by lazy {
         VideoRelatedAdapter(null)
     }
-    private val presenter: VideoRelatedPresenter by lazy {
-        VideoRelatedPresenter(context, this)
+
+    private val viewModel: VideoRelatedViewModel by lazy {
+        ViewModelProvider(this, VideoRelatedViewModelFactory())[VideoRelatedViewModel::class.java]
     }
+
     private val dbManager: VideoDbManager by lazy {
         VideoDbManager()
     }
@@ -126,7 +129,7 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
         }
         bean?.let {
             it.id?.let { itt ->
-                presenter.load(itt.toString())
+                viewModel.load(this, itt.toString())
                 it.savePath =
                     getExternalFilesDir(null)!!.absolutePath + File.separator + "download_${itt}.mp4"
             }
@@ -234,6 +237,15 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
 
     override fun initData(savedInstanceState: Bundle?) {
         prepareVideo()
+        viewModel.liveData.observe(
+            this,
+            androidx.lifecycle.Observer<MutableList<VideoRelatedBean.Item.Data>> { beans ->
+                beans?.let {
+                    adapter.setList(it)
+                    adapter.addFooterView(FooterUtil.getFooter(context!!, color(R.color.white)))
+                }
+            }
+        )
     }
 
     override fun onPause() {
@@ -255,7 +267,6 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
         }
         GSYVideoManager.releaseAllVideos()
         orientationUtils.releaseListener()
-        presenter.cancel()
         super.onDestroy()
     }
 
@@ -282,13 +293,6 @@ class VideoDetailActivity : BaseAppCompatActivity(), VideoRelatedContract.View {
             return
         }
         super.onBackPressed()
-    }
-
-    override fun setData(beans: MutableList<VideoRelatedBean.Item.Data>?) {
-        beans?.let {
-            adapter.setList(it)
-            adapter.addFooterView(FooterUtil.getFooter(context!!, color(R.color.white)))
-        }
     }
 
     /**

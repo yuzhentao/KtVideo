@@ -1,40 +1,26 @@
-package com.yzt.ktvideo.mvp.presenter
+package com.yzt.ktvideo.viewmodel
 
 import android.content.Context
-import com.yzt.ktvideo.mvp.contract.HotSearchContract
-import com.yzt.ktvideo.mvp.model.HotSearchModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.yzt.ktvideo.repository.HotSearchRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
  * 热门搜索词
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class HotSearchPresenter(context: Context, view: HotSearchContract.View) :
-    HotSearchContract.Presenter {
+class HotSearchViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: HotSearchContract.View? = null
-    private val model: HotSearchModel by lazy {
-        HotSearchModel()
+    val liveData: MutableLiveData<MutableList<String>> by lazy {
+        MutableLiveData<MutableList<String>>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load() {
+    fun load(context: Context?) {
 //        context?.let {
 //            model.loadData(it)
 //        }
@@ -59,20 +45,16 @@ class HotSearchPresenter(context: Context, view: HotSearchContract.View) :
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it)
+            viewModelScope.launch(exceptionHandler) {
+                val data = HotSearchRepository.loadDataByCoroutine(it)
                 if (data == null || data.isEmpty()) {
                     Timber.e("loadDataByCoroutine_失败>>>>>")
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
-                    view?.setData(data)
+                    liveData.value = data
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }

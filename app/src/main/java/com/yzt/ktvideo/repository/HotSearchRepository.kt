@@ -1,28 +1,27 @@
-package com.yzt.ktvideo.mvp.model
+package com.yzt.ktvideo.repository
 
 import android.content.Context
-import com.yzt.bean.VideoRelatedBean
 import com.yzt.common.network.ApiService
 import com.yzt.common.network.RetrofitClient
 import com.yzt.common.util.AppUtil
 
 /**
- * 视频详情-相关推荐
+ * 热门搜索词
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class VideoRelatedModel {
+object HotSearchRepository {
 
-//    fun loadData(context: Context, id: String?): Observable<VideoRelatedBean>? {
+//    fun loadData(context: Context): Observable<MutableList<String>>? {
 //        val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
 //        val apiService = retrofitClient.create(ApiService::class.java)
-//        return apiService?.getVideoRelatedData(id!!, AppUtil.getOSModel())?.ioMain()
+//        return apiService?.getHotSearch(AppUtil.getOSModel())?.ioMain()
 //    }
 
-    suspend fun loadDataByCoroutine(context: Context, id: String?): VideoRelatedBean? {
+    suspend fun loadDataByCoroutine(context: Context): MutableList<String>? {
         val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)
         val apiService = retrofitClient.create(ApiService::class.java)
-        return apiService?.getVideoRelatedDataByCoroutine(id!!, AppUtil.getOSModel())
+        return apiService?.getHotSearchByCoroutine(AppUtil.getOSModel())
     }
 
 }

@@ -6,6 +6,8 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -18,8 +20,8 @@ import com.yzt.common.util.KeyBoardUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HotSearchAdapter
 import com.yzt.ktvideo.databinding.FragmentSearchBinding
-import com.yzt.ktvideo.mvp.contract.HotSearchContract
-import com.yzt.ktvideo.mvp.presenter.HotSearchPresenter
+import com.yzt.ktvideo.viewmodel.HotSearchViewModel
+import com.yzt.ktvideo.viewmodel.HotSearchViewModelFactory
 
 /**
  * 搜索
@@ -30,8 +32,7 @@ class SearchFragment : DialogFragment(),
     View.OnClickListener,
     ViewTreeObserver.OnPreDrawListener,
     DialogInterface.OnKeyListener,
-    CircularRevealAnim.AnimListener,
-    HotSearchContract.View {
+    CircularRevealAnim.AnimListener {
 
     private var binding: FragmentSearchBinding? = null
 
@@ -47,8 +48,8 @@ class SearchFragment : DialogFragment(),
         HotSearchAdapter(null)
     }
 
-    private val presenter: HotSearchPresenter by lazy {
-        HotSearchPresenter(requireContext(), this)
+    private val viewModel: HotSearchViewModel by lazy {
+        ViewModelProvider(this, HotSearchViewModelFactory())[HotSearchViewModel::class.java]
     }
 
     private val circularRevealAnim: CircularRevealAnim by lazy {
@@ -82,11 +83,6 @@ class SearchFragment : DialogFragment(),
     override fun onStart() {
         super.onStart()
         initDialog()
-    }
-
-    override fun onDestroy() {
-        presenter.cancel()
-        super.onDestroy()
     }
 
     override fun onClick(v: View?) {
@@ -132,13 +128,9 @@ class SearchFragment : DialogFragment(),
         }
     }
 
-    override fun setData(beans: MutableList<String>?) {
-        adapter.setList(beans)
-    }
-
     private fun initView() {
         context?.let {
-            presenter.load()
+            viewModel.load(requireContext())
             circularRevealAnim.setAnimListener(this)
             binding!!.ivBack.setOnClickListener(this)
             binding!!.ivBack.setOnLongClickListener { true }
@@ -166,6 +158,12 @@ class SearchFragment : DialogFragment(),
                         .navigation()
                 }
             }
+            viewModel.liveData.observe(
+                this,
+                Observer<MutableList<String>> { beans ->
+                    adapter.setList(beans)
+                }
+            )
         }
     }
 

@@ -1,38 +1,29 @@
-package com.yzt.ktvideo.mvp.presenter
+package com.yzt.ktvideo.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yzt.bean.VideoRelatedBean
-import com.yzt.ktvideo.mvp.contract.VideoRelatedContract
-import com.yzt.ktvideo.mvp.model.VideoRelatedModel
-import kotlinx.coroutines.*
+import com.yzt.ktvideo.repository.VideoRelatedRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
  * 视频详情-相关推荐
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class VideoRelatedPresenter(context: Context?, view: VideoRelatedContract.View) :
-    VideoRelatedContract.Presenter {
+class VideoRelatedViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: VideoRelatedContract.View? = null
-    private val model: VideoRelatedModel by lazy {
-        VideoRelatedModel()
+    val liveData: MutableLiveData<MutableList<VideoRelatedBean.Item.Data>> by lazy {
+        MutableLiveData<MutableList<VideoRelatedBean.Item.Data>>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load(id: String) {
+    fun load(context: Context?, id: String) {
 //        context?.let {
 //            model
 //                .loadData(it, id)
@@ -67,8 +58,8 @@ class VideoRelatedPresenter(context: Context?, view: VideoRelatedContract.View) 
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it, id)
+            viewModelScope.launch(exceptionHandler) {
+                val data = VideoRelatedRepository.loadDataByCoroutine(it, id)
                 val beans: MutableList<VideoRelatedBean.Item.Data> = mutableListOf()
                 for (item in data?.itemList!!) {
                     item.data?.playUrl?.let {
@@ -80,15 +71,11 @@ class VideoRelatedPresenter(context: Context?, view: VideoRelatedContract.View) 
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
                     withContext(Dispatchers.Main) {
-                        view?.setData(beans)
+                        liveData.value = beans
                     }
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }
