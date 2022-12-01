@@ -2,7 +2,6 @@ package com.yzt.ktvideo.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -16,8 +15,6 @@ import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.FooterUtil
-import com.yzt.home.viewmodel.HomeViewModel
-import com.yzt.home.viewmodel.HomeViewModelFactory
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.WatchAdapter
 import com.yzt.ktvideo.databinding.ActivityWatchBinding
@@ -41,10 +38,6 @@ class WatchActivity : BaseAppCompatActivity(), View.OnClickListener, SearchContr
 
     private val presenter: SearchPresenter by lazy {
         SearchPresenter(context!!, this)
-    }
-
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProvider(this, HomeViewModelFactory())[HomeViewModel::class.java]
     }
 
     private val dbManager: VideoDbManager by lazy {
