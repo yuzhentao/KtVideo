@@ -1,4 +1,4 @@
-package com.yzt.discover.mvp.model
+package com.yzt.discover.repository
 
 import android.content.Context
 import com.yzt.bean.DiscoverBean
@@ -9,9 +9,9 @@ import com.yzt.common.util.AppUtil
 /**
  * 发现
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class DiscoverModel {
+object DiscoverRepository {
 
 //    fun loadData(context: Context): Observable<DiscoverBean>? {
 //        val retrofitClient = RetrofitClient.getInstance(context, ApiService.BASE_URL)

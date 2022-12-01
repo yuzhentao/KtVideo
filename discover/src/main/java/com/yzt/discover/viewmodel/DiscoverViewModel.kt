@@ -1,38 +1,29 @@
-package com.yzt.discover.mvp.presenter
+package com.yzt.discover.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yzt.bean.DiscoverBean
-import com.yzt.discover.mvp.contract.DiscoverContract
-import com.yzt.discover.mvp.model.DiscoverModel
-import kotlinx.coroutines.*
+import com.yzt.discover.repository.DiscoverRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
  * 发现
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class DiscoverPresenter(context: Context?, view: DiscoverContract.View) :
-    DiscoverContract.Presenter {
+class DiscoverViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: DiscoverContract.View? = null
-    private val model: DiscoverModel by lazy {
-        DiscoverModel()
+    val liveData: MutableLiveData<MutableList<DiscoverBean.Item.Data>> by lazy {
+        MutableLiveData<MutableList<DiscoverBean.Item.Data>>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load() {
+    fun load(context: Context?) {
 //        context?.let {
 //            model.loadData(it)
 //        }
@@ -68,8 +59,8 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) :
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it)
+            viewModelScope.launch(exceptionHandler) {
+                val data = DiscoverRepository.loadDataByCoroutine(it)
                 val beans: MutableList<DiscoverBean.Item.Data> = mutableListOf()
                 data?.let {
                     for (item in data.itemList) {
@@ -85,15 +76,11 @@ class DiscoverPresenter(context: Context?, view: DiscoverContract.View) :
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
                     withContext(Dispatchers.Main) {
-                        view?.setData(beans)
+                        liveData.value = beans
                     }
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }

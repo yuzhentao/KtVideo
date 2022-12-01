@@ -2,6 +2,8 @@ package com.yzt.discover.fragment
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
@@ -18,15 +20,15 @@ import com.yzt.discover.R
 import com.yzt.discover.activity.DiscoverDetailActivity
 import com.yzt.discover.adapter.DiscoverDetailLeftAdapter
 import com.yzt.discover.databinding.FragmentDiscoverLeftBinding
-import com.yzt.discover.mvp.contract.DiscoverDetailLeftContract
-import com.yzt.discover.mvp.presenter.DiscoverDetailLeftPresenter
+import com.yzt.discover.viewmodel.DiscoverDetailLeftViewModel
+import com.yzt.discover.viewmodel.DiscoverDetailLeftViewModelFactory
 
 /**
  * 发现详情-推荐
  *
  * @author yzt 2021/2/9
  */
-class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
+class DiscoverLeftFragment : BaseFragment() {
 
     private lateinit var discoverDetailActivity: DiscoverDetailActivity
 
@@ -36,8 +38,11 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
         DiscoverDetailLeftAdapter(null)
     }
 
-    private val presenter: DiscoverDetailLeftPresenter by lazy {
-        DiscoverDetailLeftPresenter(requireContext(), this)
+    private val viewModel: DiscoverDetailLeftViewModel by lazy {
+        ViewModelProvider(
+            this,
+            DiscoverDetailLeftViewModelFactory()
+        )[DiscoverDetailLeftViewModel::class.java]
     }
 
     private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
@@ -57,8 +62,10 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
     }
 
     override fun initView() {
-        val playTop = DimenUtil.getHeightInPx(requireContext()) / 2 - DimenUtil.getHeightInPx(requireContext()) / 4
-        val playBottom = DimenUtil.getHeightInPx(requireContext()) / 2 + DimenUtil.getHeightInPx(requireContext()) / 4
+        val playTop =
+            DimenUtil.getHeightInPx(requireContext()) / 2 - DimenUtil.getHeightInPx(requireContext()) / 4
+        val playBottom =
+            DimenUtil.getHeightInPx(requireContext()) / 2 + DimenUtil.getHeightInPx(requireContext()) / 4
         scrollCalculatorHelper =
             ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -128,23 +135,24 @@ class DiscoverLeftFragment : BaseFragment(), DiscoverDetailLeftContract.View {
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom)
         arguments?.let {
             it.getString("id")?.let { itt ->
-                presenter.load(itt)
+                viewModel.load(requireContext(), itt)
             }
         }
     }
 
     override fun initData() {
-
-    }
-
-    override fun onDestroy() {
-        presenter.cancel()
-        super.onDestroy()
-    }
-
-    override fun setData(beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content>?) {
-        adapter.setList(beans)
-        adapter.addFooterView(FooterUtil.getFooter(requireContext(), requireContext().color(R.color.app_black)))
+        viewModel.liveData.observe(
+            this,
+            Observer<MutableList<DiscoverDetailLeftBean.Item.Data.Content>> { beans ->
+                adapter.setList(beans)
+                adapter.addFooterView(
+                    FooterUtil.getFooter(
+                        requireContext(),
+                        requireContext().color(R.color.app_black)
+                    )
+                )
+            }
+        )
     }
 
     fun scrollToTop() {

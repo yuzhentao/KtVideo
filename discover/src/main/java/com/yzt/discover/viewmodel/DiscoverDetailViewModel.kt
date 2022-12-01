@@ -1,37 +1,29 @@
-package com.yzt.discover.mvp.presenter
+package com.yzt.discover.viewmodel
 
 import android.content.Context
-import com.yzt.discover.mvp.contract.DiscoverDetailContract
-import com.yzt.discover.mvp.model.DiscoverDetailModel
-import kotlinx.coroutines.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.yzt.bean.DiscoverDetailBean
+import com.yzt.discover.repository.DiscoverDetailRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
- * 发现详情
+ * 发现-详情
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.View) :
-    DiscoverDetailContract.Presenter {
+class DiscoverDetailViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: DiscoverDetailContract.View? = null
-    private val model: DiscoverDetailModel by lazy {
-        DiscoverDetailModel()
+    val liveData: MutableLiveData<DiscoverDetailBean> by lazy {
+        MutableLiveData<DiscoverDetailBean>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load(id: String) {
+    fun load(context: Context?, id: String) {
 //        context?.let {
 //            model.loadData(it, id)
 //        }
@@ -56,22 +48,18 @@ class DiscoverDetailPresenter(context: Context, view: DiscoverDetailContract.Vie
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it, id)
+            viewModelScope.launch(exceptionHandler) {
+                val data = DiscoverDetailRepository.loadDataByCoroutine(it, id)
                 if (data == null) {
                     Timber.e("loadDataByCoroutine_失败>>>>>")
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
                     withContext(Dispatchers.Main) {
-                        view?.setData(data)
+                        liveData.value = data
                     }
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }

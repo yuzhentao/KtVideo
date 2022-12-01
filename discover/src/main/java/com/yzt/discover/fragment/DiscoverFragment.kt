@@ -2,6 +2,8 @@ package com.yzt.discover.fragment
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
@@ -18,23 +20,24 @@ import com.yzt.common.util.ViewUtil
 import com.yzt.discover.R
 import com.yzt.discover.adapter.DiscoverAdapter
 import com.yzt.discover.databinding.FragmentDiscoverBinding
-import com.yzt.discover.mvp.contract.DiscoverContract
-import com.yzt.discover.mvp.presenter.DiscoverPresenter
+import com.yzt.discover.viewmodel.DiscoverViewModel
+import com.yzt.discover.viewmodel.DiscoverViewModelFactory
 
 /**
  * 发现
  *
  * @author yzt 2020/12/31
  */
-class DiscoverFragment : BaseFragment(), DiscoverContract.View {
+class DiscoverFragment : BaseFragment() {
 
     private var binding: FragmentDiscoverBinding? = null
 
     private val adapter: DiscoverAdapter by lazy {
         DiscoverAdapter(null)
     }
-    private val presenter: DiscoverPresenter by lazy {
-        DiscoverPresenter(context, this)
+
+    private val viewModel: DiscoverViewModel by lazy {
+        ViewModelProvider(this, DiscoverViewModelFactory())[DiscoverViewModel::class.java]
     }
 
     private var onRvScrollListener: OnRvScrollListener? = null
@@ -53,7 +56,7 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
     }
 
     override fun initView() {
-        presenter.load()
+        viewModel.load(requireContext())
         ViewUtil.setPaddings(
             binding!!.rv,
             0,
@@ -86,17 +89,18 @@ class DiscoverFragment : BaseFragment(), DiscoverContract.View {
     }
 
     override fun initData() {
-
-    }
-
-    override fun onDestroy() {
-        presenter.cancel()
-        super.onDestroy()
-    }
-
-    override fun setData(beans: MutableList<DiscoverBean.Item.Data>) {
-        adapter.setList(beans)
-        adapter.addFooterView(FooterUtil.getFooter(requireContext(), requireContext().color(R.color.app_black)))
+        viewModel.liveData.observe(
+            this,
+            Observer<MutableList<DiscoverBean.Item.Data>> { beans ->
+                adapter.setList(beans)
+                adapter.addFooterView(
+                    FooterUtil.getFooter(
+                        requireContext(),
+                        requireContext().color(R.color.app_black)
+                    )
+                )
+            }
+        )
     }
 
     fun scrollToTop() {

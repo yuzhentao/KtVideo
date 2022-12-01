@@ -1,43 +1,34 @@
-package com.yzt.discover.mvp.presenter
+package com.yzt.discover.viewmodel
 
 import android.content.Context
-import com.yzt.bean.DiscoverDetailLeftBean
-import com.yzt.discover.mvp.contract.DiscoverDetailLeftContract
-import com.yzt.discover.mvp.model.DiscoverDetailLeftModel
-import kotlinx.coroutines.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.yzt.bean.DiscoverDetailRightBean
+import com.yzt.discover.repository.DiscoverDetailRightRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
- * 发现详情-推荐
+ * 发现-详情-广场
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftContract.View) :
-    DiscoverDetailLeftContract.Presenter {
+class DiscoverDetailRightViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: DiscoverDetailLeftContract.View? = null
-    private val model: DiscoverDetailLeftModel by lazy {
-        DiscoverDetailLeftModel()
+    val liveData: MutableLiveData<MutableList<DiscoverDetailRightBean.Item.Data.Content>> by lazy {
+        MutableLiveData<MutableList<DiscoverDetailRightBean.Item.Data.Content>>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load(id: String) {
+    fun load(context: Context?, id: String) {
 //        context?.let {
 //            model.loadData(it, id)
 //        }
 //            ?.flatMap { t ->
-//                val beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content> = mutableListOf()
+//                val beans: MutableList<DiscoverDetailRightBean.Item.Data.Content> = mutableListOf()
 //                for (item in t.itemList) {
 //                    item.data?.content?.data?.playUrl?.let {
 //                        beans.add(item.data!!.content!!)
@@ -45,7 +36,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
 //                }
 //                Observable.just(beans)
 //            }
-//            ?.subscribe(object : Observer<MutableList<DiscoverDetailLeftBean.Item.Data.Content>> {
+//            ?.subscribe(object : Observer<MutableList<DiscoverDetailRightBean.Item.Data.Content>> {
 //                override fun onComplete() {
 //
 //                }
@@ -54,7 +45,7 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
 //
 //                }
 //
-//                override fun onNext(t: MutableList<DiscoverDetailLeftBean.Item.Data.Content>) {
+//                override fun onNext(t: MutableList<DiscoverDetailRightBean.Item.Data.Content>) {
 //                    view?.setData(t)
 //                }
 //
@@ -66,9 +57,9 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it, id)
-                val beans: MutableList<DiscoverDetailLeftBean.Item.Data.Content> = mutableListOf()
+            viewModelScope.launch(exceptionHandler) {
+                val data = DiscoverDetailRightRepository.loadDataByCoroutine(it, id)
+                val beans: MutableList<DiscoverDetailRightBean.Item.Data.Content> = mutableListOf()
                 data?.let {
                     for (item in data.itemList) {
                         item.data?.content?.data?.playUrl?.let {
@@ -81,15 +72,11 @@ class DiscoverDetailLeftPresenter(context: Context, view: DiscoverDetailLeftCont
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
                     withContext(Dispatchers.Main) {
-                        view?.setData(beans)
+                        liveData.value = beans
                     }
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }

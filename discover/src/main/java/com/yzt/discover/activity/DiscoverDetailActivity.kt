@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
@@ -23,8 +25,8 @@ import com.yzt.discover.adapter.DiscoverDetailPagerAdapter
 import com.yzt.discover.databinding.ActivityDiscoverDetailBinding
 import com.yzt.discover.fragment.DiscoverLeftFragment
 import com.yzt.discover.fragment.DiscoverRightFragment
-import com.yzt.discover.mvp.contract.DiscoverDetailContract
-import com.yzt.discover.mvp.presenter.DiscoverDetailPresenter
+import com.yzt.discover.viewmodel.DiscoverDetailViewModel
+import com.yzt.discover.viewmodel.DiscoverDetailViewModelFactory
 import kotlin.math.abs
 
 /**
@@ -33,13 +35,15 @@ import kotlin.math.abs
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_DISCOVER_DETAIL)
-class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
-    DiscoverDetailContract.View {
+class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityDiscoverDetailBinding? = null
 
-    private val presenter: DiscoverDetailPresenter by lazy {
-        DiscoverDetailPresenter(context!!, this)
+    private val viewModel: DiscoverDetailViewModel by lazy {
+        ViewModelProvider(
+            this,
+            DiscoverDetailViewModelFactory()
+        )[DiscoverDetailViewModel::class.java]
     }
 
     private lateinit var fragments: MutableList<androidx.fragment.app.Fragment>
@@ -76,7 +80,7 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
     override fun initView(savedInstanceState: Bundle?) {
         id = intent.getStringExtra("id")
         id?.let {
-            presenter.load(id!!)
+            viewModel.load(this, id!!)
         }
 
         binding!!.ivBack.setOnClickListener(this)
@@ -128,7 +132,96 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        viewModel.liveData.observe(
+            this,
+            Observer<DiscoverDetailBean> { bean ->
+                bean?.tagInfo?.let {
+                    category = it.name
+                    binding!!.tvTop.text = category
+                    binding!!.tvName.text = category
+                    binding!!.tvDesc.text = it.description
+                    var count = ""
+                    if (it.tagFollowCount.toString().isNotEmpty() && getString(
+                            R.string.discover_join,
+                            it.lookCount.toString()
+                        ).isEmpty()
+                    ) {
+                        count = getString(R.string.discover_follow, it.tagFollowCount.toString())
+                    } else if (it.tagFollowCount.toString().isEmpty() && getString(
+                            R.string.discover_join,
+                            it.lookCount.toString()
+                        ).isNotEmpty()
+                    ) {
+                        count = getString(R.string.discover_join, it.lookCount.toString())
+                    } else if (it.tagFollowCount.toString().isNotEmpty() && getString(
+                            R.string.discover_join,
+                            it.lookCount.toString()
+                        ).isNotEmpty()
+                    ) {
+                        count = getString(
+                            R.string.discover_follow,
+                            it.tagFollowCount.toString()
+                        ) + " | " + getString(R.string.discover_join, it.lookCount.toString())
+                    } else {
+                        binding!!.tvCount.visibility = View.GONE
+                    }
+                    binding!!.tvCount.text = count
+                    ImageUtil.show(context!!, binding!!.iv, it.headerImage)
+                    binding!!.iv.setColorFilter(context!!.color(R.color.black_25))
 
+                    titles = mutableListOf()
+                    bean.tabInfo.tabList.forEach { itt ->
+                        itt.name?.let { name ->
+                            titles.add(name)
+                        }
+                    }
+                    binding!!.vp.adapter = DiscoverDetailPagerAdapter(
+                        supportFragmentManager,
+                        FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+                        fragments,
+                        titles
+                    )
+                    binding!!.tl.setupWithViewPager(binding!!.vp)
+                    binding!!.tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                        override fun onTabReselected(tab: TabLayout.Tab?) {
+                            tab?.let { itt ->
+                                when (itt.position) {
+                                    0 -> {
+                                        (fragments[0] as DiscoverLeftFragment).scrollToTop()
+                                    }
+                                    1 -> {
+                                        (fragments[1] as DiscoverRightFragment).scrollToTop()
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                        }
+                    })
+                    for (i in titles.indices) {
+                        val tab = binding!!.tl.getTabAt(i) ?: continue
+
+                        tab.setCustomView(R.layout.layout_tab)
+                        if (tab.customView == null) {
+                            continue
+                        }
+
+                        val tv = tab.customView!!.findViewById<AppCompatTextView>(R.id.tv)
+                        tv.text = titles[i]
+                        if (i == 0) {
+                            tv.isSelected = true
+                            tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
+                        }
+                    }
+                }
+            }
+        )
     }
 
     override fun onPause() {
@@ -143,7 +236,6 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
 
     override fun onDestroy() {
         GSYVideoManager.releaseAllVideos()
-        presenter.cancel()
         super.onDestroy()
     }
 
@@ -172,94 +264,6 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener,
             }
             R.id.tv_follow -> {
 
-            }
-        }
-    }
-
-    override fun setData(bean: DiscoverDetailBean?) {
-        bean?.tagInfo?.let {
-            category = it.name
-            binding!!.tvTop.text = category
-            binding!!.tvName.text = category
-            binding!!.tvDesc.text = it.description
-            var count = ""
-            if (it.tagFollowCount.toString().isNotEmpty() && getString(
-                    R.string.discover_join,
-                    it.lookCount.toString()
-                ).isEmpty()
-            ) {
-                count = getString(R.string.discover_follow, it.tagFollowCount.toString())
-            } else if (it.tagFollowCount.toString().isEmpty() && getString(
-                    R.string.discover_join,
-                    it.lookCount.toString()
-                ).isNotEmpty()
-            ) {
-                count = getString(R.string.discover_join, it.lookCount.toString())
-            } else if (it.tagFollowCount.toString().isNotEmpty() && getString(
-                    R.string.discover_join,
-                    it.lookCount.toString()
-                ).isNotEmpty()
-            ) {
-                count = getString(
-                    R.string.discover_follow,
-                    it.tagFollowCount.toString()
-                ) + " | " + getString(R.string.discover_join, it.lookCount.toString())
-            } else {
-                binding!!.tvCount.visibility = View.GONE
-            }
-            binding!!.tvCount.text = count
-            ImageUtil.show(context!!, binding!!.iv, it.headerImage)
-            binding!!.iv.setColorFilter(context!!.color(R.color.black_25))
-
-            titles = mutableListOf()
-            bean.tabInfo.tabList.forEach { itt ->
-                itt.name?.let { name ->
-                    titles.add(name)
-                }
-            }
-            binding!!.vp.adapter = DiscoverDetailPagerAdapter(
-                supportFragmentManager,
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-                fragments,
-                titles
-            )
-            binding!!.tl.setupWithViewPager(binding!!.vp)
-            binding!!.tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                    tab?.let { itt ->
-                        when (itt.position) {
-                            0 -> {
-                                (fragments[0] as DiscoverLeftFragment).scrollToTop()
-                            }
-                            1 -> {
-                                (fragments[1] as DiscoverRightFragment).scrollToTop()
-                            }
-                        }
-                    }
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                }
-
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                }
-            })
-            for (i in titles.indices) {
-                val tab = binding!!.tl.getTabAt(i) ?: continue
-
-                tab.setCustomView(R.layout.layout_tab)
-                if (tab.customView == null) {
-                    continue
-                }
-
-                val tv = tab.customView!!.findViewById<AppCompatTextView>(R.id.tv)
-                tv.text = titles[i]
-                if (i == 0) {
-                    tv.isSelected = true
-                    tab.customView!!.findViewById<View>(R.id.v_line).isSelected = true
-                }
             }
         }
     }
