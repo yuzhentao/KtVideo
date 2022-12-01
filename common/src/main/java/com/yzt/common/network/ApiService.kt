@@ -2,7 +2,6 @@ package com.yzt.common.network
 
 import com.yzt.bean.*
 import com.yzt.common.key.Constant
-import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -175,14 +174,5 @@ interface ApiService {
      */
     @GET("v3/queries/hot?${Constant.PARAMS}")
     suspend fun getHotSearchByCoroutine(@Query("deviceModel") deviceModel: String): MutableList<String>?
-
-    /**
-     * 搜索
-     */
-    @GET("v3/search?${Constant.PARAMS}")
-    fun getSearch(
-        @Query("query") key: String,
-        @Query("deviceModel") deviceModel: String
-    ): Observable<SearchBean>?
 
 }

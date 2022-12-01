@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.bean.SearchBean
 import com.yzt.bean.VideoBean
 import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.db.VideoDbManager
@@ -18,8 +17,6 @@ import com.yzt.common.util.FooterUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.WatchAdapter
 import com.yzt.ktvideo.databinding.ActivityWatchBinding
-import com.yzt.ktvideo.mvp.contract.SearchContract
-import com.yzt.ktvideo.mvp.presenter.SearchPresenter
 
 /**
  * 观看记录
@@ -27,17 +24,13 @@ import com.yzt.ktvideo.mvp.presenter.SearchPresenter
  * @author yzt 2021/2/9
  */
 @Route(path = Constant.PATH_WATCH)
-class WatchActivity : BaseAppCompatActivity(), View.OnClickListener, SearchContract.View {
+class WatchActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityWatchBinding? = null
 
     private lateinit var beans: MutableList<VideoBean>
     private val adapter: WatchAdapter by lazy {
         WatchAdapter(null)
-    }
-
-    private val presenter: SearchPresenter by lazy {
-        SearchPresenter(context!!, this)
     }
 
     private val dbManager: VideoDbManager by lazy {
@@ -95,28 +88,22 @@ class WatchActivity : BaseAppCompatActivity(), View.OnClickListener, SearchContr
 
     override fun initData(savedInstanceState: Bundle?) {
         beans = mutableListOf()
-        if (noKey!!) {
-            dbManager.findAll()?.let {
-                beans.addAll(it)
-                if (beans.size > 0) {
-                    binding!!.rv.visibility = View.VISIBLE
-                    binding!!.tvHint.visibility = View.GONE
-                } else {
-                    binding!!.rv.visibility = View.GONE
-                    binding!!.tvHint.visibility = View.VISIBLE
-                }
-                adapter.setList(beans)
-                adapter.addFooterView(
-                    FooterUtil.getFooter(
-                        context!!,
-                        color(R.color.app_black)
-                    )
+        dbManager.findAll()?.let {
+            beans.addAll(it)
+            if (beans.size > 0) {
+                binding!!.rv.visibility = View.VISIBLE
+                binding!!.tvHint.visibility = View.GONE
+            } else {
+                binding!!.rv.visibility = View.GONE
+                binding!!.tvHint.visibility = View.VISIBLE
+            }
+            adapter.setList(beans)
+            adapter.addFooterView(
+                FooterUtil.getFooter(
+                    context!!,
+                    color(R.color.app_black)
                 )
-            }
-        } else {
-            intent.getStringExtra("key")?.let {
-                presenter.load(it)
-            }
+            )
         }
     }
 
@@ -133,30 +120,6 @@ class WatchActivity : BaseAppCompatActivity(), View.OnClickListener, SearchContr
                 }
             }
         }
-    }
-
-    override fun setData(beans: MutableList<SearchBean.Item.Data.Content>) {
-        beans.forEach {
-            val data = it.data
-            data?.let { itt ->
-                this.beans.add(
-                    VideoBean(
-                        itt.id,
-                        itt.cover?.feed,
-                        itt.title,
-                        itt.description,
-                        itt.duration,
-                        itt.playUrl,
-                        itt.category,
-                        itt.cover?.blurred,
-                        itt.consumption?.collectionCount,
-                        itt.consumption?.shareCount,
-                        itt.consumption?.replyCount
-                    )
-                )
-            }
-        }
-        adapter.setList(this.beans)
     }
 
 }

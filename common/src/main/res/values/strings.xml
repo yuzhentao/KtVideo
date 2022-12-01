@@ -55,5 +55,6 @@
     <string name="login_desc">登录后即可关注作者、\n发表评论、同步收藏视频和播放记录</string>
     <string name="login_protocol">登录或注册即可同意开眼 用户服务协议</string>
     <string name="end">- The End -</string>
+    <string name="api_no_response">接口无响应</string>
 
 </resources>

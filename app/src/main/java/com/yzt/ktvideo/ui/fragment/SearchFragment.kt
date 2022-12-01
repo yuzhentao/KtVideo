@@ -8,15 +8,14 @@ import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yzt.common.key.Constant
 import com.yzt.common.util.CircularRevealAnim
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.KeyBoardUtil
+import com.yzt.common.util.ToastUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.HotSearchAdapter
 import com.yzt.ktvideo.databinding.FragmentSearchBinding
@@ -151,11 +150,7 @@ class SearchFragment : DialogFragment(),
                 val bean: String? = adapter.data[position] as String?
                 bean?.let { itt ->
                     KeyBoardUtil.closeKeyboard(it, binding!!.et)
-                    ARouter
-                        .getInstance()
-                        .build(Constant.PATH_WATCH)
-                        .withString("key", itt)
-                        .navigation()
+                    ToastUtil.shortCenter(R.string.api_no_response)
                 }
             }
             viewModel.liveData.observe(
@@ -188,11 +183,7 @@ class SearchFragment : DialogFragment(),
         val key = binding!!.et.text.toString()
         if (key.isNotEmpty()) {
             KeyBoardUtil.closeKeyboard(context, binding!!.et)
-            ARouter
-                .getInstance()
-                .build(Constant.PATH_WATCH)
-                .withString("key", key)
-                .navigation()
+            ToastUtil.shortCenter(R.string.api_no_response)
         }
     }
 
