@@ -2,6 +2,8 @@ package com.yzt.home.fragment
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -20,8 +22,8 @@ import com.yzt.common.util.ViewUtil
 import com.yzt.home.R
 import com.yzt.home.adapter.HomeAdapter
 import com.yzt.home.databinding.FragmentHomeBinding
-import com.yzt.home.mvp.contract.HomeContract
-import com.yzt.home.mvp.presenter.HomePresenter
+import com.yzt.home.viewmodel.HomeViewModel
+import com.yzt.home.viewmodel.HomeViewModelFactory
 import java.util.regex.Pattern
 
 /**
@@ -29,7 +31,7 @@ import java.util.regex.Pattern
  *
  * @author yzt 2020/12/31
  */
-class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
+class HomeFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private var binding: FragmentHomeBinding? = null
 
@@ -38,8 +40,8 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
         HomeAdapter(null)
     }
 
-    private val presenter: HomePresenter by lazy {
-        HomePresenter(context, this)
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider(this, HomeViewModelFactory())[HomeViewModel::class.java]
     }
 
     private var date: String? = null
@@ -61,7 +63,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     }
 
     override fun initView() {
-        presenter.load()
+        viewModel.load(requireContext())
         binding!!.srl.setOnRefreshListener(this)
         binding!!.srl.setColorSchemeResources(R.color.app_pink)
         binding!!.srl.setProgressViewOffset(
@@ -87,7 +89,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
                 val lastPosition = layoutManager.findLastVisibleItemPosition()
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastPosition == beans.size - 1) {
                     if (date != null) {
-                        presenter.loadMore(date)
+                        viewModel.loadMore(requireContext(), date)
                     }
                 }
             }
@@ -141,46 +143,42 @@ class HomeFragment : BaseFragment(), HomeContract.View, SwipeRefreshLayout.OnRef
     }
 
     override fun initData() {
-
-    }
-
-    override fun onDestroy() {
-        presenter.cancel()
-        super.onDestroy()
-    }
-
-    override fun setData(bean: HomeBean) {
-        val regEx = "[^0-9]"
-        val p = Pattern.compile(regEx)
-        val m = p.matcher(bean.nextPageUrl)
-        date = m.replaceAll("").subSequence(1, m.replaceAll("").length - 1).toString()
-        if (isRefresh) {
-            isRefresh = false
-            binding!!.srl.isRefreshing = false
-            if (beans.size > 0) {
-                beans.clear()
+        viewModel.liveData.observe(
+            this,
+            Observer<HomeBean> { bean ->
+                val regEx = "[^0-9]"
+                val p = Pattern.compile(regEx)
+                val m = p.matcher(bean.nextPageUrl)
+                date = m.replaceAll("").subSequence(1, m.replaceAll("").length - 1).toString()
+                if (isRefresh) {
+                    isRefresh = false
+                    binding!!.srl.isRefreshing = false
+                    if (beans.size > 0) {
+                        beans.clear()
+                    }
+                }
+                bean.issueList
+                    ?.flatMap { it.itemList!! }
+                    ?.filter { it.type == "video" }
+                    ?.forEach { beans.add(it) }
+                if (beans.size > 0) {
+                    adapter.setList(beans)
+                } else if (adapter.data.size > 0) {
+                    adapter.addFooterView(
+                        FooterUtil.getFooter(
+                            requireContext(),
+                            requireContext().color(R.color.app_black)
+                        )
+                    )
+                }
             }
-        }
-        bean.issueList
-            ?.flatMap { it.itemList!! }
-            ?.filter { it.type == "video" }
-            ?.forEach { beans.add(it) }
-        if (beans.size > 0) {
-            adapter.setList(beans)
-        } else if (adapter.data.size > 0) {
-            adapter.addFooterView(
-                FooterUtil.getFooter(
-                    requireContext(),
-                    requireContext().color(R.color.app_black)
-                )
-            )
-        }
+        )
     }
 
     override fun onRefresh() {
         if (!isRefresh) {
             isRefresh = true
-            presenter.load()
+            viewModel.load(requireContext())
         }
     }
 

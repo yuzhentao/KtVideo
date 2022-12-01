@@ -1,4 +1,4 @@
-package com.yzt.home.mvp.model
+package com.yzt.home.repository
 
 import android.content.Context
 import com.yzt.bean.HomeBean
@@ -8,11 +8,11 @@ import com.yzt.common.network.RetrofitClient
 /**
  * 首页
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class HomeModel {
+object HomeRepository {
 
-//    fun loadData(context: Context, isFirst: Boolean, date: String?): Observable<HomeBean>? {
+    //    fun loadData(context: Context, isFirst: Boolean, date: String?): Observable<HomeBean>? {
 //        val apiService = RetrofitClient.getInstance(context, ApiService.BASE_URL).create(ApiService::class.java)
 //        return when (isFirst) {
 //            true -> apiService?.getHomeData()!!.ioMain()

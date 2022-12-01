@@ -1,36 +1,29 @@
-package com.yzt.home.mvp.presenter
+package com.yzt.home.viewmodel
 
 import android.content.Context
-import com.yzt.home.mvp.contract.HomeContract
-import com.yzt.home.mvp.model.HomeModel
-import kotlinx.coroutines.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.yzt.bean.HomeBean
+import com.yzt.home.repository.HomeRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
  * 首页
  *
- * @author yzt 2021/2/9
+ * @author yzt 2022/12/1
  */
-class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.Presenter {
+class HomeViewModel : ViewModel() {
 
-    private var context: Context? = null
-    private var view: HomeContract.View? = null
-    private val model: HomeModel by lazy {
-        HomeModel()
+    val liveData: MutableLiveData<HomeBean> by lazy {
+        MutableLiveData<HomeBean>()
     }
 
-    private var job: Job? = null
-
-    init {
-        this.context = context
-        this.view = view
-    }
-
-    override fun start() {
-
-    }
-
-    override fun load() {
+    fun load(context: Context?) {
 //        context?.let {
 //            model.loadData(it, true, "")
 //        }
@@ -55,19 +48,19 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it, true, "")
+            viewModelScope.launch(exceptionHandler) {
+                val data = HomeRepository.loadDataByCoroutine(it, true, "")
                 if (data == null) {
                     Timber.e("loadDataByCoroutine_失败>>>>>")
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
-                    view?.setData(data)
+                    liveData.value = data
                 }
             }
         }
     }
 
-    override fun loadMore(date: String?) {
+    fun loadMore(context: Context?, date: String?) {
 //        context?.let {
 //            model.loadData(it, false, date)
 //        }
@@ -92,22 +85,18 @@ class HomePresenter(context: Context?, view: HomeContract.View) : HomeContract.P
             val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
                 Timber.e("loadDataByCoroutine_异常>>>>>$throwable")
             }
-            job = GlobalScope.launch(exceptionHandler) {
-                val data = model.loadDataByCoroutine(it, false, date)
+            viewModelScope.launch(exceptionHandler) {
+                val data = HomeRepository.loadDataByCoroutine(it, false, date)
                 if (data == null) {
                     Timber.e("loadDataByCoroutine_失败>>>>>")
                 } else {
                     Timber.e("loadDataByCoroutine_成功>>>>>")
                     withContext(Dispatchers.Main) {
-                        view?.setData(data)
+                        liveData.value = data
                     }
                 }
             }
         }
-    }
-
-    override fun cancel() {
-        job?.cancel()
     }
 
 }
