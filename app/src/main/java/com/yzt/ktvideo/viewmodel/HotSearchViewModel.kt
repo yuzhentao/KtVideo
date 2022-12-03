@@ -11,6 +11,8 @@ import timber.log.Timber
 
 /**
  * 热门搜索词
+ * setValue：只能在主线程调用，同步更新数据
+ * postValue：可在后台线程调用，其内部会切换到主线程调用setValue
  *
  * @author yzt 2022/12/1
  */
