@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.gyf.immersionbar.ImmersionBar
 import com.yzt.bean.RankingBean
 import com.yzt.common.base.BaseFragment
@@ -95,13 +95,28 @@ class RankingFragment : BaseFragment() {
                         0,
                         0,
                     )
-                    binding!!.vp.adapter = RankingPagerAdapter(
-                        requireFragmentManager(),
-                        FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-                        fragments,
-                        titles
-                    )
-                    binding!!.tl.setupWithViewPager(binding!!.vp)
+
+                    //绑定TabLayout和ViewPager
+//                    binding!!.vp.adapter = RankingPagerAdapter(
+//                        requireFragmentManager(),
+//                        FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+//                        fragments,
+//                        titles
+//                    )
+//                    binding!!.tl.setupWithViewPager(binding!!.vp)
+
+                    //绑定TabLayout和ViewPager2
+                    binding!!.vp.adapter = RankingPagerAdapter(requireActivity(), fragments)
+                    TabLayoutMediator(
+                        binding!!.tl,
+                        binding!!.vp,
+                        true,
+                        true,
+                        fun(tab: TabLayout.Tab, position: Int) {
+                            tab.text = titles[position]
+                        }
+                    ).attach()
+
                     binding!!.tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                         override fun onTabReselected(tab: TabLayout.Tab?) {
                             tab?.let { itt ->
