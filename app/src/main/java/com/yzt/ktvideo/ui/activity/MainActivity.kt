@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.work.Constraints
 import androidx.work.Data
@@ -74,6 +75,17 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
             transparentStatusBar()
             statusBarDarkFont(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (System.currentTimeMillis().minus(exitTime) <= 3000) {
+                    finish()
+                    toast!!.cancel()
+                } else {
+                    exitTime = System.currentTimeMillis()
+                    toast = shortToast("再按一次退出程序")
+                }
+            }
+        })
         requestPermissions()
     }
 
@@ -131,16 +143,6 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
             }
         }
         super.onDestroy()
-    }
-
-    override fun onBackPressed() {
-        if (System.currentTimeMillis().minus(exitTime) <= 3000) {
-            finish()
-            toast!!.cancel()
-        } else {
-            exitTime = System.currentTimeMillis()
-            toast = shortToast("再按一次退出程序")
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

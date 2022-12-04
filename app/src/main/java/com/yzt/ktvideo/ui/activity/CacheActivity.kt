@@ -2,6 +2,7 @@ package com.yzt.ktvideo.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -66,6 +67,11 @@ class CacheActivity : BaseAppCompatActivity(), View.OnClickListener {
             statusBarDarkFont(true)
             fitsSystemWindows(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        })
         Aria.download(this).register()
     }
 
@@ -162,7 +168,7 @@ class CacheActivity : BaseAppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_top -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
         }

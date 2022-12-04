@@ -7,6 +7,7 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
@@ -48,6 +49,11 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
         immersionBar {
             statusBarColor(R.color.transparent)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        })
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -89,7 +95,7 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_top -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
         }

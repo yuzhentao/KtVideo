@@ -2,6 +2,7 @@ package com.yzt.ktvideo.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.util.ClickUtil
@@ -36,6 +37,11 @@ class AvatarActivity : BaseAppCompatActivity(), View.OnClickListener {
             statusBarDarkFont(true)
             fitsSystemWindows(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        })
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -52,7 +58,7 @@ class AvatarActivity : BaseAppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_top -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
         }

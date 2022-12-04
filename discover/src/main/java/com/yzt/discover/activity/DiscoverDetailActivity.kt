@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
@@ -75,6 +76,15 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (GSYVideoManager.backFromWindowFull(context)) {
+                    return
+                }
+
+                finish()
+            }
+        })
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -239,13 +249,6 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
         super.onDestroy()
     }
 
-    override fun onBackPressed() {
-        if (GSYVideoManager.backFromWindowFull(context)) {
-            return
-        }
-        super.onBackPressed()
-    }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         isFull = newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER
@@ -259,7 +262,7 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
                         1000
                     ) || !ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)
                 ) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
             R.id.tv_follow -> {

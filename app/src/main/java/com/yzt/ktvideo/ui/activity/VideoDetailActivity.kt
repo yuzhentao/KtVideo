@@ -10,6 +10,7 @@ import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -112,6 +113,16 @@ class VideoDetailActivity : BaseAppCompatActivity() {
             transparentStatusBar()
             statusBarDarkFont(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                orientationUtils.backToProtVideo()
+                if (GSYVideoManager.backFromWindowFull(context)) {
+                    return
+                }
+
+                finish()
+            }
+        })
         ARouter.getInstance().inject(this)
         Aria.download(this).register()
     }
@@ -125,7 +136,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
             0,
         )
         binding!!.ivBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         bean?.let {
             it.id?.let { itt ->
@@ -287,14 +298,6 @@ class VideoDetailActivity : BaseAppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        orientationUtils.backToProtVideo()
-        if (GSYVideoManager.backFromWindowFull(context)) {
-            return
-        }
-        super.onBackPressed()
-    }
-
     /**
      * 缓存
      */
@@ -352,7 +355,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
             orientationUtils.isEnable = !lock//配合下方的onConfigurationChanged
         }
         binding!!.vp.backButton.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         if (autoPlay) {
             binding!!.vp.startPlayLogic()

@@ -2,6 +2,7 @@ package com.yzt.mine.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseAppCompatActivity
@@ -41,6 +42,11 @@ class FavoriteActivity : BaseAppCompatActivity(), View.OnClickListener {
             navigationBarDarkIcon(true)
             fitsSystemWindows(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        })
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -57,7 +63,7 @@ class FavoriteActivity : BaseAppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_top -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
         }

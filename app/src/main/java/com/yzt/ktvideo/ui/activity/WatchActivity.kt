@@ -2,6 +2,7 @@ package com.yzt.ktvideo.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -58,6 +59,11 @@ class WatchActivity : BaseAppCompatActivity(), View.OnClickListener {
             statusBarDarkFont(true)
             fitsSystemWindows(true)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        })
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -116,7 +122,7 @@ class WatchActivity : BaseAppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_top -> {
                 if (!ClickUtil.isFastDoubleClick(R.id.iv_top, 1000)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
         }
