@@ -31,16 +31,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 //}
 
 class RankingPagerAdapter(
-    fa: FragmentActivity,
-    var beans: MutableList<Fragment>
-) : FragmentStateAdapter(fa) {
+    fragmentActivity: FragmentActivity,
+    var fragments: MutableList<Fragment>
+) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int {
-        return beans.size
+        return fragments.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return beans[position]
+        return fragments[position]
     }
 
 }

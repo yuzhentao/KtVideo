@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.gyf.immersionbar.ktx.immersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yzt.bean.DiscoverDetailBean
@@ -185,13 +185,28 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
                             titles.add(name)
                         }
                     }
-                    binding!!.vp.adapter = DiscoverDetailPagerAdapter(
-                        supportFragmentManager,
-                        FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-                        fragments,
-                        titles
-                    )
-                    binding!!.tl.setupWithViewPager(binding!!.vp)
+
+                    //绑定TabLayout和ViewPager
+//                    binding!!.vp.adapter = DiscoverDetailPagerAdapter(
+//                        supportFragmentManager,
+//                        FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+//                        fragments,
+//                        titles
+//                    )
+//                    binding!!.tl.setupWithViewPager(binding!!.vp)
+
+                    //绑定TabLayout和ViewPager2
+                    binding!!.vp.adapter = DiscoverDetailPagerAdapter(this, fragments)
+                    TabLayoutMediator(
+                        binding!!.tl,
+                        binding!!.vp,
+                        true,
+                        true,
+                        fun(tab: TabLayout.Tab, position: Int) {
+                            tab.text = titles[position]
+                        }
+                    ).attach()
+
                     binding!!.tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                         override fun onTabReselected(tab: TabLayout.Tab?) {
                             tab?.let { itt ->

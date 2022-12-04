@@ -172,11 +172,18 @@
             tools:background="@color/bg_blue"
             tools:ignore="UnusedAttribute" />
 
-        <androidx.viewpager.widget.ViewPager
+        <!--<androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@color/bg_green" />-->
+
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:background="@color/bg_green" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
