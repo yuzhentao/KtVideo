@@ -34,7 +34,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         context = this
         activity = this
         compositeDisposable = CompositeDisposable()
-        initAfterSetLayout(savedInstanceState)
+        initBeforeSetLayout(savedInstanceState)
         setLayoutId()?.let {
             setContentView(it)
         }

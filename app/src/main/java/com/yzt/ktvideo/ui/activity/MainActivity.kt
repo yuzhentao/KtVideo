@@ -28,6 +28,7 @@ import com.yzt.discover.fragment.DiscoverFragment
 import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityMainBinding
+import com.yzt.ktvideo.lifecycle.MainLifecycleObserver
 import com.yzt.ktvideo.ui.fragment.*
 import com.yzt.ktvideo.worker.DownloadSplashWorker
 import com.yzt.mine.fragment.MineFragment
@@ -56,6 +57,8 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
     private var changeBgDiscover: Boolean = false
 
     private var permissionsDisposable: Disposable? = null
+
+    private lateinit var lifecycleObserver: MainLifecycleObserver
 
     override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
 
@@ -86,7 +89,7 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
                 }
             }
         })
-        requestPermissions()
+        lifecycleObserver = MainLifecycleObserver(this, PermissionsManager())
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -134,15 +137,6 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
     override fun onPause() {
         super.onPause()
         toast?.cancel()
-    }
-
-    override fun onDestroy() {
-        permissionsDisposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
-            }
-        }
-        super.onDestroy()
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -263,27 +257,6 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun requestPermissions() {
-        permissionsDisposable = rxPermissions
-            .requestEachCombined(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE
-            )
-            .subscribe { permission ->
-                when {
-                    permission.granted -> {
-                        downloadSplash()
-                    }
-                    permission.shouldShowRequestPermissionRationale -> {
-
-                    }
-                    else -> {
-
-                    }
-                }
-            }
-    }
-
     private fun downloadSplash() {
         val url = SPUtils.getInstance(context!!, Constant.KT_VIDEO).getString(SPLASH_URL)
         require(url.isNotEmpty()) {
@@ -378,6 +351,39 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
             index = 0
         }
         return week[index]
+    }
+
+    inner class PermissionsManager {
+
+        fun requestPermissions() {
+            permissionsDisposable = rxPermissions
+                .requestEachCombined(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_PHONE_STATE
+                )
+                .subscribe { permission ->
+                    when {
+                        permission.granted -> {
+                            downloadSplash()
+                        }
+                        permission.shouldShowRequestPermissionRationale -> {
+
+                        }
+                        else -> {
+
+                        }
+                    }
+                }
+        }
+
+        fun dispose() {
+            permissionsDisposable?.let {
+                if (!it.isDisposed) {
+                    it.dispose()
+                }
+            }
+        }
+
     }
 
 }
