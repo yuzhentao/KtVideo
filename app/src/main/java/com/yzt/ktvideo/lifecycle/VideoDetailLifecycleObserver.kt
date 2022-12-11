@@ -3,7 +3,6 @@ package com.yzt.ktvideo.lifecycle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.yzt.ktvideo.ui.activity.VideoDetailActivity
-import timber.log.Timber
 
 /**
  * @author yzt 2022/12/11
