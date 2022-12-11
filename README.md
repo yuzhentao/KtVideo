@@ -12,7 +12,6 @@ An open-eye app developed with Kotlin. 一个用Kotlin开发的开眼APP。
 #### 功能：
 含有开眼APP每日推荐、分类、热门排行等内容  
 支持视频全屏播放，视频缓存等功能  
-支持关键字搜索
 
 #### 特点：
 项目采用Kotlin编写，主要架构为ViewModel+LiveData+Lifecycle+Realm  
