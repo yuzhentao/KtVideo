@@ -249,7 +249,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        lifecycleObserver = VideoDetailLifecycleObserver(this, VideoManager())
+        lifecycleObserver = VideoDetailLifecycleObserver(this, LifecycleManager())
         viewModel.liveData.observe(
             this,
             androidx.lifecycle.Observer<MutableList<VideoRelatedBean.Item.Data>> { beans ->
@@ -259,16 +259,6 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                 }
             }
         )
-    }
-
-    override fun onDestroy() {
-        dbManager.close()
-        coverDisposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
-            }
-        }
-        super.onDestroy()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -386,7 +376,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
         }
     }
 
-    inner class VideoManager {
+    inner class LifecycleManager {
 
         fun prepareVideo() {
             val uri = intent.getStringExtra("loac©lFile")
@@ -445,6 +435,18 @@ class VideoDetailActivity : BaseAppCompatActivity() {
 
         fun setNoPause() {
             isPause = false
+        }
+
+        fun closeDbManager() {
+            dbManager.close()
+        }
+
+        fun disposeCover() {
+            coverDisposable?.let {
+                if (!it.isDisposed) {
+                    it.dispose()
+                }
+            }
         }
 
         fun releaseVideo() {

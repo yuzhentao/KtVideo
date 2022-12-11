@@ -9,7 +9,7 @@ import com.yzt.ktvideo.ui.activity.VideoDetailActivity
  */
 class VideoDetailLifecycleObserver(
     lifecycleOwner: LifecycleOwner,
-    private val videoManager: VideoDetailActivity.VideoManager
+    private val manager: VideoDetailActivity.LifecycleManager
 ) : DefaultLifecycleObserver {
 
     init {
@@ -18,7 +18,7 @@ class VideoDetailLifecycleObserver(
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        videoManager.prepareVideo()
+        manager.prepareVideo()
     }
 
     override fun onStart(owner: LifecycleOwner) {
@@ -27,12 +27,12 @@ class VideoDetailLifecycleObserver(
 
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        videoManager.setNoPause()
+        manager.setNoPause()
     }
 
     override fun onPause(owner: LifecycleOwner) {
         super.onPause(owner)
-        videoManager.setPause()
+        manager.setPause()
     }
 
     override fun onStop(owner: LifecycleOwner) {
@@ -40,7 +40,9 @@ class VideoDetailLifecycleObserver(
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
-        videoManager.releaseVideo()
+        manager.closeDbManager()
+        manager.disposeCover()
+        manager.releaseVideo()
         super.onDestroy(owner)
         owner.lifecycle.removeObserver(this)
     }

@@ -9,7 +9,7 @@ import com.yzt.ktvideo.ui.activity.MainActivity
  */
 class MainLifecycleObserver(
     lifecycleOwner: LifecycleOwner,
-    private val permissionsManager: MainActivity.PermissionsManager
+    private val manager: MainActivity.LifecycleManager
 ) : DefaultLifecycleObserver {
 
     init {
@@ -18,7 +18,7 @@ class MainLifecycleObserver(
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        permissionsManager.requestPermissions()
+        manager.requestPermissions()
     }
 
     override fun onStart(owner: LifecycleOwner) {
@@ -31,6 +31,7 @@ class MainLifecycleObserver(
 
     override fun onPause(owner: LifecycleOwner) {
         super.onPause(owner)
+        manager.cancelToast()
     }
 
     override fun onStop(owner: LifecycleOwner) {
@@ -38,7 +39,7 @@ class MainLifecycleObserver(
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
-        permissionsManager.dispose()
+        manager.dispose()
         super.onDestroy(owner)
         owner.lifecycle.removeObserver(this)
     }

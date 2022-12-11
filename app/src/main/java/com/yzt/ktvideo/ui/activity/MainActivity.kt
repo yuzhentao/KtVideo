@@ -89,7 +89,7 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
                 }
             }
         })
-        lifecycleObserver = MainLifecycleObserver(this, PermissionsManager())
+        lifecycleObserver = MainLifecycleObserver(this, LifecycleManager())
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -123,20 +123,6 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     override fun initData(savedInstanceState: Bundle?) {
 
-    }
-
-    /**
-     * let扩展函数的实际上是一个作用域函数，当你需要去定义一个变量在一个特定的作用域范围内，let函数的是一个不错的选择；let函数另一个作用就是可以避免写一些判断null的操作
-     * object.let{
-     *  it.XXX//在函数体内使用it替代object对象去访问其公有的属性和方法
-     * }
-     * object?.let{//表示object不为null的条件下，才会去执行let函数体
-     *  it.XXX
-     * }
-     */
-    override fun onPause() {
-        super.onPause()
-        toast?.cancel()
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -353,7 +339,7 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
         return week[index]
     }
 
-    inner class PermissionsManager {
+    inner class LifecycleManager {
 
         fun requestPermissions() {
             permissionsDisposable = rxPermissions
@@ -374,6 +360,10 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
                         }
                     }
                 }
+        }
+
+        fun cancelToast() {
+            toast?.cancel()
         }
 
         fun dispose() {
