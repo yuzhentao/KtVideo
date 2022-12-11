@@ -39,4 +39,8 @@ class HomeActivity : BaseAppCompatActivity() {
 
     }
 
+    override fun initLifecycleObserver() {
+
+    }
+
 }

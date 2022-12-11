@@ -26,6 +26,7 @@ import com.yzt.discover.adapter.DiscoverDetailPagerAdapter
 import com.yzt.discover.databinding.ActivityDiscoverDetailBinding
 import com.yzt.discover.fragment.DiscoverLeftFragment
 import com.yzt.discover.fragment.DiscoverRightFragment
+import com.yzt.discover.lifecycle.DiscoverDetailLifecycleObserver
 import com.yzt.discover.viewmodel.DiscoverDetailViewModel
 import com.yzt.discover.viewmodel.DiscoverDetailViewModelFactory
 import kotlin.math.abs
@@ -46,6 +47,8 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
             DiscoverDetailViewModelFactory()
         )[DiscoverDetailViewModel::class.java]
     }
+
+    private lateinit var lifecycleObserver: DiscoverDetailLifecycleObserver
 
     private lateinit var fragments: MutableList<androidx.fragment.app.Fragment>
     private lateinit var titles: MutableList<String>
@@ -249,19 +252,8 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
         )
     }
 
-    override fun onPause() {
-        super.onPause()
-        GSYVideoManager.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        GSYVideoManager.onResume()
-    }
-
-    override fun onDestroy() {
-        GSYVideoManager.releaseAllVideos()
-        super.onDestroy()
+    override fun initLifecycleObserver() {
+        lifecycleObserver = DiscoverDetailLifecycleObserver(this, LifecycleManager())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -284,6 +276,22 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
 
             }
         }
+    }
+
+    inner class LifecycleManager {
+
+        fun resumeVideo() {
+            GSYVideoManager.onResume()
+        }
+
+        fun pauseVideo() {
+            GSYVideoManager.onPause()
+        }
+
+        fun releaseVideo() {
+            GSYVideoManager.releaseAllVideos()
+        }
+
     }
 
 }

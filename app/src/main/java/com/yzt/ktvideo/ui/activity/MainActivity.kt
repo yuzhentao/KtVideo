@@ -89,7 +89,6 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
                 }
             }
         })
-        lifecycleObserver = MainLifecycleObserver(this, LifecycleManager())
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -123,6 +122,10 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     override fun initData(savedInstanceState: Bundle?) {
 
+    }
+
+    override fun initLifecycleObserver() {
+        lifecycleObserver = MainLifecycleObserver(this, LifecycleManager())
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

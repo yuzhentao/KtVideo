@@ -39,4 +39,8 @@ class MineActivity : BaseAppCompatActivity() {
 
     }
 
+    override fun initLifecycleObserver() {
+
+    }
+
 }

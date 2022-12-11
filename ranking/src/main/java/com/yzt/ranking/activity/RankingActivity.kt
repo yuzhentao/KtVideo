@@ -39,4 +39,8 @@ class RankingActivity : BaseAppCompatActivity() {
 
     }
 
+    override fun initLifecycleObserver() {
+
+    }
+
 }

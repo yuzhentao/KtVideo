@@ -39,4 +39,8 @@ class DiscoverActivity : BaseAppCompatActivity() {
 
     }
 
+    override fun initLifecycleObserver() {
+
+    }
+
 }

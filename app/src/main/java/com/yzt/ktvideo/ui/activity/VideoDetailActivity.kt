@@ -249,7 +249,6 @@ class VideoDetailActivity : BaseAppCompatActivity() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        lifecycleObserver = VideoDetailLifecycleObserver(this, LifecycleManager())
         viewModel.liveData.observe(
             this,
             androidx.lifecycle.Observer<MutableList<VideoRelatedBean.Item.Data>> { beans ->
@@ -259,6 +258,10 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                 }
             }
         )
+    }
+
+    override fun initLifecycleObserver() {
+        lifecycleObserver = VideoDetailLifecycleObserver(this, LifecycleManager())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

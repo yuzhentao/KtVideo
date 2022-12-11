@@ -159,6 +159,10 @@ class CacheActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun initLifecycleObserver() {
+
+    }
+
     override fun onDestroy() {
         dbManager.close()
         super.onDestroy()

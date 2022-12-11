@@ -48,6 +48,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         initAfterSetLayout(savedInstanceState)
         initView(savedInstanceState)
         initData(savedInstanceState)
+        initLifecycleObserver()
     }
 
     override fun onDestroy() {
@@ -98,5 +99,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
     protected abstract fun initView(savedInstanceState: Bundle?)
 
     protected abstract fun initData(savedInstanceState: Bundle?)
+
+    protected abstract fun initLifecycleObserver()
 
 }

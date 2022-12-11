@@ -59,6 +59,10 @@ class FavoriteActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     }
 
+    override fun initLifecycleObserver() {
+
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_top -> {
