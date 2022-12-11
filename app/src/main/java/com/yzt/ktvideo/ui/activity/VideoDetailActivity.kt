@@ -41,10 +41,10 @@ import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.adapter.VideoRelatedAdapter
 import com.yzt.ktvideo.databinding.ActivityVideoDetailBinding
+import com.yzt.ktvideo.lifecycle.VideoDetailLifecycleObserver
 import com.yzt.ktvideo.viewmodel.VideoRelatedViewModel
 import com.yzt.ktvideo.viewmodel.VideoRelatedViewModelFactory
 import io.reactivex.Observable
-import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.io.File
@@ -84,6 +84,8 @@ class VideoDetailActivity : BaseAppCompatActivity() {
     private val viewModel: VideoRelatedViewModel by lazy {
         ViewModelProvider(this, VideoRelatedViewModelFactory())[VideoRelatedViewModel::class.java]
     }
+
+    private lateinit var lifecycleObserver: VideoDetailLifecycleObserver
 
     private val dbManager: VideoDbManager by lazy {
         VideoDbManager()
@@ -247,7 +249,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        prepareVideo()
+        lifecycleObserver = VideoDetailLifecycleObserver(this, VideoManager())
         viewModel.liveData.observe(
             this,
             androidx.lifecycle.Observer<MutableList<VideoRelatedBean.Item.Data>> { beans ->
@@ -259,16 +261,6 @@ class VideoDetailActivity : BaseAppCompatActivity() {
         )
     }
 
-    override fun onPause() {
-        super.onPause()
-        isPause = true
-    }
-
-    override fun onResume() {
-        super.onResume()
-        isPause = false
-    }
-
     override fun onDestroy() {
         dbManager.close()
         coverDisposable?.let {
@@ -276,8 +268,6 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                 it.dispose()
             }
         }
-        GSYVideoManager.releaseAllVideos()
-        orientationUtils.releaseListener()
         super.onDestroy()
     }
 
@@ -311,57 +301,6 @@ class VideoDetailActivity : BaseAppCompatActivity() {
         }
     }
 
-    private fun prepareVideo() {
-        val uri = intent.getStringExtra("loac©lFile")
-        if (uri != null) {
-            binding!!.vp.setUp(uri, false, null, null)
-        } else {
-            bean?.playUrl?.let {
-                binding!!.vp.setUp(it, false, null, null)
-            }
-        }
-        ivCover = ImageView(context)
-        ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
-        setCover()
-        binding!!.vp.titleTextView.visibility = View.GONE
-        binding!!.vp.backButton.visibility = View.GONE
-        orientationUtils = OrientationUtils(activity, binding!!.vp)
-        binding!!.vp.setIsTouchWiget(true)
-        binding!!.vp.isRotateViewAuto = false
-        binding!!.vp.isLockLand = false
-        binding!!.vp.isShowFullAnimation = false
-        binding!!.vp.isNeedLockFull = true
-        binding!!.vp.fullscreenButton.setOnClickListener {
-            orientationUtils.resolveByClick()//直接横屏
-            binding!!.vp.startWindowFullscreen(
-                context,
-                true,
-                true
-            )//第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-        }
-        binding!!.vp.setVideoAllCallBack(object : VideoListener() {
-            override fun onQuitFullscreen(url: String?, vararg objects: Any?) {
-                super.onQuitFullscreen(url, *objects)
-                orientationUtils.backToProtVideo()
-            }
-
-            override fun onPrepared(url: String?, vararg objects: Any?) {
-                super.onPrepared(url, *objects)
-                orientationUtils.isEnable = true//开始播放了才能旋转和全屏
-                isPlay = true
-            }
-        })
-        binding!!.vp.setLockClickListener { _, lock ->
-            orientationUtils.isEnable = !lock//配合下方的onConfigurationChanged
-        }
-        binding!!.vp.backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-        if (autoPlay) {
-            binding!!.vp.startPlayLogic()
-        }
-    }
-
     private fun setCover() {
         bean?.feed?.let {
             val observable: Observable<Bitmap> = Observable.create { emitter ->
@@ -376,7 +315,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 emitter.onNext(bitmap)
             }
-            observable.ioMain().subscribe(object : Observer<Bitmap> {
+            observable.ioMain().subscribe(object : io.reactivex.Observer<Bitmap> {
                 override fun onComplete() {
 
                 }
@@ -445,6 +384,74 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                 dbManager.update(it)
             }
         }
+    }
+
+    inner class VideoManager {
+
+        fun prepareVideo() {
+            val uri = intent.getStringExtra("loac©lFile")
+            if (uri != null) {
+                binding!!.vp.setUp(uri, false, null, null)
+            } else {
+                bean?.playUrl?.let {
+                    binding!!.vp.setUp(it, false, null, null)
+                }
+            }
+            ivCover = ImageView(context)
+            ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
+            setCover()
+            binding!!.vp.titleTextView.visibility = View.GONE
+            binding!!.vp.backButton.visibility = View.GONE
+            orientationUtils = OrientationUtils(activity, binding!!.vp)
+            binding!!.vp.setIsTouchWiget(true)
+            binding!!.vp.isRotateViewAuto = false
+            binding!!.vp.isLockLand = false
+            binding!!.vp.isShowFullAnimation = false
+            binding!!.vp.isNeedLockFull = true
+            binding!!.vp.fullscreenButton.setOnClickListener {
+                orientationUtils.resolveByClick()//直接横屏
+                binding!!.vp.startWindowFullscreen(
+                    context,
+                    true,
+                    true
+                )//第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
+            }
+            binding!!.vp.setVideoAllCallBack(object : VideoListener() {
+                override fun onQuitFullscreen(url: String?, vararg objects: Any?) {
+                    super.onQuitFullscreen(url, *objects)
+                    orientationUtils.backToProtVideo()
+                }
+
+                override fun onPrepared(url: String?, vararg objects: Any?) {
+                    super.onPrepared(url, *objects)
+                    orientationUtils.isEnable = true//开始播放了才能旋转和全屏
+                    isPlay = true
+                }
+            })
+            binding!!.vp.setLockClickListener { _, lock ->
+                orientationUtils.isEnable = !lock//配合下方的onConfigurationChanged
+            }
+            binding!!.vp.backButton.setOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
+            if (autoPlay) {
+                binding!!.vp.startPlayLogic()
+            }
+        }
+
+        fun setPause() {
+            isPause = true
+        }
+
+        fun setNoPause() {
+            isPause = false
+        }
+
+        fun releaseVideo() {
+            GSYVideoManager.releaseAllVideos()
+            orientationUtils.releaseListener()
+        }
+
     }
 
 }
