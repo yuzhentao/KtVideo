@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_video"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="12dp"
@@ -76,7 +77,7 @@
         app:showDividerVertical="middle" />
 
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
-        android:id="@+id/vp"
+        android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:layout_marginTop="8dp"
@@ -92,7 +93,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vp"
+        app:layout_constraintTop_toBottomOf="@id/player"
         tools:ignore="UnusedAttribute">
 
         <androidx.appcompat.widget.AppCompatImageView

@@ -48,7 +48,7 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
             val tvReply = holder.getView<AppCompatTextView>(R.id.tv_replay)
             val tvPlayTime = holder.getView<AppCompatTextView>(R.id.tv_play_time)
             val vLine = holder.getView<View>(R.id.v_line)
-            val vp = holder.getView<StandardGSYVideoPlayer>(R.id.vp)
+            val player = holder.getView<StandardGSYVideoPlayer>(R.id.player)
             dataBean.author?.icon?.let {
                 ImageUtil.showCircle(context, ivIcon, it)
             }
@@ -135,13 +135,13 @@ class DiscoverDetailLeftAdapter(data: MutableList<DiscoverDetailLeftBean.Item.Da
                 dataBean.cover?.feed?.let { itt ->
                     ImageUtil.show(context, ivCover, itt)
                 }
-                vp.thumbImageView = ivCover
-                vp.setUp(it, false, null, null)
-                vp.titleTextView.visibility = View.GONE
-                vp.backButton.visibility = View.GONE
-                vp.playPosition = position
-                vp.setIsTouchWiget(false)
-                vp.setGSYVideoProgressListener { _, _, currentPosition, _ ->
+                player.thumbImageView = ivCover
+                player.setUp(it, false, null, null)
+                player.titleTextView.visibility = View.GONE
+                player.backButton.visibility = View.GONE
+                player.playPosition = position
+                player.setIsTouchWiget(false)
+                player.setGSYVideoProgressListener { _, _, currentPosition, _ ->
                     run {
                         tvPlayTime.text = CommonUtil.stringForTime(currentPosition)
                     }

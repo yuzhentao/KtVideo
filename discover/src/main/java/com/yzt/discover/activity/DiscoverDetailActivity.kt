@@ -19,6 +19,7 @@ import com.yzt.bean.DiscoverDetailBean
 import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
+import com.yzt.common.player.AutoPlayUtil
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.discover.R
@@ -281,15 +282,15 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
     inner class LifecycleManager {
 
         fun resumeVideo() {
-            GSYVideoManager.onResume()
+            AutoPlayUtil.resume()
         }
 
         fun pauseVideo() {
-            GSYVideoManager.onPause()
+            AutoPlayUtil.pause()
         }
 
         fun releaseVideo() {
-            GSYVideoManager.releaseAllVideos()
+            AutoPlayUtil.release()
         }
 
     }

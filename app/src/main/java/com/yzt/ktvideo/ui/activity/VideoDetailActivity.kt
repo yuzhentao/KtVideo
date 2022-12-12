@@ -268,12 +268,12 @@ class VideoDetailActivity : BaseAppCompatActivity() {
         super.onConfigurationChanged(newConfig)
         if (isPlay && !isPause) {
             if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
-                if (!binding!!.vp.isIfCurrentIsFullscreen) {
-                    binding!!.vp.startWindowFullscreen(context, true, true)
+                if (!binding!!.player.isIfCurrentIsFullscreen) {
+                    binding!!.player.startWindowFullscreen(context, true, true)
                 }
             } else {
                 //新版本isIfCurrentIsFullscreen的标志位内部提前设置了，所以不会和手动点击冲突
-                if (binding!!.vp.isIfCurrentIsFullscreen) {
+                if (binding!!.player.isIfCurrentIsFullscreen) {
                     GSYVideoManager.backFromWindowFull(context)
                 }
                 orientationUtils.isEnable = true
@@ -319,7 +319,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
 
                 override fun onNext(bitmap: Bitmap) {
                     ivCover.setImageBitmap(bitmap)
-                    binding!!.vp.thumbImageView = ivCover
+                    binding!!.player.thumbImageView = ivCover
                 }
 
                 override fun onError(e: Throwable) {
@@ -384,32 +384,32 @@ class VideoDetailActivity : BaseAppCompatActivity() {
         fun prepareVideo() {
             val uri = intent.getStringExtra("loac©lFile")
             if (uri != null) {
-                binding!!.vp.setUp(uri, false, null, null)
+                binding!!.player.setUp(uri, false, null, null)
             } else {
                 bean?.playUrl?.let {
-                    binding!!.vp.setUp(it, false, null, null)
+                    binding!!.player.setUp(it, false, null, null)
                 }
             }
             ivCover = ImageView(context)
             ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
             setCover()
-            binding!!.vp.titleTextView.visibility = View.GONE
-            binding!!.vp.backButton.visibility = View.GONE
-            orientationUtils = OrientationUtils(activity, binding!!.vp)
-            binding!!.vp.setIsTouchWiget(true)
-            binding!!.vp.isRotateViewAuto = false
-            binding!!.vp.isLockLand = false
-            binding!!.vp.isShowFullAnimation = false
-            binding!!.vp.isNeedLockFull = true
-            binding!!.vp.fullscreenButton.setOnClickListener {
+            binding!!.player.titleTextView.visibility = View.GONE
+            binding!!.player.backButton.visibility = View.GONE
+            orientationUtils = OrientationUtils(activity, binding!!.player)
+            binding!!.player.setIsTouchWiget(true)
+            binding!!.player.isRotateViewAuto = false
+            binding!!.player.isLockLand = false
+            binding!!.player.isShowFullAnimation = false
+            binding!!.player.isNeedLockFull = true
+            binding!!.player.fullscreenButton.setOnClickListener {
                 orientationUtils.resolveByClick()//直接横屏
-                binding!!.vp.startWindowFullscreen(
+                binding!!.player.startWindowFullscreen(
                     context,
                     true,
                     true
                 )//第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
             }
-            binding!!.vp.setVideoAllCallBack(object : VideoListener() {
+            binding!!.player.setVideoAllCallBack(object : VideoListener() {
                 override fun onQuitFullscreen(url: String?, vararg objects: Any?) {
                     super.onQuitFullscreen(url, *objects)
                     orientationUtils.backToProtVideo()
@@ -421,14 +421,14 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                     isPlay = true
                 }
             })
-            binding!!.vp.setLockClickListener { _, lock ->
+            binding!!.player.setLockClickListener { _, lock ->
                 orientationUtils.isEnable = !lock//配合下方的onConfigurationChanged
             }
-            binding!!.vp.backButton.setOnClickListener {
+            binding!!.player.backButton.setOnClickListener {
                 onBackPressedDispatcher.onBackPressed()
             }
             if (autoPlay) {
-                binding!!.vp.startPlayLogic()
+                binding!!.player.startPlayLogic()
             }
         }
 

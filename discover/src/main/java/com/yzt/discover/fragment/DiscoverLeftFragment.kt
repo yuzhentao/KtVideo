@@ -13,15 +13,15 @@ import com.yzt.bean.VideoBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.key.Constant
-import com.yzt.common.util.DimenUtil
+import com.yzt.common.player.AutoPlayUtil
 import com.yzt.common.util.FooterUtil
-import com.yzt.common.util.ScrollCalculatorHelper
 import com.yzt.discover.R
 import com.yzt.discover.activity.DiscoverDetailActivity
 import com.yzt.discover.adapter.DiscoverDetailLeftAdapter
 import com.yzt.discover.databinding.FragmentDiscoverLeftBinding
 import com.yzt.discover.viewmodel.DiscoverDetailLeftViewModel
 import com.yzt.discover.viewmodel.DiscoverDetailLeftViewModelFactory
+import timber.log.Timber
 
 /**
  * 发现详情-推荐
@@ -45,14 +45,12 @@ class DiscoverLeftFragment : BaseFragment() {
         )[DiscoverDetailLeftViewModel::class.java]
     }
 
-    private lateinit var scrollCalculatorHelper: ScrollCalculatorHelper
-
     override fun getLayoutId(): Int? {
         return null
     }
 
     override fun getLayoutView(inflater: LayoutInflater): View? {
-        discoverDetailActivity = getActivity() as DiscoverDetailActivity
+        discoverDetailActivity = activity as DiscoverDetailActivity
         binding = FragmentDiscoverLeftBinding.inflate(inflater)
         return binding?.root
     }
@@ -62,36 +60,41 @@ class DiscoverLeftFragment : BaseFragment() {
     }
 
     override fun initView() {
-        val playTop =
-            DimenUtil.getHeightInPx(requireContext()) / 2 - DimenUtil.getHeightInPx(requireContext()) / 4
-        val playBottom =
-            DimenUtil.getHeightInPx(requireContext()) / 2 + DimenUtil.getHeightInPx(requireContext()) / 4
-        scrollCalculatorHelper =
-            ScrollCalculatorHelper(R.id.vp, playTop.toInt(), playBottom.toInt())
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding!!.rv.layoutManager = layoutManager
         binding!!.rv.adapter = adapter
         binding!!.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            var firstVisibleItem: Int? = 0
-            var lastVisibleItem: Int? = 0
+            var isScrolled: Boolean = false
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
-                lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                if (!discoverDetailActivity.isFull) {
-                    scrollCalculatorHelper.onScroll(
+                if (!isScrolled) {
+                    Timber.e("视频>>>>>onScrolled")
+                    isScrolled = true
+                    AutoPlayUtil.onVerticalScrollPlayVideo(
                         recyclerView,
-                        firstVisibleItem!!,
-                        lastVisibleItem!!,
-                        lastVisibleItem!! - firstVisibleItem!!
+                        R.id.cl_video,
+                        R.id.player,
+                        layoutManager.findFirstVisibleItemPosition(),
+                        layoutManager.findLastVisibleItemPosition(),
+                        true
                     )
                 }
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                scrollCalculatorHelper.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Timber.e("视频>>>>>onScrollStateChanged")
+                    AutoPlayUtil.onVerticalScrollPlayVideo(
+                        recyclerView,
+                        R.id.cl_video,
+                        R.id.player,
+                        layoutManager.findFirstVisibleItemPosition(),
+                        layoutManager.findLastVisibleItemPosition(),
+                        true
+                    )
+                }
             }
         })
         adapter.setOnItemClickListener { adapter, _, position ->
@@ -153,6 +156,11 @@ class DiscoverLeftFragment : BaseFragment() {
                 )
             }
         )
+    }
+
+    override fun onDestroy() {
+        AutoPlayUtil.release()
+        super.onDestroy()
     }
 
     fun scrollToTop() {
