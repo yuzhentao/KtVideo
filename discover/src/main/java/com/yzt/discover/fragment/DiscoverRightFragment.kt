@@ -34,6 +34,7 @@ class DiscoverRightFragment : BaseFragment() {
 
     private var binding: FragmentDiscoverRightBinding? = null
 
+    private lateinit var layoutManager: LinearLayoutManager
     private val adapter: DiscoverDetailRightAdapter by lazy {
         DiscoverDetailRightAdapter(null)
     }
@@ -60,7 +61,7 @@ class DiscoverRightFragment : BaseFragment() {
     }
 
     override fun initView() {
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding!!.rv.layoutManager = layoutManager
         binding!!.rv.adapter = adapter
         binding!!.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -165,6 +166,23 @@ class DiscoverRightFragment : BaseFragment() {
 
     fun scrollToTop() {
         binding!!.rv.smoothScrollToPosition(0)
+    }
+
+    /**
+     * 恢复播放
+     */
+    fun resumeVideo() {
+        Timber.e(">>>>>DiscoverRightFragment-resume")
+        binding?.let {
+            AutoPlayUtil.onVerticalScrollPlayVideo(
+                it.rv,
+                R.id.cl_video,
+                R.id.player,
+                layoutManager.findFirstVisibleItemPosition(),
+                layoutManager.findLastVisibleItemPosition(),
+                false
+            )
+        }
     }
 
 }

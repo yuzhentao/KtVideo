@@ -30,6 +30,7 @@ import com.yzt.discover.fragment.DiscoverRightFragment
 import com.yzt.discover.lifecycle.DiscoverDetailLifecycleObserver
 import com.yzt.discover.viewmodel.DiscoverDetailViewModel
 import com.yzt.discover.viewmodel.DiscoverDetailViewModelFactory
+import timber.log.Timber
 import kotlin.math.abs
 
 /**
@@ -51,13 +52,17 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private lateinit var lifecycleObserver: DiscoverDetailLifecycleObserver
 
+    private lateinit var leftFragment: DiscoverLeftFragment
+    private lateinit var rightFragment: DiscoverRightFragment
+
     private lateinit var fragments: MutableList<androidx.fragment.app.Fragment>
     private lateinit var titles: MutableList<String>
 
     private var id: String? = null
     var category: String? = null
+    private var tabPosition: Int = 0
     private var isChange: Boolean? = false
-    var isFull: Boolean = false
+    private var isFull: Boolean = false
 
     override fun initBeforeSetLayout(savedInstanceState: Bundle?) {
 
@@ -130,12 +135,12 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
         binding!!.tvFollow.setOnClickListener(this)
         binding!!.tvFollow.setOnLongClickListener { true }
 
-        val leftFragment = DiscoverLeftFragment()
+        leftFragment = DiscoverLeftFragment()
         val leftBundle = Bundle()
         leftBundle.putString("id", id)
         leftFragment.arguments = leftBundle
 
-        val rightFragment = DiscoverRightFragment()
+        rightFragment = DiscoverRightFragment()
         val rightBundle = Bundle()
         rightBundle.putString("id", id)
         rightFragment.arguments = rightBundle
@@ -213,8 +218,8 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                     binding!!.tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                         override fun onTabReselected(tab: TabLayout.Tab?) {
-                            tab?.let { itt ->
-                                when (itt.position) {
+                            tab?.let { it ->
+                                when (it.position) {
                                     0 -> {
                                         (fragments[0] as DiscoverLeftFragment).scrollToTop()
                                     }
@@ -230,7 +235,19 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
                         }
 
                         override fun onTabSelected(tab: TabLayout.Tab?) {
-
+                            tab?.let { it ->
+                                tabPosition = it.position
+                                when (it.position) {
+                                    0 -> {
+                                        Timber.e(">>>>>DiscoverDetailActivity-onTabSelected-resume")
+                                        (fragments[0] as DiscoverLeftFragment).resumeVideo()
+                                    }
+                                    1 -> {
+                                        Timber.e(">>>>>DiscoverDetailActivity-onTabSelected-resume")
+                                        (fragments[1] as DiscoverRightFragment).resumeVideo()
+                                    }
+                                }
+                            }
                         }
                     })
                     for (i in titles.indices) {
@@ -262,6 +279,14 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
         isFull = newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (!hasFocus) {
+            Timber.e(">>>>>DiscoverDetailActivity-onWindowFocusChanged-pause")
+            AutoPlayUtil.pause()
+        }
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.iv_back, R.id.iv_top -> {
@@ -282,14 +307,24 @@ class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
     inner class LifecycleManager {
 
         fun resumeVideo() {
-            AutoPlayUtil.resume()
+            Timber.e(">>>>>DiscoverDetailActivity-resume")
+            when (tabPosition) {
+                0 -> {
+                    (fragments[0] as DiscoverLeftFragment).resumeVideo()
+                }
+                1 -> {
+                    (fragments[1] as DiscoverRightFragment).resumeVideo()
+                }
+            }
         }
 
         fun pauseVideo() {
+            Timber.e(">>>>>DiscoverDetailActivity-pause")
             AutoPlayUtil.pause()
         }
 
         fun releaseVideo() {
+            Timber.e(">>>>>DiscoverDetailActivity-release")
             AutoPlayUtil.release()
         }
 
