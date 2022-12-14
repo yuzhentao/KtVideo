@@ -14,15 +14,15 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
+import com.tencent.mmkv.MMKV
 import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.newIntent
 import com.yzt.common.extension.shortToast
-import com.yzt.common.key.Constants
+import com.yzt.common.key.Keys
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
-import com.yzt.common.util.SPUtils
 import com.yzt.common.util.ViewUtil
 import com.yzt.discover.fragment.DiscoverFragment
 import com.yzt.home.fragment.HomeFragment
@@ -247,8 +247,9 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
     }
 
     private fun downloadSplash() {
-        val url = SPUtils.getInstance(context!!, Constants.KT_VIDEO).getString(SPLASH_URL)
-        require(url.isNotEmpty()) {
+        val mmkv = MMKV.defaultMMKV()
+        val url = mmkv.decodeString(Keys.SPLASH_URL, "")
+        require(!url.isNullOrEmpty()) {
             return
         }
 
@@ -257,7 +258,7 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
             .setRequiresBatteryNotLow(false)//电量低时不执行
             .build()
         val request = OneTimeWorkRequest.Builder(DownloadSplashWorker::class.java)
-            .setInputData(Data.Builder().putString(SPLASH_URL, url).build())
+            .setInputData(Data.Builder().putString(Keys.SPLASH_URL, url).build())
             .setConstraints(constraints)
             .build()
         WorkManager

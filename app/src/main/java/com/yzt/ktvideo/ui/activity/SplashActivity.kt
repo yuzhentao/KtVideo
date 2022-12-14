@@ -12,13 +12,13 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.arialyy.aria.core.Aria
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
+import com.tencent.mmkv.MMKV
 import com.yzt.bean.SplashBean
 import com.yzt.common.base.BaseActivity
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.newIntent
-import com.yzt.common.key.Constants.KT_VIDEO
+import com.yzt.common.key.Keys
 import com.yzt.common.util.ImageUtil
-import com.yzt.common.util.SPUtils
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivitySplashBinding
 import com.yzt.ktvideo.mvp.contract.SplashContract
@@ -33,8 +33,6 @@ import io.reactivex.disposables.Disposable
  *
  * @author yzt 2021/2/9
  */
-const val SPLASH_URL = "splash_url"
-
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity(), SplashContract.View {
 
@@ -92,8 +90,9 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
         Observable
             .create(ObservableOnSubscribe<String> { emitter ->
-                val url = SPUtils.getInstance(context!!, KT_VIDEO).getString(SPLASH_URL)
-                emitter.onNext(url)
+                val mmkv = MMKV.defaultMMKV()
+                val url = mmkv.decodeString(Keys.SPLASH_URL, "")
+                emitter.onNext(url!!)
             })
             .ioMain()
             .subscribe(object : Observer<String> {
@@ -109,8 +108,8 @@ class SplashActivity : BaseActivity(), SplashContract.View {
                     if (bean.startPage != null && !bean.startPage!!.imageUrl.isNullOrEmpty()) {
                         ImageUtil.show(context!!, binding!!.ivBg, bean.startPage!!.imageUrl!!)
                         if (bean.startPage!!.imageUrl != url) {
-                            SPUtils.getInstance(context!!, KT_VIDEO)
-                                .put(SPLASH_URL, bean.startPage!!.imageUrl!!)
+                            val mmkv = MMKV.defaultMMKV()
+                            mmkv.encode(Keys.SPLASH_URL, bean.startPage!!.imageUrl!!)
                         }
                     } else {
                         if (url.isNotEmpty()) {

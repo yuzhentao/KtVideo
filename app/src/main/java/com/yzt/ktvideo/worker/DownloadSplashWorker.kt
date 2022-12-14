@@ -5,7 +5,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.arialyy.aria.core.Aria
 import com.yzt.common.base.App
-import com.yzt.ktvideo.ui.activity.SPLASH_URL
+import com.yzt.common.key.Keys
 import java.io.File
 
 class DownloadSplashWorker(context: Context, workerParameters: WorkerParameters) :
@@ -18,7 +18,7 @@ class DownloadSplashWorker(context: Context, workerParameters: WorkerParameters)
     }
 
     override fun doWork(): Result {
-        val url = inputData.getString(SPLASH_URL)
+        val url = inputData.getString(Keys.SPLASH_URL)
         if (!url.isNullOrEmpty()) {
             Aria
                 .download(App.app)

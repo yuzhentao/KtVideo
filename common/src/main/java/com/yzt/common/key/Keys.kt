@@ -5,6 +5,7 @@ package com.yzt.common.key
  */
 object Keys {
 
+    const val SPLASH_URL = "splash_url"
     const val AUTO_PLAY_MODE = "auto_play_mode"
 
 }
