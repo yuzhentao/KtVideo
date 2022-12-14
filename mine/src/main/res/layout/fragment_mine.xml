@@ -38,7 +38,8 @@
                 android:maxWidth="100dp"
                 android:text="@string/mine_favorite"
                 android:textColor="@color/app_gray"
-                android:textSize="12dp" />
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -69,7 +70,8 @@
                 android:maxWidth="100dp"
                 android:text="@string/mine_comment"
                 android:textColor="@color/app_gray"
-                android:textSize="12dp" />
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <View
@@ -112,7 +114,7 @@
             android:maxLines="2"
             android:text="@string/mine_login"
             android:textColor="@color/app_gray"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
@@ -128,7 +130,7 @@
             android:paddingEnd="2dp"
             android:text="@string/mine_cache"
             android:textColor="@color/app_gray"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/v_line_2"
             tools:ignore="UnusedAttribute" />
 
@@ -142,7 +144,7 @@
             android:paddingEnd="2dp"
             android:text="@string/mine_watch"
             android:textColor="@color/app_gray"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/tv_cache"
             tools:ignore="UnusedAttribute" />
 
@@ -156,9 +158,10 @@
             android:paddingEnd="2dp"
             android:text="@string/mine_feedback"
             android:textColor="@color/app_gray"
-            android:textSize="12dp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/tv_watch"
             tools:ignore="UnusedAttribute" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

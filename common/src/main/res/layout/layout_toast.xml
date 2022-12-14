@@ -11,6 +11,6 @@
     android:paddingEnd="8dp"
     android:paddingBottom="5dp"
     android:textColor="@color/white"
-    android:textSize="12dp"
+    android:textSize="14sp"
     tools:layout_gravity="center"
     tools:text="测试测试测试" />

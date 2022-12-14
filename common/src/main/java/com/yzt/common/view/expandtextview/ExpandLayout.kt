@@ -44,12 +44,12 @@ class ExpandLayout @JvmOverloads constructor(
         etvContent = view.findViewById(R.id.etv_content)
         tvTip = view.findViewById(R.id.tv_tip)
 //        etvContent!!.textSize = DimenUtil.px2sp(context, contentTextSize).toFloat()
-        etvContent!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, contentTextSize)
+        etvContent!!.setTextSize(TypedValue.COMPLEX_UNIT_SP, contentTextSize)
         etvContent!!.setTextColor(contentTextColor)
         etvContent!!.setMaxLineCount(maxCollapsedLines)
         etvContent!!.setEllipsizeText(ellipsizeText)
 //        tvTip!!.textSize = DimenUtil.px2sp(context, expandCollapseTextSize).toFloat()
-        tvTip!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, expandCollapseTextSize)
+        tvTip!!.setTextSize(TypedValue.COMPLEX_UNIT_SP, expandCollapseTextSize)
         tvTip!!.setTextColor(expandCollapseTextColor)
         tvTip!!.gravity = when (expandCollapseTextGravity) {
             0 -> Gravity.START

@@ -47,13 +47,15 @@
                 android:layout_height="wrap_content"
                 android:maxWidth="240dp"
                 android:textColor="@color/app_black"
-                android:textSize="14dp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="测试测试测试" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
     <View
@@ -82,7 +84,7 @@
             android:gravity="center"
             android:text="@string/home_bottom_1"
             android:textColor="@color/color_gray_black"
-            android:textSize="10dp"
+            android:textSize="12sp"
             app:rb_height="20dp"
             app:rb_width="33dp" />
 
@@ -96,7 +98,7 @@
             android:gravity="center"
             android:text="@string/home_bottom_2"
             android:textColor="@color/color_gray_black"
-            android:textSize="10dp"
+            android:textSize="12sp"
             app:rb_height="20dp"
             app:rb_width="33dp" />
 
@@ -110,7 +112,7 @@
             android:gravity="center"
             android:text="@string/home_bottom_3"
             android:textColor="@color/color_gray_black"
-            android:textSize="10dp"
+            android:textSize="12sp"
             app:rb_height="20dp"
             app:rb_width="33dp" />
 
@@ -124,9 +126,10 @@
             android:gravity="center"
             android:text="@string/home_bottom_4"
             android:textColor="@color/color_gray_black"
-            android:textSize="10dp"
+            android:textSize="12sp"
             app:rb_height="20dp"
             app:rb_width="33dp" />
+
     </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

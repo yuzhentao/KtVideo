@@ -39,14 +39,16 @@
                 android:layout_height="wrap_content"
                 android:maxWidth="240dp"
                 android:textColor="@color/app_black"
-                android:textSize="14dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="测试测试测试" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -65,7 +67,7 @@
         android:layout_height="wrap_content"
         android:text="@string/watch_no"
         android:textColor="@color/app_black"
-        android:textSize="14dp"
+        android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/rv"
         app:layout_constraintEnd_toEndOf="parent"

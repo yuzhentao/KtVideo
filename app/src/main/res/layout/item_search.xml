@@ -12,5 +12,5 @@
     android:paddingEnd="4dp"
     android:paddingBottom="2dp"
     android:textColor="@color/app_pink"
-    android:textSize="12dp"
+    android:textSize="14sp"
     tools:text="测试测试测试" />

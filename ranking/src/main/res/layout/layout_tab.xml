@@ -13,7 +13,7 @@
         android:paddingStart="2dp"
         android:paddingEnd="2dp"
         android:textColor="@color/color_gray_black"
-        android:textSize="12dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="测试测试测试" />

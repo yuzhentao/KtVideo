@@ -43,7 +43,7 @@
                 android:inputType="text"
                 android:textColor="@color/app_gray"
                 android:textCursorDrawable="@drawable/shape_cursor_pink"
-                android:textSize="12dp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@id/iv_search"
                 app:layout_constraintStart_toEndOf="@id/iv_back"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="UnusedAttribute" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
@@ -69,7 +71,7 @@
         android:padding="10dp"
         android:text="@string/search_tip"
         android:textColor="@color/app_gray"
-        android:textSize="10dp"
+        android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tb" />
 
     <TextView
@@ -80,7 +82,7 @@
         android:padding="10dp"
         android:text="@string/search_hot"
         android:textColor="@color/app_black"
-        android:textSize="10dp"
+        android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tv_tip" />
 
     <androidx.recyclerview.widget.RecyclerView
