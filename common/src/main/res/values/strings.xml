@@ -60,5 +60,7 @@
     <string name="auto_play_open">打开</string>
     <string name="auto_play_open_in_wifi">WIFI下打开</string>
     <string name="auto_play_close">关闭</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="clear_cache_yes_or_no">是否清除缓存</string>
 
 </resources>
