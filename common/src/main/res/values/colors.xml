@@ -124,5 +124,6 @@
     <color name="bg_green">#33CAFF70</color>
     <color name="pink">#FFF06292</color>
     <color name="purple">#FF673AB7</color>
+    <color name="color_f8">#FFF8F8F8</color>
 
 </resources>

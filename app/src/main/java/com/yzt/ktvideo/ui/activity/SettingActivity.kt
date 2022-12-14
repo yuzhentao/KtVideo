@@ -48,6 +48,27 @@ class SettingActivity : BaseAppCompatActivity(), View.OnClickListener {
         binding!!.ivTop.setOnClickListener(this)
         binding!!.ivTop.setOnLongClickListener { true }
         binding!!.tvTop.text = getString(R.string.mine_setting)
+        binding!!.layoutSettingAutoPlay.cbOpen.isChecked = true
+        binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
+        binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
+        binding!!.layoutSettingAutoPlay.cbOpen.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
+            }
+        }
+        binding!!.layoutSettingAutoPlay.cbOpenInWifi.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
+            }
+        }
+        binding!!.layoutSettingAutoPlay.cbClose.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
+            }
+        }
     }
 
     override fun initData(savedInstanceState: Bundle?) {

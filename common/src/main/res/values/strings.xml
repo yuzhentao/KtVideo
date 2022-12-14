@@ -56,5 +56,9 @@
     <string name="login_protocol">登录或注册即可同意开眼 用户服务协议</string>
     <string name="end">- The End -</string>
     <string name="api_no_response">接口无响应</string>
+    <string name="auto_play">视频自动播放</string>
+    <string name="auto_play_open">打开</string>
+    <string name="auto_play_open_in_wifi">WIFI下打开</string>
+    <string name="auto_play_close">关闭</string>
 
 </resources>

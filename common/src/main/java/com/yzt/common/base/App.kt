@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
+import com.tencent.mmkv.MMKV
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import timber.log.Timber
@@ -23,6 +24,7 @@ class App : MultiDexApplication() {
         initARouter()
         initTimber()
         initRealm()
+        initMMKV()
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -48,6 +50,11 @@ class App : MultiDexApplication() {
         config?.let {
             Realm.setDefaultConfiguration(it)
         }
+    }
+
+    private fun initMMKV() {
+        val rootDir = MMKV.initialize(this)
+        Timber.e("MMKV根路径>>>>>$rootDir")
     }
 
 }
