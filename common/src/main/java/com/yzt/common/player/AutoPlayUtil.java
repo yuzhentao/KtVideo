@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYBaseVideoPlayer;
+import com.tencent.mmkv.MMKV;
 import com.yzt.common.R;
 import com.yzt.common.base.App;
+import com.yzt.common.key.Keys;
 import com.yzt.common.util.NetworkUtil;
 import com.yzt.common.util.ToastUtil;
 
@@ -70,20 +72,28 @@ public class AutoPlayUtil {
                                     player.getCurrentPlayer().getCurrentState() == GSYBaseVideoPlayer.CURRENT_STATE_NORMAL
                                             || player.getCurrentPlayer().getCurrentState() == GSYBaseVideoPlayer.CURRENT_STATE_ERROR
                             ) {
-                                Timber.e(">>>>>AutoPlayUtil-onScroll-自动播放=" + index + ">>>状态=" + player.getCurrentPlayer().getCurrentState());
-                                if (!NetworkUtil.INSTANCE.isWifi()) {
+                                if (getAutPlayMode() == 0) {
+                                    return;
+                                }
+
+                                if (getAutPlayMode() == 2 && !NetworkUtil.INSTANCE.isWifi()) {
                                     showWifiDialog(App.getApp(), player);
                                     return;
                                 }
 
+                                Timber.e(">>>>>AutoPlayUtil-onScroll-自动播放=" + index + ">>>状态=" + player.getCurrentPlayer().getCurrentState());
                                 player.startPlayLogic();
                             } else if (player.getCurrentPlayer().getCurrentState() == GSYBaseVideoPlayer.CURRENT_STATE_PAUSE) {
-                                Timber.e(">>>>>AutoPlayUtil-onScroll-恢复播放=" + index + ">>>状态=" + player.getCurrentPlayer().getCurrentState());
-                                if (!NetworkUtil.INSTANCE.isWifi()) {
+                                if (getAutPlayMode() == 0) {
+                                    return;
+                                }
+
+                                if (getAutPlayMode() == 2 && !NetworkUtil.INSTANCE.isWifi()) {
                                     showWifiDialog(App.getApp(), player);
                                     return;
                                 }
 
+                                Timber.e(">>>>>AutoPlayUtil-onScroll-恢复播放=" + index + ">>>状态=" + player.getCurrentPlayer().getCurrentState());
                                 GSYVideoManager.onResume();
                             }
                             break;
@@ -205,6 +215,14 @@ public class AutoPlayUtil {
 
         float visibleWidth = rect.right - rect.left;
         return visibleWidth / width;
+    }
+
+    /**
+     * 是否自动播放
+     */
+    public static int getAutPlayMode() {
+        MMKV mmkv = MMKV.defaultMMKV();
+        return mmkv.decodeInt(Keys.AUTO_PLAY_MODE);
     }
 
 }
