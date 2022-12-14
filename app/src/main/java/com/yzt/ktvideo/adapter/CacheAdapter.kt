@@ -12,7 +12,7 @@ import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.shortToast
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.ViewUtil
 import com.yzt.ktvideo.R
@@ -99,7 +99,7 @@ class CacheAdapter(data: MutableList<VideoBean>?, private var dbManager: VideoDb
                     DownloadState.COMPLETE.name -> {
                         ARouter
                             .getInstance()
-                            .build(Constant.PATH_VIDEO_DETAIL)
+                            .build(Constants.PATH_VIDEO_DETAIL)
                             .withParcelable("bean", item)
                             .withBoolean("showCache", false)
                             .withBoolean("autoPlay", true)

@@ -6,7 +6,7 @@ import androidx.activity.OnBackPressedCallback
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
 import com.yzt.common.base.BaseAppCompatActivity
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.util.ClickUtil
 import com.yzt.mine.R
 import com.yzt.mine.databinding.ActivityCommentBinding
@@ -16,7 +16,7 @@ import com.yzt.mine.databinding.ActivityCommentBinding
  *
  * @author yzt 2021/2/9
  */
-@Route(path = Constant.PATH_COMMENT)
+@Route(path = Constants.PATH_COMMENT)
 class CommentActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityCommentBinding? = null

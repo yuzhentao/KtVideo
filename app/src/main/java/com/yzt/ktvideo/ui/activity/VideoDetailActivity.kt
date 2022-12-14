@@ -33,7 +33,7 @@ import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.ioMain
 import com.yzt.common.extension.shortToast
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.util.FooterUtil
 import com.yzt.common.util.ImageUtil
 import com.yzt.common.util.VideoListener
@@ -55,7 +55,7 @@ import java.io.FileInputStream
  *
  * @author yzt 2021/2/9
  */
-@Route(path = Constant.PATH_VIDEO_DETAIL)
+@Route(path = Constants.PATH_VIDEO_DETAIL)
 class VideoDetailActivity : BaseAppCompatActivity() {
 
     private var binding: ActivityVideoDetailBinding? = null
@@ -237,7 +237,7 @@ class VideoDetailActivity : BaseAppCompatActivity() {
                     )
                     ARouter
                         .getInstance()
-                        .build(Constant.PATH_VIDEO_DETAIL)
+                        .build(Constants.PATH_VIDEO_DETAIL)
                         .withParcelable("bean", videoBean)
                         .withBoolean("showCache", true)
                         .navigation()

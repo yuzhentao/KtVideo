@@ -15,7 +15,7 @@ import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
 import com.yzt.common.extension.drawable
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.ViewUtil
@@ -27,7 +27,7 @@ import com.yzt.ktvideo.databinding.ActivityLoginBinding
  *
  * @author yzt 2021/2/9
  */
-@Route(path = Constant.PATH_LOGIN)
+@Route(path = Constants.PATH_LOGIN)
 class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityLoginBinding? = null

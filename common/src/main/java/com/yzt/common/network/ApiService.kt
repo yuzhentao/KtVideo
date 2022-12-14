@@ -1,7 +1,7 @@
 package com.yzt.common.network
 
 import com.yzt.bean.*
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -22,7 +22,7 @@ interface ApiService {
     /**
      * 闪屏页
      */
-    @GET("v2/configs?${Constant.PARAMS}")
+    @GET("v2/configs?${Constants.PARAMS}")
     suspend fun getSplashDataByCoroutine(@Query("deviceModel") deviceModel: String): SplashBean?
 
     /**
@@ -34,7 +34,7 @@ interface ApiService {
     /**
      * 首页
      */
-    @GET("v2/feed?${Constant.PARAMS}")
+    @GET("v2/feed?${Constants.PARAMS}")
     suspend fun getHomeDataByCoroutine(): HomeBean?
 
     /**
@@ -76,7 +76,7 @@ interface ApiService {
     /**
      * 分类
      */
-    @GET("v4/categories/all?${Constant.PARAMS}")
+    @GET("v4/categories/all?${Constants.PARAMS}")
     suspend fun getDiscoverDataByCoroutine(@Query("deviceModel") deviceModel: String): DiscoverBean?
 
     /**
@@ -91,7 +91,7 @@ interface ApiService {
     /**
      * 分类详情
      */
-    @GET("v6/tag/index?${Constant.PARAMS}")
+    @GET("v6/tag/index?${Constants.PARAMS}")
     suspend fun getDiscoverDetailDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
@@ -109,7 +109,7 @@ interface ApiService {
     /**
      * 分类详情-推荐
      */
-    @GET("v1/tag/videos?${Constant.PARAMS}")
+    @GET("v1/tag/videos?${Constants.PARAMS}")
     suspend fun getDiscoverDetailLeftDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
@@ -127,7 +127,7 @@ interface ApiService {
     /**
      * 分类详情-广场
      */
-    @GET("v6/tag/dynamics?${Constant.PARAMS}")
+    @GET("v6/tag/dynamics?${Constants.PARAMS}")
     suspend fun getDiscoverDetailRightDataByCoroutine(
         @Query("id") id: String,
         @Query("deviceModel") deviceModel: String
@@ -142,7 +142,7 @@ interface ApiService {
     /**
      * 排行
      */
-    @GET("v4/rankList?${Constant.PARAMS}")
+    @GET("v4/rankList?${Constants.PARAMS}")
     suspend fun getRankingDataByCoroutine(@Query("deviceModel") deviceModel: String): RankingBean?
 
     /**
@@ -157,7 +157,7 @@ interface ApiService {
     /**
      * 排行子页
      */
-    @GET("v4/rankList/videos?${Constant.PARAMS}")
+    @GET("v4/rankList/videos?${Constants.PARAMS}")
     suspend fun getRankingSubDataByCoroutine(
         @Query("strategy") strategy: String,
         @Query("deviceModel") deviceModel: String
@@ -172,7 +172,7 @@ interface ApiService {
     /**
      * 热门搜索
      */
-    @GET("v3/queries/hot?${Constant.PARAMS}")
+    @GET("v3/queries/hot?${Constants.PARAMS}")
     suspend fun getHotSearchByCoroutine(@Query("deviceModel") deviceModel: String): MutableList<String>?
 
 }

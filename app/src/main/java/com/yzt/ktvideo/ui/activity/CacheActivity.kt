@@ -19,7 +19,7 @@ import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.db.VideoDbManager
 import com.yzt.common.extension.color
 import com.yzt.common.extension.shortToast
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.FileUtil
 import com.yzt.common.util.FooterUtil
@@ -34,7 +34,7 @@ import timber.log.Timber
  *
  * @author yzt 2021/2/9
  */
-@Route(path = Constant.PATH_CACHE)
+@Route(path = Constants.PATH_CACHE)
 class CacheActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityCacheBinding? = null
@@ -91,7 +91,7 @@ class CacheActivity : BaseAppCompatActivity(), View.OnClickListener {
             bean?.let {
                 ARouter
                     .getInstance()
-                    .build(Constant.PATH_VIDEO_DETAIL)
+                    .build(Constants.PATH_VIDEO_DETAIL)
                     .withParcelable("bean", it)
                     .withBoolean("showCache", false)
                     .navigation()

@@ -14,7 +14,7 @@ import com.yzt.bean.VideoBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
 import com.yzt.common.extension.dimensionPixelOffset
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
@@ -134,7 +134,7 @@ class HomeFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
                 )
                 ARouter
                     .getInstance()
-                    .build(Constant.PATH_VIDEO_DETAIL)
+                    .build(Constants.PATH_VIDEO_DETAIL)
                     .withParcelable("bean", videoBean)
                     .withBoolean("showCache", true)
                     .navigation()

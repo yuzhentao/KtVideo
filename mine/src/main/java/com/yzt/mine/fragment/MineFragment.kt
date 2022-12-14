@@ -6,7 +6,7 @@ import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.immersionbar.ImmersionBar
 import com.yzt.common.base.BaseFragment
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.ViewUtil
@@ -77,32 +77,32 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                         1000
                     ) || !ClickUtil.isFastDoubleClick(R.id.tv_login, 1000)
                 ) {
-                    ARouter.getInstance().build(Constant.PATH_LOGIN).navigation()
+                    ARouter.getInstance().build(Constants.PATH_LOGIN).navigation()
                 }
             }
             R.id.ll_favorite -> {//收藏
                 if (!ClickUtil.isFastDoubleClick(R.id.ll_favorite, 1000)) {
-                    ARouter.getInstance().build(Constant.PATH_FAVORITE).navigation()
+                    ARouter.getInstance().build(Constants.PATH_FAVORITE).navigation()
                 }
             }
             R.id.ll_comment -> {//评论
                 if (!ClickUtil.isFastDoubleClick(R.id.ll_comment, 1000)) {
-                    ARouter.getInstance().build(Constant.PATH_COMMENT).navigation()
+                    ARouter.getInstance().build(Constants.PATH_COMMENT).navigation()
                 }
             }
             R.id.tv_cache -> {//我的缓存
                 if (!ClickUtil.isFastDoubleClick(R.id.tv_cache, 1000)) {
-                    ARouter.getInstance().build(Constant.PATH_CACHE).navigation()
+                    ARouter.getInstance().build(Constants.PATH_CACHE).navigation()
                 }
             }
             R.id.tv_watch -> {//观看记录
                 if (!ClickUtil.isFastDoubleClick(R.id.tv_watch, 1000)) {
-                    ARouter.getInstance().build(Constant.PATH_WATCH).navigation()
+                    ARouter.getInstance().build(Constants.PATH_WATCH).navigation()
                 }
             }
             R.id.tv_feedback -> {//意见反馈
                 if (!ClickUtil.isFastDoubleClick(R.id.tv_feedback, 1000)) {
-                    ARouter.getInstance().build(Constant.PATH_FEEDBACK).navigation()
+                    ARouter.getInstance().build(Constants.PATH_FEEDBACK).navigation()
                 }
             }
         }

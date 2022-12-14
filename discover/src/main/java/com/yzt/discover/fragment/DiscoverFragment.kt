@@ -12,7 +12,7 @@ import com.gyf.immersionbar.ImmersionBar
 import com.yzt.bean.DiscoverBean
 import com.yzt.common.base.BaseFragment
 import com.yzt.common.extension.color
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.DimenUtil
 import com.yzt.common.util.FooterUtil
@@ -71,7 +71,7 @@ class DiscoverFragment : BaseFragment() {
             bean?.let {
                 ARouter
                     .getInstance()
-                    .build(Constant.PATH_DISCOVER_DETAIL)
+                    .build(Constants.PATH_DISCOVER_DETAIL)
                     .withString("id", it.id.toString())
                     .navigation()
             }

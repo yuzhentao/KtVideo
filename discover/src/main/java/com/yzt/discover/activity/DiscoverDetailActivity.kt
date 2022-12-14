@@ -18,7 +18,7 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.yzt.bean.DiscoverDetailBean
 import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.player.AutoPlayUtil
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.ImageUtil
@@ -38,7 +38,7 @@ import kotlin.math.abs
  *
  * @author yzt 2021/2/9
  */
-@Route(path = Constant.PATH_DISCOVER_DETAIL)
+@Route(path = Constants.PATH_DISCOVER_DETAIL)
 class DiscoverDetailActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityDiscoverDetailBinding? = null

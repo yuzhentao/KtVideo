@@ -18,7 +18,7 @@ import com.yzt.common.base.BaseAppCompatActivity
 import com.yzt.common.extension.color
 import com.yzt.common.extension.newIntent
 import com.yzt.common.extension.shortToast
-import com.yzt.common.key.Constant
+import com.yzt.common.key.Constants
 import com.yzt.common.listener.OnRvScrollListener
 import com.yzt.common.util.ClickUtil
 import com.yzt.common.util.DimenUtil
@@ -247,7 +247,7 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
     }
 
     private fun downloadSplash() {
-        val url = SPUtils.getInstance(context!!, Constant.KT_VIDEO).getString(SPLASH_URL)
+        val url = SPUtils.getInstance(context!!, Constants.KT_VIDEO).getString(SPLASH_URL)
         require(url.isNotEmpty()) {
             return
         }
