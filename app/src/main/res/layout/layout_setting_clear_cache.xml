@@ -7,7 +7,7 @@
     android:background="@drawable/shape_white_round">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_clear_cache"
         style="@style/TextStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -18,31 +18,8 @@
         android:textColor="@color/app_black"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_clear_cache"
-        style="@style/TextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:text="@string/clear_cache_yes_or_no"
-        android:textColor="@color/app_gray"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/cb_clear_cache"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_clear_cache"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_clear_cache" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

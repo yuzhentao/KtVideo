@@ -17,11 +17,12 @@ class VideoDbManager : DbManager<VideoBean> {
             it.beginTransaction()
             it.copyToRealm(data)
             it.commitTransaction()
-            Timber.tag("记录").e(">>>${data.title}")
+            Timber.e("插入记录>>>>>${data.title}")
         }
     }
 
     override fun delete(data: VideoBean) {
+        Timber.e("删除记录>>>>>${data.title}")
         data.playUrl?.let {
             val bean = find(it)
             realm?.let { itt ->
@@ -32,7 +33,17 @@ class VideoDbManager : DbManager<VideoBean> {
         }
     }
 
+    override fun deleteAll() {
+        Timber.e("删除全部记录>>>>>")
+        realm?.let {
+            it.beginTransaction()
+            it.deleteAll()
+            it.commitTransaction()
+        }
+    }
+
     override fun update(data: VideoBean) {
+        Timber.e("更新记录>>>>>${data.title}")
         realm?.let {
             it.beginTransaction()
             it.copyToRealmOrUpdate(data)
@@ -40,15 +51,8 @@ class VideoDbManager : DbManager<VideoBean> {
         }
     }
 
-    override fun close() {
-        realm?.let {
-            if (!it.isClosed) {
-                it.close()
-            }
-        }
-    }
-
     override fun find(value: String): VideoBean? {
+        Timber.e("查找记录>>>>>${value}")
         return if (realm != null) {
             realm!!.where(VideoBean::class.java).equalTo("playUrl", value).findFirst()
         } else {
@@ -57,6 +61,7 @@ class VideoDbManager : DbManager<VideoBean> {
     }
 
     override fun findAll(): MutableList<VideoBean>? {
+        Timber.e("查找全部记录>>>>>")
         return if (realm != null) {
             val beans: RealmResults<VideoBean> =
                 realm!!.where(VideoBean::class.java).findAllAsync().sort("time", Sort.DESCENDING)
@@ -67,6 +72,7 @@ class VideoDbManager : DbManager<VideoBean> {
     }
 
     fun findCache(): MutableList<VideoBean>? {
+        Timber.e("查找全部缓存>>>>>")
         return if (realm != null) {
             val beans: RealmResults<VideoBean> = realm!!.where(VideoBean::class.java)
                 .notEqualTo("downloadState", DownloadState.NORMAL.name).findAllAsync()
@@ -74,6 +80,15 @@ class VideoDbManager : DbManager<VideoBean> {
             return realm!!.copyFromRealm(beans)
         } else {
             null
+        }
+    }
+
+    override fun close() {
+        Timber.e("关闭数据库>>>>>")
+        realm?.let {
+            if (!it.isClosed) {
+                it.close()
+            }
         }
     }
 

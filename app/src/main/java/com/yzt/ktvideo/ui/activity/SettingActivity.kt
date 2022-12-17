@@ -1,11 +1,14 @@
 package com.yzt.ktvideo.ui.activity
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tencent.mmkv.MMKV
 import com.yzt.common.base.BaseAppCompatActivity
+import com.yzt.common.db.VideoDbManager
 import com.yzt.common.key.Keys
 import com.yzt.common.util.ClickUtil
 import com.yzt.ktvideo.R
@@ -51,23 +54,7 @@ class SettingActivity : BaseAppCompatActivity(), View.OnClickListener {
         binding!!.ivTop.setOnLongClickListener { true }
         binding!!.tvTop.text = getString(R.string.mine_setting)
         val mmkv = MMKV.defaultMMKV()
-        when (mmkv.decodeInt(Keys.AUTO_PLAY_MODE)) {
-            0 -> {
-                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
-                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
-                binding!!.layoutSettingAutoPlay.cbClose.isChecked = true
-            }
-            1 -> {
-                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = true
-                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
-                binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
-            }
-            2 -> {
-                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
-                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = true
-                binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
-            }
-        }
+        initAutoPlaySetting(mmkv)
         binding!!.layoutSettingAutoPlay.cbOpen.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 mmkv.encode(Keys.AUTO_PLAY_MODE, 1)
@@ -87,6 +74,61 @@ class SettingActivity : BaseAppCompatActivity(), View.OnClickListener {
                 mmkv.encode(Keys.AUTO_PLAY_MODE, 0)
                 binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
                 binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
+            }
+        }
+        binding!!.layoutSettingClearCache.tvClearCache.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setTitle(getString(R.string.clear_cache))
+            builder.setMessage(getString(R.string.clear_cache_click_yes))
+            builder.setCancelable(true)
+            builder.setPositiveButton(
+                getString(R.string.yes),
+                object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        VideoDbManager().deleteAll()
+                        val mmkv = MMKV.defaultMMKV()
+                        mmkv.clearAll()
+                        initAutoPlaySetting(mmkv)
+                    }
+                })
+            builder.setNegativeButton(
+                getString(R.string.no),
+                object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+
+                    }
+                })
+            val dialog = builder.create()
+            dialog.setOnShowListener(object : DialogInterface.OnShowListener {
+                override fun onShow(dialog: DialogInterface?) {
+
+                }
+            })
+            dialog.setOnCancelListener(object : DialogInterface.OnCancelListener {
+                override fun onCancel(dialog: DialogInterface?) {
+
+                }
+            })
+            dialog.show()
+        }
+    }
+
+    private fun initAutoPlaySetting(mmkv: MMKV) {
+        when (mmkv.decodeInt(Keys.AUTO_PLAY_MODE)) {
+            0 -> {
+                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbClose.isChecked = true
+            }
+            1 -> {
+                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = true
+                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
+            }
+            2 -> {
+                binding!!.layoutSettingAutoPlay.cbOpen.isChecked = false
+                binding!!.layoutSettingAutoPlay.cbOpenInWifi.isChecked = true
+                binding!!.layoutSettingAutoPlay.cbClose.isChecked = false
             }
         }
     }

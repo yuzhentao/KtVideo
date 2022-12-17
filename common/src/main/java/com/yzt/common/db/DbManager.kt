@@ -6,12 +6,14 @@ interface DbManager<T> {
 
     fun delete(data: T)
 
-    fun update(data: T)
+    fun deleteAll()
 
-    fun close()
+    fun update(data: T)
 
     fun find(value: String): T?
 
     fun findAll(): MutableList<T>?
+
+    fun close()
 
 }
