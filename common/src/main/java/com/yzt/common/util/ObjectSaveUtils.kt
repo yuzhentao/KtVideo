@@ -35,7 +35,7 @@ object ObjectSaveUtils{
         } finally {
             if (fis != null) {
                 try {
-                    fis.close();
+                    fis.close()
                 } catch (e: IOException) {
                     // fis流关闭异常
                     e.printStackTrace()
@@ -43,7 +43,7 @@ object ObjectSaveUtils{
             }
             if (ois != null) {
                 try {
-                    ois.close();
+                    ois.close()
                 } catch (e: IOException) {
                     // ois流关闭异常
                     e.printStackTrace()

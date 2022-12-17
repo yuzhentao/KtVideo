@@ -23,7 +23,7 @@ object ToastUtil {
             try {
                 sField_TN = Toast::class.java.getDeclaredField("mTN")
                 sField_TN!!.isAccessible = true
-                sField_TN_Handler = sField_TN!!.getType().getDeclaredField("mHandler")
+                sField_TN_Handler = sField_TN!!.type.getDeclaredField("mHandler")
                 sField_TN_Handler!!.isAccessible = true
             } catch (ignored: Exception) {
 
@@ -43,7 +43,7 @@ object ToastUtil {
         }
     }
 
-    private class SafelyHandlerWrapper internal constructor(private val impl: Handler) : Handler() {
+    private class SafelyHandlerWrapper(private val impl: Handler) : Handler() {
 
         override fun dispatchMessage(msg: Message) {
             try {

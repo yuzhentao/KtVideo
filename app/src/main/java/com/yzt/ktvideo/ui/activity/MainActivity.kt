@@ -2,12 +2,10 @@ package com.yzt.ktvideo.ui.activity
 
 import android.Manifest
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
 import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -29,7 +27,7 @@ import com.yzt.home.fragment.HomeFragment
 import com.yzt.ktvideo.R
 import com.yzt.ktvideo.databinding.ActivityMainBinding
 import com.yzt.ktvideo.lifecycle.MainLifecycleObserver
-import com.yzt.ktvideo.ui.fragment.*
+import com.yzt.ktvideo.ui.fragment.SearchFragment
 import com.yzt.ktvideo.worker.DownloadSplashWorker
 import com.yzt.mine.fragment.MineFragment
 import com.yzt.ranking.fragment.RankingFragment
@@ -128,7 +126,6 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
         lifecycleObserver = MainLifecycleObserver(this, LifecycleManager())
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tb -> {

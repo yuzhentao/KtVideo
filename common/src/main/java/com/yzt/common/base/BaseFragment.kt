@@ -68,7 +68,7 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         TAG = this.javaClass.simpleName
-        appCompatActivity = getActivity() as BaseAppCompatActivity?
+        appCompatActivity = activity as BaseAppCompatActivity?
         init()
         initView()
     }
