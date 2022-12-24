@@ -8,7 +8,6 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.yzt.common.listener.LifecycleListener
 import com.yzt.common.receiver.NetworkReceiver
 import io.reactivex.disposables.CompositeDisposable
 
@@ -21,7 +20,6 @@ abstract class BaseActivity : Activity() {
     protected var activity: BaseActivity? = null
 
     private var networkReceiver: NetworkReceiver? = null
-    private var lifecycleListener: LifecycleListener? = null
     var compositeDisposable: CompositeDisposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +44,6 @@ abstract class BaseActivity : Activity() {
     }
 
     override fun onDestroy() {
-        if (lifecycleListener != null) {
-            lifecycleListener!!.onDestroy()
-            lifecycleListener = null
-        }
         try {
             unregisterReceiver(networkReceiver)
         } catch (e: Exception) {
@@ -59,10 +53,6 @@ abstract class BaseActivity : Activity() {
         context = null
         activity = null
         compositeDisposable = null
-    }
-
-    open fun setOnLifecycleListener(lifecycleListener: LifecycleListener?) {
-        this.lifecycleListener = lifecycleListener
     }
 
     open fun isActivityExist(): Boolean {

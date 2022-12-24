@@ -9,7 +9,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.yzt.common.listener.LifecycleListener
 import com.yzt.common.receiver.NetworkReceiver
 import io.reactivex.disposables.CompositeDisposable
 
@@ -26,7 +25,6 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
     }
 
     private var networkReceiver: NetworkReceiver? = null
-    private var lifecycleListener: LifecycleListener? = null
     var compositeDisposable: CompositeDisposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,10 +50,6 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        if (lifecycleListener != null) {
-            lifecycleListener!!.onDestroy()
-            lifecycleListener = null
-        }
         try {
             unregisterReceiver(networkReceiver)
         } catch (e: Exception) {
@@ -65,10 +59,6 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         context = null
         activity = null
         compositeDisposable = null
-    }
-
-    open fun setOnLifecycleListener(lifecycleListener: LifecycleListener?) {
-        this.lifecycleListener = lifecycleListener
     }
 
     open fun isActivityExist(): Boolean {
