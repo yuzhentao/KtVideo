@@ -299,28 +299,32 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
             .hide(rankingFragment!!)
             .hide(mineFragment!!)
             .commit()
-        homeFragment?.setOnRvScrollListener(OnRvScrollListener {
-            binding!!.tb.setBackgroundColor(
-                if (it < 0) {
-                    this@MainActivity.changeBgHome = true
-                    color(R.color.white_50)
-                } else {
-                    this@MainActivity.changeBgHome = false
-                    color(R.color.white)
-                }
-            )
-        })
-        discoverFragment?.setOnRvScrollListener(OnRvScrollListener {
-            binding!!.tb.setBackgroundColor(
-                if (it < 0) {
-                    this@MainActivity.changeBgDiscover = true
-                    color(R.color.white_50)
-                } else {
-                    this@MainActivity.changeBgDiscover = false
-                    color(R.color.white)
-                }
-            )
-        })
+        homeFragment?.setOnRvScrollListener(
+            OnRvScrollListener {
+                binding!!.tb.setBackgroundColor(
+                    if (it < 0) {
+                        this@MainActivity.changeBgHome = true
+                        color(R.color.white_50)
+                    } else {
+                        this@MainActivity.changeBgHome = false
+                        color(R.color.white)
+                    }
+                )
+            }
+        )
+        discoverFragment?.setOnRvScrollListener(
+            OnRvScrollListener {
+                binding!!.tb.setBackgroundColor(
+                    if (it < 0) {
+                        this@MainActivity.changeBgDiscover = true
+                        color(R.color.white_50)
+                    } else {
+                        this@MainActivity.changeBgDiscover = false
+                        color(R.color.white)
+                    }
+                )
+            }
+        )
     }
 
     private fun getToday(): String {
