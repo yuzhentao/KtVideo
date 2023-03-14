@@ -7,11 +7,13 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/content"
+        android:name="com.yzt.home.fragment.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/rg_bottom"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/app_pink" />
+        tools:background="@color/app_pink"
+        tools:layout="@layout/fragment_home" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb"
@@ -138,6 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="50dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_plus"
         app:backgroundTint="@color/pink"
         app:borderWidth="0dp"
@@ -146,5 +149,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:pressedTranslationZ="12dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
