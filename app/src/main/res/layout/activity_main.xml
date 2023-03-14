@@ -140,7 +140,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="50dp"
-        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_plus"
         app:backgroundTint="@color/pink"
         app:borderWidth="0dp"
@@ -148,7 +147,8 @@
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="12dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv"
