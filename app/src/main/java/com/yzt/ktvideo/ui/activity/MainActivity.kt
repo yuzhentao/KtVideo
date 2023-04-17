@@ -116,10 +116,15 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
         binding!!.fab.setOnClickListener(this)
         binding!!.fab.setOnLongClickListener { true }
         initFragment(savedInstanceState)
+//        context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.absolutePath
+//        + File.separator
+//        + Constants.SPLASH_IMAGE_FOLDER_NAME
+//        + File.separator
+//        + Constants.SPLASH_IMAGE_FILE_NAME
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+        downloadSplash()
     }
 
     override fun initLifecycleObserver() {
@@ -345,7 +350,7 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
         fun requestPermissions() {
             permissionsDisposable = rxPermissions
                 .requestEachCombined(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_PHONE_STATE
                 )
                 .subscribe { permission ->
@@ -361,6 +366,32 @@ class MainActivity : BaseAppCompatActivity(), View.OnClickListener {
                         }
                     }
                 }
+//            XXPermissions.with(this@MainActivity)
+//                .permission(Permission.WRITE_EXTERNAL_STORAGE)
+//                .permission(Permission.READ_PHONE_STATE)
+//                .request(object : OnPermissionCallback {
+//                    override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
+//                        if (!allGranted) {
+//                            shortToast("获取部分权限成功，但部分权限未正常授予")
+//                            return
+//                        }
+//
+//                        shortToast("获取权限成功")
+//                    }
+//
+//                    override fun onDenied(
+//                        permissions: MutableList<String>,
+//                        doNotAskAgain: Boolean,
+//                    ) {
+//                        if (doNotAskAgain) {
+//                            shortToast("被永久拒绝授权，请手动授予权限")
+//                            //如果是被永久拒绝就跳转到应用权限系统设置页面
+//                            XXPermissions.startPermissionActivity(this@MainActivity, permissions)
+//                        } else {
+//                            shortToast("获取权限失败")
+//                        }
+//                    }
+//                })
         }
 
         fun cancelToast() {

@@ -13,4 +13,7 @@ object Constants {
     const val PATH_COMMENT = "/mine/activity/CommentActivity"
     const val PATH_FEEDBACK = "/mine/activity/FeedbackActivity"
 
+    const val SPLASH_IMAGE_FOLDER_NAME = "Splash"
+    const val SPLASH_IMAGE_FILE_NAME = "splash.png"
+
 }
